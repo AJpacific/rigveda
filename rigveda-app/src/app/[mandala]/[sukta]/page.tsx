@@ -16,9 +16,10 @@ export async function generateStaticParams() {
   return params;
 }
 
-export default async function HymnPage({ params }: { params: { mandala: string; sukta: string } }) {
-  const mandala = parseInt(params.mandala);
-  const sukta = parseInt(params.sukta);
+export default async function HymnPage({ params }: { params: Promise<{ mandala: string; sukta: string }> }) {
+  const { mandala: mandalaStr, sukta: suktaStr } = await params;
+  const mandala = parseInt(mandalaStr, 10);
+  const sukta = parseInt(suktaStr, 10);
   const filePath = path.join(process.cwd(), 'src/data', `mandala${mandala}.json`);
   const jsonData = await fs.readFile(filePath, 'utf8');
   const data = JSON.parse(jsonData) as { hymns: Hymn[] };
