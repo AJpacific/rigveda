@@ -37,6 +37,16 @@ export async function POST(req: NextRequest) {
     const referer = process.env.OPENROUTER_SITE_URL || undefined;
     const title = process.env.OPENROUTER_SITE_NAME || undefined;
 
+    // Derive safe fallbacks for OpenRouter-required headers in hosted environments
+    const forwardedProto = req.headers.get('x-forwarded-proto') || 'https';
+    const forwardedHost = req.headers.get('x-forwarded-host') || req.headers.get('host') || '';
+    const originHeader = req.headers.get('origin') || undefined;
+    const fallbackReferer = process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : (originHeader || (forwardedHost ? `${forwardedProto}://${forwardedHost}` : undefined));
+    const finalReferer = referer || fallbackReferer;
+    const finalTitle = title || 'Rigveda';
+
     const systemInstruction = 'You are a helpful, concise assistant that ONLY answers questions about the Rigveda. If a question is outside the Rigveda, politely refuse and explain you can only discuss the Rigveda. Avoid speculation and do not fabricate citations.';
 
     // Extract optional inline CONTEXT from the first user turn
@@ -81,8 +91,8 @@ export async function POST(req: NextRequest) {
         headers: {
           'Authorization': `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
-          ...(referer ? { 'HTTP-Referer': referer } : {}),
-          ...(title ? { 'X-Title': title } : {}),
+          ...(finalReferer ? { 'HTTP-Referer': finalReferer } : {}),
+          ...(finalTitle ? { 'X-Title': finalTitle } : {}),
         },
         body: JSON.stringify({
           model,
@@ -93,6 +103,7 @@ export async function POST(req: NextRequest) {
       });
     } catch (e) {
       const detail = e instanceof Error ? e.message : String(e);
+      console.error('[chat] OpenRouter fetch failed:', detail);
       return NextResponse.json({ error: 'LLM error', detail }, { status: 500 });
     }
 
@@ -105,7 +116,13 @@ export async function POST(req: NextRequest) {
     }
 
     if (!resp.ok) {
-      return NextResponse.json({ error: 'LLM error', detail: upstreamText || 'empty response' }, { status: resp.status || 500 });
+      const parsedUpstream: unknown = upstreamJson;
+      const errorPayload = (parsedUpstream && typeof parsedUpstream === 'object') ? parsedUpstream as Record<string, unknown> : {};
+      const upstreamError = (errorPayload as { error?: { message?: string; code?: string | number } }).error;
+      const detailMessage = upstreamError?.message || upstreamText || 'empty response';
+      const code = upstreamError?.code;
+      console.error('[chat] OpenRouter non-OK response:', resp.status, detailMessage);
+      return NextResponse.json({ error: 'LLM error', code, detail: detailMessage }, { status: resp.status || 500 });
     }
 
     const answer: string = upstreamJson?.choices?.[0]?.message?.content || '';
