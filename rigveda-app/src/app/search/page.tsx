@@ -54,8 +54,9 @@ export default function SearchPage() {
       if (!res.ok) throw new Error(data?.error || 'Chat failed');
       setHistory((h) => [...h, { role: 'assistant', content: data.answer || '' }]);
       setChatRefs(data.refs || []);
-    } catch (e: any) {
-      setChatError(e?.message || 'Chat failed');
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : 'Chat failed';
+      setChatError(message);
     }
     setChatLoading(false);
   };
