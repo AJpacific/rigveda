@@ -3,11 +3,30 @@ import { NextRequest, NextResponse } from 'next/server';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
+type ClientMessage = { role: 'user' | 'assistant'; content: string };
+type OpenRouterChoice = { message?: { content?: string } };
+type OpenRouterResponse = { choices?: OpenRouterChoice[] };
+
+function isClientMessage(value: unknown): value is ClientMessage {
+  if (typeof value !== 'object' || value === null) return false;
+  const v = value as { role?: unknown; content?: unknown };
+  return (v.role === 'user' || v.role === 'assistant') && typeof v.content === 'string';
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json().catch(() => ({} as any));
-    const query: string | undefined = body?.query;
-    const clientMessages: { role: 'user' | 'assistant'; content: string }[] = Array.isArray(body?.messages) ? body.messages : [];
+    let parsedBody: unknown;
+    try {
+      parsedBody = await req.json();
+    } catch {
+      parsedBody = {};
+    }
+    const bodyObj = (typeof parsedBody === 'object' && parsedBody !== null)
+      ? (parsedBody as Record<string, unknown>)
+      : {};
+    const query = typeof bodyObj.query === 'string' ? bodyObj.query : undefined;
+    const rawMessages = Array.isArray(bodyObj.messages) ? bodyObj.messages : [];
+    const clientMessages: ClientMessage[] = rawMessages.filter(isClientMessage);
 
     const apiKey = process.env.OPENROUTER_API_KEY || process.env.NEXT_PUBLIC_OPENROUTER_API_KEY;
     if (!apiKey) {
@@ -55,33 +74,38 @@ export async function POST(req: NextRequest) {
       ...normalizedMessages,
     ];
 
-    let upstreamText = '';
-    let upstreamJson: any = null;
-    const resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        ...(referer ? { 'HTTP-Referer': referer } : {}),
-        ...(title ? { 'X-Title': title } : {}),
-      },
-      body: JSON.stringify({
-        model,
-        messages,
-        temperature: 0.3,
-        max_tokens: 2000,
-      }),
-    }).catch((e) => ({ ok: false, status: 500, text: async () => String(e) } as any));
-
+    let resp: Response;
     try {
-      upstreamText = await (resp as Response).text();
-      upstreamJson = upstreamText ? JSON.parse(upstreamText) : null;
+      resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+          ...(referer ? { 'HTTP-Referer': referer } : {}),
+          ...(title ? { 'X-Title': title } : {}),
+        },
+        body: JSON.stringify({
+          model,
+          messages,
+          temperature: 0.3,
+          max_tokens: 2000,
+        }),
+      });
+    } catch (e) {
+      const detail = e instanceof Error ? e.message : String(e);
+      return NextResponse.json({ error: 'LLM error', detail }, { status: 500 });
+    }
+
+    const upstreamText = await resp.text();
+    let upstreamJson: OpenRouterResponse | null = null;
+    try {
+      upstreamJson = upstreamText ? (JSON.parse(upstreamText) as OpenRouterResponse) : null;
     } catch {
       upstreamJson = null;
     }
 
-    if (!resp || !(resp as Response).ok) {
-      return NextResponse.json({ error: 'LLM error', detail: upstreamText || 'empty response' }, { status: 500 });
+    if (!resp.ok) {
+      return NextResponse.json({ error: 'LLM error', detail: upstreamText || 'empty response' }, { status: resp.status || 500 });
     }
 
     const answer: string = upstreamJson?.choices?.[0]?.message?.content || '';
