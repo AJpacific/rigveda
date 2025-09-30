@@ -7,8 +7,9 @@ export async function generateStaticParams() {
   return Array.from({ length: 10 }, (_, i) => ({ mandala: (i + 1).toString() }));
 }
 
-export default async function MandalaPage({ params }: { params: { mandala: string } }) {
-  const mandala = parseInt(params.mandala);
+export default async function MandalaPage({ params }: { params: Promise<{ mandala: string }> }) {
+  const { mandala: mandalaStr } = await params;
+  const mandala = parseInt(mandalaStr, 10);
   const filePath = path.join(process.cwd(), 'src/data', `mandala${mandala}.json`);
   const jsonData = await fs.readFile(filePath, 'utf8');
   const data = JSON.parse(jsonData) as { hymns: Hymn[] };
