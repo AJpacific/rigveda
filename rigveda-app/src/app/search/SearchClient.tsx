@@ -64,7 +64,10 @@ export default function SearchClient() {
         const txt = await res.text().catch(() => '');
         data = { error: txt || 'Empty response' };
       }
-      if (!res.ok) throw new Error(data.error || data.detail || 'Chat failed');
+      if (!res.ok) {
+        const combined = [data.error, data.detail].filter(Boolean).join(': ');
+        throw new Error(combined || `Chat failed (${res.status})`);
+      }
       setHistory((h) => [...h, { role: 'assistant', content: data.answer || '' }]);
       setChatRefs(Array.isArray(data.refs) ? data.refs : []);
     } catch (e: unknown) {

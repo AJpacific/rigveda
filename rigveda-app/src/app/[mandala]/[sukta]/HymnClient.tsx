@@ -95,7 +95,10 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
         const txt = await res.text().catch(() => '');
         data = { error: txt || 'Empty response' };
       }
-      if (!res.ok) throw new Error(data.error || data.detail || 'Chat failed');
+      if (!res.ok) {
+        const combined = [data.error, data.detail].filter(Boolean).join(': ');
+        throw new Error(combined || `Chat failed (${res.status})`);
+      }
       setChatHistory((h) => [...h, { role: 'assistant', content: data.answer || '' }]);
     } catch (e: unknown) {
       const message = e instanceof Error ? e.message : 'Chat failed';
