@@ -231,8 +231,8 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
         <div className="h-full bg-[color:var(--primary)]" style={{ width: `${scrollProgress}%` }} />
       </div>
 
-      <div className="mt-6">
-        <div className="rounded-2xl border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] px-4 py-3 shadow-sm space-y-3">
+      <div className="mt-4 sm:mt-6">
+        <div className="rounded-2xl border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] px-3 sm:px-4 py-2.5 sm:py-3 shadow-sm space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-sm text-[color:var(--muted)]">
               <Link href="/" className="icon-btn" aria-label="Home"><FontAwesomeIcon icon={faHome} /></Link>
@@ -242,7 +242,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
 
             <div className="text-center">
               <div className="text-[10px] uppercase tracking-[0.3em] text-[color:var(--olive-green)]">Mandala {mandala}</div>
-              <h1 className="text-lg font-semibold">Hymn {sukta}: {hymn.title}</h1>
+              <h1 className="text-base sm:text-lg font-semibold">Hymn {sukta}: {hymn.title}</h1>
             </div>
 
             <div className="flex items-center gap-2 text-sm">
@@ -261,7 +261,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
               )}
               <button
                 onClick={toggleAudio}
-                className="px-3 py-2 rounded-lg border border-[color:var(--burnt-umber)] bg-transparent text-[color:var(--midnight-blue)] hover:bg-[color:var(--surface)] transition text-sm disabled:opacity-60"
+                className="px-3 py-2 rounded-lg border border-[color:var(--burnt-umber)] bg-transparent text-[color:var(--midnight-blue)] hover:bg-[color:var(--surface)] transition text-xs sm:text-sm disabled:opacity-60"
                 disabled={audioState === 'loading'}
               >
                 <FontAwesomeIcon icon={audioButtonIcon} className="mr-2" />
@@ -310,10 +310,10 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
 
       <section className="space-y-4">
         {hymn.verses.map((verse: Verse, i: number) => (
-          <article key={i} className="verse-card rounded-xl p-4 shadow-sm border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] relative">
+          <article key={i} className="verse-card rounded-xl p-3 sm:p-4 sm:pt-10 shadow-sm border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] relative">
             <button
               onClick={() => startChatForVerse(verse)}
-              className="absolute top-2 right-2 px-2 py-1 text-xs rounded-md border border-[color:var(--burnt-umber)] bg-transparent hover:bg-[color:var(--surface)] flex items-center gap-1"
+              className="block ml-auto mb-2 sm:absolute sm:top-2 sm:right-2 px-2 py-1 text-xs rounded-md border border-[color:var(--burnt-umber)] bg-transparent hover:bg-[color:var(--surface)] flex items-center gap-1"
               aria-label="Ask AI about this verse"
             >
               <FontAwesomeIcon icon={faComments} /> Ask AI
@@ -341,7 +341,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                 </div>
               ))}
             </div>
-            <div className="max-w-none text-[color:var(--midnight-blue)] whitespace-pre-line">
+            <div className="max-w-none text-[color:var(--midnight-blue)] whitespace-pre-line text-sm sm:text-base">
               {verse.translation}
             </div>
             <div className="text-right text-xs text-[color:var(--muted)] mt-2">{verse.number}</div>
@@ -350,13 +350,13 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
       </section>
 
       {chatOpen && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
-          <div className="w-full max-w-2xl rounded-2xl border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] shadow-xl">
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-3 sm:p-4" role="dialog" aria-modal="true">
+          <div className="w-full max-w-2xl max-h-[85vh] sm:max-h-[80vh] rounded-2xl border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] shadow-xl">
             <div className="flex items-center justify-between px-4 py-3 border-b border-[color:var(--surface-strong)]">
               <div className="text-sm uppercase tracking-wide text-[color:var(--muted)]">Ask AI · Verse {chatRef}</div>
               <button onClick={() => setChatOpen(false)} className="icon-btn" aria-label="Close">×</button>
             </div>
-            <div className="max-h-[50vh] overflow-auto p-4 space-y-3">
+            <div className="max-h-[65vh] sm:max-h-[55vh] overflow-auto p-3 sm:p-4 space-y-3">
               {chatHistory.length === 0 && <div className="text-sm text-[color:var(--muted)]">Context loaded. Ask a question about this verse.</div>}
               {chatHistory.map((m, idx) => (
                 <div key={idx} className="space-y-1">

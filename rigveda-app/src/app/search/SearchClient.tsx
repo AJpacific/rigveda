@@ -82,13 +82,13 @@ export default function SearchClient() {
 
   return (
     <div className="space-y-6">
-      <nav className="rounded-xl border border-[color:var(--surface-strong)] bg-gradient-to-br from-[color:var(--light-cream)] to-white/80 dark:from-black/30 dark:to-black/20 backdrop-blur p-4 flex flex-wrap items-center justify-between gap-4">
+      <nav className="rounded-xl border border-[color:var(--surface-strong)] bg-gradient-to-br from-[color:var(--light-cream)] to-white/80 dark:from-black/30 dark:to-black/20 backdrop-blur p-3 sm:p-4 flex flex-wrap items-center justify-between gap-3 sm:gap-4">
         <Link href="/" className="text-[color:var(--gold)] text-lg flex items-center gap-2"><FontAwesomeIcon icon={faHome} /> Home</Link>
-        <h2 className="text-xl font-semibold">Ask AI</h2>
-        <span className="text-xs uppercase tracking-[0.35em] text-[color:var(--muted)]">RAG</span>
+        <h2 className="text-lg sm:text-xl font-semibold">Ask AI</h2>
+        <span className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-[color:var(--muted)]">RAG</span>
       </nav>
 
-      <div className="rounded-xl border border-[color:var(--surface-strong)] bg-[color:var(--light-cream)]/80 dark:bg-black/20 backdrop-blur p-5 space-y-3">
+      <div className="rounded-xl border border-[color:var(--surface-strong)] bg-[color:var(--light-cream)]/80 dark:bg-black/20 backdrop-blur p-4 sm:p-5 space-y-3">
         <div className="text-sm text-[color:var(--olive-green)] uppercase tracking-wide">Ask a question about the Rigveda</div>
         <div className="relative">
           <input
@@ -111,17 +111,17 @@ export default function SearchClient() {
         <p className="text-xs text-[color:var(--muted)]">Press Enter to ask AI. Use the box again for follow-ups.</p>
       </div>
 
-      <div ref={listRef} className="rounded-xl border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] p-4 shadow-sm space-y-3 max-h-[50vh] overflow-auto">
+      <div ref={listRef} className="rounded-xl border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] p-3 sm:p-4 shadow-sm space-y-3 max-h-[55vh] sm:max-h-[60vh] overflow-auto">
         {history.length === 0 && <div className="text-sm text-[color:var(--muted)]">Start by asking a question above.</div>}
         {history.map((m, i) => (
           <div key={i} className={`${m.role === 'user' ? 'text-[color:var(--olive-green)]' : ''}`}>
-            <div className="text-xs uppercase tracking-wide mb-1">{m.role === 'user' ? 'You' : 'AI'}</div>
+            <div className="text-xs sm:text-sm uppercase tracking-wide mb-1">{m.role === 'user' ? 'You' : 'AI'}</div>
             {m.role === 'assistant' ? (
-              <div className="prose max-w-none">
+              <div className="prose max-w-none text-sm sm:text-base">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown>
               </div>
             ) : (
-              <div className="whitespace-pre-line">{m.content}</div>
+              <div className="whitespace-pre-line text-sm sm:text-base">{m.content}</div>
             )}
           </div>
         ))}
