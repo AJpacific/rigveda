@@ -26,6 +26,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [currentVerseIndex, setCurrentVerseIndex] = useState<number | null>(null);
 
   // Verse-level Ask AI modal state
   const [chatOpen, setChatOpen] = useState(false);
@@ -147,10 +148,29 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
       }
     };
 
-    const updateProgress = () => {
-      const current = audio.currentTime;
-      setCurrentTime(current);
-    };
+  const updateProgress = () => {
+    const current = audio.currentTime;
+    setCurrentTime(current);
+    if (Array.isArray(hymn.verseTimecodes) && hymn.verseTimecodes.length > 0) {
+      const times = hymn.verseTimecodes;
+      let idx = times.length - 1;
+      for (let i = 0; i < times.length; i++) {
+        if (current < times[i]) { idx = Math.max(0, i - 1); break; }
+      }
+      setCurrentVerseIndex(idx);
+    } else {
+      // Fallback: approximate verse index by proportion of total duration
+      const totalVerses = hymn.verses.length;
+      const totalDuration = audio.duration;
+      if (Number.isFinite(totalDuration) && totalDuration > 0 && totalVerses > 0) {
+        const ratio = Math.min(Math.max(current / totalDuration, 0), 1);
+        const idx = Math.min(totalVerses - 1, Math.floor(ratio * totalVerses));
+        setCurrentVerseIndex(idx);
+      } else {
+        setCurrentVerseIndex(null);
+      }
+    }
+  };
 
     const handlePlay = () => setAudioState('playing');
     const handlePause = () => {
@@ -318,6 +338,9 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
           <div className="pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-muted">
             <div>Hymn Group: <span className="font-medium text-[color:var(--olive-green)]">{hymn.group || 'Unknown group'}</span></div>
             <div>Stanzas: <span className="font-medium text-[color:var(--olive-green)]">{hymn.stanzas || hymn.verses.length}</span></div>
+            {Number.isInteger(currentVerseIndex) && currentVerseIndex !== null && (
+              <div className="sm:col-span-2">Now playing: <span className="font-medium text-[color:var(--olive-green)]">Verse {hymn.verses[currentVerseIndex]?.number}</span></div>
+            )}
           </div>
         </div>
       </div>

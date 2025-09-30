@@ -24,6 +24,7 @@ export type Hymn = {
   stanzas?: number | null;
   verses: Verse[];
   audio?: string;
+  verseTimecodes?: number[];
 };
 
 
