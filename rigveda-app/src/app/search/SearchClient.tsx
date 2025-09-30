@@ -48,13 +48,25 @@ export default function SearchClient() {
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ messages: nextHistory }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data?.error || 'Chat failed');
+      let data: { answer?: string; refs?: { mandala: number; sukta: number; verse: string }[]; error?: string; detail?: string } = {};
+      const contentType = res.headers.get('content-type') || '';
+      try {
+        if (contentType.includes('application/json')) {
+          data = await res.json();
+        } else {
+          const txt = await res.text();
+          try { data = JSON.parse(txt); } catch { data = { error: txt || 'Empty response' }; }
+        }
+      } catch {
+        const txt = await res.text().catch(() => '');
+        data = { error: txt || 'Empty response' };
+      }
+      if (!res.ok) throw new Error(data.error || data.detail || 'Chat failed');
       setHistory((h) => [...h, { role: 'assistant', content: data.answer || '' }]);
-      setChatRefs(data.refs || []);
+      setChatRefs(Array.isArray(data.refs) ? data.refs : []);
     } catch (e: unknown) {
       const message = e instanceof Error ? e.message : 'Chat failed';
       setChatError(message);

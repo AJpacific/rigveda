@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
+    const body = await req.json().catch(() => ({} as any));
     const query: string | undefined = body?.query;
     const clientMessages: { role: 'user' | 'assistant'; content: string }[] = Array.isArray(body?.messages) ? body.messages : [];
 
@@ -52,6 +55,8 @@ export async function POST(req: NextRequest) {
       ...normalizedMessages,
     ];
 
+    let upstreamText = '';
+    let upstreamJson: any = null;
     const resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -64,17 +69,22 @@ export async function POST(req: NextRequest) {
         model,
         messages,
         temperature: 0.3,
-        max_tokens: 10000,
+        max_tokens: 2000,
       }),
-    });
+    }).catch((e) => ({ ok: false, status: 500, text: async () => String(e) } as any));
 
-    if (!resp.ok) {
-      const txt = await resp.text();
-      return NextResponse.json({ error: 'LLM error', detail: txt }, { status: 500 });
+    try {
+      upstreamText = await (resp as Response).text();
+      upstreamJson = upstreamText ? JSON.parse(upstreamText) : null;
+    } catch {
+      upstreamJson = null;
     }
-    const data = await resp.json();
-    const answer = data.choices?.[0]?.message?.content || '';
 
+    if (!resp || !(resp as Response).ok) {
+      return NextResponse.json({ error: 'LLM error', detail: upstreamText || 'empty response' }, { status: 500 });
+    }
+
+    const answer: string = upstreamJson?.choices?.[0]?.message?.content || '';
     return NextResponse.json({ answer, refs: [] });
   } catch (e: unknown) {
     const message = e instanceof Error ? e.message : String(e);
