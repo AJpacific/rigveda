@@ -70,7 +70,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
     if (!q) return;
     const firstTurn = chatHistory.length === 0;
     const messages: ChatMessage[] = firstTurn
-      ? [{ role: 'user', content: `CONTEXT\n${chatContext}\n\nQUESTION: ${q}` }]
+      ? [{ role: 'user', content: `${chatContext}${q}` }]
       : [...chatHistory, { role: 'user', content: q }];
     setChatLoading(true);
     setChatError(null);
@@ -347,14 +347,14 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             <div className="max-h-[50vh] overflow-auto p-4 space-y-3">
               {chatHistory.length === 0 && <div className="text-sm text-[color:var(--muted)]">Context loaded. Ask a question about this verse.</div>}
               {chatHistory.map((m, idx) => (
-                <div key={idx}>
-                  <div className="text-xs uppercase tracking-wide mb-1 text-[color:var(--muted)]">{m.role === 'user' ? 'You' : 'AI'}</div>
+                <div key={idx} className="space-y-1">
+                  <div className="text-sm uppercase tracking-wide mb-1 text-[color:var(--burnt-umber)] font-semibold">{m.role === 'user' ? 'You' : 'AI'}</div>
                   {m.role === 'assistant' ? (
-                    <div className="prose max-w-none">
+                    <div className="max-w-none text-black text-base leading-relaxed">
                       <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown>
                     </div>
                   ) : (
-                    <div className="whitespace-pre-line">{m.content}</div>
+                    <div className="whitespace-pre-line text-black text-base leading-relaxed">{m.content}</div>
                   )}
                 </div>
               ))}
