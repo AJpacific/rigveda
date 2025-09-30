@@ -41,7 +41,8 @@ export default function SearchPage() {
     setChatLoading(true);
     setChatError(null);
     setChatRefs([]);
-    const nextHistory = [...history, { role: 'user', content }];
+    const userTurn: ChatMessage = { role: 'user', content };
+    const nextHistory: ChatMessage[] = [...history, userTurn];
     setHistory(nextHistory);
     setQuery('');
     try {
