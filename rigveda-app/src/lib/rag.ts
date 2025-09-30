@@ -62,24 +62,33 @@ export function parseReference(raw: string): { mandala: number; sukta: number; v
 export async function loadHymnEntries(mandala: number, sukta: number): Promise<SearchIndexEntry[] | null> {
   try {
     // Read from src/data (available to the server at build/dev time)
-    const mod = await import(`../data/mandala${mandala}.json`);
-    const hymns = (mod as any).default?.hymns ?? (mod as any).hymns;
-    const hymn = hymns?.find((h: any) => h.sukta === sukta);
+    const mod = (await import(`../data/mandala${mandala}.json`)) as {
+      default?: { hymns: import('../types/rigveda').Hymn[] };
+      hymns?: import('../types/rigveda').Hymn[];
+    };
+    const hymns = mod.default?.hymns ?? mod.hymns ?? [];
+    const hymn = hymns.find((h) => h.sukta === sukta);
     if (!hymn) return null;
-    const entries: SearchIndexEntry[] = hymn.verses.map((v: any) => ({
+    const entries: SearchIndexEntry[] = hymn.verses.map((v) => ({
       mandala,
       sukta,
-      verse: v.number,
+      verse: String(v.number),
       title: hymn.title,
       group: hymn.group ?? null,
       stanzas: hymn.stanzas ?? hymn.verses?.length ?? null,
       text: [
         v.translation,
-        ...(Array.isArray(v.sanskrit) ? v.sanskrit.map((w: any) => `${w.word} ${w.translit}`) : []),
-      ].filter(Boolean).join(' '),
+        ...(Array.isArray(v.sanskrit)
+          ? v.sanskrit
+              .filter((t): t is { word: string; translit?: string } => 'word' in t)
+              .map((w) => `${w.word} ${w.translit ?? ''}`)
+          : []),
+      ]
+        .filter(Boolean)
+        .join(' '),
     }));
     return entries;
-  } catch (e) {
+  } catch {
     return null;
   }
 }

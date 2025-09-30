@@ -24,7 +24,7 @@ export default function RootLayout({
           <div className="container mx-auto px-4 py-3 flex items-center justify-between">
             <Link href="/" className="header-title">Rig Veda</Link>
             <div className="flex items-center gap-4">
-              <a href="/search" className="header-link">Ask AI</a>
+              <Link href="/search" className="header-link">Ask AI</Link>
             </div>
           </div>
         </header>

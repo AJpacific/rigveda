@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -68,7 +69,7 @@ export default function SearchPage() {
   return (
     <div className="space-y-6">
       <nav className="rounded-xl border border-[color:var(--surface-strong)] bg-gradient-to-br from-[color:var(--light-cream)] to-white/80 dark:from-black/30 dark:to-black/20 backdrop-blur p-4 flex flex-wrap items-center justify-between gap-4">
-        <a href="/" className="text-[color:var(--gold)] text-lg flex items-center gap-2"><FontAwesomeIcon icon={faHome} /> Home</a>
+        <Link href="/" className="text-[color:var(--gold)] text-lg flex items-center gap-2"><FontAwesomeIcon icon={faHome} /> Home</Link>
         <h2 className="text-xl font-semibold">Ask AI</h2>
         <span className="text-xs uppercase tracking-[0.35em] text-[color:var(--muted)]">RAG</span>
       </nav>

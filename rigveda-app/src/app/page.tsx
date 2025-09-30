@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Home() {
   const router = useRouter();
@@ -38,7 +39,7 @@ export default function Home() {
         <h2 className="text-xl font-semibold mb-4">Mandalas</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5">
           {Array.from({ length: 10 }, (_, i) => i + 1).map((mandala) => (
-            <a key={mandala} href={`/${mandala}`} className="group block">
+            <Link key={mandala} href={`/${mandala}`} className="group block">
               <div className="rounded-xl p-4 shadow-sm transition-all border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] hover:shadow-md">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-lg grid place-items-center bg-[color:var(--primary)]/15 text-[color:var(--primary)]">{mandala}</div>
@@ -48,7 +49,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </section>

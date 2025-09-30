@@ -1,14 +1,16 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faBars, faVolumeUp, faStop, faHourglass, faArrowRight, faHome, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faBars, faStop, faHourglass, faArrowRight, faHome, faPlay } from '@fortawesome/free-solid-svg-icons';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
+import type { Hymn, Verse, SanskritToken, SanskritSepToken, SanskritWordToken } from '../../../types/rigveda';
 
 type HymnClientProps = {
-  hymn: any;
+  hymn: Hymn;
   mandala: number;
   sukta: number;
   prevPath: string | null;
@@ -22,12 +24,9 @@ type ChatMessage = { role: 'user' | 'assistant'; content: string };
 export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }: HymnClientProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [audioState, setAudioState] = useState<AudioState>('idle');
-  const [progress, setProgress] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [audioError, setAudioError] = useState<string | null>(null);
-  const hasAudio = Boolean(hymn.audio);
 
   // Verse-level Ask AI modal state
   const [chatOpen, setChatOpen] = useState(false);
@@ -38,14 +37,24 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   const [chatRef, setChatRef] = useState<string>('');
   const [chatContext, setChatContext] = useState<string>('');
 
-  const startChatForVerse = (verse: any) => {
+  const isSepToken = (t: SanskritToken): t is SanskritSepToken => 'sep' in t && typeof (t as SanskritSepToken).sep === 'string';
+  const isWordToken = (t: SanskritToken): t is SanskritWordToken => 'word' in t;
+
+  const startChatForVerse = (verse: Verse) => {
     const ref = `${verse.number}`;
-    const sanskrit = (verse.sanskrit_lines ?? [verse.sanskrit])
-      .map((line: any[]) => line.filter(Boolean).map((w: any) => (w.sep ? w.sep : w.word)).join(' '))
+    const lines: SanskritToken[][] = verse.sanskrit_lines && verse.sanskrit_lines.length
+      ? verse.sanskrit_lines
+      : verse.sanskrit ? [verse.sanskrit] : [];
+    const sanskrit = lines
+      .map((line: SanskritToken[]) => line
+        .filter(Boolean)
+        .map((w) => (isSepToken(w) ? w.sep : (isWordToken(w) ? w.word : ''))) 
+        .filter(Boolean)
+        .join(' '))
       .join(' / ');
     const translit = (verse.sanskrit ?? [])
-      .filter((w: any) => !w.sep && w.translit)
-      .map((w: any) => w.translit)
+      .filter((w): w is SanskritWordToken => isWordToken(w) && !!w.translit)
+      .map((w) => w.translit as string)
       .join(' ');
     const ctx = `(${ref}) ${sanskrit}${translit ? `\n(${translit})` : ''}\n${verse.translation || ''}`;
     setChatRef(ref);
@@ -76,13 +85,14 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error || 'Chat failed');
       setChatHistory((h) => [...h, { role: 'assistant', content: data.answer || '' }]);
-    } catch (e: any) {
-      setChatError(e?.message || 'Chat failed');
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : 'Chat failed';
+      setChatError(message);
     }
     setChatLoading(false);
   };
 
-  const handleChatKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleChatKey = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       void askChat();
     }
@@ -113,10 +123,8 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
     };
 
     const updateProgress = () => {
-      const dur = audio.duration || duration;
       const current = audio.currentTime;
       setCurrentTime(current);
-      setProgress(dur ? (current / dur) * 100 : 0);
     };
 
     const handlePlay = () => setAudioState('playing');
@@ -129,7 +137,6 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
     const handleEnded = () => {
       setAudioState('idle');
       setCurrentTime(0);
-      setProgress(0);
       audio.currentTime = 0;
     };
 
@@ -175,7 +182,6 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
     audio.currentTime = 0;
     setCurrentTime(0);
     setDuration(0);
-    setProgress(0);
     setAudioState('idle');
   }, [hymn]);
 
@@ -195,8 +201,6 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
     const clamped = Math.min(Math.max(value, 0), duration || audio.duration || 0);
     audio.currentTime = clamped;
     setCurrentTime(clamped);
-    const dur = audio.duration || duration;
-    setProgress(dur ? (clamped / dur) * 100 : 0);
   };
 
   const formatTime = (seconds: number) => {
@@ -219,9 +223,9 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
         <div className="rounded-2xl border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] px-4 py-3 shadow-sm space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-sm text-[color:var(--muted)]">
-              <a href="/" className="icon-btn" aria-label="Home"><FontAwesomeIcon icon={faHome} /></a>
+              <Link href="/" className="icon-btn" aria-label="Home"><FontAwesomeIcon icon={faHome} /></Link>
               <span className="text-[color:var(--burnt-umber)]">/</span>
-              <a href={`/${mandala}`} className="icon-btn" aria-label="Mandala index"><FontAwesomeIcon icon={faBars} /></a>
+              <Link href={`/${mandala}`} className="icon-btn" aria-label="Mandala index"><FontAwesomeIcon icon={faBars} /></Link>
             </div>
 
             <div className="text-center">
@@ -230,13 +234,19 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             </div>
 
             <div className="flex items-center gap-2 text-sm">
-              <a
-                href={prevPath || `/${mandala}/${sukta - 1}`}
-                className={`nav-btn ${prevPath ? '' : 'nav-btn-disabled'}`}
-                aria-label="Previous hymn"
-              >
-                <FontAwesomeIcon icon={faArrowLeft} />
-              </a>
+              {prevPath ? (
+                <Link
+                  href={prevPath}
+                  className="nav-btn"
+                  aria-label="Previous hymn"
+                >
+                  <FontAwesomeIcon icon={faArrowLeft} />
+                </Link>
+              ) : (
+                <span className="nav-btn nav-btn-disabled" aria-hidden="true">
+                  <FontAwesomeIcon icon={faArrowLeft} />
+                </span>
+              )}
               <button
                 onClick={toggleAudio}
                 className="px-3 py-2 rounded-lg border border-[color:var(--burnt-umber)] bg-transparent text-[color:var(--midnight-blue)] hover:bg-[color:var(--surface)] transition text-sm disabled:opacity-60"
@@ -245,13 +255,19 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                 <FontAwesomeIcon icon={audioButtonIcon} className="mr-2" />
                 {audioButtonLabel}
               </button>
-              <a
-                href={nextPath || `/${mandala}/${sukta + 1}`}
-                className={`nav-btn ${nextPath ? '' : 'nav-btn-disabled'}`}
-                aria-label="Next hymn"
-              >
-                <FontAwesomeIcon icon={faArrowRight} />
-              </a>
+              {nextPath ? (
+                <Link
+                  href={nextPath}
+                  className="nav-btn"
+                  aria-label="Next hymn"
+                >
+                  <FontAwesomeIcon icon={faArrowRight} />
+                </Link>
+              ) : (
+                <span className="nav-btn nav-btn-disabled" aria-hidden="true">
+                  <FontAwesomeIcon icon={faArrowRight} />
+                </span>
+              )}
             </div>
           </div>
           <audio ref={audioRef} src={hymn.audio} />
@@ -281,7 +297,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
       </div>
 
       <section className="space-y-4">
-        {hymn.verses.map((verse: any, i: number) => (
+        {hymn.verses.map((verse: Verse, i: number) => (
           <article key={i} className="verse-card rounded-xl p-4 shadow-sm border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] relative">
             <button
               onClick={() => startChatForVerse(verse)}
@@ -291,18 +307,22 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
               <FontAwesomeIcon icon={faComments} /> Ask AI
             </button>
             <div className="space-y-2 mb-3">
-              {(verse.sanskrit_lines ?? [verse.sanskrit]).map((line: any[], li: number) => (
+              {(
+                verse.sanskrit_lines && verse.sanskrit_lines.length
+                  ? verse.sanskrit_lines
+                  : verse.sanskrit ? [verse.sanskrit] : []
+                ).map((line: SanskritToken[], li: number) => (
                 <div key={li} className="flex flex-wrap items-start gap-x-3 gap-y-2">
-                  {line.map((w: any, wi: number) => (
-                    w.sep ? (
+                  {line.map((w: SanskritToken, wi: number) => (
+                    isSepToken(w) ? (
                       <div key={`sep-${li}-${wi}`} className="text-center">
                         <div className="text-[1.25rem] leading-tight text-[color:var(--accent)]">{w.sep}</div>
                         <div className="text-[13px] text-transparent select-none">.</div>
                       </div>
                     ) : (
-                      <a key={wi} href={`https://www.learnsanskrit.cc/translate?search=${w.word}`} target="_blank" className="text-center">
-                        <div className="text-[1.25rem] leading-tight text-[color:var(--accent)]">{w.word}</div>
-                        {w.translit && <div className="text-[13px] text-[color:var(--muted)]">{w.translit}</div>}
+                      <a key={wi} href={`https://www.learnsanskrit.cc/translate?search=${(w as SanskritWordToken).word}`} target="_blank" rel="noreferrer noopener" className="text-center">
+                        <div className="text-[1.25rem] leading-tight text-[color:var(--accent)]">{(w as SanskritWordToken).word}</div>
+                        {(w as SanskritWordToken).translit && <div className="text-[13px] text-[color:var(--muted)]">{(w as SanskritWordToken).translit}</div>}
                       </a>
                     )
                   ))}

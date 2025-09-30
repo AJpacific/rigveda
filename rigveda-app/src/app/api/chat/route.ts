@@ -76,7 +76,8 @@ export async function POST(req: NextRequest) {
     const answer = data.choices?.[0]?.message?.content || '';
 
     return NextResponse.json({ answer, refs: [] });
-  } catch (e: any) {
-    return NextResponse.json({ error: 'Unexpected error', detail: e?.message || String(e) }, { status: 500 });
+  } catch (e: unknown) {
+    const message = e instanceof Error ? e.message : String(e);
+    return NextResponse.json({ error: 'Unexpected error', detail: message }, { status: 500 });
   }
 }
