@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing OPENROUTER_API_KEY' }, { status: 500 });
     }
 
-    const model = process.env.OPENROUTER_MODEL || 'x-ai/grok-4-fast:free';
+    const model = process.env.OPENROUTER_MODEL || 'google/gemma-3-27b-it:free';
     const referer = process.env.OPENROUTER_SITE_URL || undefined;
     const title = process.env.OPENROUTER_SITE_NAME || undefined;
 
