@@ -99,3 +99,153 @@ a:hover { color: var(--primary); }
   opacity: 0.35;
   pointer-events: none;
 }
+
+/* Material Design tokens and components (palette preserved) */
+
+/* Elevation tokens (shadows tuned for soft parchment palette) */
+.m-elevation-0 { box-shadow: none; }
+.m-elevation-1 { box-shadow: 0 1px 2px rgba(27,58,75,0.06), 0 1px 1px rgba(27,58,75,0.04); }
+.m-elevation-2 { box-shadow: 0 2px 6px rgba(27,58,75,0.08), 0 1px 2px rgba(27,58,75,0.06); }
+.m-elevation-3 { box-shadow: 0 4px 10px rgba(27,58,75,0.10), 0 2px 4px rgba(27,58,75,0.06); }
+.m-elevation-4 { box-shadow: 0 6px 14px rgba(27,58,75,0.12), 0 2px 6px rgba(27,58,75,0.06); }
+.m-elevation-5 { box-shadow: 0 8px 18px rgba(27,58,75,0.14), 0 4px 8px rgba(27,58,75,0.08); }
+
+/* App bar */
+.m-appbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: blur(8px);
+  /* Slightly tinted surface to separate from page background */
+  background: color-mix(in oklab, var(--primary) 14%, var(--background));
+  border-bottom: 1px solid var(--surface-strong);
+  box-shadow: 0 1px 2px rgba(27,58,75,0.06), 0 1px 1px rgba(27,58,75,0.04);
+}
+.dark .m-appbar { background: color-mix(in oklab, var(--primary) 22%, var(--background)); }
+.m-appbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+}
+.m-appbar-title {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--midnight-blue);
+}
+.dark .m-appbar-title { color: var(--parchment); }
+
+/* Cards */
+.m-card {
+  border: 1px solid var(--surface-strong);
+  background: white;
+  color: var(--midnight-blue);
+  border-radius: 0.9rem;
+}
+.dark .m-card { background: color-mix(in oklab, black 20%, transparent); color: var(--parchment); }
+
+/* Buttons */
+.m-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  border-radius: 0.65rem;
+  line-height: 1;
+  transition: transform 0.1s ease, opacity 0.15s ease, background 0.15s ease;
+}
+.m-btn:active { transform: translateY(1px); }
+.m-btn:disabled { opacity: 0.5; pointer-events: none; }
+
+.m-btn-filled {
+  background: var(--primary);
+  color: white;
+  border: 1px solid var(--primary-600);
+  padding: 0.6rem 0.9rem;
+}
+.m-btn-filled:hover { background: var(--primary-600); }
+
+.m-btn-tonal {
+  background: color-mix(in oklab, var(--primary) 12%, white);
+  color: var(--midnight-blue);
+  border: 1px solid var(--surface-strong);
+  padding: 0.6rem 0.9rem;
+}
+.m-btn-tonal:hover { background: color-mix(in oklab, var(--primary) 16%, white); }
+
+.m-btn-outlined {
+  background: transparent;
+  color: var(--midnight-blue);
+  border: 1px solid var(--surface-strong);
+  padding: 0.55rem 0.9rem;
+}
+.m-btn-outlined:hover { background: var(--surface); }
+
+.m-btn-text {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid transparent;
+  padding: 0.4rem 0.5rem;
+}
+.m-btn-text:hover { background: var(--surface); }
+
+/* Text field */
+.m-field {
+  display: grid;
+  grid-template-areas: 'input';
+}
+.m-input {
+  grid-area: input;
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.8rem;
+  border: 1px solid var(--surface-strong);
+  background: color-mix(in oklab, white 80%, transparent);
+  color: var(--midnight-blue);
+  outline: none;
+}
+.m-input::placeholder { color: var(--muted); }
+.m-input:focus { box-shadow: 0 0 0 2px color-mix(in oklab, var(--primary) 35%, transparent); }
+.dark .m-input { background: color-mix(in oklab, black 25%, transparent); color: var(--parchment); }
+
+/* Dialog */
+.m-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  z-index: 50;
+  overscroll-behavior: contain;
+}
+.m-dialog {
+  width: 100%;
+  max-width: 40rem;
+  max-height: 85vh;
+  border-radius: 1rem;
+  border: 1px solid var(--surface-strong);
+  background: white;
+  color: var(--midnight-blue);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.dark .m-dialog { background: color-mix(in oklab, black 25%, transparent); color: var(--parchment); }
+.m-dialog-header { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1rem; border-bottom: 1px solid var(--surface-strong); }
+.m-dialog-body { padding: 0.9rem 1rem; overflow: auto; flex: 1 1 auto; -webkit-overflow-scrolling: touch; }
+.m-dialog-footer { padding: 0.9rem 1rem; border-top: 1px solid var(--surface-strong); }
+
+/* Dividers */
+.m-divider { height: 1px; background: var(--surface-strong); width: 100%; }
+
+/* Assistive colors */
+.text-muted { color: var(--muted); }
+.text-accent { color: var(--accent); }
+.text-primary { color: var(--primary); }
+.bg-surface { background: var(--surface); }
+
+/* Scroll lock helper when modal open */
+html.no-scroll, body.no-scroll { overflow: hidden; overscroll-behavior: contain; }

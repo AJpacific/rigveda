@@ -20,12 +20,12 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </head>
       <body className="antialiased bg-background text-foreground">
-        <header className="global-header sticky top-0 z-40 border-b border-black/10 dark:border-white/10 backdrop-blur bg-white/70 dark:bg-black/40">
-          <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-            <Link href="/" className="header-title">Rig Veda</Link>
-            <div className="flex items-center gap-4">
-              <Link href="/search" className="header-link">Ask AI</Link>
-            </div>
+        <header className="m-appbar">
+          <div className="container mx-auto px-4 m-appbar-inner">
+            <Link href="/" className="m-appbar-title text-lg sm:text-xl">Rig Veda</Link>
+            <nav className="flex items-center gap-2">
+              <Link href="/search" className="m-btn m-btn-outlined text-sm">Ask AI</Link>
+            </nav>
           </div>
         </header>
         <main className="container mx-auto px-4 py-6 min-h-[calc(100vh-80px)]">

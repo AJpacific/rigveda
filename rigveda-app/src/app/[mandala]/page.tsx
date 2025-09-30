@@ -20,12 +20,12 @@ export default async function MandalaPage({ params }: { params: Promise<{ mandal
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {data.hymns.map((hymn: Hymn) => (
           <Link key={hymn.sukta} href={`/${mandala}/${hymn.sukta}`} className="group block">
-            <div className="rounded-xl p-5 shadow-sm transition-all border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] hover:shadow-md">
+            <div className="m-card m-elevation-1 p-5 hover:m-elevation-2 transition-shadow">
               <div className="font-semibold text-lg">Hymn {hymn.sukta}</div>
-              <div className="text-sm text-[color:var(--muted)]">{hymn.title}</div>
-              <div className="mt-4 space-y-1 text-xs text-[color:var(--olive-green)]">
-                {hymn.group && <div>Hymn Group: <span className="text-[color:var(--midnight-blue)]">{hymn.group}</span></div>}
-                {hymn.stanzas && <div>Stanzas: <span className="text-[color:var(--midnight-blue)]">{hymn.stanzas}</span></div>}
+              <div className="text-sm text-muted">{hymn.title}</div>
+              <div className="mt-4 space-y-1 text-xs text-primary">
+                {hymn.group && <div>Hymn Group: <span className="text-foreground">{hymn.group}</span></div>}
+                {hymn.stanzas && <div>Stanzas: <span className="text-foreground">{hymn.stanzas}</span></div>}
               </div>
             </div>
           </Link>

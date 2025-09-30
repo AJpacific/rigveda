@@ -85,39 +85,39 @@ export default function SearchClient() {
 
   return (
     <div className="space-y-6">
-      <nav className="rounded-xl border border-[color:var(--surface-strong)] bg-gradient-to-br from-[color:var(--light-cream)] to-white/80 dark:from-black/30 dark:to-black/20 backdrop-blur p-3 sm:p-4 flex flex-wrap items-center justify-between gap-3 sm:gap-4">
-        <Link href="/" className="text-[color:var(--gold)] text-lg flex items-center gap-2"><FontAwesomeIcon icon={faHome} /> Home</Link>
-        <h2 className="text-lg sm:text-xl font-semibold">Ask AI</h2>
-        <span className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-[color:var(--muted)]">RAG</span>
+      <nav className="m-card m-elevation-1 p-3 sm:p-4 grid grid-cols-3 items-center">
+        <Link href="/" className="m-btn m-btn-text text-lg justify-self-start"><FontAwesomeIcon icon={faHome} /> Home</Link>
+        <h2 className="text-lg sm:text-xl font-semibold justify-self-center text-center">Ask AI</h2>
+        <span className="justify-self-end" />
       </nav>
 
-      <div className="rounded-xl border border-[color:var(--surface-strong)] bg-[color:var(--light-cream)]/80 dark:bg-black/20 backdrop-blur p-4 sm:p-5 space-y-3">
-        <div className="text-sm text-[color:var(--olive-green)] uppercase tracking-wide">Ask a question about the Rigveda</div>
+      <div className="m-card m-elevation-1 p-4 sm:p-5 space-y-3">
+        <div className="text-sm text-primary uppercase tracking-wide">Ask a question about the Rigveda</div>
         <div className="relative">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyPress}
-            className="w-full p-3 rounded-lg border border-[color:var(--surface-strong)] bg-white dark:bg-black/40 focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)]"
+            className="m-input pr-20"
             placeholder="e.g. Who is Indra? What is described in 1.1?"
           />
           <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-2">
             <button
               onClick={() => void askChat()}
-              className="px-3 py-2 rounded-md bg-[color:var(--olive-green)] text-white text-sm hover:opacity-90"
+              className="m-btn m-btn-filled text-sm"
             >
               Ask
             </button>
           </div>
         </div>
-        <p className="text-xs text-[color:var(--muted)]">Press Enter to ask AI. Use the box again for follow-ups.</p>
+        <p className="text-xs text-muted">Press Enter to ask AI. Use the box again for follow-ups.</p>
       </div>
 
-      <div ref={listRef} className="rounded-xl border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] p-3 sm:p-4 shadow-sm space-y-3 max-h-[55vh] sm:max-h-[60vh] overflow-auto">
-        {history.length === 0 && <div className="text-sm text-[color:var(--muted)]">Start by asking a question above.</div>}
+      <div ref={listRef} className="m-card m-elevation-1 p-3 sm:p-4 space-y-3 max-h-[55vh] sm:max-h-[60vh] overflow-auto">
+        {history.length === 0 && <div className="text-sm text-muted">Start by asking a question above.</div>}
         {history.map((m, i) => (
-          <div key={i} className={`${m.role === 'user' ? 'text-[color:var(--olive-green)]' : ''}`}>
+          <div key={i} className={`${m.role === 'user' ? 'text-primary' : ''}`}>
             <div className="text-xs sm:text-sm uppercase tracking-wide mb-1">{m.role === 'user' ? 'You' : 'AI'}</div>
             {m.role === 'assistant' ? (
               <div className="prose max-w-none text-sm sm:text-base">
@@ -128,10 +128,10 @@ export default function SearchClient() {
             )}
           </div>
         ))}
-        {chatLoading && <div className="text-sm text-[color:var(--muted)]">Thinking…</div>}
-        {chatError && <div className="text-sm text-red-500">{chatError}</div>}
+        {chatLoading && <div className="text-sm text-muted">Thinking…</div>}
+        {chatError && <div className="text-sm" style={{color:'#b3261e'}}>{chatError}</div>}
         {!!chatRefs.length && (
-          <div className="text-xs text-[color:var(--muted)]">Refs: {chatRefs.map(r => `${r.mandala}.${r.sukta}.${r.verse}`).join(', ')}</div>
+          <div className="text-xs text-muted">Refs: {chatRefs.map(r => `${r.mandala}.${r.sukta}.${r.verse}`).join(', ')}</div>
         )}
       </div>
     </div>

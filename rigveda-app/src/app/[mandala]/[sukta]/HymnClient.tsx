@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faBars, faStop, faHourglass, faArrowRight, faHome, faPlay } from '@fortawesome/free-solid-svg-icons';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { faComments } from '@fortawesome/free-solid-svg-icons';
 import type { Hymn, Verse, SanskritToken, SanskritSepToken, SanskritWordToken } from '../../../types/rigveda';
 
 type HymnClientProps = {
@@ -62,6 +61,11 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
     setChatHistory([]);
     setChatError(null);
     setChatOpen(true);
+    // Lock background scroll when modal opens
+    try {
+      document.documentElement.classList.add('no-scroll');
+      document.body.classList.add('no-scroll');
+    } catch {}
     void askChat(`Explain this verse in detail:\n${ctx}`);
   };
 
@@ -235,7 +239,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
       </div>
 
       <div className="mt-4 sm:mt-6">
-        <div className="rounded-2xl border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] px-3 sm:px-4 py-2.5 sm:py-3 shadow-sm space-y-3">
+        <div className="m-card m-elevation-1 px-3 sm:px-4 py-2.5 sm:py-3 space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-sm text-[color:var(--muted)]">
               <Link href="/" className="icon-btn" aria-label="Home"><FontAwesomeIcon icon={faHome} /></Link>
@@ -252,19 +256,19 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
               {prevPath ? (
                 <Link
                   href={prevPath}
-                  className="nav-btn"
+                  className="m-btn m-btn-outlined"
                   aria-label="Previous hymn"
                 >
                   <FontAwesomeIcon icon={faArrowLeft} />
                 </Link>
               ) : (
-                <span className="nav-btn nav-btn-disabled" aria-hidden="true">
+                <span className="m-btn m-btn-outlined" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
                   <FontAwesomeIcon icon={faArrowLeft} />
                 </span>
               )}
               <button
                 onClick={toggleAudio}
-                className="px-3 py-2 rounded-lg border border-[color:var(--burnt-umber)] bg-transparent text-[color:var(--midnight-blue)] hover:bg-[color:var(--surface)] transition text-xs sm:text-sm disabled:opacity-60"
+                className="m-btn m-btn-tonal text-xs sm:text-sm"
                 disabled={audioState === 'loading'}
               >
                 <FontAwesomeIcon icon={audioButtonIcon} className="mr-2" />
@@ -273,13 +277,13 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
               {nextPath ? (
                 <Link
                   href={nextPath}
-                  className="nav-btn"
+                  className="m-btn m-btn-outlined"
                   aria-label="Next hymn"
                 >
                   <FontAwesomeIcon icon={faArrowRight} />
                 </Link>
               ) : (
-                <span className="nav-btn nav-btn-disabled" aria-hidden="true">
+                <span className="m-btn m-btn-outlined" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
                   <FontAwesomeIcon icon={faArrowRight} />
                 </span>
               )}
@@ -304,7 +308,8 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
               />
             </div>
           )}
-          <div className="border-t border-[color:var(--surface-strong)] pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[color:var(--muted)]">
+          <div className="m-divider mt-2" />
+          <div className="pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-muted">
             <div>Hymn Group: <span className="font-medium text-[color:var(--olive-green)]">{hymn.group || 'Unknown group'}</span></div>
             <div>Stanzas: <span className="font-medium text-[color:var(--olive-green)]">{hymn.stanzas || hymn.verses.length}</span></div>
           </div>
@@ -313,14 +318,16 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
 
       <section className="space-y-4">
         {hymn.verses.map((verse: Verse, i: number) => (
-          <article key={i} className="verse-card rounded-xl p-3 sm:p-4 sm:pt-10 shadow-sm border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] relative">
-            <button
-              onClick={() => startChatForVerse(verse)}
-              className="block ml-auto mb-2 sm:absolute sm:top-2 sm:right-2 px-2 py-1 text-xs rounded-md border border-[color:var(--burnt-umber)] bg-transparent hover:bg-[color:var(--surface)] flex items-center gap-1"
-              aria-label="Ask AI about this verse"
-            >
-              <FontAwesomeIcon icon={faComments} /> Ask AI
-            </button>
+          <article key={i} className="m-card m-elevation-1 p-3 sm:p-4 sm:pt-10 relative">
+            <div className="flex justify-end">
+              <button
+                onClick={() => startChatForVerse(verse)}
+                className="m-btn m-btn-outlined text-xs sm:absolute sm:top-2 sm:right-2"
+                aria-label="Ask AI about this verse"
+              >
+                Ask AI
+              </button>
+            </div>
             <div className="space-y-2 mb-3">
               {(
                 verse.sanskrit_lines && verse.sanskrit_lines.length
@@ -331,65 +338,64 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                   {line.map((w: SanskritToken, wi: number) => (
                     isSepToken(w) ? (
                       <div key={`sep-${li}-${wi}`} className="text-center">
-                        <div className="text-[1.25rem] leading-tight text-[color:var(--accent)]">{w.sep}</div>
+                        <div className="text-[1.25rem] leading-tight text-accent">{w.sep}</div>
                         <div className="text-[13px] text-transparent select-none">.</div>
                       </div>
                     ) : (
                       <a key={wi} href={`https://www.learnsanskrit.cc/translate?search=${(w as SanskritWordToken).word}`} target="_blank" rel="noreferrer noopener" className="text-center">
-                        <div className="text-[1.25rem] leading-tight text-[color:var(--accent)]">{(w as SanskritWordToken).word}</div>
-                        {(w as SanskritWordToken).translit && <div className="text-[13px] text-[color:var(--muted)]">{(w as SanskritWordToken).translit}</div>}
+                        <div className="text-[1.25rem] leading-tight text-accent">{(w as SanskritWordToken).word}</div>
+                        {(w as SanskritWordToken).translit && <div className="text-[13px] text-muted">{(w as SanskritWordToken).translit}</div>}
                       </a>
                     )
                   ))}
                 </div>
               ))}
             </div>
-            <div className="max-w-none text-[color:var(--midnight-blue)] whitespace-pre-line text-sm sm:text-base">
+            <div className="max-w-none whitespace-pre-line text-sm sm:text-base">
               {verse.translation}
             </div>
-            <div className="text-right text-xs text-[color:var(--muted)] mt-2">{verse.number}</div>
+            <div className="text-right text-xs text-muted mt-2">{verse.number}</div>
           </article>
         ))}
       </section>
 
       {chatOpen && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-3 sm:p-4" role="dialog" aria-modal="true">
-          <div className="w-full max-w-2xl max-h-[85vh] sm:max-h-[80vh] rounded-2xl border border-[color:var(--burnt-umber)] bg-white text-[color:var(--midnight-blue)] shadow-xl">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-[color:var(--surface-strong)]">
-              <div className="text-sm uppercase tracking-wide text-[color:var(--muted)]">Ask AI · Verse {chatRef}</div>
-              <button onClick={() => setChatOpen(false)} className="icon-btn" aria-label="Close">×</button>
+        <div className="m-dialog-overlay" role="dialog" aria-modal="true">
+          <div className="m-dialog">
+            <div className="m-dialog-header">
+              <div className="text-sm uppercase tracking-wide text-muted">Ask AI · Verse {chatRef}</div>
+              <button onClick={() => { setChatOpen(false); try { document.documentElement.classList.remove('no-scroll'); document.body.classList.remove('no-scroll'); } catch {} }} className="icon-btn" aria-label="Close">×</button>
             </div>
-            <div className="max-h-[65vh] sm:max-h-[55vh] overflow-auto p-3 sm:p-4 space-y-3">
-              {chatHistory.length === 0 && <div className="text-sm text-[color:var(--muted)]">Context loaded. Ask a question about this verse.</div>}
+            <div className="m-dialog-body space-y-3">
+              {chatHistory.length === 0 && <div className="text-sm text-muted">Context loaded. Ask a question about this verse.</div>}
               {chatHistory.map((m, idx) => (
                 <div key={idx} className="space-y-1">
-                  <div className="text-sm uppercase tracking-wide mb-1 text-[color:var(--burnt-umber)] font-semibold">{m.role === 'user' ? 'You' : 'AI'}</div>
+                  <div className="text-sm uppercase tracking-wide mb-1 text-primary font-semibold">{m.role === 'user' ? 'You' : 'AI'}</div>
                   {m.role === 'assistant' ? (
-                    <div className="max-w-none text-black text-base leading-relaxed">
+                    <div className="max-w-none text-base leading-relaxed">
                       <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown>
                     </div>
                   ) : (
-                    <div className="whitespace-pre-line text-black text-base leading-relaxed">{m.content}</div>
+                    <div className="whitespace-pre-line text-base leading-relaxed">{m.content}</div>
                   )}
                 </div>
               ))}
-              {chatError && <div className="text-sm text-red-600">{chatError}</div>}
-              {chatLoading && <div className="text-sm text-[color:var(--muted)]">Thinking…</div>}
+              {chatError && <div className="text-sm" style={{color:'#b3261e'}}>{chatError}</div>}
+              {chatLoading && <div className="text-sm text-muted">Thinking…</div>}
             </div>
-            <div className="p-4 border-t border-[color:var(--surface-strong)]">
-              <input
-                type="text"
-                value={chatInput}
-                onChange={(e) => setChatInput(e.target.value)}
-                onKeyDown={handleChatKey}
-                className="w-full p-3 rounded-lg border border-[color:var(--surface-strong)] bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)]"
-                placeholder="Ask a follow-up…"
-              />
+            <div className="m-dialog-footer">
+              <div className="m-field">
+                <input
+                  type="text"
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  onKeyDown={handleChatKey}
+                  className="m-input"
+                  placeholder="Ask a follow-up…"
+                />
+              </div>
               <div className="mt-2 text-right">
-                <button
-                  onClick={() => void askChat()}
-                  className="px-3 py-2 rounded-md border border-[color:var(--burnt-umber)] bg-transparent hover:bg-[color:var(--surface)]"
-                >
+                <button onClick={() => void askChat()} className="m-btn m-btn-filled">
                   Ask
                 </button>
               </div>
