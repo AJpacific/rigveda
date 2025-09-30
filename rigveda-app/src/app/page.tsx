@@ -33,7 +33,7 @@ export default function Home() {
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleSearch}
               className="m-input pr-24"
-              placeholder="Search hymns, e.g. Indra, Agni..."
+              placeholder="Type your question..."
             />
             <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-2">
               <button onClick={handleAskClick} className="m-btn m-btn-filled text-sm" disabled={!query.trim()}>

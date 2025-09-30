@@ -35,6 +35,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   const [chatInput, setChatInput] = useState('');
   const [chatRef, setChatRef] = useState<string>('');
   const [chatContext, setChatContext] = useState<string>('');
+  const chatListRef = useRef<HTMLDivElement | null>(null);
 
   const isSepToken = (t: SanskritToken): t is SanskritSepToken => 'sep' in t && typeof (t as SanskritSepToken).sep === 'string';
   const isWordToken = (t: SanskritToken): t is SanskritWordToken => 'word' in t;
@@ -116,6 +117,11 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
       void askChat();
     }
   };
+
+  // Auto-scroll chat body to latest message
+  useEffect(() => {
+    chatListRef.current?.scrollTo({ top: chatListRef.current.scrollHeight, behavior: 'smooth' });
+  }, [chatHistory, chatLoading]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -366,7 +372,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
               <div className="text-sm uppercase tracking-wide text-muted">Ask AI · Verse {chatRef}</div>
               <button onClick={() => { setChatOpen(false); try { document.documentElement.classList.remove('no-scroll'); document.body.classList.remove('no-scroll'); } catch {} }} className="icon-btn" aria-label="Close">×</button>
             </div>
-            <div className="m-dialog-body space-y-3">
+            <div ref={chatListRef} className="m-dialog-body space-y-3">
               {chatHistory.length === 0 && <div className="text-sm text-muted">Context loaded. Ask a question about this verse.</div>}
               {chatHistory.map((m, idx) => (
                 <div key={idx} className="space-y-1">

@@ -100,7 +100,7 @@ export default function SearchClient() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyPress}
             className="m-input pr-20"
-            placeholder="e.g. Who is Indra? What is described in 1.1?"
+            placeholder="Type your question..."
           />
           <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-2">
             <button
