@@ -1,0 +1,44 @@
+import fs from 'fs/promises';
+import path from 'path';
+import HymnClient from './HymnClient';
+
+export async function generateStaticParams() {
+  const params: { mandala: string; sukta: string }[] = [];
+  for (let m = 1; m <= 10; m++) {
+    const filePath = path.join(process.cwd(), 'src/data', `mandala${m}.json`);
+    const jsonData = await fs.readFile(filePath, 'utf8');
+    const data = JSON.parse(jsonData);
+    data.hymns.forEach((hymn: any) => {
+      params.push({ mandala: m.toString(), sukta: hymn.sukta.toString() });
+    });
+  }
+  return params;
+}
+
+export default async function HymnPage({ params }: { params: { mandala: string; sukta: string } }) {
+  const mandala = parseInt(params.mandala);
+  const sukta = parseInt(params.sukta);
+  const filePath = path.join(process.cwd(), 'src/data', `mandala${mandala}.json`);
+  const jsonData = await fs.readFile(filePath, 'utf8');
+  const data = JSON.parse(jsonData);
+  const hymns: any[] = data.hymns;
+  const index = hymns.findIndex((h) => h.sukta === sukta);
+  const hymn = hymns[index];
+
+  if (!hymn) {
+    return <div>Hymn not found</div>;
+  }
+
+  const prevPath = index > 0 ? `/${mandala}/${hymns[index - 1].sukta}` : null;
+  const nextPath = index < hymns.length - 1 ? `/${mandala}/${hymns[index + 1].sukta}` : null;
+
+  return (
+    <HymnClient
+      hymn={hymn}
+      mandala={mandala}
+      sukta={sukta}
+      prevPath={prevPath}
+      nextPath={nextPath}
+    />
+  );
+}

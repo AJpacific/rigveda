@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+:root {
+  /* Palette */
+  --parchment: #F5F0E1ff;
+  --terracotta: #D9822Bff;
+  --deep-maroon: #6B1E14ff;
+  --olive-green: var(--burnt-umber);
+  --midnight-blue: #1B3A4Bff;
+  --gold: var(--burnt-umber);
+  --light-cream: #FFF8E7ff;
+  --burnt-umber: #8A4B2Dff;
+
+  /* Role mapping – Light (default) */
+  --background: var(--parchment);
+  --foreground: var(--midnight-blue);
+  --surface: rgba(138, 75, 45, 0.06); /* burnt-umber @ 6% */
+  --surface-strong: rgba(138, 75, 45, 0.18); /* burnt-umber @ 18% */
+  --primary: var(--burnt-umber);
+  --primary-600: #734129; /* darker burnt-umber */
+  --accent: var(--deep-maroon);
+  --muted: #6f6a63; /* neutral text */
+}
+
+/* Dark theme overrides */
+html.dark {
+  --background: var(--midnight-blue);
+  --foreground: var(--parchment);
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-strong: rgba(255, 255, 255, 0.15);
+  --primary: var(--burnt-umber);
+  --primary-600: #734129;
+  --accent: var(--burnt-umber);
+  --muted: #c8c2b7;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-600: var(--primary-600);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+}
+
+html { color-scheme: light dark; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Utility polish */
+.container { max-width: 1100px; }
+
+a { color: var(--burnt-umber); }
+a:hover { color: var(--primary); }
+
+/* Card surface helpers */
+.card-surface { background: var(--light-cream); border: 1px solid var(--burnt-umber); }
+
+/* Icon buttons */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--burnt-umber);
+  background: white;
+  color: var(--midnight-blue);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.icon-btn:hover {
+  background: var(--surface);
+  color: var(--midnight-blue);
+}
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--burnt-umber);
+  background: white;
+  color: var(--midnight-blue);
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+.nav-btn:hover {
+  background: var(--surface);
+  color: var(--midnight-blue);
+  transform: translateY(-1px);
+}
+.nav-btn-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
