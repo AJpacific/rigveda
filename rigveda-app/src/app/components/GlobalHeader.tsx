@@ -292,7 +292,7 @@ export default function GlobalHeader() {
                     <iframe className="embedded-frame" src={detailUrl} title="Result preview" />
                   </div>
                   <div className="m-note-foot mt-2 text-xs text-muted">
-                    If the page fails to load here, use "Open" to view in a new tab.
+                    If the page fails to load here, use &quot;Open&quot; to view in a new tab.
                   </div>
                 </div>
               )}
