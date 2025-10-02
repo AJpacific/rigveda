@@ -300,14 +300,13 @@ html.no-scroll, body.no-scroll { overflow: hidden; overscroll-behavior: contain;
 
 /* Enable pinch-zoom on embedded external pages only */
 .m-embed-container { touch-action: pinch-zoom; }
-.m-dialog-body { touch-action: none; }
 
-/* Improve zoom isolation for embedded popups */
+/* Allow vertical scrolling inside dialogs on mobile */
+.m-dialog { touch-action: pan-y; }
+.m-dialog-body { touch-action: pan-y; }
+
+/* Keep background from handling gestures when overlay is present */
 .m-dialog-overlay { touch-action: none; }
-.m-dialog { touch-action: none; }
-.m-dialog-body { touch-action: none; }
-/* Only the embedded content can pinch-zoom */
-.m-embed-container { touch-action: pinch-zoom; }
 
 /* Sticky note footer (keeps helper text visible) */
 .m-note-foot {
