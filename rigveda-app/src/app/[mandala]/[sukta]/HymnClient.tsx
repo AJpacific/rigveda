@@ -349,7 +349,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                     ) : (
                       <button key={wi} onClick={() => openDictionary((w as SanskritWordToken).word)} className="text-center">
                         <div className={isFirst ? 'text-[1.05rem] sm:text-[1.25rem] leading-tight text-accent' : 'text-[1.25rem] leading-tight text-accent'}>{(w as SanskritWordToken).word}</div>
-                        {(w as SanskritWordToken).translit && <div className={isFirst ? 'hidden sm:block text-[13px] text-muted' : 'text-[13px] text-muted'}>{(w as SanskritWordToken).translit}</div>}
+                        {(w as SanskritWordToken).translit && <div className="text-[13px] text-muted">{(w as SanskritWordToken).translit}</div>}
                       </button>
                     )
                   ))}
