@@ -125579,7 +125579,7 @@
               }
             ]
           ],
-          "translation": "Let not this weapon of Vivasvat, this net made with hands, Ādityas, destroy us before old age."
+          "translation": "Ādityas, utterly destroy our enemies, destroy wickedness, destroy the closely drawn net, destroy evileverywhere."
         }
       ],
       "prev": "/8/66.html",
@@ -125590,26 +125590,5838 @@
     {
       "mandala": 8,
       "sukta": 68,
-      "title": "",
-      "verses": [],
-      "group": "Hymns of Priyamedha and Others",
-      "stanzas": 19
+      "title": "HYMN LXVIII. SOMA.",
+      "audio": "https://github.com/aasi-archive/rv-audio/raw/main/data/8/68.mp3",
+      "verses": [
+        {
+          "number": "8.68.1",
+          "sanskrit": [
+            {
+              "word": "आ",
+              "translit": "ā"
+            },
+            {
+              "word": "त्वा",
+              "translit": "tvā"
+            },
+            {
+              "word": "रथं",
+              "translit": "rathaṃ"
+            },
+            {
+              "word": "यथोतये",
+              "translit": "yathotaye"
+            },
+            {
+              "word": "सुम्नाय",
+              "translit": "sumnāya"
+            },
+            {
+              "word": "वर्तयामसि",
+              "translit": "vartayāmasi"
+            },
+            {
+              "word": "तुविकूर्मिम्",
+              "translit": "tuvikūrmim"
+            },
+            {
+              "word": "ऋतीषहम्",
+              "translit": "ṛtīṣaham"
+            },
+            {
+              "word": "इन्द्र",
+              "translit": "indra"
+            },
+            {
+              "word": "शविष्ठ",
+              "translit": "śaviṣṭha"
+            },
+            {
+              "word": "सत्पते",
+              "translit": "satpate"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "आ",
+                "translit": "ā"
+              },
+              {
+                "word": "त्वा",
+                "translit": "tvā"
+              },
+              {
+                "word": "रथं",
+                "translit": "rathaṃ"
+              },
+              {
+                "word": "यथोतये",
+                "translit": "yathotaye"
+              },
+              {
+                "word": "सुम्नाय",
+                "translit": "sumnāya"
+              },
+              {
+                "word": "वर्तयामसि",
+                "translit": "vartayāmasi"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "तुविकूर्मिम्",
+                "translit": "tuvikūrmim"
+              },
+              {
+                "word": "ऋतीषहम्",
+                "translit": "ṛtīṣaham"
+              },
+              {
+                "word": "इन्द्र",
+                "translit": "indra"
+              },
+              {
+                "word": "शविष्ठ",
+                "translit": "śaviṣṭha"
+              },
+              {
+                "word": "सत्पते",
+                "translit": "satpate"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Most powerful Indra, protector of the good, we brin you here, rich in achievement and subduer ofenemies, as a car for our protection and weal."
+        },
+        {
+          "number": "8.68.2",
+          "sanskrit": [
+            {
+              "word": "तुविशुष्म",
+              "translit": "tuviśuṣma"
+            },
+            {
+              "word": "तुविक्रतो",
+              "translit": "tuvikrato"
+            },
+            {
+              "word": "शचीवो",
+              "translit": "śacīvo"
+            },
+            {
+              "word": "विश्वया",
+              "translit": "viśvayā"
+            },
+            {
+              "word": "मते",
+              "translit": "mate"
+            },
+            {
+              "word": "आ",
+              "translit": "ā"
+            },
+            {
+              "word": "पप्राथ",
+              "translit": "paprātha"
+            },
+            {
+              "word": "महित्वना",
+              "translit": "mahitvanā"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "तुविशुष्म",
+                "translit": "tuviśuṣma"
+              },
+              {
+                "word": "तुविक्रतो",
+                "translit": "tuvikrato"
+              },
+              {
+                "word": "शचीवो",
+                "translit": "śacīvo"
+              },
+              {
+                "word": "विश्वया",
+                "translit": "viśvayā"
+              },
+              {
+                "word": "मते",
+                "translit": "mate"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "आ",
+                "translit": "ā"
+              },
+              {
+                "word": "पप्राथ",
+                "translit": "paprātha"
+              },
+              {
+                "word": "महित्वना",
+                "translit": "mahitvanā"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Great in power, rich in deeds, might one, adorable, you have filled (all things) with your universalmajesy."
+        },
+        {
+          "number": "8.68.3",
+          "sanskrit": [
+            {
+              "word": "यस्य",
+              "translit": "yasya"
+            },
+            {
+              "word": "ते",
+              "translit": "te"
+            },
+            {
+              "word": "महिना",
+              "translit": "mahinā"
+            },
+            {
+              "word": "महः",
+              "translit": "mahaḥ"
+            },
+            {
+              "word": "परि",
+              "translit": "pari"
+            },
+            {
+              "word": "ज्मायन्तम्",
+              "translit": "jmāyantam"
+            },
+            {
+              "word": "ईयतुः",
+              "translit": "īyatuḥ"
+            },
+            {
+              "word": "हस्ता",
+              "translit": "hastā"
+            },
+            {
+              "word": "वज्रं",
+              "translit": "vajraṃ"
+            },
+            {
+              "word": "हिरण्ययम्",
+              "translit": "hiraṇyayam"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "यस्य",
+                "translit": "yasya"
+              },
+              {
+                "word": "ते",
+                "translit": "te"
+              },
+              {
+                "word": "महिना",
+                "translit": "mahinā"
+              },
+              {
+                "word": "महः",
+                "translit": "mahaḥ"
+              },
+              {
+                "word": "परि",
+                "translit": "pari"
+              },
+              {
+                "word": "ज्मायन्तम्",
+                "translit": "jmāyantam"
+              },
+              {
+                "word": "ईयतुः",
+                "translit": "īyatuḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "हस्ता",
+                "translit": "hastā"
+              },
+              {
+                "word": "वज्रं",
+                "translit": "vajraṃ"
+              },
+              {
+                "word": "हिरण्ययम्",
+                "translit": "hiraṇyayam"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "You mighty one, whose hands in your might grasp the all-pervading golden thunderbolt."
+        },
+        {
+          "number": "8.68.4",
+          "sanskrit": [
+            {
+              "word": "विश्वानरस्य",
+              "translit": "viśvānarasya"
+            },
+            {
+              "word": "वस्",
+              "translit": "vas"
+            },
+            {
+              "word": "पतिम्",
+              "translit": "patim"
+            },
+            {
+              "word": "अनानतस्य",
+              "translit": "anānatasya"
+            },
+            {
+              "word": "शवसः",
+              "translit": "śavasaḥ"
+            },
+            {
+              "word": "एवैश्",
+              "translit": "evaiś"
+            },
+            {
+              "word": "च",
+              "translit": "ca"
+            },
+            {
+              "word": "चर्षणीनाम्",
+              "translit": "carṣaṇīnām"
+            },
+            {
+              "word": "ऊती",
+              "translit": "ūtī"
+            },
+            {
+              "word": "हुवे",
+              "translit": "huve"
+            },
+            {
+              "word": "रथानाम्",
+              "translit": "rathānām"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "विश्वानरस्य",
+                "translit": "viśvānarasya"
+              },
+              {
+                "word": "वस्",
+                "translit": "vas"
+              },
+              {
+                "word": "पतिम्",
+                "translit": "patim"
+              },
+              {
+                "word": "अनानतस्य",
+                "translit": "anānatasya"
+              },
+              {
+                "word": "शवसः",
+                "translit": "śavasaḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "एवैश्",
+                "translit": "evaiś"
+              },
+              {
+                "word": "च",
+                "translit": "ca"
+              },
+              {
+                "word": "चर्षणीनाम्",
+                "translit": "carṣaṇīnām"
+              },
+              {
+                "word": "ऊती",
+                "translit": "ūtī"
+              },
+              {
+                "word": "हुवे",
+                "translit": "huve"
+              },
+              {
+                "word": "रथानाम्",
+                "translit": "rathānām"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "I invoke (Indra) the lord of that might which subdues all enemies and bow to none-- (I invoke him)followed by your onsets as his soldiers and (surrounded) by the protection of your chariots (O Maruts)."
+        },
+        {
+          "number": "8.68.5",
+          "sanskrit": [
+            {
+              "word": "अभिष्टये",
+              "translit": "abhiṣṭaye"
+            },
+            {
+              "word": "सदावृधं",
+              "translit": "sadāvṛdhaṃ"
+            },
+            {
+              "word": "स्वर्मीळ्हेषु",
+              "translit": "svarmīḻheṣu"
+            },
+            {
+              "word": "यं",
+              "translit": "yaṃ"
+            },
+            {
+              "word": "नरः",
+              "translit": "naraḥ"
+            },
+            {
+              "word": "नाना",
+              "translit": "nānā"
+            },
+            {
+              "word": "हवन्त",
+              "translit": "havanta"
+            },
+            {
+              "word": "ऊतये",
+              "translit": "ūtaye"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "अभिष्टये",
+                "translit": "abhiṣṭaye"
+              },
+              {
+                "word": "सदावृधं",
+                "translit": "sadāvṛdhaṃ"
+              },
+              {
+                "word": "स्वर्मीळ्हेषु",
+                "translit": "svarmīḻheṣu"
+              },
+              {
+                "word": "यं",
+                "translit": "yaṃ"
+              },
+              {
+                "word": "नरः",
+                "translit": "naraḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "नाना",
+                "translit": "nānā"
+              },
+              {
+                "word": "हवन्त",
+                "translit": "havanta"
+              },
+              {
+                "word": "ऊतये",
+                "translit": "ūtaye"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "(I invoke him) to come to our help, whose might ever waxes more and more-- to whom men appeal foraid in various ways in battles."
+        },
+        {
+          "number": "8.68.6",
+          "sanskrit": [
+            {
+              "word": "परोमात्रम्",
+              "translit": "paromātram"
+            },
+            {
+              "word": "ऋचीषमम्",
+              "translit": "ṛcīṣamam"
+            },
+            {
+              "word": "इन्द्रम्",
+              "translit": "indram"
+            },
+            {
+              "word": "उग्रं",
+              "translit": "ugraṃ"
+            },
+            {
+              "word": "सुराधसम्",
+              "translit": "surādhasam"
+            },
+            {
+              "word": "ईशानं",
+              "translit": "īśānaṃ"
+            },
+            {
+              "word": "चिद्",
+              "translit": "cid"
+            },
+            {
+              "word": "वसूनाम्",
+              "translit": "vasūnām"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "परोमात्रम्",
+                "translit": "paromātram"
+              },
+              {
+                "word": "ऋचीषमम्",
+                "translit": "ṛcīṣamam"
+              },
+              {
+                "word": "इन्द्रम्",
+                "translit": "indram"
+              },
+              {
+                "word": "उग्रं",
+                "translit": "ugraṃ"
+              },
+              {
+                "word": "सुराधसम्",
+                "translit": "surādhasam"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "ईशानं",
+                "translit": "īśānaṃ"
+              },
+              {
+                "word": "चिद्",
+                "translit": "cid"
+              },
+              {
+                "word": "वसूनाम्",
+                "translit": "vasūnām"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "(I invoke) Indra, the unlimited, worthy of praise, the mighty, possessing excellent wealth, the lord oftreasures (for his votaries)."
+        },
+        {
+          "number": "8.68.7",
+          "sanskrit": [
+            {
+              "word": "तं-तम्",
+              "translit": "taṃ-tam"
+            },
+            {
+              "word": "इद्",
+              "translit": "id"
+            },
+            {
+              "word": "राधसे",
+              "translit": "rādhase"
+            },
+            {
+              "word": "मह",
+              "translit": "maha"
+            },
+            {
+              "word": "इन्द्रं",
+              "translit": "indraṃ"
+            },
+            {
+              "word": "चोदामि",
+              "translit": "codāmi"
+            },
+            {
+              "word": "पीतये",
+              "translit": "pītaye"
+            },
+            {
+              "word": "यः",
+              "translit": "yaḥ"
+            },
+            {
+              "word": "पूर्व्याम्",
+              "translit": "pūrvyām"
+            },
+            {
+              "word": "अनुष्टुतिम्",
+              "translit": "anuṣṭutim"
+            },
+            {
+              "word": "ईशे",
+              "translit": "īśe"
+            },
+            {
+              "word": "कृष्टीनां",
+              "translit": "kṛṣṭīnāṃ"
+            },
+            {
+              "word": "नृतुः",
+              "translit": "nṛtuḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "तं-तम्",
+                "translit": "taṃ-tam"
+              },
+              {
+                "word": "इद्",
+                "translit": "id"
+              },
+              {
+                "word": "राधसे",
+                "translit": "rādhase"
+              },
+              {
+                "word": "मह",
+                "translit": "maha"
+              },
+              {
+                "word": "इन्द्रं",
+                "translit": "indraṃ"
+              },
+              {
+                "word": "चोदामि",
+                "translit": "codāmi"
+              },
+              {
+                "word": "पीतये",
+                "translit": "pītaye"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "यः",
+                "translit": "yaḥ"
+              },
+              {
+                "word": "पूर्व्याम्",
+                "translit": "pūrvyām"
+              },
+              {
+                "word": "अनुष्टुतिम्",
+                "translit": "anuṣṭutim"
+              },
+              {
+                "word": "ईशे",
+                "translit": "īśe"
+              },
+              {
+                "word": "कृष्टीनां",
+                "translit": "kṛṣṭīnāṃ"
+              },
+              {
+                "word": "नृतुः",
+                "translit": "nṛtuḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "To him, to him, Indra, do I direct my praise, that he may quaff the Soma to my great gain-- to him, thebringer of success, who rules over the praises of the offerers at the opening of the sacrifice."
+        },
+        {
+          "number": "8.68.8",
+          "sanskrit": [
+            {
+              "word": "न",
+              "translit": "na"
+            },
+            {
+              "word": "यस्य",
+              "translit": "yasya"
+            },
+            {
+              "word": "ते",
+              "translit": "te"
+            },
+            {
+              "word": "शवसान",
+              "translit": "śavasāna"
+            },
+            {
+              "word": "सख्यम्",
+              "translit": "sakhyam"
+            },
+            {
+              "word": "आनंश",
+              "translit": "ānaṃśa"
+            },
+            {
+              "word": "मर्त्यः",
+              "translit": "martyaḥ"
+            },
+            {
+              "word": "नकिः",
+              "translit": "nakiḥ"
+            },
+            {
+              "word": "शवांसि",
+              "translit": "śavāṃsi"
+            },
+            {
+              "word": "ते",
+              "translit": "te"
+            },
+            {
+              "word": "नशत्",
+              "translit": "naśat"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "न",
+                "translit": "na"
+              },
+              {
+                "word": "यस्य",
+                "translit": "yasya"
+              },
+              {
+                "word": "ते",
+                "translit": "te"
+              },
+              {
+                "word": "शवसान",
+                "translit": "śavasāna"
+              },
+              {
+                "word": "सख्यम्",
+                "translit": "sakhyam"
+              },
+              {
+                "word": "आनंश",
+                "translit": "ānaṃśa"
+              },
+              {
+                "word": "मर्त्यः",
+                "translit": "martyaḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "नकिः",
+                "translit": "nakiḥ"
+              },
+              {
+                "word": "शवांसि",
+                "translit": "śavāṃsi"
+              },
+              {
+                "word": "ते",
+                "translit": "te"
+              },
+              {
+                "word": "नशत्",
+                "translit": "naśat"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "You mighty one, whose friendship no mortal reaches, whose might no one attains."
+        },
+        {
+          "number": "8.68.9",
+          "sanskrit": [
+            {
+              "word": "त्वोतासस्",
+              "translit": "tvotāsas"
+            },
+            {
+              "word": "त्वा",
+              "translit": "tvā"
+            },
+            {
+              "word": "युजा",
+              "translit": "yujā"
+            },
+            {
+              "word": "अप्सु",
+              "translit": "apsu"
+            },
+            {
+              "word": "सूर्ये",
+              "translit": "sūrye"
+            },
+            {
+              "word": "महद्",
+              "translit": "mahad"
+            },
+            {
+              "word": "धनम्",
+              "translit": "dhanam"
+            },
+            {
+              "word": "जयेम",
+              "translit": "jayema"
+            },
+            {
+              "word": "पृत्सु",
+              "translit": "pṛtsu"
+            },
+            {
+              "word": "वज्रिवः",
+              "translit": "vajrivaḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "त्वोतासस्",
+                "translit": "tvotāsas"
+              },
+              {
+                "word": "त्वा",
+                "translit": "tvā"
+              },
+              {
+                "word": "युजा",
+                "translit": "yujā"
+              },
+              {
+                "word": "अप्सु",
+                "translit": "apsu"
+              },
+              {
+                "word": "सूर्ये",
+                "translit": "sūrye"
+              },
+              {
+                "word": "महद्",
+                "translit": "mahad"
+              },
+              {
+                "word": "धनम्",
+                "translit": "dhanam"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "जयेम",
+                "translit": "jayema"
+              },
+              {
+                "word": "पृत्सु",
+                "translit": "pṛtsu"
+              },
+              {
+                "word": "वज्रिवः",
+                "translit": "vajrivaḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Protected by you, O thunderer, with you as our ally, may we win great wealth in battles, that we maybathe in the water and behold he sun."
+        },
+        {
+          "number": "8.68.10",
+          "sanskrit": [
+            {
+              "word": "तं",
+              "translit": "taṃ"
+            },
+            {
+              "word": "त्वा",
+              "translit": "tvā"
+            },
+            {
+              "word": "यज्ञेभिर्",
+              "translit": "yajñebhir"
+            },
+            {
+              "word": "ईमहे",
+              "translit": "īmahe"
+            },
+            {
+              "word": "तं",
+              "translit": "taṃ"
+            },
+            {
+              "word": "गीर्भिर्",
+              "translit": "gīrbhir"
+            },
+            {
+              "word": "गिर्वणस्तम",
+              "translit": "girvaṇastama"
+            },
+            {
+              "word": "इन्द्र",
+              "translit": "indra"
+            },
+            {
+              "word": "यथा",
+              "translit": "yathā"
+            },
+            {
+              "word": "चिद्",
+              "translit": "cid"
+            },
+            {
+              "word": "आविथ",
+              "translit": "āvitha"
+            },
+            {
+              "word": "वाजेषु",
+              "translit": "vājeṣu"
+            },
+            {
+              "word": "पुरुमाय्यम्",
+              "translit": "purumāyyam"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "तं",
+                "translit": "taṃ"
+              },
+              {
+                "word": "त्वा",
+                "translit": "tvā"
+              },
+              {
+                "word": "यज्ञेभिर्",
+                "translit": "yajñebhir"
+              },
+              {
+                "word": "ईमहे",
+                "translit": "īmahe"
+              },
+              {
+                "word": "तं",
+                "translit": "taṃ"
+              },
+              {
+                "word": "गीर्भिर्",
+                "translit": "gīrbhir"
+              },
+              {
+                "word": "गिर्वणस्तम",
+                "translit": "girvaṇastama"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "इन्द्र",
+                "translit": "indra"
+              },
+              {
+                "word": "यथा",
+                "translit": "yathā"
+              },
+              {
+                "word": "चिद्",
+                "translit": "cid"
+              },
+              {
+                "word": "आविथ",
+                "translit": "āvitha"
+              },
+              {
+                "word": "वाजेषु",
+                "translit": "vājeṣu"
+              },
+              {
+                "word": "पुरुमाय्यम्",
+                "translit": "purumāyyam"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "We address you with sacrificial gifts, (we address you) with songs, O Indra most worthy of song, as youhave protected me, the offerer of many praises, in battles."
+        },
+        {
+          "number": "8.68.11",
+          "sanskrit": [
+            {
+              "word": "यस्य",
+              "translit": "yasya"
+            },
+            {
+              "word": "ते",
+              "translit": "te"
+            },
+            {
+              "word": "स्वादु",
+              "translit": "svādu"
+            },
+            {
+              "word": "सख्यं",
+              "translit": "sakhyaṃ"
+            },
+            {
+              "word": "स्वाद्वी",
+              "translit": "svādvī"
+            },
+            {
+              "word": "प्रणीतिर्",
+              "translit": "praṇītir"
+            },
+            {
+              "word": "अद्रिवः",
+              "translit": "adrivaḥ"
+            },
+            {
+              "word": "यज्ञो",
+              "translit": "yajño"
+            },
+            {
+              "word": "वितन्तसाय्यः",
+              "translit": "vitantasāyyaḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "यस्य",
+                "translit": "yasya"
+              },
+              {
+                "word": "ते",
+                "translit": "te"
+              },
+              {
+                "word": "स्वादु",
+                "translit": "svādu"
+              },
+              {
+                "word": "सख्यं",
+                "translit": "sakhyaṃ"
+              },
+              {
+                "word": "स्वाद्वी",
+                "translit": "svādvī"
+              },
+              {
+                "word": "प्रणीतिर्",
+                "translit": "praṇītir"
+              },
+              {
+                "word": "अद्रिवः",
+                "translit": "adrivaḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "यज्ञो",
+                "translit": "yajño"
+              },
+              {
+                "word": "वितन्तसाय्यः",
+                "translit": "vitantasāyyaḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "You, the thunderer, whose friendship is sweet, sweet too is your liberality, and your sacrificepre-eminently to be performed."
+        },
+        {
+          "number": "8.68.12",
+          "sanskrit": [
+            {
+              "word": "उरु",
+              "translit": "uru"
+            },
+            {
+              "word": "णस्",
+              "translit": "ṇas"
+            },
+            {
+              "word": "तन्वे",
+              "translit": "tanve"
+            },
+            {
+              "word": "तन",
+              "translit": "tana"
+            },
+            {
+              "word": "उरु",
+              "translit": "uru"
+            },
+            {
+              "word": "क्षयाय",
+              "translit": "kṣayāya"
+            },
+            {
+              "word": "नस्",
+              "translit": "nas"
+            },
+            {
+              "word": "कृधि",
+              "translit": "kṛdhi"
+            },
+            {
+              "word": "उरु",
+              "translit": "uru"
+            },
+            {
+              "word": "णो",
+              "translit": "ṇo"
+            },
+            {
+              "word": "यन्धि",
+              "translit": "yandhi"
+            },
+            {
+              "word": "जीवसे",
+              "translit": "jīvase"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "उरु",
+                "translit": "uru"
+              },
+              {
+                "word": "णस्",
+                "translit": "ṇas"
+              },
+              {
+                "word": "तन्वे",
+                "translit": "tanve"
+              },
+              {
+                "word": "तन",
+                "translit": "tana"
+              },
+              {
+                "word": "उरु",
+                "translit": "uru"
+              },
+              {
+                "word": "क्षयाय",
+                "translit": "kṣayāya"
+              },
+              {
+                "word": "नस्",
+                "translit": "nas"
+              },
+              {
+                "word": "कृधि",
+                "translit": "kṛdhi"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "उरु",
+                "translit": "uru"
+              },
+              {
+                "word": "णो",
+                "translit": "ṇo"
+              },
+              {
+                "word": "यन्धि",
+                "translit": "yandhi"
+              },
+              {
+                "word": "जीवसे",
+                "translit": "jīvase"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Give ample (wealth) to our own selves, give ample (wealth) to our children, give ample (wealth) to ourdwelling, gran us (our desire) that we may live."
+        },
+        {
+          "number": "8.68.13",
+          "sanskrit": [
+            {
+              "word": "उरुं",
+              "translit": "uruṃ"
+            },
+            {
+              "word": "नृभ्य",
+              "translit": "nṛbhya"
+            },
+            {
+              "word": "उरुं",
+              "translit": "uruṃ"
+            },
+            {
+              "word": "गव",
+              "translit": "gava"
+            },
+            {
+              "word": "उरुं",
+              "translit": "uruṃ"
+            },
+            {
+              "word": "रथाय",
+              "translit": "rathāya"
+            },
+            {
+              "word": "पन्थाम्",
+              "translit": "panthām"
+            },
+            {
+              "word": "देववीतिं",
+              "translit": "devavītim"
+            },
+            {
+              "word": "मनामहे",
+              "translit": "manāmahe"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "उरुं",
+                "translit": "uruṃ"
+              },
+              {
+                "word": "नृभ्य",
+                "translit": "nṛbhya"
+              },
+              {
+                "word": "उरुं",
+                "translit": "uruṃ"
+              },
+              {
+                "word": "गव",
+                "translit": "gava"
+              },
+              {
+                "word": "उरुं",
+                "translit": "uruṃ"
+              },
+              {
+                "word": "रथाय",
+                "translit": "rathāya"
+              },
+              {
+                "word": "पन्थाम्",
+                "translit": "panthām"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "देववीतिं",
+                "translit": "devavītim"
+              },
+              {
+                "word": "मनामहे",
+                "translit": "manāmahe"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "We solicit a spacious (road) for our servants, a spacious (road) for our cattle, a spacious road for ourchariot, and (an abundant) sacrifice."
+        },
+        {
+          "number": "8.68.14",
+          "sanskrit": [
+            {
+              "word": "उप",
+              "translit": "upa"
+            },
+            {
+              "word": "मा",
+              "translit": "mā"
+            },
+            {
+              "word": "षड्",
+              "translit": "ṣaḍ"
+            },
+            {
+              "word": "द्वा-द्वा",
+              "translit": "dvā-dvā"
+            },
+            {
+              "word": "नरः",
+              "translit": "naraḥ"
+            },
+            {
+              "word": "सोमस्य",
+              "translit": "somasya"
+            },
+            {
+              "word": "हर्ष्या",
+              "translit": "harṣyā"
+            },
+            {
+              "word": "तिष्ठन्ति",
+              "translit": "tiṣṭhanti"
+            },
+            {
+              "word": "स्वादुरातयः",
+              "translit": "svādurātayaḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "उप",
+                "translit": "upa"
+              },
+              {
+                "word": "मा",
+                "translit": "mā"
+              },
+              {
+                "word": "षड्",
+                "translit": "ṣaḍ"
+              },
+              {
+                "word": "द्वा-द्वा",
+                "translit": "dvā-dvā"
+              },
+              {
+                "word": "नरः",
+                "translit": "naraḥ"
+              },
+              {
+                "word": "सोमस्य",
+                "translit": "somasya"
+              },
+              {
+                "word": "हर्ष्या",
+                "translit": "harṣyā"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "तिष्ठन्ति",
+                "translit": "tiṣṭhanti"
+              },
+              {
+                "word": "स्वादुरातयः",
+                "translit": "svādurātayaḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Six princes come to me in pairs, bearing plural asant gifts, in the exhilaration of the Soma."
+        },
+        {
+          "number": "8.68.15",
+          "sanskrit": [
+            {
+              "word": "ऋज्राव्",
+              "translit": "ṛjrāv"
+            },
+            {
+              "word": "इन्द्रोत",
+              "translit": "indrota"
+            },
+            {
+              "word": "आ",
+              "translit": "ā"
+            },
+            {
+              "word": "ददे",
+              "translit": "dade"
+            },
+            {
+              "word": "हरी",
+              "translit": "harī"
+            },
+            {
+              "word": "ऋक्षस्य",
+              "translit": "ṛkṣasya"
+            },
+            {
+              "word": "सूनवि",
+              "translit": "sūnavi"
+            },
+            {
+              "word": "आश्वमेधस्य",
+              "translit": "āśvamedhasya"
+            },
+            {
+              "word": "रोहिता",
+              "translit": "rohitā"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "ऋज्राव्",
+                "translit": "ṛjrāv"
+              },
+              {
+                "word": "इन्द्रोत",
+                "translit": "indrota"
+              },
+              {
+                "word": "आ",
+                "translit": "ā"
+              },
+              {
+                "word": "ददे",
+                "translit": "dade"
+              },
+              {
+                "word": "हरी",
+                "translit": "harī"
+              },
+              {
+                "word": "ऋक्षस्य",
+                "translit": "ṛkṣasya"
+              },
+              {
+                "word": "सूनवि",
+                "translit": "sūnavi"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "आश्वमेधस्य",
+                "translit": "āśvamedhasya"
+              },
+              {
+                "word": "रोहिता",
+                "translit": "rohitā"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "I receive two straight-going steeds from Indrota, two from the son of Ṛkṣa, two from the son ofAśvamedha."
+        },
+        {
+          "number": "8.68.16",
+          "sanskrit": [
+            {
+              "word": "सुरथाँ",
+              "translit": "surathām̐"
+            },
+            {
+              "word": "आतिथिग्वे",
+              "translit": "ātithigve"
+            },
+            {
+              "word": "स्वभीशूँर्",
+              "translit": "svabhīśūm̐r"
+            },
+            {
+              "word": "आर्क्षे",
+              "translit": "ārkṣe"
+            },
+            {
+              "word": "आश्वमेधे",
+              "translit": "āśvamedhe"
+            },
+            {
+              "word": "सुपेशसः",
+              "translit": "supeśasaḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "सुरथाँ",
+                "translit": "surathām̐"
+              },
+              {
+                "word": "आतिथिग्वे",
+                "translit": "ātithigve"
+              },
+              {
+                "word": "स्वभीशूँर्",
+                "translit": "svabhīśūm̐r"
+              },
+              {
+                "word": "आर्क्षे",
+                "translit": "ārkṣe"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "आश्वमेधे",
+                "translit": "āśvamedhe"
+              },
+              {
+                "word": "सुपेशसः",
+                "translit": "supeśasaḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "(I receive) two steeds with excellent chariots from the son of Atithigva, two with excellent reins from theson of Ṛkṣa, two with excellent ornaments from the son of Aśvamedha."
+        },
+        {
+          "number": "8.68.17",
+          "sanskrit": [
+            {
+              "word": "षळ्",
+              "translit": "ṣaḻ"
+            },
+            {
+              "word": "अश्वाँ",
+              "translit": "aśvām̐"
+            },
+            {
+              "word": "आतिथिग्व",
+              "translit": "ātithigva"
+            },
+            {
+              "word": "इन्द्रोते",
+              "translit": "indrote"
+            },
+            {
+              "word": "वधूमतः",
+              "translit": "vadhūmataḥ"
+            },
+            {
+              "word": "सचा",
+              "translit": "sacā"
+            },
+            {
+              "word": "पूतक्रतौ",
+              "translit": "pūtakratau"
+            },
+            {
+              "word": "सनम्",
+              "translit": "sanam"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "षळ्",
+                "translit": "ṣaḻ"
+              },
+              {
+                "word": "अश्वाँ",
+                "translit": "aśvām̐"
+              },
+              {
+                "word": "आतिथिग्व",
+                "translit": "ātithigva"
+              },
+              {
+                "word": "इन्द्रोते",
+                "translit": "indrote"
+              },
+              {
+                "word": "वधूमतः",
+                "translit": "vadhūmataḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "सचा",
+                "translit": "sacā"
+              },
+              {
+                "word": "पूतक्रतौ",
+                "translit": "pūtakratau"
+              },
+              {
+                "word": "सनम्",
+                "translit": "sanam"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "I have received together (with my other gifts) six horses with their mares from te pious Indrota, the sonof Atithigva."
+        },
+        {
+          "number": "8.68.18",
+          "sanskrit": [
+            {
+              "word": "ऐषु",
+              "translit": "aiṣu"
+            },
+            {
+              "word": "चेतद्",
+              "translit": "cetad"
+            },
+            {
+              "word": "वृषण्वत्य्",
+              "translit": "vṛṣaṇvaty"
+            },
+            {
+              "word": "अन्तॠज्रेष्व्",
+              "translit": "antar ṛjreṣv"
+            },
+            {
+              "word": "अरुषी",
+              "translit": "aruṣī"
+            },
+            {
+              "word": "स्वभीशुः",
+              "translit": "svabhīśuḥ"
+            },
+            {
+              "word": "कशावती",
+              "translit": "kaśāvatī"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "ऐषु",
+                "translit": "aiṣu"
+              },
+              {
+                "word": "चेतद्",
+                "translit": "cetad"
+              },
+              {
+                "word": "वृषण्वत्य्",
+                "translit": "vṛṣaṇvaty"
+              },
+              {
+                "word": "अन्तॠज्रेष्व्",
+                "translit": "antar ṛjreṣv"
+              },
+              {
+                "word": "अरुषी",
+                "translit": "aruṣī"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "स्वभीशुः",
+                "translit": "svabhīśuḥ"
+              },
+              {
+                "word": "कशावती",
+                "translit": "kaśāvatī"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Among these straight-going steeds is numbered a mature mare with excellent reins and whip."
+        },
+        {
+          "number": "8.68.19",
+          "sanskrit": [
+            {
+              "word": "न",
+              "translit": "na"
+            },
+            {
+              "word": "युष्मे",
+              "translit": "yuṣme"
+            },
+            {
+              "word": "वाजबन्धवो",
+              "translit": "vājabandhavo"
+            },
+            {
+              "word": "निनित्सुश्",
+              "translit": "ninitsuś"
+            },
+            {
+              "word": "चन",
+              "translit": "cana"
+            },
+            {
+              "word": "मर्त्यः",
+              "translit": "martyaḥ"
+            },
+            {
+              "word": "अवद्यम्",
+              "translit": "avadyam"
+            },
+            {
+              "word": "अधि",
+              "translit": "adhi"
+            },
+            {
+              "word": "दीधरत्",
+              "translit": "dīdharat"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "न",
+                "translit": "na"
+              },
+              {
+                "word": "युष्मे",
+                "translit": "yuṣme"
+              },
+              {
+                "word": "वाजबन्धवो",
+                "translit": "vājabandhavo"
+              },
+              {
+                "word": "निनित्सुश्",
+                "translit": "ninitsuś"
+              },
+              {
+                "word": "चन",
+                "translit": "cana"
+              },
+              {
+                "word": "मर्त्यः",
+                "translit": "martyaḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "अवद्यम्",
+                "translit": "avadyam"
+              },
+              {
+                "word": "अधि",
+                "translit": "adhi"
+              },
+              {
+                "word": "दीधरत्",
+                "translit": "dīdharat"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "O princes, givers of food, even the lover of calumny has thrown no censure on you."
+        }
+      ],
+          "prev": "/8/67.html",
+          "next": "/8/69.html",
+          "group": "Hymns of Priyamedha and Others",
+          "stanzas": 19
     },
     {
       "mandala": 8,
       "sukta": 69,
-      "title": "",
-      "verses": [],
-      "group": "Hymns of Priyamedha and Others",
-      "stanzas": 18
+      "title": "HYMN LXIX. INDRA.",
+      "audio": "https://github.com/aasi-archive/rv-audio/raw/main/data/8/69.mp3",
+      "verses": [
+        {
+          "number": "8.69.1",
+          "sanskrit": [
+            {
+              "word": "प्रप्र",
+              "translit": "pra-pra"
+            },
+            {
+              "word": "वस्त्रिष्टुभमिषं",
+              "translit": "vas triṣṭubham iṣam"
+            },
+            {
+              "word": "मन्दद्वीरायेन्दवे",
+              "translit": "mandadvīrāyendave"
+            },
+            {
+              "word": "धिया",
+              "translit": "dhiyā"
+            },
+            {
+              "word": "वो",
+              "translit": "vo"
+            },
+            {
+              "word": "मेधसातये",
+              "translit": "medhasātaye"
+            },
+            {
+              "word": "पुरंध्या",
+              "translit": "puraṃdhyā"
+            },
+            {
+              "word": "विवासति",
+              "translit": "vivāsati"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "प्रप्र",
+                "translit": "pra-pra"
+              },
+              {
+                "word": "वस्त्रिष्टुभमिषं",
+                "translit": "vas triṣṭubham iṣam"
+              },
+              {
+                "word": "मन्दद्वीरायेन्दवे",
+                "translit": "mandadvīrāyendave"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "धिया",
+                "translit": "dhiyā"
+              },
+              {
+                "word": "वो",
+                "translit": "vo"
+              },
+              {
+                "word": "मेधसातये",
+                "translit": "medhasātaye"
+              },
+              {
+                "word": "पुरंध्या",
+                "translit": "puraṃdhyā"
+              },
+              {
+                "word": "विवासति",
+                "translit": "vivāsati"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Present your sacrificial food with a three-fold song of praise to Indu, gladdener of heroes; he will blessyou in your religious rites to the accompaniment of your sacrifice."
+        },
+        {
+          "number": "8.69.2",
+          "sanskrit": [
+            {
+              "word": "नदं",
+              "translit": "nadaṃ"
+            },
+            {
+              "word": "व",
+              "translit": "va"
+            },
+            {
+              "word": "ओदतीनां",
+              "translit": "odatīnāṃ"
+            },
+            {
+              "word": "नदं",
+              "translit": "nadaṃ"
+            },
+            {
+              "word": "योयुवतीनाम्",
+              "translit": "yoyuvatīnām"
+            },
+            {
+              "word": "पतिं",
+              "translit": "patiṃ"
+            },
+            {
+              "word": "वो",
+              "translit": "vo"
+            },
+            {
+              "word": "अघ्न्यानां",
+              "translit": "aghnyānāṃ"
+            },
+            {
+              "word": "धेनूनाम्",
+              "translit": "dhenūnām"
+            },
+            {
+              "word": "इषुध्यसि",
+              "translit": "iṣudhyasi"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "नदं",
+                "translit": "nadaṃ"
+              },
+              {
+                "word": "व",
+                "translit": "va"
+              },
+              {
+                "word": "ओदतीनां",
+                "translit": "odatīnāṃ"
+              },
+              {
+                "word": "नदं",
+                "translit": "nadaṃ"
+              },
+              {
+                "word": "योयुवतीनाम्",
+                "translit": "yoyuvatīnām"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "पतिं",
+                "translit": "patiṃ"
+              },
+              {
+                "word": "वो",
+                "translit": "vo"
+              },
+              {
+                "word": "अघ्न्यानां",
+                "translit": "aghnyānāṃ"
+              },
+              {
+                "word": "धेनूनाम्",
+                "translit": "dhenūnām"
+              },
+              {
+                "word": "इषुध्यसि",
+                "translit": "iṣudhyasi"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "(Invoke) for yourselves the author of the dawns, (I invoke) for you the roarer of the rivers; (I invoke) foryou the lord of the inviolable ones; (O sacrificer), you desire kine."
+        },
+        {
+          "number": "8.69.3",
+          "sanskrit": [
+            {
+              "word": "ता",
+              "translit": "tā"
+            },
+            {
+              "word": "अस्य",
+              "translit": "asya"
+            },
+            {
+              "word": "सूददोहसः",
+              "translit": "sūdadohasaḥ"
+            },
+            {
+              "word": "सोमं",
+              "translit": "somaṃ"
+            },
+            {
+              "word": "श्रीणन्ति",
+              "translit": "śrīṇanti"
+            },
+            {
+              "word": "पृश्नयः",
+              "translit": "pṛśnayaḥ"
+            },
+            {
+              "word": "जन्मन्",
+              "translit": "janman"
+            },
+            {
+              "word": "देवानां",
+              "translit": "devānāṃ"
+            },
+            {
+              "word": "विशस्",
+              "translit": "viśas"
+            },
+            {
+              "word": "त्रिष्व",
+              "translit": "triṣv"
+            },
+            {
+              "word": "आ",
+              "translit": "ā"
+            },
+            {
+              "word": "रोचने",
+              "translit": "rocane"
+            },
+            {
+              "word": "दिवः",
+              "translit": "divaḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "ता",
+                "translit": "tā"
+              },
+              {
+                "word": "अस्य",
+                "translit": "asya"
+              },
+              {
+                "word": "सूददोहसः",
+                "translit": "sūdadohasaḥ"
+              },
+              {
+                "word": "सोमं",
+                "translit": "somaṃ"
+              },
+              {
+                "word": "श्रीणन्ति",
+                "translit": "śrīṇanti"
+              },
+              {
+                "word": "पृश्नयः",
+                "translit": "pṛśnayaḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "जन्मन्",
+                "translit": "janman"
+              },
+              {
+                "word": "देवानां",
+                "translit": "devānāṃ"
+              },
+              {
+                "word": "विशस्",
+                "translit": "viśas"
+              },
+              {
+                "word": "त्रिष्व",
+                "translit": "triṣv"
+              },
+              {
+                "word": "आ",
+                "translit": "ā"
+              },
+              {
+                "word": "रोचने",
+                "translit": "rocane"
+              },
+              {
+                "word": "दिवः",
+                "translit": "divaḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "These white kine, giving milk wells, mix the Soma for him at the three oblations, rising (in consequece tothe brilliant home of the sun, the birthplace of the gods)."
+        },
+        {
+          "number": "8.69.4",
+          "sanskrit": [
+            {
+              "word": "अभि",
+              "translit": "abhi"
+            },
+            {
+              "word": "प्र",
+              "translit": "pra"
+            },
+            {
+              "word": "गोपतिं",
+              "translit": "gopatiṃ"
+            },
+            {
+              "word": "गिरा",
+              "translit": "girā"
+            },
+            {
+              "word": "इन्द्रम्",
+              "translit": "indram"
+            },
+            {
+              "word": "अर्च",
+              "translit": "arca"
+            },
+            {
+              "word": "यथा",
+              "translit": "yathā"
+            },
+            {
+              "word": "विदे",
+              "translit": "vide"
+            },
+            {
+              "word": "सूनुं",
+              "translit": "sūnuṃ"
+            },
+            {
+              "word": "सत्यस्य",
+              "translit": "satyasya"
+            },
+            {
+              "word": "सत्पतिम्",
+              "translit": "satpatim"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "अभि",
+                "translit": "abhi"
+              },
+              {
+                "word": "प्र",
+                "translit": "pra"
+              },
+              {
+                "word": "गोपतिं",
+                "translit": "gopatiṃ"
+              },
+              {
+                "word": "गिरा",
+                "translit": "girā"
+              },
+              {
+                "word": "इन्द्रम्",
+                "translit": "indram"
+              },
+              {
+                "word": "अर्च",
+                "translit": "arca"
+              },
+              {
+                "word": "यथा",
+                "translit": "yathā"
+              },
+              {
+                "word": "विदे",
+                "translit": "vide"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "सूनुं",
+                "translit": "sūnuṃ"
+              },
+              {
+                "word": "सत्यस्य",
+                "translit": "satyasya"
+              },
+              {
+                "word": "सत्पतिम्",
+                "translit": "satpatim"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Worship with your praise, as he himself knows-- that lord of kine, Indra, the son of Satya, the protectorof the good."
+        },
+        {
+          "number": "8.69.5",
+          "sanskrit": [
+            {
+              "word": "आ",
+              "translit": "ā"
+            },
+            {
+              "word": "हरयः",
+              "translit": "harayaḥ"
+            },
+            {
+              "word": "ससृज्रिरे",
+              "translit": "sasṛjrire"
+            },
+            {
+              "word": "अरुषीर्",
+              "translit": "aruṣīr"
+            },
+            {
+              "word": "अधि",
+              "translit": "adhi"
+            },
+            {
+              "word": "बर्हिषि",
+              "translit": "barhiṣi"
+            },
+            {
+              "word": "यत्रा",
+              "translit": "yatrā"
+            },
+            {
+              "word": "अभि",
+              "translit": "abhi"
+            },
+            {
+              "word": "संनवामहे",
+              "translit": "saṃnavāmahe"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "आ",
+                "translit": "ā"
+              },
+              {
+                "word": "हरयः",
+                "translit": "harayaḥ"
+              },
+              {
+                "word": "ससृज्रिरे",
+                "translit": "sasṛjrire"
+              },
+              {
+                "word": "अरुषीर्",
+                "translit": "aruṣīr"
+              },
+              {
+                "word": "अधि",
+                "translit": "adhi"
+              },
+              {
+                "word": "बर्हिषि",
+                "translit": "barhiṣi"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "यत्रा",
+                "translit": "yatrā"
+              },
+              {
+                "word": "अभि",
+                "translit": "abhi"
+              },
+              {
+                "word": "संनवामहे",
+                "translit": "saṃnavāmahe"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Let the brilliant bay (horses) drop him down on the cut grass, where we will hymn his praise."
+        },
+        {
+          "number": "8.69.6",
+          "sanskrit": [
+            {
+              "word": "इन्द्राय",
+              "translit": "indrāya"
+            },
+            {
+              "word": "गाव",
+              "translit": "gāva"
+            },
+            {
+              "word": "आशिरं",
+              "translit": "āśiraṃ"
+            },
+            {
+              "word": "दुदुह्रे",
+              "translit": "duduhre"
+            },
+            {
+              "word": "वज्रिणे",
+              "translit": "vajriṇe"
+            },
+            {
+              "word": "मधु",
+              "translit": "madhu"
+            },
+            {
+              "word": "यत्",
+              "translit": "yat"
+            },
+            {
+              "word": "सीम्",
+              "translit": "sīm"
+            },
+            {
+              "word": "उपह्वरे",
+              "translit": "upahvare"
+            },
+            {
+              "word": "विदत्",
+              "translit": "vidat"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "इन्द्राय",
+                "translit": "indrāya"
+              },
+              {
+                "word": "गाव",
+                "translit": "gāva"
+              },
+              {
+                "word": "आशिरं",
+                "translit": "āśiraṃ"
+              },
+              {
+                "word": "दुदुह्रे",
+                "translit": "duduhre"
+              },
+              {
+                "word": "वज्रिणे",
+                "translit": "vajriṇe"
+              },
+              {
+                "word": "मधु",
+                "translit": "madhu"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "यत्",
+                "translit": "yat"
+              },
+              {
+                "word": "सीम्",
+                "translit": "sīm"
+              },
+              {
+                "word": "उपह्वरे",
+                "translit": "upahvare"
+              },
+              {
+                "word": "विदत्",
+                "translit": "vidat"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "The cows have milked the intoxicating draught for Indra, the thunderer, when he finds it near him."
+        },
+        {
+          "number": "8.69.7",
+          "sanskrit": [
+            {
+              "word": "उद्",
+              "translit": "ud"
+            },
+            {
+              "word": "यद्",
+              "translit": "yad"
+            },
+            {
+              "word": "ब्रध्नस्य",
+              "translit": "bradhnasya"
+            },
+            {
+              "word": "विष्टपं",
+              "translit": "viṣṭapaṃ"
+            },
+            {
+              "word": "गृहम्",
+              "translit": "gṛham"
+            },
+            {
+              "word": "इन्द्रश्",
+              "translit": "indraś"
+            },
+            {
+              "word": "च",
+              "translit": "ca"
+            },
+            {
+              "word": "गन्वहि",
+              "translit": "ganvahi"
+            },
+            {
+              "word": "मध्वः",
+              "translit": "madhvaḥ"
+            },
+            {
+              "word": "पीत्वा",
+              "translit": "pītvā"
+            },
+            {
+              "word": "सचेवहि",
+              "translit": "sacevahi"
+            },
+            {
+              "word": "त्रिः",
+              "translit": "triḥ"
+            },
+            {
+              "word": "सप्त",
+              "translit": "sapta"
+            },
+            {
+              "word": "सख्युः",
+              "translit": "sakhyuḥ"
+            },
+            {
+              "word": "पदे",
+              "translit": "pade"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "उद्",
+                "translit": "ud"
+              },
+              {
+                "word": "यद्",
+                "translit": "yad"
+              },
+              {
+                "word": "ब्रध्नस्य",
+                "translit": "bradhnasya"
+              },
+              {
+                "word": "विष्टपं",
+                "translit": "viṣṭapaṃ"
+              },
+              {
+                "word": "गृहम्",
+                "translit": "gṛham"
+              },
+              {
+                "word": "इन्द्रश्",
+                "translit": "indraś"
+              },
+              {
+                "word": "च",
+                "translit": "ca"
+              },
+              {
+                "word": "गन्वहि",
+                "translit": "ganvahi"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "मध्वः",
+                "translit": "madhvaḥ"
+              },
+              {
+                "word": "पीत्वा",
+                "translit": "pītvā"
+              },
+              {
+                "word": "सचेवहि",
+                "translit": "sacevahi"
+              },
+              {
+                "word": "त्रिः",
+                "translit": "triḥ"
+              },
+              {
+                "word": "सप्त",
+                "translit": "sapta"
+              },
+              {
+                "word": "सख्युः",
+                "translit": "sakhyuḥ"
+              },
+              {
+                "word": "पदे",
+                "translit": "pade"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "When Indra, and I ascend to our home, the world of the sun, then, having drunk the sweet (Soma), letus be united in the twenty-first sphere of the (universal) friend."
+        },
+        {
+          "number": "8.69.8",
+          "sanskrit": [
+            {
+              "word": "अर्चत",
+              "translit": "arcata"
+            },
+            {
+              "word": "प्रार्चत",
+              "translit": "prārcata"
+            },
+            {
+              "word": "प्रियमेधासो",
+              "translit": "priyamedhāso"
+            },
+            {
+              "word": "अर्चत",
+              "translit": "arcata"
+            },
+            {
+              "word": "अर्चन्तु",
+              "translit": "arcantu"
+            },
+            {
+              "word": "पुत्रका",
+              "translit": "putrakā"
+            },
+            {
+              "word": "उत",
+              "translit": "uta"
+            },
+            {
+              "word": "पुरं",
+              "translit": "puraṃ"
+            },
+            {
+              "word": "न",
+              "translit": "na"
+            },
+            {
+              "word": "धृष्ण्व्",
+              "translit": "dhṛṣṇv"
+            },
+            {
+              "word": "अर्चत",
+              "translit": "arcata"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "अर्चत",
+                "translit": "arcata"
+              },
+              {
+                "word": "प्रार्चत",
+                "translit": "prārcata"
+              },
+              {
+                "word": "प्रियमेधासो",
+                "translit": "priyamedhāso"
+              },
+              {
+                "word": "अर्चत",
+                "translit": "arcata"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "अर्चन्तु",
+                "translit": "arcantu"
+              },
+              {
+                "word": "पुत्रका",
+                "translit": "putrakā"
+              },
+              {
+                "word": "उत",
+                "translit": "uta"
+              },
+              {
+                "word": "पुरं",
+                "translit": "puraṃ"
+              },
+              {
+                "word": "न",
+                "translit": "na"
+              },
+              {
+                "word": "धृष्ण्व्",
+                "translit": "dhṛṣṇv"
+              },
+              {
+                "word": "अर्चत",
+                "translit": "arcata"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Worship Indra, worship him pre-eminently, worship him, you of the family of Priyamedha; let your sonsalso worship him; worship him as a strong city."
+        },
+        {
+          "number": "8.69.9",
+          "sanskrit": [
+            {
+              "word": "अव",
+              "translit": "ava"
+            },
+            {
+              "word": "स्वराति",
+              "translit": "svarāti"
+            },
+            {
+              "word": "गर्गरो",
+              "translit": "gargaro"
+            },
+            {
+              "word": "गोधा",
+              "translit": "godhā"
+            },
+            {
+              "word": "परि",
+              "translit": "pari"
+            },
+            {
+              "word": "सनिष्वणत्",
+              "translit": "saniṣvaṇat"
+            },
+            {
+              "word": "पिङ्गा",
+              "translit": "piṅgā"
+            },
+            {
+              "word": "परि",
+              "translit": "pari"
+            },
+            {
+              "word": "चनिष्कदत्",
+              "translit": "caniṣkadat"
+            },
+            {
+              "word": "इन्द्राय",
+              "translit": "indrāya"
+            },
+            {
+              "word": "ब्रह्म",
+              "translit": "brahmo"
+            },
+            {
+              "word": "उद्यतम्",
+              "translit": "udyatam"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "अव",
+                "translit": "ava"
+              },
+              {
+                "word": "स्वराति",
+                "translit": "svarāti"
+              },
+              {
+                "word": "गर्गरो",
+                "translit": "gargaro"
+              },
+              {
+                "word": "गोधा",
+                "translit": "godhā"
+              },
+              {
+                "word": "परि",
+                "translit": "pari"
+              },
+              {
+                "word": "सनिष्वणत्",
+                "translit": "saniṣvaṇat"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "पिङ्गा",
+                "translit": "piṅgā"
+              },
+              {
+                "word": "परि",
+                "translit": "pari"
+              },
+              {
+                "word": "चनिष्कदत्",
+                "translit": "caniṣkadat"
+              },
+              {
+                "word": "इन्द्राय",
+                "translit": "indrāya"
+              },
+              {
+                "word": "ब्रह्म",
+                "translit": "brahmo"
+              },
+              {
+                "word": "उद्यतम्",
+                "translit": "udyatam"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "The drum utters its sound, the leathern guard twangs, the tawny bowstring leaps to and fro; let thehymn be raised to Indra."
+        },
+        {
+          "number": "8.69.10",
+          "sanskrit": [
+            {
+              "word": "आ",
+              "translit": "ā"
+            },
+            {
+              "word": "यत्",
+              "translit": "yat"
+            },
+            {
+              "word": "पतन्ति",
+              "translit": "patanti"
+            },
+            {
+              "word": "एन्यः",
+              "translit": "enyaḥ"
+            },
+            {
+              "word": "सुदुघा",
+              "translit": "sudughā"
+            },
+            {
+              "word": "अनपस्फुरः",
+              "translit": "anapasphuraḥ"
+            },
+            {
+              "word": "अपस्फुरं",
+              "translit": "apasphuraṃ"
+            },
+            {
+              "word": "गृभायत",
+              "translit": "gṛbhāyata"
+            },
+            {
+              "word": "सोमम्",
+              "translit": "somam"
+            },
+            {
+              "word": "इन्द्राय",
+              "translit": "indrāya"
+            },
+            {
+              "word": "पातवे",
+              "translit": "pātave"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "आ",
+                "translit": "ā"
+              },
+              {
+                "word": "यत्",
+                "translit": "yat"
+              },
+              {
+                "word": "पतन्ति",
+                "translit": "patanti"
+              },
+              {
+                "word": "एन्यः",
+                "translit": "enyaḥ"
+              },
+              {
+                "word": "सुदुघा",
+                "translit": "sudughā"
+              },
+              {
+                "word": "अनपस्फुरः",
+                "translit": "anapasphuraḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "अपस्फुरं",
+                "translit": "apasphuraṃ"
+              },
+              {
+                "word": "गृभायत",
+                "translit": "gṛbhāyata"
+              },
+              {
+                "word": "सोमम्",
+                "translit": "somam"
+              },
+              {
+                "word": "इन्द्राय",
+                "translit": "indrāya"
+              },
+              {
+                "word": "पातवे",
+                "translit": "pātave"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "When the bright fertilizing rivers flow with diminished waters, then take the overflowing Soma for Indrato drink."
+        },
+        {
+          "number": "8.69.11",
+          "sanskrit": [
+            {
+              "word": "अपात्",
+              "translit": "apāt"
+            },
+            {
+              "word": "इन्द्रो",
+              "translit": "indro"
+            },
+            {
+              "word": "अपाद्",
+              "translit": "apād"
+            },
+            {
+              "word": "अग्निर्",
+              "translit": "agnir"
+            },
+            {
+              "word": "विश्वे",
+              "translit": "viśve"
+            },
+            {
+              "word": "देवा",
+              "translit": "devā"
+            },
+            {
+              "word": "अमत्सत",
+              "translit": "amatsata"
+            },
+            {
+              "word": "वरुण",
+              "translit": "varuṇa"
+            },
+            {
+              "word": "इद्",
+              "translit": "id"
+            },
+            {
+              "word": "इह",
+              "translit": "iha"
+            },
+            {
+              "word": "क्षयत्",
+              "translit": "kṣayat"
+            },
+            {
+              "word": "तम्",
+              "translit": "tam"
+            },
+            {
+              "word": "आपो",
+              "translit": "āpo"
+            },
+            {
+              "word": "अभ्य्",
+              "translit": "abhy"
+            },
+            {
+              "word": "अनूषत",
+              "translit": "anūṣata"
+            },
+            {
+              "word": "वत्सं",
+              "translit": "vatsaṃ"
+            },
+            {
+              "word": "संशिश्वरीरिव",
+              "translit": "saṃśiśvarīr iva"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "अपात्",
+                "translit": "apāt"
+              },
+              {
+                "word": "इन्द्रो",
+                "translit": "indro"
+              },
+              {
+                "word": "अपाद्",
+                "translit": "apād"
+              },
+              {
+                "word": "अग्निर्",
+                "translit": "agnir"
+              },
+              {
+                "word": "विश्वे",
+                "translit": "viśve"
+              },
+              {
+                "word": "देवा",
+                "translit": "devā"
+              },
+              {
+                "word": "अमत्सत",
+                "translit": "amatsata"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "वरुण",
+                "translit": "varuṇa"
+              },
+              {
+                "word": "इद्",
+                "translit": "id"
+              },
+              {
+                "word": "इह",
+                "translit": "iha"
+              },
+              {
+                "word": "क्षयत्",
+                "translit": "kṣayat"
+              },
+              {
+                "word": "तम्",
+                "translit": "tam"
+              },
+              {
+                "word": "आपो",
+                "translit": "āpo"
+              },
+              {
+                "word": "अभ्य्",
+                "translit": "abhy"
+              },
+              {
+                "word": "अनूषत",
+                "translit": "anūṣata"
+              },
+              {
+                "word": "वत्सं",
+                "translit": "vatsaṃ"
+              },
+              {
+                "word": "संशिश्वरीरिव",
+                "translit": "saṃśiśvarīr iva"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Indra drank (the Soma), Agni drank it, the Viśve Devās were gladdened; let Varuṇa fix his dwellinghere, the waters have praised him as cows (low) meeting their calves."
+        },
+        {
+          "number": "8.69.12",
+          "sanskrit": [
+            {
+              "word": "सुदेवो",
+              "translit": "sudevo"
+            },
+            {
+              "word": "असि",
+              "translit": "asi"
+            },
+            {
+              "word": "वरुण",
+              "translit": "varuṇa"
+            },
+            {
+              "word": "यस्य",
+              "translit": "yasya"
+            },
+            {
+              "word": "ते",
+              "translit": "te"
+            },
+            {
+              "word": "सप्त",
+              "translit": "sapta"
+            },
+            {
+              "word": "सिन्धवः",
+              "translit": "sindhavaḥ"
+            },
+            {
+              "word": "अनुक्षरन्ति",
+              "translit": "anukṣaranti"
+            },
+            {
+              "word": "काकुदं",
+              "translit": "kākudaṃ"
+            },
+            {
+              "word": "सूर्म्यं",
+              "translit": "sūrmyaṃ"
+            },
+            {
+              "word": "सुषिरामिव",
+              "translit": "suṣirām iva"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "सुदेवो",
+                "translit": "sudevo"
+              },
+              {
+                "word": "असि",
+                "translit": "asi"
+              },
+              {
+                "word": "वरुण",
+                "translit": "varuṇa"
+              },
+              {
+                "word": "यस्य",
+                "translit": "yasya"
+              },
+              {
+                "word": "ते",
+                "translit": "te"
+              },
+              {
+                "word": "सप्त",
+                "translit": "sapta"
+              },
+              {
+                "word": "सिन्धवः",
+                "translit": "sindhavaḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "अनुक्षरन्ति",
+                "translit": "anukṣaranti"
+              },
+              {
+                "word": "काकुदं",
+                "translit": "kākudaṃ"
+              },
+              {
+                "word": "सूर्म्यं",
+                "translit": "sūrmyaṃ"
+              },
+              {
+                "word": "सुषिरामिव",
+                "translit": "suṣirām iva"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "You are a glorious god, Varuṇa, across whose palate the seven rivers keep pouring as a fair-flowing(stream) into an abyss."
+        },
+        {
+          "number": "8.69.13",
+          "sanskrit": [
+            {
+              "word": "यो",
+              "translit": "yo"
+            },
+            {
+              "word": "व्यतीँर्",
+              "translit": "vyatīm̐r"
+            },
+            {
+              "word": "अफाणयत्",
+              "translit": "aphāṇayat"
+            },
+            {
+              "word": "सुयुक्ताँ",
+              "translit": "suyuktām̐"
+            },
+            {
+              "word": "उप",
+              "translit": "upa"
+            },
+            {
+              "word": "दाशुषे",
+              "translit": "dāśuṣe"
+            },
+            {
+              "word": "तक्वो",
+              "translit": "takvo"
+            },
+            {
+              "word": "नेता",
+              "translit": "netā"
+            },
+            {
+              "word": "तद्",
+              "translit": "tad"
+            },
+            {
+              "word": "इद्",
+              "translit": "id"
+            },
+            {
+              "word": "वपुर्",
+              "translit": "vapur"
+            },
+            {
+              "word": "उपमा",
+              "translit": "upamā"
+            },
+            {
+              "word": "यो",
+              "translit": "yo"
+            },
+            {
+              "word": "अमुच्यत",
+              "translit": "amucyata"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "यो",
+                "translit": "yo"
+              },
+              {
+                "word": "व्यतीँर्",
+                "translit": "vyatīm̐r"
+              },
+              {
+                "word": "अफाणयत्",
+                "translit": "aphāṇayat"
+              },
+              {
+                "word": "सुयुक्ताँ",
+                "translit": "suyuktām̐"
+              },
+              {
+                "word": "उप",
+                "translit": "upa"
+              },
+              {
+                "word": "दाशुषे",
+                "translit": "dāśuṣe"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "तक्वो",
+                "translit": "takvo"
+              },
+              {
+                "word": "नेता",
+                "translit": "netā"
+              },
+              {
+                "word": "तद्",
+                "translit": "tad"
+              },
+              {
+                "word": "इद्",
+                "translit": "id"
+              },
+              {
+                "word": "वपुर्",
+                "translit": "vapur"
+              },
+              {
+                "word": "उपमा",
+                "translit": "upamā"
+              },
+              {
+                "word": "यो",
+                "translit": "yo"
+              },
+              {
+                "word": "अमुच्यत",
+                "translit": "amucyata"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "He ho directs towards the worshiper his well-yoked prancing steeds-- he, (Indra), the swift bearer ofblessing, (produces) rain-- he, who being comparable only to himself is delivered (from all his enemies)."
+        },
+        {
+          "number": "8.69.14",
+          "sanskrit": [
+            {
+              "word": "अतीदु",
+              "translit": "atīdu"
+            },
+            {
+              "word": "शक्र",
+              "translit": "śakra"
+            },
+            {
+              "word": "ओहत",
+              "translit": "ohata"
+            },
+            {
+              "word": "इन्द्रो",
+              "translit": "indro"
+            },
+            {
+              "word": "विश्वा",
+              "translit": "viśvā"
+            },
+            {
+              "word": "अति",
+              "translit": "ati"
+            },
+            {
+              "word": "द्विषः",
+              "translit": "dviṣaḥ"
+            },
+            {
+              "word": "भिनत्",
+              "translit": "bhinat"
+            },
+            {
+              "word": "कनीन",
+              "translit": "kanīna"
+            },
+            {
+              "word": "ओदनं",
+              "translit": "odanam"
+            },
+            {
+              "word": "पच्यमानं",
+              "translit": "pacyamānam"
+            },
+            {
+              "word": "परो",
+              "translit": "paro"
+            },
+            {
+              "word": "गिरा",
+              "translit": "girā"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "अतीदु",
+                "translit": "atīdu"
+              },
+              {
+                "word": "शक्र",
+                "translit": "śakra"
+              },
+              {
+                "word": "ओहत",
+                "translit": "ohata"
+              },
+              {
+                "word": "इन्द्रो",
+                "translit": "indro"
+              },
+              {
+                "word": "विश्वा",
+                "translit": "viśvā"
+              },
+              {
+                "word": "अति",
+                "translit": "ati"
+              },
+              {
+                "word": "द्विषः",
+                "translit": "dviṣaḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "भिनत्",
+                "translit": "bhinat"
+              },
+              {
+                "word": "कनीन",
+                "translit": "kanīna"
+              },
+              {
+                "word": "ओदनं",
+                "translit": "odanam"
+              },
+              {
+                "word": "पच्यमानं",
+                "translit": "pacyamānam"
+              },
+              {
+                "word": "परो",
+                "translit": "paro"
+              },
+              {
+                "word": "गिरा",
+                "translit": "girā"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Śakra verily overpowers, Indra overpowers all his enemies; he, worthy of love, abiding beyond, cleavesthe cloud smitten by his thunder-voice."
+        },
+        {
+          "number": "8.69.15",
+          "sanskrit": [
+            {
+              "word": "अर्भको",
+              "translit": "arbhako"
+            },
+            {
+              "word": "न",
+              "translit": "na"
+            },
+            {
+              "word": "कुमारको",
+              "translit": "kumārako"
+            },
+            {
+              "word": "अधि",
+              "translit": "adhi"
+            },
+            {
+              "word": "तिष्ठन्",
+              "translit": "tiṣṭhan"
+            },
+            {
+              "word": "नवं",
+              "translit": "navaṃ"
+            },
+            {
+              "word": "रथम्",
+              "translit": "ratham"
+            },
+            {
+              "word": "स",
+              "translit": "sa"
+            },
+            {
+              "word": "पक्षन्",
+              "translit": "pakṣan"
+            },
+            {
+              "word": "महिषं",
+              "translit": "mahiṣam"
+            },
+            {
+              "word": "मृगं",
+              "translit": "mṛgaṃ"
+            },
+            {
+              "word": "पित्रे",
+              "translit": "pitre"
+            },
+            {
+              "word": "मात्रे",
+              "translit": "mātre"
+            },
+            {
+              "word": "विभुक्रतुम्",
+              "translit": "vibhukratum"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "अर्भको",
+                "translit": "arbhako"
+              },
+              {
+                "word": "न",
+                "translit": "na"
+              },
+              {
+                "word": "कुमारको",
+                "translit": "kumārako"
+              },
+              {
+                "word": "अधि",
+                "translit": "adhi"
+              },
+              {
+                "word": "तिष्ठन्",
+                "translit": "tiṣṭhan"
+              },
+              {
+                "word": "नवं",
+                "translit": "navaṃ"
+              },
+              {
+                "word": "रथम्",
+                "translit": "ratham"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "स",
+                "translit": "sa"
+              },
+              {
+                "word": "पक्षन्",
+                "translit": "pakṣan"
+              },
+              {
+                "word": "महिषं",
+                "translit": "mahiṣam"
+              },
+              {
+                "word": "मृगं",
+                "translit": "mṛgaṃ"
+              },
+              {
+                "word": "पित्रे",
+                "translit": "pitre"
+              },
+              {
+                "word": "मात्रे",
+                "translit": "mātre"
+              },
+              {
+                "word": "विभुक्रतुम्",
+                "translit": "vibhukratum"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "(Indra), like a young boy, has mounted his splendid chariot; he makes ready for his father and motherthe great deer-like many-functioned cloud."
+        },
+        {
+          "number": "8.69.16",
+          "sanskrit": [
+            {
+              "word": "आ",
+              "translit": "ā"
+            },
+            {
+              "word": "तू",
+              "translit": "tū"
+            },
+            {
+              "word": "सुशिप्र",
+              "translit": "suśipra"
+            },
+            {
+              "word": "दम्पते",
+              "translit": "dampate"
+            },
+            {
+              "word": "रथं",
+              "translit": "rathaṃ"
+            },
+            {
+              "word": "तिष्ठा",
+              "translit": "tiṣṭhā"
+            },
+            {
+              "word": "हिरण्ययम्",
+              "translit": "hiraṇyayam"
+            },
+            {
+              "word": "अध",
+              "translit": "adha"
+            },
+            {
+              "word": "द्युक्षं",
+              "translit": "dyukṣaṃ"
+            },
+            {
+              "word": "सचेवहि",
+              "translit": "sacevahi"
+            },
+            {
+              "word": "सहस्रपादम्",
+              "translit": "sahasrapādam"
+            },
+            {
+              "word": "अरुषं",
+              "translit": "aruṣaṃ"
+            },
+            {
+              "word": "स्वस्तिगाम्",
+              "translit": "svastigām"
+            },
+            {
+              "word": "अनेहसम्",
+              "translit": "anehasam"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "आ",
+                "translit": "ā"
+              },
+              {
+                "word": "तू",
+                "translit": "tū"
+              },
+              {
+                "word": "सुशिप्र",
+                "translit": "suśipra"
+              },
+              {
+                "word": "दम्पते",
+                "translit": "dampate"
+              },
+              {
+                "word": "रथं",
+                "translit": "rathaṃ"
+              },
+              {
+                "word": "तिष्ठा",
+                "translit": "tiṣṭhā"
+              },
+              {
+                "word": "हिरण्ययम्",
+                "translit": "hiraṇyayam"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "अध",
+                "translit": "adha"
+              },
+              {
+                "word": "द्युक्षं",
+                "translit": "dyukṣaṃ"
+              },
+              {
+                "word": "सचेवहि",
+                "translit": "sacevahi"
+              },
+              {
+                "word": "सहस्रपादम्",
+                "translit": "sahasrapādam"
+              },
+              {
+                "word": "अरुषं",
+                "translit": "aruṣaṃ"
+              },
+              {
+                "word": "स्वस्तिगाम्",
+                "translit": "svastigām"
+              },
+              {
+                "word": "अनेहसम्",
+                "translit": "anehasam"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Handsome-jawed (Indra), householder, mount your golden chariot; then let us meet mounted togetheron that bright thousand-footed brilliant auspiciously moving sinless (car)."
+        },
+        {
+          "number": "8.69.17",
+          "sanskrit": [
+            {
+              "word": "तं",
+              "translit": "taṃ"
+            },
+            {
+              "word": "घा",
+              "translit": "ghā"
+            },
+            {
+              "word": "इमित्था",
+              "translit": "em itthā"
+            },
+            {
+              "word": "नमस्विन",
+              "translit": "namasvina"
+            },
+            {
+              "word": "उप",
+              "translit": "upa"
+            },
+            {
+              "word": "स्वराजम्",
+              "translit": "svarājam"
+            },
+            {
+              "word": "आसते",
+              "translit": "āsate"
+            },
+            {
+              "word": "अर्थं",
+              "translit": "arthaṃ"
+            },
+            {
+              "word": "चिद्",
+              "translit": "cid"
+            },
+            {
+              "word": "अस्य",
+              "translit": "asya"
+            },
+            {
+              "word": "सुधितं",
+              "translit": "sudhitaṃ"
+            },
+            {
+              "word": "यद्",
+              "translit": "yad"
+            },
+            {
+              "word": "एतव",
+              "translit": "etava"
+            },
+            {
+              "word": "आवर्तयन्ति",
+              "translit": "āvartayanti"
+            },
+            {
+              "word": "दावने",
+              "translit": "dāvane"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "तं",
+                "translit": "taṃ"
+              },
+              {
+                "word": "घा",
+                "translit": "ghā"
+              },
+              {
+                "word": "इमित्था",
+                "translit": "em itthā"
+              },
+              {
+                "word": "नमस्विन",
+                "translit": "namasvina"
+              },
+              {
+                "word": "उप",
+                "translit": "upa"
+              },
+              {
+                "word": "स्वराजम्",
+                "translit": "svarājam"
+              },
+              {
+                "word": "आसते",
+                "translit": "āsate"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "अर्थं",
+                "translit": "arthaṃ"
+              },
+              {
+                "word": "चिद्",
+                "translit": "cid"
+              },
+              {
+                "word": "अस्य",
+                "translit": "asya"
+              },
+              {
+                "word": "सुधितं",
+                "translit": "sudhitaṃ"
+              },
+              {
+                "word": "यद्",
+                "translit": "yad"
+              },
+              {
+                "word": "एतव",
+                "translit": "etava"
+              },
+              {
+                "word": "आवर्तयन्ति",
+                "translit": "āvartayanti"
+              },
+              {
+                "word": "दावने",
+                "translit": "dāvane"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "(The priests), presenting praise, thus worship that self-resplendent (Indra); they obtain his well-storedwealth, when (his horsesk) bring him on his way for the offering."
+        },
+        {
+          "number": "8.69.18",
+          "sanskrit": [
+            {
+              "word": "अनु",
+              "translit": "anu"
+            },
+            {
+              "word": "प्रत्नस्य",
+              "translit": "pratnasya"
+            },
+            {
+              "word": "ओकसः",
+              "translit": "okasaḥ"
+            },
+            {
+              "word": "प्रियमेधास",
+              "translit": "priyamedhāsa"
+            },
+            {
+              "word": "एषाम्",
+              "translit": "eṣām"
+            },
+            {
+              "word": "पूर्वाम्",
+              "translit": "pūrvām"
+            },
+            {
+              "word": "अनु",
+              "translit": "anu"
+            },
+            {
+              "word": "प्रयतिं",
+              "translit": "prayatiṃ"
+            },
+            {
+              "word": "वृक्तबर्हिषो",
+              "translit": "vṛktabarhiṣo"
+            },
+            {
+              "word": "हितप्रयस",
+              "translit": "hitaprayasa"
+            },
+            {
+              "word": "आशत",
+              "translit": "āśata"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "अनु",
+                "translit": "anu"
+              },
+              {
+                "word": "प्रत्नस्य",
+                "translit": "pratnasya"
+              },
+              {
+                "word": "ओकसः",
+                "translit": "okasaḥ"
+              },
+              {
+                "word": "प्रियमेधास",
+                "translit": "priyamedhāsa"
+              },
+              {
+                "word": "एषाम्",
+                "translit": "eṣām"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "पूर्वाम्",
+                "translit": "pūrvām"
+              },
+              {
+                "word": "अनु",
+                "translit": "anu"
+              },
+              {
+                "word": "प्रयतिं",
+                "translit": "prayatiṃ"
+              },
+              {
+                "word": "वृक्तबर्हिषो",
+                "translit": "vṛktabarhiṣo"
+              },
+              {
+                "word": "हितप्रयस",
+                "translit": "hitaprayasa"
+              },
+              {
+                "word": "आशत",
+                "translit": "āśata"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "The Priyamedhas have reached the ancient dwelling plural ce of these deities, having strewn the sacredgrass and plural ced their oblations after the manner of a pre-eminent offering."
+        }
+      ],
+          "prev": "/8/68.html",
+          "next": "/8/70.html",
+          "group": "Hymns of Priyamedha and Others",
+          "stanzas": 18
     },
     {
       "mandala": 8,
       "sukta": 70,
-      "title": "",
-      "verses": [],
-      "group": "Hymns of Priyamedha and Others",
-      "stanzas": 15
+      "title": "HYMN LXX. INDRA.",
+      "audio": "https://github.com/aasi-archive/rv-audio/raw/main/data/8/70.mp3",
+      "verses": [
+        {
+          "number": "8.70.1",
+          "sanskrit": [
+            {
+              "word": "यो",
+              "translit": "yo"
+            },
+            {
+              "word": "राजा",
+              "translit": "rājā"
+            },
+            {
+              "word": "चर्षणीनां",
+              "translit": "carṣaṇīnāṃ"
+            },
+            {
+              "word": "याता",
+              "translit": "yātā"
+            },
+            {
+              "word": "रथेभिरध्रिगुः",
+              "translit": "rathebhir adhriguḥ"
+            },
+            {
+              "word": "विश्वासां",
+              "translit": "viśvāsāṃ"
+            },
+            {
+              "word": "तरुता",
+              "translit": "tarutā"
+            },
+            {
+              "word": "पृतनानां",
+              "translit": "pṛtanānāṃ"
+            },
+            {
+              "word": "ज्येष्ठो",
+              "translit": "jyeṣṭho"
+            },
+            {
+              "word": "यो",
+              "translit": "yo"
+            },
+            {
+              "word": "वृत्रहा",
+              "translit": "vṛtrahā"
+            },
+            {
+              "word": "गृणे",
+              "translit": "gṛṇe"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "यो",
+                "translit": "yo"
+              },
+              {
+                "word": "राजा",
+                "translit": "rājā"
+              },
+              {
+                "word": "चर्षणीनां",
+                "translit": "carṣaṇīnāṃ"
+              },
+              {
+                "word": "याता",
+                "translit": "yātā"
+              },
+              {
+                "word": "रथेभिरध्रिगुः",
+                "translit": "rathebhir adhriguḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "विश्वासां",
+                "translit": "viśvāsāṃ"
+              },
+              {
+                "word": "तरुता",
+                "translit": "tarutā"
+              },
+              {
+                "word": "पृतनानां",
+                "translit": "pṛtanānāṃ"
+              },
+              {
+                "word": "ज्येष्ठो",
+                "translit": "jyeṣṭho"
+              },
+              {
+                "word": "यो",
+                "translit": "yo"
+              },
+              {
+                "word": "वृत्रहा",
+                "translit": "vṛtrahā"
+              },
+              {
+                "word": "गृणे",
+                "translit": "gṛṇe"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "I praise that Indra who is the lord of men, who proceeds irresistible in his chariots, the breaker-throughof all armies, the pre-eminent one, the slayer of Vṛtra."
+        },
+        {
+          "number": "8.70.2",
+          "sanskrit": [
+            {
+              "word": "इन्द्रं",
+              "translit": "indraṃ"
+            },
+            {
+              "word": "तं",
+              "translit": "taṃ"
+            },
+            {
+              "word": "शुम्भ",
+              "translit": "śumbha"
+            },
+            {
+              "word": "पुरुहन्मन्नवसे",
+              "translit": "puruhanmann avase"
+            },
+            {
+              "word": "यस्य",
+              "translit": "yasya"
+            },
+            {
+              "word": "द्विता",
+              "translit": "dvitā"
+            },
+            {
+              "word": "विधर्तरि",
+              "translit": "vidhartari"
+            },
+            {
+              "word": "हस्ताय",
+              "translit": "hastāya"
+            },
+            {
+              "word": "वज्रः",
+              "translit": "vajraḥ"
+            },
+            {
+              "word": "प्रति",
+              "translit": "prati"
+            },
+            {
+              "word": "धायि",
+              "translit": "dhāyi"
+            },
+            {
+              "word": "दर्शतो",
+              "translit": "darśato"
+            },
+            {
+              "word": "महो",
+              "translit": "maho"
+            },
+            {
+              "word": "दिवे",
+              "translit": "dive"
+            },
+            {
+              "word": "न",
+              "translit": "na"
+            },
+            {
+              "word": "सूर्यः",
+              "translit": "sūryaḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "इन्द्रं",
+                "translit": "indraṃ"
+              },
+              {
+                "word": "तं",
+                "translit": "taṃ"
+              },
+              {
+                "word": "शुम्भ",
+                "translit": "śumbha"
+              },
+              {
+                "word": "पुरुहन्मन्नवसे",
+                "translit": "puruhanmann avase"
+              },
+              {
+                "word": "यस्य",
+                "translit": "yasya"
+              },
+              {
+                "word": "द्विता",
+                "translit": "dvitā"
+              },
+              {
+                "word": "विधर्तरि",
+                "translit": "vidhartari"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "हस्ताय",
+                "translit": "hastāya"
+              },
+              {
+                "word": "वज्रः",
+                "translit": "vajraḥ"
+              },
+              {
+                "word": "प्रति",
+                "translit": "prati"
+              },
+              {
+                "word": "धायि",
+                "translit": "dhāyi"
+              },
+              {
+                "word": "दर्शतो",
+                "translit": "darśato"
+              },
+              {
+                "word": "महो",
+                "translit": "maho"
+              },
+              {
+                "word": "दिवे",
+                "translit": "dive"
+              },
+              {
+                "word": "न",
+                "translit": "na"
+              },
+              {
+                "word": "सूर्यः",
+                "translit": "sūryaḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Puruhanman, honour that Indra for your protection, for in your upholder there is a two-fold might; heholds in his hand (to smite his enemies) the glorious thunderbolt great as the sun in heaven."
+        },
+        {
+          "number": "8.70.3",
+          "sanskrit": [
+            {
+              "word": "नकिष्",
+              "translit": "nakiṣ"
+            },
+            {
+              "word": "टं",
+              "translit": "ṭaṃ"
+            },
+            {
+              "word": "कर्मणा",
+              "translit": "karmaṇā"
+            },
+            {
+              "word": "नशद्",
+              "translit": "naśad"
+            },
+            {
+              "word": "यश्",
+              "translit": "yaś"
+            },
+            {
+              "word": "चकार",
+              "translit": "cakāra"
+            },
+            {
+              "word": "सदावृधम्",
+              "translit": "sadāvṛdham"
+            },
+            {
+              "word": "इन्द्रं",
+              "translit": "indraṃ"
+            },
+            {
+              "word": "न",
+              "translit": "na"
+            },
+            {
+              "word": "यज्ञैर्",
+              "translit": "yajñair"
+            },
+            {
+              "word": "विश्वगूर्तम्",
+              "translit": "viśvagūrtam"
+            },
+            {
+              "word": "ऋभ्वसम्",
+              "translit": "ṛbhvasam"
+            },
+            {
+              "word": "अधृष्टं",
+              "translit": "adhṛṣṭaṃ"
+            },
+            {
+              "word": "धृष्ण्वोजसम्",
+              "translit": "dhṛṣṇvojasam"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "नकिष्",
+                "translit": "nakiṣ"
+              },
+              {
+                "word": "टं",
+                "translit": "ṭaṃ"
+              },
+              {
+                "word": "कर्मणा",
+                "translit": "karmaṇā"
+              },
+              {
+                "word": "नशद्",
+                "translit": "naśad"
+              },
+              {
+                "word": "यश्",
+                "translit": "yaś"
+              },
+              {
+                "word": "चकार",
+                "translit": "cakāra"
+              },
+              {
+                "word": "सदावृधम्",
+                "translit": "sadāvṛdham"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "इन्द्रं",
+                "translit": "indraṃ"
+              },
+              {
+                "word": "न",
+                "translit": "na"
+              },
+              {
+                "word": "यज्ञैर्",
+                "translit": "yajñair"
+              },
+              {
+                "word": "विश्वगूर्तम्",
+                "translit": "viśvagūrtam"
+              },
+              {
+                "word": "ऋभ्वसम्",
+                "translit": "ṛbhvasam"
+              },
+              {
+                "word": "अधृष्टं",
+                "translit": "adhṛṣṭaṃ"
+              },
+              {
+                "word": "धृष्ण्वोजसम्",
+                "translit": "dhṛṣṇvojasam"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "None can touch him by his deeds, who has made Indra his friend by sacrifices-- (Indra) ever givingfresh strength, to be hymned by all, great, unconquered, of ever-daring might."
+        },
+        {
+          "number": "8.70.4",
+          "sanskrit": [
+            {
+              "word": "अषाळ्हमुग्रं",
+              "translit": "aṣāḻham ugram"
+            },
+            {
+              "word": "पृतनासु",
+              "translit": "pṛtanāsu"
+            },
+            {
+              "word": "सासहिं",
+              "translit": "sāsahiṃ"
+            },
+            {
+              "word": "यस्मिन्",
+              "translit": "yasmin"
+            },
+            {
+              "word": "महीरुरुज्रयः",
+              "translit": "mahīr urujrayaḥ"
+            },
+            {
+              "word": "सं",
+              "translit": "saṃ"
+            },
+            {
+              "word": "धेनवो",
+              "translit": "dhenavo"
+            },
+            {
+              "word": "जायमाने",
+              "translit": "jāyamāne"
+            },
+            {
+              "word": "अनोनवुर्",
+              "translit": "anonavur"
+            },
+            {
+              "word": "द्यावः",
+              "translit": "dyāvaḥ"
+            },
+            {
+              "word": "क्षामो",
+              "translit": "kṣāmo"
+            },
+            {
+              "word": "अनोनवुः",
+              "translit": "anonavuḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "अषाळ्हमुग्रं",
+                "translit": "aṣāḻham ugram"
+              },
+              {
+                "word": "पृतनासु",
+                "translit": "pṛtanāsu"
+              },
+              {
+                "word": "सासहिं",
+                "translit": "sāsahiṃ"
+              },
+              {
+                "word": "यस्मिन्",
+                "translit": "yasmin"
+              },
+              {
+                "word": "महीरुरुज्रयः",
+                "translit": "mahīr urujrayaḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "सं",
+                "translit": "saṃ"
+              },
+              {
+                "word": "धेनवो",
+                "translit": "dhenavo"
+              },
+              {
+                "word": "जायमाने",
+                "translit": "jāyamāne"
+              },
+              {
+                "word": "अनोनवुर्",
+                "translit": "anonavur"
+              },
+              {
+                "word": "द्यावः",
+                "translit": "dyāvaḥ"
+              },
+              {
+                "word": "क्षामो",
+                "translit": "kṣāmo"
+              },
+              {
+                "word": "अनोनवुः",
+                "translit": "anonavuḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "(I laud) him who is not to be withstood, the mighty, the conqueror in hostile hosts; whom, when he wasborn, the strong rushing cows welcomed and the heavens and the earths praised."
+        },
+        {
+          "number": "8.70.5",
+          "sanskrit": [
+            {
+              "word": "यद्",
+              "translit": "yad"
+            },
+            {
+              "word": "द्याव",
+              "translit": "dyāva"
+            },
+            {
+              "word": "इन्द्र",
+              "translit": "indra"
+            },
+            {
+              "word": "ते",
+              "translit": "te"
+            },
+            {
+              "word": "शतं",
+              "translit": "śataṃ"
+            },
+            {
+              "word": "शतं",
+              "translit": "śataṃ"
+            },
+            {
+              "word": "भूमीर्",
+              "translit": "bhūmīr"
+            },
+            {
+              "word": "उत",
+              "translit": "uta"
+            },
+            {
+              "word": "स्युः",
+              "translit": "syuḥ"
+            },
+            {
+              "word": "न",
+              "translit": "na"
+            },
+            {
+              "word": "त्वा",
+              "translit": "tvā"
+            },
+            {
+              "word": "वज्रिन्",
+              "translit": "vajrin"
+            },
+            {
+              "word": "सहस्रं",
+              "translit": "sahasraṃ"
+            },
+            {
+              "word": "सूर्या",
+              "translit": "sūryā"
+            },
+            {
+              "word": "अनु",
+              "translit": "anu"
+            },
+            {
+              "word": "न",
+              "translit": "na"
+            },
+            {
+              "word": "जातम्",
+              "translit": "jātam"
+            },
+            {
+              "word": "अष्ट",
+              "translit": "aṣṭa"
+            },
+            {
+              "word": "रोदसी",
+              "translit": "rodasī"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "यद्",
+                "translit": "yad"
+              },
+              {
+                "word": "द्याव",
+                "translit": "dyāva"
+              },
+              {
+                "word": "इन्द्र",
+                "translit": "indra"
+              },
+              {
+                "word": "ते",
+                "translit": "te"
+              },
+              {
+                "word": "शतं",
+                "translit": "śataṃ"
+              },
+              {
+                "word": "शतं",
+                "translit": "śataṃ"
+              },
+              {
+                "word": "भूमीर्",
+                "translit": "bhūmīr"
+              },
+              {
+                "word": "उत",
+                "translit": "uta"
+              },
+              {
+                "word": "स्युः",
+                "translit": "syuḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "न",
+                "translit": "na"
+              },
+              {
+                "word": "त्वा",
+                "translit": "tvā"
+              },
+              {
+                "word": "वज्रिन्",
+                "translit": "vajrin"
+              },
+              {
+                "word": "सहस्रं",
+                "translit": "sahasraṃ"
+              },
+              {
+                "word": "सूर्या",
+                "translit": "sūryā"
+              },
+              {
+                "word": "अनु",
+                "translit": "anu"
+              },
+              {
+                "word": "न",
+                "translit": "na"
+              },
+              {
+                "word": "जातम्",
+                "translit": "jātam"
+              },
+              {
+                "word": "अष्ट",
+                "translit": "aṣṭa"
+              },
+              {
+                "word": "रोदसी",
+                "translit": "rodasī"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Indra, were there a hundred heavens to compare with you, or were there a hundred earths-- Othunderer, not even a thousand suns woudl reveal you-- yes, no created thing would fill you, nor heaven andearth."
+        },
+        {
+          "number": "8.70.6",
+          "sanskrit": [
+            {
+              "word": "आ",
+              "translit": "ā"
+            },
+            {
+              "word": "पप्राथ",
+              "translit": "paprātha"
+            },
+            {
+              "word": "महिना",
+              "translit": "mahinā"
+            },
+            {
+              "word": "वृष्ण्या",
+              "translit": "vṛṣṇyā"
+            },
+            {
+              "word": "वृषन्",
+              "translit": "vṛṣan"
+            },
+            {
+              "word": "विश्वा",
+              "translit": "viśvā"
+            },
+            {
+              "word": "शविष्ठ",
+              "translit": "śaviṣṭha"
+            },
+            {
+              "word": "शवसा",
+              "translit": "śavasā"
+            },
+            {
+              "word": "अस्माँ",
+              "translit": "asmām̐"
+            },
+            {
+              "word": "अव",
+              "translit": "ava"
+            },
+            {
+              "word": "मघवन्",
+              "translit": "maghavan"
+            },
+            {
+              "word": "गोमति",
+              "translit": "gomati"
+            },
+            {
+              "word": "व्रजे",
+              "translit": "vraje"
+            },
+            {
+              "word": "वज्रिञ्",
+              "translit": "vajriñ"
+            },
+            {
+              "word": "चित्राभिर्",
+              "translit": "citrābhir"
+            },
+            {
+              "word": "ऊतिभिः",
+              "translit": "ūtibhiḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "आ",
+                "translit": "ā"
+              },
+              {
+                "word": "पप्राथ",
+                "translit": "paprātha"
+              },
+              {
+                "word": "महिना",
+                "translit": "mahinā"
+              },
+              {
+                "word": "वृष्ण्या",
+                "translit": "vṛṣṇyā"
+              },
+              {
+                "word": "वृषन्",
+                "translit": "vṛṣan"
+              },
+              {
+                "word": "विश्वा",
+                "translit": "viśvā"
+              },
+              {
+                "word": "शविष्ठ",
+                "translit": "śaviṣṭha"
+              },
+              {
+                "word": "शवसा",
+                "translit": "śavasā"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "अस्माँ",
+                "translit": "asmām̐"
+              },
+              {
+                "word": "अव",
+                "translit": "ava"
+              },
+              {
+                "word": "मघवन्",
+                "translit": "maghavan"
+              },
+              {
+                "word": "गोमति",
+                "translit": "gomati"
+              },
+              {
+                "word": "व्रजे",
+                "translit": "vraje"
+              },
+              {
+                "word": "वज्रिञ्",
+                "translit": "vajriñ"
+              },
+              {
+                "word": "चित्राभिर्",
+                "translit": "citrābhir"
+              },
+              {
+                "word": "ऊतिभिः",
+                "translit": "ūtibhiḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Mightiest showerer (of blessings), you have filled all (our hosts) with your vast bountiful power; OMaghavan, thunderer, guard us with your manifold protections, (when we march) against the well-stockedcowpen of our enemies."
+        },
+        {
+          "number": "8.70.7",
+          "sanskrit": [
+            {
+              "word": "न",
+              "translit": "na"
+            },
+            {
+              "word": "सीमदेव",
+              "translit": "sīm adeva"
+            },
+            {
+              "word": "आपद्",
+              "translit": "āpad"
+            },
+            {
+              "word": "इषं",
+              "translit": "iṣaṃ"
+            },
+            {
+              "word": "दीर्घायो",
+              "translit": "dīrghāyo"
+            },
+            {
+              "word": "मर्त्यः",
+              "translit": "martyaḥ"
+            },
+            {
+              "word": "एतग्वा",
+              "translit": "etagvā"
+            },
+            {
+              "word": "चिद्",
+              "translit": "cid"
+            },
+            {
+              "word": "य",
+              "translit": "ya"
+            },
+            {
+              "word": "एतशा",
+              "translit": "etaśā"
+            },
+            {
+              "word": "युयोजते",
+              "translit": "yuyojate"
+            },
+            {
+              "word": "हरी",
+              "translit": "harī"
+            },
+            {
+              "word": "इन्द्रो",
+              "translit": "indro"
+            },
+            {
+              "word": "युयोजते",
+              "translit": "yuyojate"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "न",
+                "translit": "na"
+              },
+              {
+                "word": "सीमदेव",
+                "translit": "sīm adeva"
+              },
+              {
+                "word": "आपद्",
+                "translit": "āpad"
+              },
+              {
+                "word": "इषं",
+                "translit": "iṣaṃ"
+              },
+              {
+                "word": "दीर्घायो",
+                "translit": "dīrghāyo"
+              },
+              {
+                "word": "मर्त्यः",
+                "translit": "martyaḥ"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "एतग्वा",
+                "translit": "etagvā"
+              },
+              {
+                "word": "चिद्",
+                "translit": "cid"
+              },
+              {
+                "word": "य",
+                "translit": "ya"
+              },
+              {
+                "word": "एतशा",
+                "translit": "etaśā"
+              },
+              {
+                "word": "युयोजते",
+                "translit": "yuyojate"
+              },
+              {
+                "word": "हरी",
+                "translit": "harī"
+              },
+              {
+                "word": "इन्द्रो",
+                "translit": "indro"
+              },
+              {
+                "word": "युयोजते",
+                "translit": "yuyojate"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "O long-lived Indra, the mortal who has not you as his deity obtains no food; (he who praises not) thatsteed-borne Indra, who yokes to his car the two variegated, who yokes the two bay steeds."
+        },
+        {
+          "number": "8.70.8",
+          "sanskrit": [
+            {
+              "word": "तं",
+              "translit": "taṃ"
+            },
+            {
+              "word": "वो",
+              "translit": "vo"
+            },
+            {
+              "word": "महो",
+              "translit": "maho"
+            },
+            {
+              "word": "महाय्य्",
+              "translit": "mahāyy"
+            },
+            {
+              "word": "अम्",
+              "translit": "am"
+            },
+            {
+              "word": "इन्द्रं",
+              "translit": "indraṃ"
+            },
+            {
+              "word": "दानाय",
+              "translit": "dānāya"
+            },
+            {
+              "word": "सक्षणिम्",
+              "translit": "sakṣaṇim"
+            },
+            {
+              "word": "यो",
+              "translit": "yo"
+            },
+            {
+              "word": "गाधेषु",
+              "translit": "gādheṣu"
+            },
+            {
+              "word": "य",
+              "translit": "ya"
+            },
+            {
+              "word": "आरणेषु",
+              "translit": "āraṇeṣu"
+            },
+            {
+              "word": "हव्यो",
+              "translit": "havyo"
+            },
+            {
+              "word": "वाजेष्व्",
+              "translit": "vājeṣv"
+            },
+            {
+              "word": "अस्ति",
+              "translit": "asti"
+            },
+            {
+              "word": "हव्यः",
+              "translit": "havyaḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "तं",
+                "translit": "taṃ"
+              },
+              {
+                "word": "वो",
+                "translit": "vo"
+              },
+              {
+                "word": "महो",
+                "translit": "maho"
+              },
+              {
+                "word": "महाय्य्",
+                "translit": "mahāyy"
+              },
+              {
+                "word": "अम्",
+                "translit": "am"
+              },
+              {
+                "word": "इन्द्रं",
+                "translit": "indraṃ"
+              },
+              {
+                "word": "दानाय",
+                "translit": "dānāya"
+              },
+              {
+                "word": "सक्षणिम्",
+                "translit": "sakṣaṇim"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "यो",
+                "translit": "yo"
+              },
+              {
+                "word": "गाधेषु",
+                "translit": "gādheṣu"
+              },
+              {
+                "word": "य",
+                "translit": "ya"
+              },
+              {
+                "word": "आरणेषु",
+                "translit": "āraṇeṣu"
+              },
+              {
+                "word": "हव्यो",
+                "translit": "havyo"
+              },
+              {
+                "word": "वाजेष्व्",
+                "translit": "vājeṣv"
+              },
+              {
+                "word": "अस्ति",
+                "translit": "asti"
+              },
+              {
+                "word": "हव्यः",
+                "translit": "havyaḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Great (priests), worship that Indra who is propitiated by gifts; who is to be invoked in the shallows andin the depths, and who is to be invoked in battles."
+        },
+        {
+          "number": "8.70.9",
+          "sanskrit": [
+            {
+              "word": "उदू",
+              "translit": "ud ū"
+            },
+            {
+              "word": "षु",
+              "translit": "ṣu"
+            },
+            {
+              "word": "णो",
+              "translit": "ṇo"
+            },
+            {
+              "word": "वसो",
+              "translit": "vaso"
+            },
+            {
+              "word": "महे",
+              "translit": "mahe"
+            },
+            {
+              "word": "मृशस्व",
+              "translit": "mṛśasva"
+            },
+            {
+              "word": "शूर",
+              "translit": "śūra"
+            },
+            {
+              "word": "राधसे",
+              "translit": "rādhase"
+            },
+            {
+              "word": "उदू",
+              "translit": "ud ū"
+            },
+            {
+              "word": "षु",
+              "translit": "ṣu"
+            },
+            {
+              "word": "मह्यै",
+              "translit": "mahyai"
+            },
+            {
+              "word": "मघवन्",
+              "translit": "maghavan"
+            },
+            {
+              "word": "मघत्तय",
+              "translit": "maghattaya"
+            },
+            {
+              "word": "उद्",
+              "translit": "ud"
+            },
+            {
+              "word": "इन्द्र",
+              "translit": "indra"
+            },
+            {
+              "word": "श्रवसे",
+              "translit": "śravase"
+            },
+            {
+              "word": "महे",
+              "translit": "mahe"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "उदू",
+                "translit": "ud ū"
+              },
+              {
+                "word": "षु",
+                "translit": "ṣu"
+              },
+              {
+                "word": "णो",
+                "translit": "ṇo"
+              },
+              {
+                "word": "वसो",
+                "translit": "vaso"
+              },
+              {
+                "word": "महे",
+                "translit": "mahe"
+              },
+              {
+                "word": "मृशस्व",
+                "translit": "mṛśasva"
+              },
+              {
+                "word": "शूर",
+                "translit": "śūra"
+              },
+              {
+                "word": "राधसे",
+                "translit": "rādhase"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "उदू",
+                "translit": "ud ū"
+              },
+              {
+                "word": "षु",
+                "translit": "ṣu"
+              },
+              {
+                "word": "मह्यै",
+                "translit": "mahyai"
+              },
+              {
+                "word": "मघवन्",
+                "translit": "maghavan"
+              },
+              {
+                "word": "मघत्तय",
+                "translit": "maghattaya"
+              },
+              {
+                "word": "उद्",
+                "translit": "ud"
+              },
+              {
+                "word": "इन्द्र",
+                "translit": "indra"
+              },
+              {
+                "word": "श्रवसे",
+                "translit": "śravase"
+              },
+              {
+                "word": "महे",
+                "translit": "mahe"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "O hero, giver of dwellings, raise up to enjoy abundant food; raise us up, Maghavan, for abundantwealth; raise us up, Indra, for abundant fame."
+        },
+        {
+          "number": "8.70.10",
+          "sanskrit": [
+            {
+              "word": "त्वं",
+              "translit": "tvaṃ"
+            },
+            {
+              "word": "न",
+              "translit": "na"
+            },
+            {
+              "word": "इन्द्र",
+              "translit": "indra"
+            },
+            {
+              "word": "ऋतयुस्",
+              "translit": "ṛtayus"
+            },
+            {
+              "word": "त्वानिदो",
+              "translit": "tvānido"
+            },
+            {
+              "word": "नि",
+              "translit": "ni"
+            },
+            {
+              "word": "तृम्पसि",
+              "translit": "tṛmpasi"
+            },
+            {
+              "word": "मध्ये",
+              "translit": "madhye"
+            },
+            {
+              "word": "वसिष्व",
+              "translit": "vasiṣva"
+            },
+            {
+              "word": "तुविनृम्णोर्",
+              "translit": "tuvinṛmṇor"
+            },
+            {
+              "word": "वोर्",
+              "translit": "vor"
+            },
+            {
+              "word": "नि",
+              "translit": "ni"
+            },
+            {
+              "word": "दासं",
+              "translit": "dāsaṃ"
+            },
+            {
+              "word": "शिश्नथो",
+              "translit": "śiśnatho"
+            },
+            {
+              "word": "हथैः",
+              "translit": "hathaiḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "त्वं",
+                "translit": "tvaṃ"
+              },
+              {
+                "word": "न",
+                "translit": "na"
+              },
+              {
+                "word": "इन्द्र",
+                "translit": "indra"
+              },
+              {
+                "word": "ऋतयुस्",
+                "translit": "ṛtayus"
+              },
+              {
+                "word": "त्वानिदो",
+                "translit": "tvānido"
+              },
+              {
+                "word": "नि",
+                "translit": "ni"
+              },
+              {
+                "word": "तृम्पसि",
+                "translit": "tṛmpasi"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "मध्ये",
+                "translit": "madhye"
+              },
+              {
+                "word": "वसिष्व",
+                "translit": "vasiṣva"
+              },
+              {
+                "word": "तुविनृम्णोर्",
+                "translit": "tuvinṛmṇor"
+              },
+              {
+                "word": "वोर्",
+                "translit": "vor"
+              },
+              {
+                "word": "नि",
+                "translit": "ni"
+              },
+              {
+                "word": "दासं",
+                "translit": "dāsaṃ"
+              },
+              {
+                "word": "शिश्नथो",
+                "translit": "śiśnatho"
+              },
+              {
+                "word": "हथैः",
+                "translit": "hathaiḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Indra, who delights in offerings, you satisfy us abundantly with (the possession of him) who despisesyou; O you possessed of vast wealth, shelter us between your thighs; you smite down the Dāsa with yourblows."
+        },
+        {
+          "number": "8.70.11",
+          "sanskrit": [
+            {
+              "word": "अन्यव्रतम्",
+              "translit": "anyavratam"
+            },
+            {
+              "word": "अमानुषम्",
+              "translit": "amānuṣam"
+            },
+            {
+              "word": "अयज्वानम्",
+              "translit": "ayajvānam"
+            },
+            {
+              "word": "अदेवयुम्",
+              "translit": "adevayum"
+            },
+            {
+              "word": "अव",
+              "translit": "ava"
+            },
+            {
+              "word": "स्वः",
+              "translit": "svaḥ"
+            },
+            {
+              "word": "सखा",
+              "translit": "sakhā"
+            },
+            {
+              "word": "दुधुवीत",
+              "translit": "dudhuvīta"
+            },
+            {
+              "word": "पर्वतः",
+              "translit": "parvataḥ"
+            },
+            {
+              "word": "सुघ्नाय",
+              "translit": "sughnāya"
+            },
+            {
+              "word": "दस्युं",
+              "translit": "dasyum"
+            },
+            {
+              "word": "पर्वतः",
+              "translit": "parvataḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "अन्यव्रतम्",
+                "translit": "anyavratam"
+              },
+              {
+                "word": "अमानुषम्",
+                "translit": "amānuṣam"
+              },
+              {
+                "word": "अयज्वानम्",
+                "translit": "ayajvānam"
+              },
+              {
+                "word": "अदेवयुम्",
+                "translit": "adevayum"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "अव",
+                "translit": "ava"
+              },
+              {
+                "word": "स्वः",
+                "translit": "svaḥ"
+              },
+              {
+                "word": "सखा",
+                "translit": "sakhā"
+              },
+              {
+                "word": "दुधुवीत",
+                "translit": "dudhuvīta"
+              },
+              {
+                "word": "पर्वतः",
+                "translit": "parvataḥ"
+              },
+              {
+                "word": "सुघ्नाय",
+                "translit": "sughnāya"
+              },
+              {
+                "word": "दस्युं",
+                "translit": "dasyum"
+              },
+              {
+                "word": "पर्वतः",
+                "translit": "parvataḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "May your friend, Parvata, hurl down from heaven him who follows other rites, the enemy of men, himwho offers no sacrifice and who worships not the gods; may Parvata hurl the Dasyu down to the storm smiter(death)."
+        },
+        {
+          "number": "8.70.12",
+          "sanskrit": [
+            {
+              "word": "त्वं",
+              "translit": "tvaṃ"
+            },
+            {
+              "word": "न",
+              "translit": "na"
+            },
+            {
+              "word": "इन्द्रासां",
+              "translit": "indrāsāṃ"
+            },
+            {
+              "word": "हस्ते",
+              "translit": "haste"
+            },
+            {
+              "word": "शविष्ठ",
+              "translit": "śaviṣṭha"
+            },
+            {
+              "word": "दावने",
+              "translit": "dāvane"
+            },
+            {
+              "word": "धानानां",
+              "translit": "dhānānāṃ"
+            },
+            {
+              "word": "न",
+              "translit": "na"
+            },
+            {
+              "word": "सं",
+              "translit": "saṃ"
+            },
+            {
+              "word": "गृभायास्मयुर्",
+              "translit": "gṛbhāyāsmayur"
+            },
+            {
+              "word": "द्विः",
+              "translit": "dviḥ"
+            },
+            {
+              "word": "सं",
+              "translit": "saṃ"
+            },
+            {
+              "word": "गृभायास्मयुः",
+              "translit": "gṛbhāyāsmayuḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "त्वं",
+                "translit": "tvaṃ"
+              },
+              {
+                "word": "न",
+                "translit": "na"
+              },
+              {
+                "word": "इन्द्रासां",
+                "translit": "indrāsāṃ"
+              },
+              {
+                "word": "हस्ते",
+                "translit": "haste"
+              },
+              {
+                "word": "शविष्ठ",
+                "translit": "śaviṣṭha"
+              },
+              {
+                "word": "दावने",
+                "translit": "dāvane"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "धानानां",
+                "translit": "dhānānāṃ"
+              },
+              {
+                "word": "न",
+                "translit": "na"
+              },
+              {
+                "word": "सं",
+                "translit": "saṃ"
+              },
+              {
+                "word": "गृभायास्मयुर्",
+                "translit": "gṛbhāyāsmayur"
+              },
+              {
+                "word": "द्विः",
+                "translit": "dviḥ"
+              },
+              {
+                "word": "सं",
+                "translit": "saṃ"
+              },
+              {
+                "word": "गृभायास्मयुः",
+                "translit": "gṛbhāyāsmayuḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Most powerful Indra, in your favour towards us, take these cows in your hand, as fried grain, to give tous; yes, take them twice in your favour towards us."
+        },
+        {
+          "number": "8.70.13",
+          "sanskrit": [
+            {
+              "word": "सखायः",
+              "translit": "sakhāyaḥ"
+            },
+            {
+              "word": "क्रतुमिच्छत",
+              "translit": "kratum icchata"
+            },
+            {
+              "word": "कथा",
+              "translit": "kathā"
+            },
+            {
+              "word": "राधाम",
+              "translit": "rādhāma"
+            },
+            {
+              "word": "शरस्य",
+              "translit": "śarasya"
+            },
+            {
+              "word": "उपस्तुतिं",
+              "translit": "upastutim"
+            },
+            {
+              "word": "भोजः",
+              "translit": "bhojaḥ"
+            },
+            {
+              "word": "सूरिर्",
+              "translit": "sūrir"
+            },
+            {
+              "word": "यो",
+              "translit": "yo"
+            },
+            {
+              "word": "अह्रयः",
+              "translit": "ahrayaḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "सखायः",
+                "translit": "sakhāyaḥ"
+              },
+              {
+                "word": "क्रतुमिच्छत",
+                "translit": "kratum icchata"
+              },
+              {
+                "word": "कथा",
+                "translit": "kathā"
+              },
+              {
+                "word": "राधाम",
+                "translit": "rādhāma"
+              },
+              {
+                "word": "शरस्य",
+                "translit": "śarasya"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "उपस्तुतिं",
+                "translit": "upastutim"
+              },
+              {
+                "word": "भोजः",
+                "translit": "bhojaḥ"
+              },
+              {
+                "word": "सूरिर्",
+                "translit": "sūrir"
+              },
+              {
+                "word": "यो",
+                "translit": "yo"
+              },
+              {
+                "word": "अह्रयः",
+                "translit": "ahrayaḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Associated priests, give good heed to the sacrifice, for how can we (worthily) perform the praise of(Indra) the destroyer, who is the recompenser of enemies, the sender of reward, the unvanquished?"
+        },
+        {
+          "number": "8.70.14",
+          "sanskrit": [
+            {
+              "word": "भूरिभिः",
+              "translit": "bhūribhiḥ"
+            },
+            {
+              "word": "समह",
+              "translit": "samaha"
+            },
+            {
+              "word": "ऋषिभिर्",
+              "translit": "ṛṣibhir"
+            },
+            {
+              "word": "बर्हिष्मद्भिः",
+              "translit": "barhiṣmadbhiḥ"
+            },
+            {
+              "word": "स्तविष्यसे",
+              "translit": "staviṣyase"
+            },
+            {
+              "word": "यद्",
+              "translit": "yad"
+            },
+            {
+              "word": "इत्थम्",
+              "translit": "ittham"
+            },
+            {
+              "word": "एकमेकमिच्",
+              "translit": "ekam-ekam ic"
+            },
+            {
+              "word": "छर",
+              "translit": "chara"
+            },
+            {
+              "word": "वत्सान्",
+              "translit": "vatsān"
+            },
+            {
+              "word": "पराददः",
+              "translit": "parādadaḥ"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "भूरिभिः",
+                "translit": "bhūribhiḥ"
+              },
+              {
+                "word": "समह",
+                "translit": "samaha"
+              },
+              {
+                "word": "ऋषिभिर्",
+                "translit": "ṛṣibhir"
+              },
+              {
+                "word": "बर्हिष्मद्भिः",
+                "translit": "barhiṣmadbhiḥ"
+              },
+              {
+                "word": "स्तविष्यसे",
+                "translit": "staviṣyase"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "यद्",
+                "translit": "yad"
+              },
+              {
+                "word": "इत्थम्",
+                "translit": "ittham"
+              },
+              {
+                "word": "एकमेकमिच्",
+                "translit": "ekam-ekam ic"
+              },
+              {
+                "word": "छर",
+                "translit": "chara"
+              },
+              {
+                "word": "वत्सान्",
+                "translit": "vatsān"
+              },
+              {
+                "word": "पराददः",
+                "translit": "parādadaḥ"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "Indra, the common object of our worship, you are praised by many sacrificing Ṛṣis; for it is you,destroyer of foes, who thus give calves in succession to your worshippers."
+        },
+        {
+          "number": "8.70.15",
+          "sanskrit": [
+            {
+              "word": "कर्णगृह्या",
+              "translit": "karṇagṛhyā"
+            },
+            {
+              "word": "मघवा",
+              "translit": "maghavā"
+            },
+            {
+              "word": "शौरदेव्यो",
+              "translit": "śauradevyo"
+            },
+            {
+              "word": "वत्सं",
+              "translit": "vatsaṃ"
+            },
+            {
+              "word": "नस्",
+              "translit": "nas"
+            },
+            {
+              "word": "त्रिभ्य",
+              "translit": "tribhya"
+            },
+            {
+              "word": "आनयत्",
+              "translit": "ānayat"
+            },
+            {
+              "word": "अजां",
+              "translit": "ajāṃ"
+            },
+            {
+              "word": "सूरिर्",
+              "translit": "sūrir"
+            },
+            {
+              "word": "न",
+              "translit": "na"
+            },
+            {
+              "word": "धातवे",
+              "translit": "dhātave"
+            }
+          ],
+          "sanskrit_lines": [
+            [
+              {
+                "word": "कर्णगृह्या",
+                "translit": "karṇagṛhyā"
+              },
+              {
+                "word": "मघवा",
+                "translit": "maghavā"
+              },
+              {
+                "word": "शौरदेव्यो",
+                "translit": "śauradevyo"
+              },
+              {
+                "word": "वत्सं",
+                "translit": "vatsaṃ"
+              },
+              {
+                "word": "नस्",
+                "translit": "nas"
+              },
+              {
+                "word": "त्रिभ्य",
+                "translit": "tribhya"
+              },
+              {
+                "word": "आनयत्",
+                "translit": "ānayat"
+              },
+              {
+                "sep": "|"
+              }
+            ],
+            [
+              {
+                "word": "अजां",
+                "translit": "ajāṃ"
+              },
+              {
+                "word": "सूरिर्",
+                "translit": "sūrir"
+              },
+              {
+                "word": "न",
+                "translit": "na"
+              },
+              {
+                "word": "धातवे",
+                "translit": "dhātave"
+              },
+              {
+                "sep": "||"
+              }
+            ]
+          ],
+          "translation": "May Maghavan, taking them by the ears, lead the cows with their calves from our three (destructiveenemies), as the owner leads a goat to drink."
+        }
+      ],
+          "prev": "/8/69.html",
+          "next": "/8/71.html",
+          "group": "Hymns of Priyamedha and Others",
+          "stanzas": 15
     },
     {
       "mandala": 8,

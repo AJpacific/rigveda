@@ -18993,39 +18993,48 @@
         {
           "number": "2.14.12",
           "sanskrit": [
-            {
-              "word": "अस्मभ्यं",
-              "translit": "asmabhyaṃ"
-            },
-            {
-              "word": "तद",
-              "translit": "tad"
-            },
-            {
-              "word": "...",
-              "translit": "..."
-            }
+            { "word": "अस्मभ्यं", "translit": "asmabhyaṃ" },
+            { "word": "तद्वसो", "translit": "tad vaso" },
+            { "word": "दानाय", "translit": "dānāya" },
+            { "word": "राधः", "translit": "rādhaḥ" },
+            { "word": "समर्थयस्व", "translit": "sam arthayasva" },
+            { "word": "बहु", "translit": "bahu" },
+            { "word": "ते", "translit": "te" },
+            { "word": "वसव्यम्", "translit": "vasavyam" },
+            { "word": "इन्द्र", "translit": "indra" },
+            { "word": "यच्चित्रं", "translit": "yac citraṃ" },
+            { "word": "श्रवस्या", "translit": "śravasyā" },
+            { "word": "अनु", "translit": "anu" },
+            { "word": "द्यून्", "translit": "dyūn" },
+            { "word": "बृहद्वदेम", "translit": "bṛhad vadema" },
+            { "word": "विदथे", "translit": "vidathe" },
+            { "word": "सुवीराः", "translit": "suvīrāḥ" }
           ],
           "sanskrit_lines": [
             [
-              {
-                "word": "अस्मभ्यं",
-                "translit": "asmabhyaṃ"
-              },
-              {
-                "word": "तद",
-                "translit": "tad"
-              },
-              {
-                "word": "...",
-                "translit": "..."
-              },
-              {
-                "sep": "||"
-              }
+              { "word": "अस्मभ्यं", "translit": "asmabhyaṃ" },
+              { "word": "तद्वसो", "translit": "tad vaso" },
+              { "word": "दानाय", "translit": "dānāya" },
+              { "word": "राधः", "translit": "rādhaḥ" },
+              { "word": "समर्थयस्व", "translit": "sam arthayasva" },
+              { "word": "बहु", "translit": "bahu" },
+              { "word": "ते", "translit": "te" },
+              { "word": "वसव्यम्", "translit": "vasavyam" },
+              { "sep": "|" }
+            ],
+            [
+              { "word": "इन्द्र", "translit": "indra" },
+              { "word": "यच्चित्रं", "translit": "yac citraṃ" },
+              { "word": "श्रवस्या", "translit": "śravasyā" },
+              { "word": "अनु", "translit": "anu" },
+              { "word": "द्यून्", "translit": "dyūn" },
+              { "word": "बृहद्वदेम", "translit": "bṛhad vadema" },
+              { "word": "विदथे", "translit": "vidathe" },
+              { "word": "सुवीराः", "translit": "suvīrāḥ" },
+              { "sep": "||" }
             ]
           ],
-          "translation": "Prepare thyself to grant us that great booty, O Vasu, for abundant is thy treasure. \n Gather up wondrous wealth, O Indra, daily. Loud may we speak, with heroes, in assembly."
+          "translation": "Possessor of riches, exert your ability to bestow wealth upon us; for yours is great affluence; may, you, Indra, be disposed to grant us exceeding abundance day by day, so that, blessed with worthy descendants, we may glorify you at our sacrifice."
         }
       ],
       "prev": "/2/13.html",
