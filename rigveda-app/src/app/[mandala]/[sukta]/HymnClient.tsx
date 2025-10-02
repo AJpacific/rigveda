@@ -451,7 +451,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
           <div className="flex items-center gap-2">
             <button
               onClick={toggleAudio}
-              className="m-btn m-btn-tonal text-xs sm:text-sm m-btn-fixed-sm"
+              className="m-btn m-btn-outlined text-xs sm:text-sm min-w-[2.5rem] sm:min-w-[6rem]"
               disabled={audioState === 'loading'}
               aria-label={audioButtonLabel}
             >
