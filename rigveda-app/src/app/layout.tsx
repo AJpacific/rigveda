@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Link from "next/link";
+import GlobalHeader from "./components/GlobalHeader";
 
 export const metadata: Metadata = {
   title: "The Rig Veda",
@@ -20,14 +20,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </head>
       <body className="antialiased bg-background text-foreground">
-        <header className="m-appbar">
-          <div className="container mx-auto px-4 m-appbar-inner">
-            <Link href="/" className="m-appbar-title text-lg sm:text-xl">Rig Veda</Link>
-            <nav className="flex items-center gap-2">
-              <Link href="/search" className="m-btn m-btn-outlined text-sm">Ask AI</Link>
-            </nav>
-          </div>
-        </header>
+        <GlobalHeader />
         <main className="container mx-auto px-4 py-6 min-h-[calc(100vh-80px)]">
           {children}
         </main>

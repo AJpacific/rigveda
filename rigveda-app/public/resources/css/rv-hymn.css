@@ -16,9 +16,30 @@ h2 {
     left: 0;
     z-index: 1000;
     width: 100%;
-    background-color: var(--theme-color-navbar-background);
-    color: var(--theme-color-navbar-text);
+    /* Opaque UI color surface with rounded bottom corners */
+    background: var(--theme-color-background-light);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: rgb(27, 58, 75);
+    border-bottom: 1px solid rgba(27, 58, 75, 0.15);
     text-align: center;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    border-radius: 0 0 12px 12px;
+}
+
+/* Make header title compact within navbar */
+.navbar h2 {
+    font-size: 1.25em;
+    margin: 0;
+}
+
+/* Ensure navbar buttons are visible on light translucent background */
+.navbar .btn-nav {
+    color: rgb(27, 58, 75);
+}
+.navbar .btn-nav:hover {
+    color: rgba(27, 58, 75, 0.8);
 }
 
 .progess-bar-header {
@@ -29,7 +50,7 @@ h2 {
 }
 
 .progress-container {
-    background-color: var(--theme-color-navbar);
+    background-color: transparent;
     height: 3px;
     width: 100%;
 }
@@ -41,7 +62,8 @@ h2 {
 }
 
 .container {
-    margin-top: 8%;
+    /* Leave space for compact sticky header */
+    margin-top: 110px;
     margin-bottom: 3%;
 }
 
@@ -124,7 +146,8 @@ h2 {
     }
 
     .container {
-        margin-top: 30%;
+        /* Smaller top space on mobile */
+        margin-top: 100px;
     }
 
     h2 {

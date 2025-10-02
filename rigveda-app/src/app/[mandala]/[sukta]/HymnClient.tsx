@@ -38,6 +38,23 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   const [chatContext, setChatContext] = useState<string>('');
   const chatListRef = useRef<HTMLDivElement | null>(null);
 
+  // Dictionary modal state
+  const [dictOpen, setDictOpen] = useState(false);
+  const [dictUrl, setDictUrl] = useState<string | null>(null);
+  const [dictWord, setDictWord] = useState<string>('');
+  const dictContainerRef = useRef<HTMLDivElement | null>(null);
+  const [dictScale, setDictScale] = useState(1);
+  const [dictWrapperHeight, setDictWrapperHeight] = useState<number | null>(null);
+
+  // Dispatch hymn metadata to global header
+  useEffect(() => {
+    try {
+      const detail = { mandala, sukta, title: hymn.title, group: hymn.group, stanzas: hymn.stanzas ?? hymn.verses.length, prevPath, nextPath };
+      window.dispatchEvent(new CustomEvent('hymn:meta', { detail }));
+      return () => { window.dispatchEvent(new CustomEvent('hymn:meta', { detail: null })); };
+    } catch {}
+  }, [hymn, mandala, sukta, prevPath, nextPath]);
+
   const isSepToken = (t: SanskritToken): t is SanskritSepToken => 'sep' in t && typeof (t as SanskritSepToken).sep === 'string';
   const isWordToken = (t: SanskritToken): t is SanskritWordToken => 'word' in t;
 
@@ -118,6 +135,37 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
       void askChat();
     }
   };
+
+  // Open dictionary modal for a Sanskrit word
+  const openDictionary = (word: string) => {
+    const url = `https://www.learnsanskrit.cc/translate?search=${encodeURIComponent(word)}&rv_embed=1`;
+    setDictWord(word);
+    setDictUrl(url);
+    setDictOpen(true);
+    try {
+      document.documentElement.classList.add('no-scroll');
+      document.body.classList.add('no-scroll');
+    } catch {}
+  };
+
+  // Compute responsive scale for dictionary frame on open and resize
+  useEffect(() => {
+    if (!dictOpen) return;
+    const updateScale = () => {
+      const container = dictContainerRef.current;
+      if (!container) return;
+      const baseWidth = 1024; // assumed desktop layout width of external site
+      const width = container.clientWidth || baseWidth;
+      const height = container.clientHeight || 800;
+      const scale = Math.min(1, width / baseWidth);
+      setDictScale(scale || 1);
+      const wrapperHeight = Math.round(height / (scale || 1));
+      setDictWrapperHeight(wrapperHeight);
+    };
+    updateScale();
+    window.addEventListener('resize', updateScale);
+    return () => window.removeEventListener('resize', updateScale);
+  }, [dictOpen]);
 
   // Auto-scroll chat body to latest message
   useEffect(() => {
@@ -259,95 +307,21 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   const audioButtonLabel = audioState === 'playing' ? 'Pause' : audioState === 'loading' ? 'Loading' : 'Play';
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-24 sm:pb-28">
+      {/* Thin scroll progress line */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-[color:var(--surface-strong)] z-50 pointer-events-none">
         <div className="h-full bg-[color:var(--primary)]" style={{ width: `${scrollProgress}%` }} />
       </div>
 
-      <div className="mt-4 sm:mt-6">
-        <div className="m-card m-elevation-1 px-3 sm:px-4 py-2.5 sm:py-3 space-y-3">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-sm text-[color:var(--muted)]">
-              <Link href="/" className="icon-btn" aria-label="Home"><FontAwesomeIcon icon={faHome} /></Link>
-              <span className="text-[color:var(--burnt-umber)]">/</span>
-              <Link href={`/${mandala}`} className="icon-btn" aria-label="Mandala index"><FontAwesomeIcon icon={faBars} /></Link>
-            </div>
-
-            <div className="text-center">
-              <div className="text-[10px] uppercase tracking-[0.3em] text-[color:var(--olive-green)]">Mandala {mandala}</div>
-              <h1 className="text-base sm:text-lg font-semibold">Hymn {sukta}: {hymn.title}</h1>
-            </div>
-
-            <div className="flex items-center gap-2 text-sm">
-              {prevPath ? (
-                <Link
-                  href={prevPath}
-                  className="m-btn m-btn-outlined"
-                  aria-label="Previous hymn"
-                >
-                  <FontAwesomeIcon icon={faArrowLeft} />
-                </Link>
-              ) : (
-                <span className="m-btn m-btn-outlined" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
-                  <FontAwesomeIcon icon={faArrowLeft} />
-                </span>
-              )}
-              <button
-                onClick={toggleAudio}
-                className="m-btn m-btn-tonal text-xs sm:text-sm"
-                disabled={audioState === 'loading'}
-              >
-                <FontAwesomeIcon icon={audioButtonIcon} className="mr-2" />
-                {audioButtonLabel}
-              </button>
-              {nextPath ? (
-                <Link
-                  href={nextPath}
-                  className="m-btn m-btn-outlined"
-                  aria-label="Next hymn"
-                >
-                  <FontAwesomeIcon icon={faArrowRight} />
-                </Link>
-              ) : (
-                <span className="m-btn m-btn-outlined" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
-                  <FontAwesomeIcon icon={faArrowRight} />
-                </span>
-              )}
-            </div>
-          </div>
-          <audio ref={audioRef} src={hymn.audio} />
-          {duration > 0 && (
-            <div className="pt-3">
-              <div className="flex items-center gap-3 text-xs text-[color:var(--muted)] mb-2">
-                <span>{formatTime(currentTime)}</span>
-                <div className="flex-1 h-px bg-[color:var(--surface-strong)]" />
-                <span>{formatTime(duration)}</span>
-              </div>
-              <input
-                type="range"
-                min={0}
-                max={duration}
-                step={0.1}
-                value={currentTime}
-                onChange={(e) => handleSeek(Number(e.target.value))}
-                className="w-full accent-[color:var(--olive-green)]"
-              />
-            </div>
-          )}
-          <div className="m-divider mt-2" />
-          <div className="pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-muted">
-            <div>Hymn Group: <span className="font-medium text-[color:var(--olive-green)]">{hymn.group || 'Unknown group'}</span></div>
-            <div>Stanzas: <span className="font-medium text-[color:var(--olive-green)]">{hymn.stanzas || hymn.verses.length}</span></div>
-            {Number.isInteger(currentVerseIndex) && currentVerseIndex !== null && (
-              <div className="sm:col-span-2">Now playing: <span className="font-medium text-[color:var(--olive-green)]">Verse {hymn.verses[currentVerseIndex]?.number}</span></div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <section className="space-y-4">
-        {hymn.verses.map((verse: Verse, i: number) => (
-          <article key={i} className="m-card m-elevation-1 p-3 sm:p-4 sm:pt-10 relative">
+      {/* Content */}
+      <section className="space-y-4 pt-2">
+        {hymn.verses.map((verse: Verse, i: number) => {
+          const isFirst = i === 0;
+          const articleClass = isFirst
+            ? 'm-card m-elevation-1 p-2 sm:p-4 sm:pt-8 relative'
+            : 'm-card m-elevation-1 p-3 sm:p-4 sm:pt-10 relative';
+          return (
+          <article key={i} className={articleClass}>
             <div className="flex justify-end">
               <button
                 onClick={() => startChatForVerse(verse)}
@@ -363,18 +337,18 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                   ? verse.sanskrit_lines
                   : verse.sanskrit ? [verse.sanskrit] : []
                 ).map((line: SanskritToken[], li: number) => (
-                <div key={li} className="flex flex-wrap items-start gap-x-3 gap-y-2">
+                <div key={li} className={isFirst ? 'flex flex-wrap items-start gap-x-2 gap-y-1 sm:gap-x-3 sm:gap-y-2' : 'flex flex-wrap items-start gap-x-3 gap-y-2'}>
                   {line.map((w: SanskritToken, wi: number) => (
                     isSepToken(w) ? (
                       <div key={`sep-${li}-${wi}`} className="text-center">
-                        <div className="text-[1.25rem] leading-tight text-accent">{w.sep}</div>
+                        <div className={isFirst ? 'text-[1.05rem] sm:text-[1.25rem] leading-tight text-accent' : 'text-[1.25rem] leading-tight text-accent'}>{w.sep}</div>
                         <div className="text-[13px] text-transparent select-none">.</div>
                       </div>
                     ) : (
-                      <a key={wi} href={`https://www.learnsanskrit.cc/translate?search=${(w as SanskritWordToken).word}`} target="_blank" rel="noreferrer noopener" className="text-center">
-                        <div className="text-[1.25rem] leading-tight text-accent">{(w as SanskritWordToken).word}</div>
-                        {(w as SanskritWordToken).translit && <div className="text-[13px] text-muted">{(w as SanskritWordToken).translit}</div>}
-                      </a>
+                      <button key={wi} onClick={() => openDictionary((w as SanskritWordToken).word)} className="text-center">
+                        <div className={isFirst ? 'text-[1.05rem] sm:text-[1.25rem] leading-tight text-accent' : 'text-[1.25rem] leading-tight text-accent'}>{(w as SanskritWordToken).word}</div>
+                        {(w as SanskritWordToken).translit && <div className={isFirst ? 'hidden sm:block text-[13px] text-muted' : 'text-[13px] text-muted'}>{(w as SanskritWordToken).translit}</div>}
+                      </button>
                     )
                   ))}
                 </div>
@@ -385,7 +359,8 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             </div>
             <div className="text-right text-xs text-muted mt-2">{verse.number}</div>
           </article>
-        ))}
+          );
+        })}
       </section>
 
       {chatOpen && (
@@ -432,6 +407,71 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
           </div>
         </div>
       )}
+
+      {dictOpen && (
+        <div className="m-dialog-overlay" role="dialog" aria-modal="true">
+          <div className="m-dialog wide">
+            <div className="m-dialog-header">
+              <div className="text-sm uppercase tracking-wide text-muted">Dictionary · {dictWord}</div>
+              <button onClick={() => { setDictOpen(false); try { document.documentElement.classList.remove('no-scroll'); document.body.classList.remove('no-scroll'); } catch {} }} className="icon-btn" aria-label="Close">×</button>
+            </div>
+            <div className="m-dialog-body">
+              {dictUrl ? (
+                <div className="m-embed-container" ref={dictContainerRef}>
+                  <div style={{ width: '1024px', height: dictWrapperHeight ? `${dictWrapperHeight}px` : '800px', transform: `scale(${dictScale})`, transformOrigin: 'top left' }}>
+                    <iframe className="embedded-frame" src={dictUrl} title="Dictionary" />
+                  </div>
+                </div>
+              ) : (
+                <div className="text-sm text-muted">Loading…</div>
+              )}
+            </div>
+            <div className="m-dialog-footer">
+              <div className="text-xs text-muted">
+                If the page fails to load here, you can open it directly.
+                {' '}
+                {dictUrl && (
+                  <a href={dictUrl} target="_blank" rel="noreferrer noopener" className="m-btn m-btn-text text-sm">Open</a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Audio footer */}
+      <div className="m-audiofooter">
+        <div className="container mx-auto px-3 py-2">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={toggleAudio}
+              className="m-btn m-btn-tonal text-xs sm:text-sm m-btn-fixed-sm"
+              disabled={audioState === 'loading'}
+              aria-label={audioButtonLabel}
+            >
+              <FontAwesomeIcon icon={audioButtonIcon} />
+              <span className="hidden sm:inline ml-2">{audioButtonLabel}</span>
+            </button>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between text-[11px] text-[color:var(--muted)] mb-1">
+                <div className="truncate">Now playing: <span className="font-medium text-[color:var(--olive-green)]">Verse {Number.isInteger(currentVerseIndex) && currentVerseIndex !== null ? hymn.verses[currentVerseIndex]?.number : '-'}</span></div>
+                <div className="whitespace-nowrap">{formatTime(currentTime)} / {formatTime(duration)}</div>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={duration}
+                step={0.1}
+                value={currentTime}
+                onChange={(e) => handleSeek(Number(e.target.value))}
+                className="w-full accent-[color:var(--olive-green)]"
+                aria-label="Seek"
+              />
+            </div>
+          </div>
+          <audio ref={audioRef} src={hymn.audio} />
+        </div>
+      </div>
 
     </div>
   );

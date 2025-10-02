@@ -3,21 +3,26 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
+import AskAIModal from './components/AskAIModal';
 
 export default function Home() {
   const router = useRouter();
   const [query, setQuery] = useState('');
+  const [askOpen, setAskOpen] = useState(false);
+  const [askInitial, setAskInitial] = useState<string | undefined>(undefined);
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      router.push(`/search?query=${encodeURIComponent(query)}`);
+      setAskInitial(query.trim() || undefined);
+      setAskOpen(true);
     }
   };
 
   const handleAskClick = () => {
     const q = query.trim();
     if (!q) return;
-    router.push(`/search?query=${encodeURIComponent(q)}`);
+    setAskInitial(q);
+    setAskOpen(true);
   };
 
   return (
@@ -41,7 +46,7 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <p className="text-xs text-muted mt-2">Press Enter to search or click Ask</p>
+          
         </div>
       </section>
 
@@ -63,6 +68,10 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {askOpen && (
+        <AskAIModal open={askOpen} onClose={() => setAskOpen(false)} initialQuestion={askInitial} />
+      )}
     </div>
   );
 }

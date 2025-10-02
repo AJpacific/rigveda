@@ -118,15 +118,17 @@ a:hover { color: var(--primary); }
   backdrop-filter: blur(8px);
   /* Slightly tinted surface to separate from page background */
   background: color-mix(in oklab, var(--primary) 14%, var(--background));
-  border-bottom: 1px solid var(--surface-strong);
+  border: 1px solid var(--surface-strong);
   box-shadow: 0 1px 2px rgba(27,58,75,0.06), 0 1px 1px rgba(27,58,75,0.04);
+  border-radius: 0.9rem;
 }
 .dark .m-appbar { background: color-mix(in oklab, var(--primary) 22%, var(--background)); }
 .m-appbar-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 .m-appbar-title {
   font-weight: 700;
@@ -134,6 +136,19 @@ a:hover { color: var(--primary); }
   color: var(--midnight-blue);
 }
 .dark .m-appbar-title { color: var(--parchment); }
+
+/* Sub App bar (for in-page sticky sections below global header) */
+.m-subappbar {
+  position: sticky;
+  top: var(--global-appbar-height, 56px);
+  z-index: 35;
+  backdrop-filter: blur(8px);
+  background: color-mix(in oklab, var(--primary) 10%, var(--background));
+  border-bottom: 1px solid var(--surface-strong);
+  box-shadow: 0 1px 2px rgba(27,58,75,0.06), 0 1px 1px rgba(27,58,75,0.04);
+  border-radius: 0.9rem;
+}
+.dark .m-subappbar { background: color-mix(in oklab, var(--primary) 18%, var(--background)); }
 
 /* Cards */
 .m-card {
@@ -189,6 +204,10 @@ a:hover { color: var(--primary); }
   padding: 0.4rem 0.5rem;
 }
 .m-btn-text:hover { background: var(--surface); }
+
+/* Fixed small button width helpers */
+.m-btn-fixed-xs { min-width: 2.5rem; }
+.m-btn-fixed-sm { min-width: 6rem; }
 
 /* Text field */
 .m-field {
@@ -249,3 +268,61 @@ a:hover { color: var(--primary); }
 
 /* Scroll lock helper when modal open */
 html.no-scroll, body.no-scroll { overflow: hidden; overscroll-behavior: contain; }
+
+/* Google CSE in dialog */
+.m-dialog-body .gsc-control-cse {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+.m-dialog-body .gsc-search-box {
+  margin-bottom: 0.75rem !important;
+}
+
+/* Wide dialog option */
+.m-dialog.wide { max-width: 64rem; }
+
+/* Embedded result frame inside dialog */
+.m-embed-container { width: 100%; height: min(65vh, 800px); }
+.embedded-frame {
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--surface-strong);
+  border-radius: 0.5rem;
+  background: white;
+  display: block;
+}
+
+/* Sticky note footer (keeps helper text visible) */
+.m-note-foot {
+  position: sticky;
+  bottom: 0;
+  padding-top: 0.5rem;
+  background: linear-gradient(to top, rgba(255,255,255,0.96), rgba(255,255,255,0.7) 50%, transparent);
+}
+.dark .m-note-foot {
+  background: linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0.55) 50%, transparent);
+}
+
+/* Audio footer */
+.m-audiofooter {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 45;
+  backdrop-filter: blur(8px);
+  background: color-mix(in oklab, var(--primary) 10%, var(--background));
+  border-top: 1px solid var(--surface-strong);
+  box-shadow: 0 -1px 2px rgba(27,58,75,0.06), 0 -1px 1px rgba(27,58,75,0.04);
+}
+.dark .m-audiofooter { background: color-mix(in oklab, var(--primary) 18%, var(--background)); }
+@supports (padding: env(safe-area-inset-bottom)) {
+  .m-audiofooter { padding-bottom: calc(env(safe-area-inset-bottom)); }
+}
+
+@media (max-width: 640px) {
+  .m-dialog { max-width: 100%; max-height: 92dvh; }
+  .m-dialog-body { padding: 0.75rem; }
+  .m-embed-container { height: 70dvh; }
+}

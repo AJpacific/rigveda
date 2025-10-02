@@ -85,14 +85,13 @@ export default function SearchClient() {
 
   return (
     <div className="space-y-6">
-      <nav className="m-card m-elevation-1 p-3 sm:p-4 grid grid-cols-3 items-center">
-        <Link href="/" className="m-btn m-btn-text text-lg justify-self-start"><FontAwesomeIcon icon={faHome} /> Home</Link>
-        <h2 className="text-lg sm:text-xl font-semibold justify-self-center text-center">Ask AI</h2>
-        <span className="justify-self-end" />
-      </nav>
+      <div className="m-card m-elevation-1 p-4 sm:p-5 space-y-4">
+        <div className="grid grid-cols-3 items-center">
+          <Link href="/" className="m-btn m-btn-text text-base sm:text-lg justify-self-start"><FontAwesomeIcon icon={faHome} /> Home</Link>
+          <h2 className="text-lg sm:text-xl font-semibold justify-self-center text-center">Ask AI</h2>
+          <span className="justify-self-end" />
+        </div>
 
-      <div className="m-card m-elevation-1 p-4 sm:p-5 space-y-3">
-        <div className="text-sm text-primary uppercase tracking-wide">Ask a question about the Rigveda</div>
         <div className="relative">
           <input
             type="text"
@@ -111,28 +110,30 @@ export default function SearchClient() {
             </button>
           </div>
         </div>
-        <p className="text-xs text-muted">Press Enter to ask AI. Use the box again for follow-ups.</p>
-      </div>
+        
 
-      <div ref={listRef} className="m-card m-elevation-1 p-3 sm:p-4 space-y-3 max-h-[55vh] sm:max-h-[60vh] overflow-auto">
-        {history.length === 0 && <div className="text-sm text-muted">Start by asking a question above.</div>}
-        {history.map((m, i) => (
-          <div key={i} className={`${m.role === 'user' ? 'text-primary' : ''}`}>
-            <div className="text-xs sm:text-sm uppercase tracking-wide mb-1">{m.role === 'user' ? 'You' : 'AI'}</div>
-            {m.role === 'assistant' ? (
-              <div className="prose max-w-none text-sm sm:text-base">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown>
-              </div>
-            ) : (
-              <div className="whitespace-pre-line text-sm sm:text-base">{m.content}</div>
-            )}
-          </div>
-        ))}
-        {chatLoading && <div className="text-sm text-muted">Thinking…</div>}
-        {chatError && <div className="text-sm" style={{color:'#b3261e'}}>{chatError}</div>}
-        {!!chatRefs.length && (
-          <div className="text-xs text-muted">Refs: {chatRefs.map(r => `${r.mandala}.${r.sukta}.${r.verse}`).join(', ')}</div>
-        )}
+        <div className="m-divider" />
+
+        <div ref={listRef} className="space-y-3 max-h-[55vh] sm:max-h-[60vh] overflow-auto">
+          {history.length === 0 }
+          {history.map((m, i) => (
+            <div key={i} className={`${m.role === 'user' ? 'text-primary' : ''}`}>
+              <div className="text-xs sm:text-sm uppercase tracking-wide mb-1">{m.role === 'user' ? 'You' : 'AI'}</div>
+              {m.role === 'assistant' ? (
+                <div className="prose max-w-none text-sm sm:text-base">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown>
+                </div>
+              ) : (
+                <div className="whitespace-pre-line text-sm sm:text-base">{m.content}</div>
+              )}
+            </div>
+          ))}
+          {chatLoading && <div className="text-sm text-muted">Thinking…</div>}
+          {chatError && <div className="text-sm" style={{color:'#b3261e'}}>{chatError}</div>}
+          {!!chatRefs.length && (
+            <div className="text-xs text-muted">Refs: {chatRefs.map(r => `${r.mandala}.${r.sukta}.${r.verse}`).join(', ')}</div>
+          )}
+        </div>
       </div>
     </div>
   );
