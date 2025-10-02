@@ -44,6 +44,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   const dictContainerRef = useRef<HTMLDivElement | null>(null);
   const [dictScale, setDictScale] = useState(1);
   const [dictWrapperHeight, setDictWrapperHeight] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Dispatch hymn metadata to global header
   useEffect(() => {
@@ -153,6 +154,8 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
     const updateScale = () => {
       const container = dictContainerRef.current;
       if (!container) return;
+      const mobile = window.matchMedia('(max-width: 640px)').matches;
+      setIsMobile(mobile);
       const baseWidth = 1024; // assumed desktop layout width of external site
       const width = container.clientWidth || baseWidth;
       const height = container.clientHeight || 800;
@@ -417,9 +420,13 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             <div className="m-dialog-body">
               {dictUrl ? (
                 <div className="m-embed-container" ref={dictContainerRef}>
-                  <div style={{ width: '1024px', height: dictWrapperHeight ? `${dictWrapperHeight}px` : '800px', transform: `scale(${dictScale})`, transformOrigin: 'top left' }}>
+                  {isMobile ? (
                     <iframe className="embedded-frame" src={dictUrl} title="Dictionary" />
-                  </div>
+                  ) : (
+                    <div style={{ width: '1024px', height: dictWrapperHeight ? `${dictWrapperHeight}px` : '800px', transform: `scale(${dictScale})`, transformOrigin: 'top left' }}>
+                      <iframe className="embedded-frame" src={dictUrl} title="Dictionary" />
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="text-sm text-muted">Loading…</div>

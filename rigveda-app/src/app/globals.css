@@ -257,6 +257,11 @@ a:hover { color: var(--primary); }
 .m-dialog-body { padding: 0.9rem 1rem; overflow: auto; flex: 1 1 auto; -webkit-overflow-scrolling: touch; }
 .m-dialog-footer { padding: 0.9rem 1rem; border-top: 1px solid var(--surface-strong); }
 
+/* Plain dialog variant (no section borders) */
+.m-dialog-plain .m-dialog-header { border-bottom: none; padding-bottom: 0; }
+.m-dialog-plain .m-dialog-footer { border-top: none; padding-top: 0; }
+.m-dialog-plain .m-dialog-body { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+
 /* Dividers */
 .m-divider { height: 1px; background: var(--surface-strong); width: 100%; }
 
@@ -292,6 +297,17 @@ html.no-scroll, body.no-scroll { overflow: hidden; overscroll-behavior: contain;
   background: white;
   display: block;
 }
+
+/* Enable pinch-zoom on embedded external pages only */
+.m-embed-container { touch-action: pinch-zoom; }
+.m-dialog-body { touch-action: none; }
+
+/* Improve zoom isolation for embedded popups */
+.m-dialog-overlay { touch-action: none; }
+.m-dialog { touch-action: none; }
+.m-dialog-body { touch-action: none; }
+/* Only the embedded content can pinch-zoom */
+.m-embed-container { touch-action: pinch-zoom; }
 
 /* Sticky note footer (keeps helper text visible) */
 .m-note-foot {

@@ -105,29 +105,13 @@ export default function GlobalHeader() {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    const isClearButton = (el: HTMLElement | null) => {
-      if (!el) return false;
-      const aria = (el.getAttribute('aria-label') || '').toLowerCase();
-      const title = (el.getAttribute('title') || '').toLowerCase();
-      return el.classList.contains('gsc-clear-button') || aria.includes('clear') || title.includes('clear');
-    };
-
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
-      // Handle clear button clicks
       let el: HTMLElement | null = target;
-      while (el && el !== container && !isClearButton(el) && el.tagName !== 'A') {
+      while (el && el !== container && el.tagName !== 'A') {
         el = el.parentElement as HTMLElement | null;
       }
       if (!el || el === container) return;
-
-      if (isClearButton(el)) {
-        // Let CSE clear first, then reinit to avoid blank state
-        setTimeout(() => { if (!detailUrl) { forceReinitCse(); } }, 0);
-        return;
-      }
-
-      // Handle result link clicks (open in preview)
       if (el.tagName === 'A') {
         const anchor = el as HTMLAnchorElement;
         const href = anchor.getAttribute('href');
@@ -138,23 +122,11 @@ export default function GlobalHeader() {
       }
     };
 
-    const onInput = (e: Event) => {
-      const t = e.target as HTMLInputElement | null;
-      if (!t) return;
-      const cls = (t.className || '').toString();
-      // CSE input tends to have class gsc-input
-      if (cls.includes('gsc-input') && t.value.trim() === '' && !detailUrl) {
-        setTimeout(() => forceReinitCse(), 0);
-      }
-    };
-
     container.addEventListener('click', onClick, true);
-    container.addEventListener('input', onInput, true);
     return () => {
       container.removeEventListener('click', onClick, true);
-      container.removeEventListener('input', onInput, true);
     };
-  }, [searchOpen, cseReady, detailUrl]);
+  }, [searchOpen, cseReady]);
 
   // Lock/unlock page scroll when dialog is open
   useEffect(() => {
@@ -191,11 +163,11 @@ export default function GlobalHeader() {
         <nav className="flex items-center gap-1 sm:gap-2">
           <button onClick={() => { setSearchOpen(true); setDetailUrl(null); }} className="m-btn m-btn-outlined text-xs sm:text-sm" aria-label="Search Google">
             <FontAwesomeIcon icon={faSearch} className="sm:mr-2" />
-            <span className="hidden sm:inline">Search</span>
+            <span className="ml-2">Search</span>
           </button>
           <Link href="/search" className="m-btn m-btn-outlined text-xs sm:text-sm" aria-label="Ask AI" onClick={(e) => { e.preventDefault(); setAskInitial(undefined); setAskOpen(true); }}>
             <FontAwesomeIcon icon={faRobot} className="sm:mr-2" />
-            <span className="hidden sm:inline">Ask AI</span>
+            <span className="ml-2">Ask AI</span>
           </Link>
         </nav>
       </div>
@@ -264,7 +236,7 @@ export default function GlobalHeader() {
 
       {searchOpen && (
         <div className="m-dialog-overlay" role="dialog" aria-modal="true">
-          <div className="m-dialog wide">
+          <div className="m-dialog wide m-dialog-plain">
             <div className="m-dialog-header">
               <div className="text-sm uppercase tracking-wide text-muted">{detailUrl ? 'Preview' : 'Search'}</div>
               <div className="flex items-center gap-2">
@@ -307,7 +279,6 @@ export default function GlobalHeader() {
           onClose={() => setAskOpen(false)}
           initialQuestion={askInitial}
           title={hymnMeta ? `Ask AI · Hymn ${hymnMeta.sukta}` : 'Ask AI'}
-          contextPrefix={hymnMeta ? `Mandala ${hymnMeta.mandala}, Hymn ${hymnMeta.sukta}: ${hymnMeta.title}\n` : ''}
         />
       )}
     </>

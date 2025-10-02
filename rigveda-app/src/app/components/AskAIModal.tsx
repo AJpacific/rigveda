@@ -90,15 +90,12 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
 
   return (
     <div className="m-dialog-overlay" role="dialog" aria-modal="true">
-      <div className="m-dialog wide">
+      <div className="m-dialog wide m-dialog-plain">
         <div className="m-dialog-header">
           <div className="text-sm uppercase tracking-wide text-muted">{title}</div>
           <button onClick={onClose} className="icon-btn" aria-label="Close">×</button>
         </div>
         <div ref={listRef} className="m-dialog-body space-y-3">
-          {chatHistory.length === 0 && !chatLoading && !chatError && (
-            <div className="text-sm text-muted">Type a question below to get started.</div>
-          )}
           {chatHistory.map((m, idx) => (
             <div key={idx} className="space-y-1">
               <div className="text-sm uppercase tracking-wide mb-1 text-primary font-semibold">{m.role === 'user' ? 'You' : 'AI'}</div>
