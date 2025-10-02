@@ -1,9 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
-import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faBars, faStop, faHourglass, faArrowRight, faHome, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faStop, faHourglass, faPlay } from '@fortawesome/free-solid-svg-icons';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import type { Hymn, Verse, SanskritToken, SanskritSepToken, SanskritWordToken } from '../../../types/rigveda';

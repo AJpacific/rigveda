@@ -1,12 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
 import AskAIModal from './components/AskAIModal';
 
 export default function Home() {
-  const router = useRouter();
   const [query, setQuery] = useState('');
   const [askOpen, setAskOpen] = useState(false);
   const [askInitial, setAskInitial] = useState<string | undefined>(undefined);

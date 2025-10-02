@@ -18,6 +18,14 @@ type HymnHeaderMeta = {
   nextPath: string | null;
 } | null;
 
+type GoogleCSEElement = {
+  render: (opts: { div: string; tag: 'search' | string }) => void;
+};
+
+type GoogleCSE = {
+  search?: { cse?: { element?: GoogleCSEElement } };
+};
+
 export default function GlobalHeader() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [cseReady, setCseReady] = useState(false);
@@ -31,8 +39,8 @@ export default function GlobalHeader() {
   useEffect(() => {
     const onMeta = (e: Event) => {
       try {
-        const ce = e as CustomEvent;
-        setHymnMeta((ce.detail as HymnHeaderMeta) ?? null);
+        const ce = e as CustomEvent<HymnHeaderMeta>;
+        setHymnMeta(ce.detail ?? null);
       } catch {
         setHymnMeta(null);
       }
@@ -47,7 +55,8 @@ export default function GlobalHeader() {
     const existing = document.querySelector(`script[src="${CSE_SRC}"]`) as HTMLScriptElement | null;
     const markReady = () => setCseReady(true);
     if (existing) {
-      if ((window as any).google?.search?.cse?.element) {
+      const googleObj = (window as unknown as { google?: GoogleCSE }).google;
+      if (googleObj?.search?.cse?.element) {
         setCseReady(true);
       } else {
         existing.addEventListener('load', markReady, { once: true });
@@ -66,7 +75,7 @@ export default function GlobalHeader() {
     try {
       const container = document.getElementById(containerId);
       const hasControl = !!container?.querySelector('.gsc-control-cse');
-      const googleObj = (window as any).google;
+      const googleObj = (window as unknown as { google?: GoogleCSE }).google;
       if (container && !hasControl && googleObj?.search?.cse?.element?.render) {
         googleObj.search.cse.element.render({ div: containerId, tag: 'search' });
       }
@@ -77,7 +86,7 @@ export default function GlobalHeader() {
   const forceReinitCse = () => {
     try {
       const container = document.getElementById(containerId);
-      const googleObj = (window as any).google;
+      const googleObj = (window as unknown as { google?: GoogleCSE }).google;
       if (!container || !googleObj?.search?.cse?.element?.render) return;
       container.innerHTML = '';
       googleObj.search.cse.element.render({ div: containerId, tag: 'search' });
