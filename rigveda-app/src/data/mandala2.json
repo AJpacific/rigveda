@@ -3966,39 +3966,50 @@
         {
           "number": "2.2.13",
           "sanskrit": [
-            {
-              "word": "ये",
-              "translit": "ye"
-            },
-            {
-              "word": "सतोत्र्भ्यो",
-              "translit": "stotṛbhyo"
-            },
-            {
-              "word": "...",
-              "translit": "..."
-            }
+            { "word": "ये", "translit": "ye" },
+            { "word": "स्तोतृभ्यो", "translit": "stotṛbhyo" },
+            { "word": "गोअग्राम", "translit": "goagrām" },
+            { "word": "अश्वपेशसम", "translit": "aśvapeśasam" },
+            { "word": "अग्ने", "translit": "agne" },
+            { "word": "रातिमुपसृजन्ति", "translit": "rātimupasṛjanti" },
+            { "word": "सूरयः", "translit": "sūrayaḥ" },
+            { "word": "अस्माञ्च", "translit": "asmāñca" },
+            { "word": "ताँश्च", "translit": "tām̐śca" },
+            { "word": "प्र", "translit": "pra" },
+            { "word": "हि", "translit": "hi" },
+            { "word": "नेषि", "translit": "neṣi" },
+            { "word": "वस्य", "translit": "vasya" },
+            { "word": "आ", "translit": "ā" },
+            { "word": "बृहद्वदेम", "translit": "bṛhadvadema" },
+            { "word": "विदथे", "translit": "vidathe" },
+            { "word": "सुवीराः", "translit": "suvīrāḥ" }
           ],
           "sanskrit_lines": [
             [
-              {
-                "word": "ये",
-                "translit": "ye"
-              },
-              {
-                "word": "सतोत्र्भ्यो",
-                "translit": "stotṛbhyo"
-              },
-              {
-                "word": "...",
-                "translit": "..."
-              },
-              {
-                "sep": "||"
-              }
+              { "word": "ये", "translit": "ye" },
+              { "word": "स्तोतृभ्यो", "translit": "stotṛbhyo" },
+              { "word": "गोअग्राम", "translit": "goagrām" },
+              { "word": "अश्वपेशसम", "translit": "aśvapeśasam" },
+              { "word": "अग्ने", "translit": "agne" },
+              { "word": "रातिमुपसृजन्ति", "translit": "rātimupasṛjanti" },
+              { "word": "सूरयः", "translit": "sūrayaḥ" },
+              { "sep": "|" }
+            ],
+            [
+              { "word": "अस्माञ्च", "translit": "asmāñca" },
+              { "word": "ताँश्च", "translit": "tām̐śca" },
+              { "word": "प्र", "translit": "pra" },
+              { "word": "हि", "translit": "hi" },
+              { "word": "नेषि", "translit": "neṣi" },
+              { "word": "वस्य", "translit": "vasya" },
+              { "word": "आ", "translit": "ā" },
+              { "word": "बृहद्वदेम", "translit": "bṛhadvadema" },
+              { "word": "विदथे", "translit": "vidathe" },
+              { "word": "सुवीराः", "translit": "suvīrāḥ" },
+              { "sep": "||" }
             ]
           ],
-          "translation": "The princely worshippers who send to those who sing thy praise, O Agni, guerdon, graced with kine and steeds,— \n Lead thou both these and us forward to higher bliss. With brave men in the assembly may we speak aloud."
+          "translation": "The pious are they who present, as a gift, to the reciters of your praises, an excellent cow and an elegant horse; do you, Agni, lead us and them to the best of abodes, (or heaven), that we and our worthy descendants may repeat the solemn prayer to you at the sacrifice."
         }
       ],
       "prev": "/2/1.html",
