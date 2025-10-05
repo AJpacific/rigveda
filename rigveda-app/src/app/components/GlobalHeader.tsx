@@ -20,6 +20,7 @@ type HymnHeaderMeta = {
 
 type GoogleCSEElement = {
   render: (opts: { div: string; tag: 'search' | string }) => void;
+  getAllElements?: () => { execute?: (query: string) => void }[];
 };
 
 type GoogleCSE = {
@@ -83,16 +84,7 @@ export default function GlobalHeader() {
     } catch {}
   };
 
-  // Force re-init helper: clear container and re-render
-  const forceReinitCse = () => {
-    try {
-      const container = document.getElementById(containerId);
-      const googleObj = (window as unknown as { google?: GoogleCSE }).google;
-      if (!container || !googleObj?.search?.cse?.element?.render) return;
-      container.innerHTML = '';
-      googleObj.search.cse.element.render({ div: containerId, tag: 'search' });
-    } catch {}
-  };
+  // (forceReinitCse removed; no longer needed)
 
   // Render search UI into container when modal opens and CSE is ready
   useEffect(() => {
@@ -170,16 +162,16 @@ export default function GlobalHeader() {
         const hasInput = !!input;
         const isEmpty = container.innerHTML.trim().length === 0;
         const hasResults = !!container.querySelector('.gsc-result, .gs-result, .gsc-webResult');
-        const googleObj = (window as unknown as { google?: GoogleCSE } & any).google as any;
+        const googleObj = (window as unknown as { google?: GoogleCSE }).google;
         // Rebuild if control missing OR input missing (blank UI)
         if ((!hasControl || !hasInput || isEmpty) && googleObj?.search?.cse?.element?.render) {
           container.innerHTML = '';
           googleObj.search.cse.element.render({ div: containerId, tag: 'search' });
         } else {
           // If results went blank unexpectedly, re-execute last query but keep input blank afterward
-          if (!hasResults && lastQueryRef.current && googleObj?.search?.cse?.element?.getAllElements) {
-            const all = googleObj.search.cse.element.getAllElements();
-            if (Array.isArray(all) && all[0]?.execute) {
+          if (!hasResults && lastQueryRef.current) {
+            const all = googleObj?.search?.cse?.element?.getAllElements?.();
+            if (Array.isArray(all) && typeof all[0]?.execute === 'function') {
               all[0].execute(lastQueryRef.current);
               setTimeout(() => { if (input) input.value = ''; }, 120);
             }
