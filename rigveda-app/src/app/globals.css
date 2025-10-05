@@ -271,6 +271,21 @@ a:hover { color: var(--primary); }
 .text-primary { color: var(--primary); }
 .bg-surface { background: var(--surface); }
 
+/* Sanskrit token hover highlight */
+.sanskrit-token {
+  border-radius: 0.4rem;
+  padding: 0.1rem 0.25rem;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+.sanskrit-token:hover {
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--surface-strong);
+}
+.sanskrit-token:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--primary) 35%, transparent);
+}
+
 /* Scroll lock helper when modal open */
 html.no-scroll, body.no-scroll { overflow: hidden; overscroll-behavior: contain; }
 

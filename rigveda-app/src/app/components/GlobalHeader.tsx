@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faUpRightFromSquare, faBars, faHome, faArrowRight, faSearch, faRobot } from '@fortawesome/free-solid-svg-icons';
 import AskAIModal from './AskAIModal';
@@ -34,6 +34,7 @@ export default function GlobalHeader() {
   const [askOpen, setAskOpen] = useState(false);
   const [askInitial, setAskInitial] = useState<string | undefined>(undefined);
   const containerId = 'gcse-search-container';
+  const lastQueryRef = useRef<string>('');
 
   // Listen for hymn metadata from hymn pages
   useEffect(() => {
@@ -107,6 +108,24 @@ export default function GlobalHeader() {
 
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
+
+      // If Google UI "Clear" button was clicked, prevent it from wiping results.
+      // We only clear the input's visible value and keep existing results.
+      const inputEl = container.querySelector('input.gsc-input') as HTMLInputElement | null;
+      if (target && (target.closest('.gsc-clear-button') || target.closest('.gscb_a'))) {
+        try {
+          e.preventDefault();
+          e.stopPropagation();
+        } catch {}
+        if (inputEl) {
+          inputEl.value = '';
+          // Do not dispatch input events to avoid triggering a new search
+          inputEl.focus();
+        }
+        return;
+      }
+
+      // Intercept result links to open preview
       let el: HTMLElement | null = target;
       while (el && el !== container && el.tagName !== 'A') {
         el = el.parentElement as HTMLElement | null;
@@ -123,9 +142,62 @@ export default function GlobalHeader() {
     };
 
     container.addEventListener('click', onClick, true);
+    // Track last non-empty query so we can restore results if CSE blanks them
+    const input = container.querySelector('input.gsc-input') as HTMLInputElement | null;
+    const onInput = () => {
+      try {
+        const v = (input?.value || '').trim();
+        if (v) lastQueryRef.current = v;
+      } catch {}
+    };
+    input?.addEventListener('input', onInput, true);
     return () => {
       container.removeEventListener('click', onClick, true);
+      input?.removeEventListener('input', onInput, true);
     };
+  }, [searchOpen, cseReady]);
+
+  // Ensure CSE UI persists and avoid blank state after clear
+  useEffect(() => {
+    if (!searchOpen || !cseReady) return;
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const ensureControl = () => {
+      try {
+        const hasControl = !!container.querySelector('.gsc-control-cse');
+        const input = container.querySelector('input.gsc-input') as HTMLInputElement | null;
+        const hasInput = !!input;
+        const isEmpty = container.innerHTML.trim().length === 0;
+        const hasResults = !!container.querySelector('.gsc-result, .gs-result, .gsc-webResult');
+        const googleObj = (window as unknown as { google?: GoogleCSE } & any).google as any;
+        // Rebuild if control missing OR input missing (blank UI)
+        if ((!hasControl || !hasInput || isEmpty) && googleObj?.search?.cse?.element?.render) {
+          container.innerHTML = '';
+          googleObj.search.cse.element.render({ div: containerId, tag: 'search' });
+        } else {
+          // If results went blank unexpectedly, re-execute last query but keep input blank afterward
+          if (!hasResults && lastQueryRef.current && googleObj?.search?.cse?.element?.getAllElements) {
+            const all = googleObj.search.cse.element.getAllElements();
+            if (Array.isArray(all) && all[0]?.execute) {
+              all[0].execute(lastQueryRef.current);
+              setTimeout(() => { if (input) input.value = ''; }, 120);
+            }
+          }
+        }
+        // Ensure container visible
+        (container as HTMLElement).style.display = '';
+      } catch {}
+    };
+
+    // Initial check in case the UI was cleared before opening
+    ensureControl();
+
+    const observer = new MutationObserver(() => {
+      ensureControl();
+    });
+    observer.observe(container, { childList: true, subtree: true });
+    return () => observer.disconnect();
   }, [searchOpen, cseReady]);
 
   // Lock/unlock page scroll when dialog is open
@@ -273,14 +345,12 @@ export default function GlobalHeader() {
         </div>
       )}
 
-      {askOpen && (
-        <AskAIModal
-          open={askOpen}
-          onClose={() => setAskOpen(false)}
-          initialQuestion={askInitial}
-          title={hymnMeta ? `Ask AI · Hymn ${hymnMeta.sukta}` : 'Ask AI'}
-        />
-      )}
+      <AskAIModal
+        open={askOpen}
+        onClose={() => setAskOpen(false)}
+        initialQuestion={askInitial}
+        title={hymnMeta ? `Ask AI` : 'Ask AI'}
+      />
     </>
   );
 }

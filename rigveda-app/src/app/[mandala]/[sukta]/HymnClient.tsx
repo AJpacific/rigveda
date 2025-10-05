@@ -342,12 +342,12 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                 <div key={li} className={isFirst ? 'flex flex-wrap items-start gap-x-2 gap-y-1 sm:gap-x-3 sm:gap-y-2' : 'flex flex-wrap items-start gap-x-3 gap-y-2'}>
                   {line.map((w: SanskritToken, wi: number) => (
                     isSepToken(w) ? (
-                      <div key={`sep-${li}-${wi}`} className="text-center">
+                      <div key={`sep-${li}-${wi}`} className="text-center sanskrit-token">
                         <div className={isFirst ? 'text-[1.05rem] sm:text-[1.25rem] leading-tight text-accent' : 'text-[1.25rem] leading-tight text-accent'}>{w.sep}</div>
                         <div className="text-[13px] text-transparent select-none">.</div>
                       </div>
                     ) : (
-                      <button key={wi} onClick={() => openDictionary((w as SanskritWordToken).word)} className="text-center">
+                      <button key={wi} onClick={() => openDictionary((w as SanskritWordToken).word)} className="text-center sanskrit-token">
                         <div className={isFirst ? 'text-[1.05rem] sm:text-[1.25rem] leading-tight text-accent' : 'text-[1.25rem] leading-tight text-accent'}>{(w as SanskritWordToken).word}</div>
                         {(w as SanskritWordToken).translit && <div className="text-[13px] text-muted">{(w as SanskritWordToken).translit}</div>}
                       </button>
