@@ -171,7 +171,7 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
             />
           </div>
           <div className="mt-2 text-right">
-            <button onClick={() => void askChat()} className="m-btn m-btn-filled">
+            <button onClick={() => void askChat()} className="m-btn m-btn-filled text-sm">
               Ask
             </button>
           </div>

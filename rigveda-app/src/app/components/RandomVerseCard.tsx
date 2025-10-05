@@ -82,11 +82,11 @@ export default function RandomVerseCard() {
           )}
         </div>
         <div className="flex items-center gap-1 sm:gap-2">
-          <button className="m-btn m-btn-filled text-xs sm:text-sm" onClick={() => setAskOpen(true)} disabled={!data} aria-label="Ask AI">
+          <button className="m-btn m-btn-filled text-sm" onClick={() => setAskOpen(true)} disabled={!data} aria-label="Ask AI">
             <FontAwesomeIcon icon={faRobot} />
             <span className="hidden sm:inline ml-2">Ask AI</span>
           </button>
-          <button className="m-btn m-btn-outlined text-xs sm:text-sm" onClick={() => void fetchVerse()} disabled={loading} aria-label={loading ? 'Refreshing' : 'Refresh'}>
+          <button className="m-btn m-btn-outlined text-sm" onClick={() => void fetchVerse()} disabled={loading} aria-label={loading ? 'Refreshing' : 'Refresh'}>
             <FontAwesomeIcon icon={faRotateRight} />
             <span className="hidden sm:inline ml-2">{loading ? 'Refreshing…' : 'Refresh'}</span>
           </button>

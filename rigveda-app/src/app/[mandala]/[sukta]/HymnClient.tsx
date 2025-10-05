@@ -327,7 +327,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             <div className="flex justify-end">
               <button
                 onClick={() => startChatForVerse(verse)}
-                className="m-btn m-btn-outlined text-xs sm:absolute sm:top-2 sm:right-2"
+                className="m-btn m-btn-outlined text-sm sm:absolute sm:top-2 sm:right-2"
                 aria-label="Ask AI about this verse"
               >
                 Ask AI
@@ -451,7 +451,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
           <div className="flex items-center gap-2">
             <button
               onClick={toggleAudio}
-              className="m-btn m-btn-outlined text-xs sm:text-sm min-w-[2.5rem] sm:min-w-[6rem]"
+              className="m-btn m-btn-outlined text-sm min-w-[2.5rem] sm:min-w-[6rem]"
               disabled={audioState === 'loading'}
               aria-label={audioButtonLabel}
             >

@@ -87,7 +87,7 @@ export default function SearchClient() {
     <div className="space-y-6">
       <div className="m-card m-elevation-1 p-4 sm:p-5 space-y-4">
         <div className="grid grid-cols-3 items-center">
-          <Link href="/" className="m-btn m-btn-text text-base sm:text-lg justify-self-start"><FontAwesomeIcon icon={faHome} /> Home</Link>
+          <Link href="/" className="m-btn m-btn-text text-sm justify-self-start"><FontAwesomeIcon icon={faHome} /> Home</Link>
           <h2 className="text-lg sm:text-xl font-semibold justify-self-center text-center">Ask AI</h2>
           <span className="justify-self-end" />
         </div>

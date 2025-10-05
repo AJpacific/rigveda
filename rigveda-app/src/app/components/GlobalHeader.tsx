@@ -225,11 +225,11 @@ export default function GlobalHeader() {
       <div className="container mx-auto px-4 m-appbar-inner">
         <Link href="/" className="m-appbar-title text-lg sm:text-xl">Rig Veda</Link>
         <nav className="flex items-center gap-1 sm:gap-2">
-          <button onClick={() => { setSearchOpen(true); setDetailUrl(null); }} className="m-btn m-btn-outlined text-xs sm:text-sm" aria-label="Search Google">
+          <button onClick={() => { setSearchOpen(true); setDetailUrl(null); }} className="m-btn m-btn-outlined text-sm" aria-label="Search Google">
             <FontAwesomeIcon icon={faSearch} className="sm:mr-2" />
             <span className="ml-2">Search</span>
           </button>
-          <Link href="/search" className="m-btn m-btn-outlined text-xs sm:text-sm" aria-label="Ask AI" onClick={(e) => { e.preventDefault(); setAskInitial(undefined); setAskOpen(true); }}>
+          <Link href="/search" className="m-btn m-btn-outlined text-sm" aria-label="Ask AI" onClick={(e) => { e.preventDefault(); setAskInitial(undefined); setAskOpen(true); }}>
             <FontAwesomeIcon icon={faRobot} className="sm:mr-2" />
             <span className="ml-2">Ask AI</span>
           </Link>
@@ -242,11 +242,11 @@ export default function GlobalHeader() {
     <header className="m-appbar">
       <div className="container mx-auto px-4 m-appbar-inner" style={{ display: 'grid', gridTemplateColumns: 'auto 1fr auto', alignItems: 'center', gap: '8px' }}>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-1 sm:gap-2 justify-self-start">
-          <Link href="/" className="m-btn m-btn-outlined text-xs sm:text-sm" aria-label="Home">
+          <Link href="/" className="m-btn m-btn-outlined text-sm" aria-label="Home">
             <FontAwesomeIcon icon={faHome} />
             <span className="hidden sm:inline ml-2">Home</span>
           </Link>
-          <Link href={`/${meta.mandala}`} className="m-btn m-btn-outlined text-xs sm:text-sm" aria-label="Mandala index">
+          <Link href={`/${meta.mandala}`} className="m-btn m-btn-outlined text-sm" aria-label="Mandala index">
             <FontAwesomeIcon icon={faBars} />
             <span className="hidden sm:inline ml-2">Index</span>
           </Link>
@@ -263,29 +263,29 @@ export default function GlobalHeader() {
         </div>
 
         <div className="grid grid-cols-2 gap-1 sm:flex sm:items-center sm:gap-2 text-sm justify-self-end">
-          <button onClick={() => { setSearchOpen(true); setDetailUrl(null); }} className="m-btn m-btn-outlined text-xs sm:text-sm" aria-label="Search Google">
+          <button onClick={() => { setSearchOpen(true); setDetailUrl(null); }} className="m-btn m-btn-outlined text-sm" aria-label="Search Google">
             <FontAwesomeIcon icon={faSearch} className="sm:mr-2" />
             <span className="hidden sm:inline">Search</span>
           </button>
-          <Link href="/search" className="m-btn m-btn-outlined text-xs sm:text-sm" aria-label="Ask AI" onClick={(e) => { e.preventDefault(); setAskInitial(undefined); setAskOpen(true); }}>
+          <Link href="/search" className="m-btn m-btn-outlined text-sm" aria-label="Ask AI" onClick={(e) => { e.preventDefault(); setAskInitial(undefined); setAskOpen(true); }}>
             <FontAwesomeIcon icon={faRobot} className="sm:mr-2" />
             <span className="hidden sm:inline">Ask AI</span>
           </Link>
           {meta.prevPath ? (
-            <Link href={meta.prevPath} className="m-btn m-btn-outlined" aria-label="Previous hymn">
+            <Link href={meta.prevPath} className="m-btn m-btn-outlined text-sm" aria-label="Previous hymn">
               <FontAwesomeIcon icon={faArrowLeft} />
             </Link>
           ) : (
-            <span className="m-btn m-btn-outlined" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
+            <span className="m-btn m-btn-outlined text-sm" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
               <FontAwesomeIcon icon={faArrowLeft} />
             </span>
           )}
           {meta.nextPath ? (
-            <Link href={meta.nextPath} className="m-btn m-btn-outlined" aria-label="Next hymn">
+            <Link href={meta.nextPath} className="m-btn m-btn-outlined text-sm" aria-label="Next hymn">
               <FontAwesomeIcon icon={faArrowRight} />
             </Link>
           ) : (
-            <span className="m-btn m-btn-outlined" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
+            <span className="m-btn m-btn-outlined text-sm" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
               <FontAwesomeIcon icon={faArrowRight} />
             </span>
           )}
