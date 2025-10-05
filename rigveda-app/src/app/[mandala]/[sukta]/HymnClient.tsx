@@ -367,7 +367,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
 
       {chatOpen && (
         <div className="m-dialog-overlay" role="dialog" aria-modal="true">
-          <div className="m-dialog">
+          <div className="m-dialog wide">
             <div className="m-dialog-header">
               <div className="text-sm uppercase tracking-wide text-muted">Ask AI · Verse {chatRef}</div>
               <button onClick={() => { setChatOpen(false); try { document.documentElement.classList.remove('no-scroll'); document.body.classList.remove('no-scroll'); } catch {} }} className="icon-btn" aria-label="Close">×</button>

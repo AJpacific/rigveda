@@ -3,6 +3,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import AskAIModal from './components/AskAIModal';
+import dynamic from 'next/dynamic';
+
+const RandomVerseCard = dynamic(() => import('./components/RandomVerseCard'), { ssr: false });
 
 export default function Home() {
   const [query, setQuery] = useState('');
@@ -65,6 +68,10 @@ export default function Home() {
             </Link>
           ))}
         </div>
+      </section>
+
+      <section>
+        <RandomVerseCard />
       </section>
 
       {askOpen && (
