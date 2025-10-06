@@ -74,9 +74,7 @@ export default function Home() {
         <RandomVerseCard />
       </section>
 
-      {askOpen && (
-        <AskAIModal open={askOpen} onClose={() => setAskOpen(false)} initialQuestion={askInitial} />
-      )}
+      <AskAIModal open={askOpen} onClose={() => setAskOpen(false)} initialQuestion={askInitial} />
     </div>
   );
 }
