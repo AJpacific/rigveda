@@ -99,18 +99,24 @@ export default function RandomVerseCard() {
       {data && !error && (
         <div className="space-y-3">
           {/* Devanagari Text with clickable words */}
-          <div className="text-[1.05rem] sm:text-[1.15rem] leading-tight text-accent">
-            {data.devanagari_text.split(' ').map((word, index) => (
-              <span key={index}>
-                <button 
-                  onClick={() => openDictionary(word.trim())} 
-                  className="hover:text-gray-700 hover:underline cursor-pointer"
-                >
-                  {word}
-                </button>
-                {index < data.devanagari_text.split(' ').length - 1 && ' '}
-              </span>
-            ))}
+          <div className="text-[1.05rem] sm:text-[1.15rem] leading-tight text-accent whitespace-pre-line">
+            {data.devanagari_text.split(/(\s+|\n)/).map((part, index) => {
+              if (part === '\n') {
+                return <br key={index} />;
+              } else if (part.trim() === '') {
+                return <span key={index}>{part}</span>;
+              } else {
+                return (
+                  <button 
+                    key={index}
+                    onClick={() => openDictionary(part.trim())} 
+                    className="hover:text-gray-700 hover:underline cursor-pointer"
+                  >
+                    {part}
+                  </button>
+                );
+              }
+            })}
           </div>
 
           

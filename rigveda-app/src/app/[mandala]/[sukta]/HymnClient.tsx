@@ -312,18 +312,24 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             
             {/* Devanagari Text with clickable words */}
             <div className="mb-3">
-              <div className={isFirst ? 'text-[1.05rem] sm:text-[1.25rem] leading-tight text-accent' : 'text-[1.25rem] leading-tight text-accent'}>
-                {verse.devanagari_text.split(' ').map((word, index) => (
-                  <span key={index}>
-                    <button 
-                      onClick={() => openDictionary(word.trim())} 
-                      className="hover:text-gray-700 hover:underline cursor-pointer"
-                    >
-                      {word}
-                    </button>
-                    {index < verse.devanagari_text.split(' ').length - 1 && ' '}
-                  </span>
-                ))}
+              <div className={`${isFirst ? 'text-[1.05rem] sm:text-[1.25rem] leading-tight text-accent' : 'text-[1.25rem] leading-tight text-accent'} whitespace-pre-line`}>
+                {verse.devanagari_text.split(/(\s+|\n)/).map((part, index) => {
+                  if (part === '\n') {
+                    return <br key={index} />;
+                  } else if (part.trim() === '') {
+                    return <span key={index}>{part}</span>;
+                  } else {
+                    return (
+                      <button 
+                        key={index}
+                        onClick={() => openDictionary(part.trim())} 
+                        className="hover:text-gray-700 hover:underline cursor-pointer"
+                      >
+                        {part}
+                      </button>
+                    );
+                  }
+                })}
               </div>
             </div>
             
