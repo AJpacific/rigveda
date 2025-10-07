@@ -312,7 +312,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             
             {/* Devanagari Text with clickable words */}
             <div className="mb-4">
-              <div className={`${isFirst ? 'text-[1.05rem] sm:text-[1.25rem] leading-loose text-accent' : 'text-[1.25rem] leading-loose text-accent'} whitespace-pre-line`}>
+              <div className={`${isFirst ? 'text-[1.05rem] sm:text-[1.15rem] leading-loose text-accent' : 'text-[1.25rem] leading-loose text-accent'} whitespace-pre-line`}>
                 {verse.devanagari_text.split(/(\s+|\n)/).map((part, index) => {
                   if (part === '\n') {
                     return <br key={index} className="mb-2" />;
@@ -335,7 +335,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             
             {/* Transliteration (increased font size) with clickable words */}
             <div className="mb-3">
-              <div className="text-[1.1rem] sm:text-[1.1rem] text-gray-500 font-light leading-relaxed">
+              <div className="text-[1rem] sm:text-[1.1rem] text-gray-500 font-light leading-relaxed">
                 {verse.padapatha_text.split(' ').map((word, index) => (
                   <span key={index}>
                     <button 

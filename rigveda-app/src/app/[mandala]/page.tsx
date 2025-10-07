@@ -22,7 +22,7 @@ export default async function MandalaPage({ params }: { params: Promise<{ mandal
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Mandala {mandala}</h1>
+      <h1 className="text-2xl font-bold">Mandala {mandala} ({mandalaData.hymns.length} hymns)</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {mandalaData.hymns.map((hymn: Hymn) => (
           <Link key={hymn.hymn_number} href={`/${mandala}/${hymn.hymn_number}`} className="group block">

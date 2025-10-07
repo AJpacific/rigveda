@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRobot, faRotateRight } from '@fortawesome/free-solid-svg-icons';
+import { faRobot, faRotateRight, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 import AskAIModal from './AskAIModal';
 
 
@@ -77,6 +78,12 @@ export default function RandomVerseCard() {
           )}
         </div>
         <div className="flex items-center gap-1 sm:gap-2">
+          {data && (
+            <Link href={`/${data.mandala}/${data.sukta}`} className="m-btn m-btn-outlined text-sm" aria-label="Go to Hymn">
+              <FontAwesomeIcon icon={faExternalLinkAlt} />
+              <span className="hidden sm:inline ml-2">Go to Hymn</span>
+            </Link>
+          )}
           <button className="m-btn m-btn-filled text-sm" onClick={() => setAskOpen(true)} disabled={!data} aria-label="Ask AI">
             <FontAwesomeIcon icon={faRobot} />
             <span className="hidden sm:inline ml-2">Ask AI</span>
@@ -120,7 +127,7 @@ export default function RandomVerseCard() {
           </div>
 
           
-          <div className="text-[1.1rem] sm:text-[1.1rem] text-gray-500 font-normal leading-relaxed">
+          <div className="text-[1rem] sm:text-[1.1rem] text-gray-500 font-normal leading-relaxed">
             {data.padapatha_text.split(' ').map((word, index) => (
               <span key={index}>
                 <button 
