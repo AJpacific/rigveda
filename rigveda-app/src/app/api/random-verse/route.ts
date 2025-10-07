@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
-import type { RigvedaData, Verse } from '../../../types/rigveda';
+import type { RigvedaData } from '../../../types/rigveda';
 
 export const dynamic = 'force-dynamic';
 

@@ -185,24 +185,15 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   const updateProgress = () => {
     const current = audio.currentTime;
     setCurrentTime(current);
-    if (Array.isArray(hymn.verseTimecodes) && hymn.verseTimecodes.length > 0) {
-      const times = hymn.verseTimecodes;
-      let idx = times.length - 1;
-      for (let i = 0; i < times.length; i++) {
-        if (current < times[i]) { idx = Math.max(0, i - 1); break; }
-      }
+    // Approximate verse index by proportion of total duration
+    const totalVerses = hymn.verses.length;
+    const totalDuration = audio.duration;
+    if (Number.isFinite(totalDuration) && totalDuration > 0 && totalVerses > 0) {
+      const ratio = Math.min(Math.max(current / totalDuration, 0), 1);
+      const idx = Math.min(totalVerses - 1, Math.floor(ratio * totalVerses));
       setCurrentVerseIndex(idx);
     } else {
-      // Fallback: approximate verse index by proportion of total duration
-      const totalVerses = hymn.verses.length;
-      const totalDuration = audio.duration;
-      if (Number.isFinite(totalDuration) && totalDuration > 0 && totalVerses > 0) {
-        const ratio = Math.min(Math.max(current / totalDuration, 0), 1);
-        const idx = Math.min(totalVerses - 1, Math.floor(ratio * totalVerses));
-        setCurrentVerseIndex(idx);
-      } else {
-        setCurrentVerseIndex(null);
-      }
+      setCurrentVerseIndex(null);
     }
   };
 
