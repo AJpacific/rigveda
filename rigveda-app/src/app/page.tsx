@@ -1,30 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
-import AskAIModal from './components/AskAIModal';
+import UniversalSearch from './components/UniversalSearch';
 import dynamic from 'next/dynamic';
 
 const RandomVerseCard = dynamic(() => import('./components/RandomVerseCard'), { ssr: false });
 
 export default function Home() {
-  const [query, setQuery] = useState('');
-  const [askOpen, setAskOpen] = useState(false);
-  const [askInitial, setAskInitial] = useState<string | undefined>(undefined);
-
-  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      setAskInitial(query.trim() || undefined);
-      setAskOpen(true);
-    }
-  };
-
-  const handleAskClick = () => {
-    const q = query.trim();
-    if (!q) return;
-    setAskInitial(q);
-    setAskOpen(true);
-  };
 
   return (
     <div className="space-y-10">
@@ -32,22 +14,7 @@ export default function Home() {
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">ऋग्वेद</h1>
         <p className="text-xl sm:text-2xl text-muted">THE RIGVEDA</p>
         <div className="max-w-2xl mx-auto">
-          <div className="m-field relative">
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={handleSearch}
-              className="m-input pr-24"
-              placeholder="Type your question..."
-            />
-            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-2">
-              <button onClick={handleAskClick} className="m-btn m-btn-filled text-sm" disabled={!query.trim()}>
-                Ask
-              </button>
-            </div>
-          </div>
-          
+          <UniversalSearch />
         </div>
       </section>
 
@@ -73,8 +40,6 @@ export default function Home() {
       <section>
         <RandomVerseCard />
       </section>
-
-      <AskAIModal open={askOpen} onClose={() => setAskOpen(false)} initialQuestion={askInitial} />
     </div>
   );
 }
