@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -434,7 +434,7 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
             {/* Results Content */}
             {results.length === 0 ? (
               <div className="p-4 text-left text-gray-500">
-                No results found for "{query}" in {activeFilter === 'all' ? 'all categories' : activeFilter}
+                No results found for &quot;{query}&quot; in {activeFilter === 'all' ? 'all categories' : activeFilter}
               </div>
             ) : (
               <div className="py-2">
