@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faUpRightFromSquare, faBars, faHome, faArrowRight, faSearch, faRobot } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faUpRightFromSquare, faBars, faHome, faArrowRight, faSearch, faRobot, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import AskAIModal from './AskAIModal';
 import UniversalSearch from './UniversalSearch';
 
@@ -46,6 +46,7 @@ export default function GlobalHeader() {
   const [askOpen, setAskOpen] = useState(false);
   const [askInitial, setAskInitial] = useState<string | undefined>(undefined);
   const [universalSearchOpen, setUniversalSearchOpen] = useState(false);
+  const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
   const containerId = 'gcse-search-container';
   const lastQueryRef = useRef<string>('');
 
@@ -219,6 +220,21 @@ export default function GlobalHeader() {
     };
   }, [searchOpen, universalSearchOpen]);
 
+  // Close search dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchDropdownOpen) {
+        const target = event.target as Element;
+        if (!target.closest('.search-dropdown-container')) {
+          setSearchDropdownOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [searchDropdownOpen]);
+
   // Measure header height for subappbars
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -237,18 +253,59 @@ export default function GlobalHeader() {
       <div className="container mx-auto px-4 m-appbar-inner">
         <Link href="/" className="m-appbar-title text-lg sm:text-xl">Rig Veda</Link>
         <nav className="flex items-center gap-1 sm:gap-2">
-          <button onClick={() => setUniversalSearchOpen(true)} className="m-btn m-btn-outlined text-sm" aria-label="Universal Search">
-            <FontAwesomeIcon icon={faSearch} />
-            <span className="hidden sm:inline ml-2">Search</span>
-          </button>
-          <button onClick={() => { setSearchOpen(true); setDetailUrl(null); }} className="m-btn m-btn-outlined text-sm" aria-label="Search Google">
-            <GoogleIcon />
-            <span className="hidden sm:inline ml-2">Google Search</span>
-          </button>
-          <Link href="/search" className="m-btn m-btn-outlined text-sm" aria-label="Ask AI" onClick={(e) => { e.preventDefault(); setAskInitial(undefined); setAskOpen(true); }}>
-            <FontAwesomeIcon icon={faRobot} />
-            <span className="hidden sm:inline ml-2">Ask AI</span>
-          </Link>
+          {/* Search Dropdown */}
+          <div className="relative search-dropdown-container">
+            <button 
+              onClick={() => setSearchDropdownOpen(!searchDropdownOpen)}
+              className="m-btn m-btn-outlined text-sm"
+              aria-label="Search Options"
+            >
+              <FontAwesomeIcon icon={faSearch} />
+              <span className="hidden sm:inline ml-2">Search</span>
+              <FontAwesomeIcon icon={faChevronDown} className="text-xs ml-1" />
+            </button>
+            
+            {searchDropdownOpen && (
+              <div className="absolute right-0 top-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50 min-w-48">
+                <div className="py-1">
+                  <button 
+                    onClick={() => {
+                      setUniversalSearchOpen(true);
+                      setSearchDropdownOpen(false);
+                    }}
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+                  >
+                    <FontAwesomeIcon icon={faSearch} />
+                    <span>Universal Search</span>
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setSearchOpen(true);
+                      setDetailUrl(null);
+                      setSearchDropdownOpen(false);
+                    }}
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+                  >
+                    <GoogleIcon />
+                    <span>Google Search</span>
+                  </button>
+                  <Link 
+                    href="/search" 
+                    onClick={(e) => { 
+                      e.preventDefault(); 
+                      setAskInitial(undefined); 
+                      setAskOpen(true); 
+                      setSearchDropdownOpen(false);
+                    }}
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2 block"
+                  >
+                    <FontAwesomeIcon icon={faRobot} />
+                    <span>Ask AI</span>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
         </nav>
       </div>
     </header>
@@ -278,40 +335,82 @@ export default function GlobalHeader() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-1 sm:flex sm:items-center sm:gap-2 text-sm justify-self-end">
-          <button onClick={() => {
-            console.log('Universal search button clicked');
-            setUniversalSearchOpen(true);
-          }} className="m-btn m-btn-outlined text-sm" aria-label="Universal Search">
-            <FontAwesomeIcon icon={faSearch} />
-            <span className="hidden sm:inline ml-2">Search</span>
-          </button>
-          <button onClick={() => { setSearchOpen(true); setDetailUrl(null); }} className="m-btn m-btn-outlined text-sm" aria-label="Search Google">
-            <GoogleIcon />
-            <span className="hidden sm:inline ml-2">Google Search</span>
-          </button>
-          <Link href="/search" className="m-btn m-btn-outlined text-sm" aria-label="Ask AI" onClick={(e) => { e.preventDefault(); setAskInitial(undefined); setAskOpen(true); }}>
-            <FontAwesomeIcon icon={faRobot} />
-            <span className="hidden sm:inline ml-2">Ask AI</span>
-          </Link>
-          {meta.prevPath ? (
-            <Link href={meta.prevPath} className="m-btn m-btn-outlined text-sm" aria-label="Previous hymn">
-              <FontAwesomeIcon icon={faArrowLeft} />
-            </Link>
-          ) : (
-            <span className="m-btn m-btn-outlined text-sm" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
-              <FontAwesomeIcon icon={faArrowLeft} />
-            </span>
-          )}
-          {meta.nextPath ? (
-            <Link href={meta.nextPath} className="m-btn m-btn-outlined text-sm" aria-label="Next hymn">
-              <FontAwesomeIcon icon={faArrowRight} />
-            </Link>
-          ) : (
-            <span className="m-btn m-btn-outlined text-sm" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
-              <FontAwesomeIcon icon={faArrowRight} />
-            </span>
-          )}
+        <div className="flex items-center gap-1 sm:gap-2 text-sm justify-self-end">
+          {/* Search Dropdown */}
+          <div className="relative search-dropdown-container">
+            <button 
+              onClick={() => setSearchDropdownOpen(!searchDropdownOpen)}
+              className="m-btn m-btn-outlined text-sm"
+              aria-label="Search Options"
+            >
+              <FontAwesomeIcon icon={faSearch} />
+              <span className="hidden sm:inline ml-2">Search</span>
+              <FontAwesomeIcon icon={faChevronDown} className="text-xs ml-1" />
+            </button>
+            
+            {searchDropdownOpen && (
+              <div className="absolute right-0 top-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50 min-w-48">
+                <div className="py-1">
+                  <button 
+                    onClick={() => {
+                      setUniversalSearchOpen(true);
+                      setSearchDropdownOpen(false);
+                    }}
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+                  >
+                    <FontAwesomeIcon icon={faSearch} />
+                    <span>Universal Search</span>
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setSearchOpen(true);
+                      setDetailUrl(null);
+                      setSearchDropdownOpen(false);
+                    }}
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+                  >
+                    <GoogleIcon />
+                    <span>Google Search</span>
+                  </button>
+                  <Link 
+                    href="/search" 
+                    onClick={(e) => { 
+                      e.preventDefault(); 
+                      setAskInitial(undefined); 
+                      setAskOpen(true); 
+                      setSearchDropdownOpen(false);
+                    }}
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2 block"
+                  >
+                    <FontAwesomeIcon icon={faRobot} />
+                    <span>Ask AI</span>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+          
+          {/* Navigation arrows - stacked vertically */}
+          <div className="flex flex-col gap-1 ml-2">
+            {meta.prevPath ? (
+              <Link href={meta.prevPath} className="m-btn m-btn-outlined text-sm" aria-label="Previous hymn">
+                <FontAwesomeIcon icon={faArrowLeft} />
+              </Link>
+            ) : (
+              <span className="m-btn m-btn-outlined text-sm" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
+                <FontAwesomeIcon icon={faArrowLeft} />
+              </span>
+            )}
+            {meta.nextPath ? (
+              <Link href={meta.nextPath} className="m-btn m-btn-outlined text-sm" aria-label="Next hymn">
+                <FontAwesomeIcon icon={faArrowRight} />
+              </Link>
+            ) : (
+              <span className="m-btn m-btn-outlined text-sm" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
+                <FontAwesomeIcon icon={faArrowRight} />
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </header>
@@ -325,10 +424,20 @@ export default function GlobalHeader() {
       {hymnMeta ? renderHymnHeader(hymnMeta) : renderDefault()}
 
       {searchOpen && (
-        <div className="m-dialog-overlay" role="dialog" aria-modal="true">
-          <div className="m-dialog wide m-dialog-plain">
+        <div 
+          className="m-dialog-overlay" 
+          role="dialog" 
+          aria-modal="true" 
+          style={{ overflow: 'visible', alignItems: 'flex-start', paddingTop: '80px' }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setSearchOpen(false);
+            }
+          }}
+        >
+          <div className="m-dialog m-dialog-plain max-w-2xl mx-auto" style={{ maxHeight: '80vh', overflow: 'visible', width: '100%' }}>
             <div className="m-dialog-header">
-              <div className="text-sm uppercase tracking-wide text-muted">{detailUrl ? 'Preview' : 'Search'}</div>
+              <div className="text-sm uppercase tracking-wide text-muted">{detailUrl ? 'Preview' : 'Google Search'}</div>
               <div className="flex items-center gap-2">
                 {detailUrl && (
                   <button onClick={() => setDetailUrl(null)} className="m-btn m-btn-outlined text-sm" aria-label="Back to results">
@@ -342,10 +451,15 @@ export default function GlobalHeader() {
                     <span className="hidden sm:inline">Open</span>
                   </a>
                 )}
-                <button onClick={() => { setDetailUrl(null); setSearchOpen(false); }} className="icon-btn" aria-label="Close">×</button>
+                <button onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setDetailUrl(null);
+                  setSearchOpen(false);
+                }} className="icon-btn" aria-label="Close" style={{ zIndex: 10000 }}>×</button>
               </div>
             </div>
-            <div className="m-dialog-body">
+            <div className="m-dialog-body" style={{ maxHeight: 'calc(80vh - 60px)', overflow: 'auto', position: 'relative' }}>
               {!cseReady && <div className="text-sm text-muted">Loading search…</div>}
               <div id={containerId} className={detailUrl ? 'gcse-search hidden' : 'gcse-search'} />
               {detailUrl && (

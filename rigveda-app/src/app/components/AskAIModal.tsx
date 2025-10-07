@@ -137,11 +137,30 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
   };
 
   return (
-    <div className="m-dialog-overlay" role="dialog" aria-modal="true" style={{ display: open ? 'flex' : 'none' }}>
-      <div className="m-dialog wide m-dialog-plain">
+    <div 
+      className="m-dialog-overlay" 
+      role="dialog" 
+      aria-modal="true" 
+      style={{ 
+        display: open ? 'flex' : 'none',
+        overflow: 'visible', 
+        alignItems: 'flex-start', 
+        paddingTop: '80px' 
+      }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      <div className="m-dialog m-dialog-plain max-w-2xl mx-auto" style={{ maxHeight: '80vh', overflow: 'visible', width: '100%' }}>
         <div className="m-dialog-header">
           <div className="text-sm uppercase tracking-wide text-muted">{title}</div>
-          <button onClick={onClose} className="icon-btn" aria-label="Close">×</button>
+          <button onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onClose();
+          }} className="icon-btn" aria-label="Close" style={{ zIndex: 10000 }}>×</button>
         </div>
         <div ref={listRef} className="m-dialog-body space-y-3">
           {chatHistory.map((m, idx) => (

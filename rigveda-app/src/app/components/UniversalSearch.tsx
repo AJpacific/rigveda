@@ -366,6 +366,10 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
           onBlur={() => setIsInputFocused(false)}
           className="m-input pr-12"
           placeholder="Search hymns, verses, deities, addressees, groups..."
+          style={{ 
+            fontSize: 'clamp(14px, 4vw, 16px)',
+            paddingRight: '3.5rem'
+          }}
         />
         <div className="absolute right-2 top-1/2 -translate-y-1/2">
           {loading ? (
