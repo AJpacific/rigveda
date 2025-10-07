@@ -99,18 +99,18 @@ export default function RandomVerseCard() {
       {data && !error && (
         <div className="space-y-3">
           {/* Devanagari Text with clickable words */}
-          <div className="text-[1.05rem] sm:text-[1.15rem] leading-tight text-accent whitespace-pre-line">
+          <div className="text-[1.05rem] sm:text-[1.15rem] leading-loose text-accent whitespace-pre-line">
             {data.devanagari_text.split(/(\s+|\n)/).map((part, index) => {
               if (part === '\n') {
-                return <br key={index} />;
+                return <br key={index} className="mb-2" />;
               } else if (part.trim() === '') {
-                return <span key={index}>{part}</span>;
+                return <span key={index} className="mx-1">{part}</span>;
               } else {
                 return (
                   <button 
                     key={index}
                     onClick={() => openDictionary(part.trim())} 
-                    className="hover:text-gray-700 hover:underline cursor-pointer"
+                    className="hover:text-gray-700 hover:underline cursor-pointer mx-1 my-1"
                   >
                     {part}
                   </button>
@@ -120,7 +120,7 @@ export default function RandomVerseCard() {
           </div>
 
           
-          <div className="text-[1.0rem] sm:text-[1rem] text-gray-500 font-normal leading-relaxed">
+          <div className="text-[1.1rem] sm:text-[1.1rem] text-gray-500 font-normal leading-relaxed">
             {data.padapatha_text.split(' ').map((word, index) => (
               <span key={index}>
                 <button 
