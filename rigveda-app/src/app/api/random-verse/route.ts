@@ -1,48 +1,39 @@
 import { NextResponse } from 'next/server';
-
-type Verse = {
-  number: number;
-  translation: string;
-  sanskrit?: Array<{ sep?: string; word?: string; translit?: string }>;
-  sanskrit_lines?: Array<Array<{ sep?: string; word?: string; translit?: string }>>;
-};
-
-type Hymn = {
-  sukta: number;
-  title: string;
-  group?: string | null;
-  stanzas?: number | null;
-  verses: Verse[];
-};
+import fs from 'fs/promises';
+import path from 'path';
+import type { RigvedaData, Verse } from '../../../types/rigveda';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    const mandalaNum = Math.floor(Math.random() * 10) + 1; // 1..10
-    const mod = (await import(`../../../data/mandala${mandalaNum}.json`)) as {
-      default?: { hymns: Hymn[] };
-      hymns?: Hymn[];
-    };
-    const hymns = mod.default?.hymns ?? mod.hymns ?? [];
-    if (!Array.isArray(hymns) || hymns.length === 0) {
+    const filePath = path.join(process.cwd(), 'src/data', 'rigveda_complete.json');
+    const jsonData = await fs.readFile(filePath, 'utf8');
+    const data = JSON.parse(jsonData) as RigvedaData;
+    
+    // Select random mandala
+    const mandala = data.mandalas[Math.floor(Math.random() * data.mandalas.length)];
+    if (!mandala || !mandala.hymns || mandala.hymns.length === 0) {
       return NextResponse.json({ error: 'No hymns found' }, { status: 404 });
     }
-    const hymn = hymns[Math.floor(Math.random() * hymns.length)];
-    const verses = Array.isArray(hymn?.verses) ? hymn.verses : [];
-    if (verses.length === 0) {
+    
+    // Select random hymn
+    const hymn = mandala.hymns[Math.floor(Math.random() * mandala.hymns.length)];
+    if (!hymn || !hymn.verses || hymn.verses.length === 0) {
       return NextResponse.json({ error: 'No verses found' }, { status: 404 });
     }
-    const verse = verses[Math.floor(Math.random() * verses.length)];
+    
+    // Select random verse
+    const verse = hymn.verses[Math.floor(Math.random() * hymn.verses.length)];
 
     return NextResponse.json({
-      mandala: mandalaNum,
-      sukta: hymn.sukta,
-      verse: verse.number,
-      title: hymn.title,
-      translation: verse.translation,
-      sanskrit: verse.sanskrit ?? [],
-      sanskrit_lines: verse.sanskrit_lines ?? null,
+      mandala: mandala.mandala_number,
+      sukta: hymn.hymn_number,
+      verse: verse.verse_number,
+      title: hymn.addressee,
+      translation: verse.griffith_translation,
+      devanagari_text: verse.devanagari_text,
+      padapatha_text: verse.padapatha_text,
     });
   } catch (e) {
     const message = e instanceof Error ? e.message : 'Unexpected error';

@@ -11,20 +11,33 @@ export type SanskritWordToken = {
 export type SanskritToken = SanskritSepToken | SanskritWordToken;
 
 export type Verse = {
-  number: number;
-  translation: string;
-  sanskrit?: SanskritToken[];
-  sanskrit_lines?: SanskritToken[][];
+  verse_number: string;
+  devanagari_text: string;
+  griffith_translation: string;
+  padapatha_text: string;
 };
 
 export type Hymn = {
-  sukta: number;
-  title: string;
-  group?: string | null;
-  stanzas?: number | null;
+  hymn_number: number;
+  group_name: string;
+  addressee: string;
   verses: Verse[];
-  audio?: string;
-  verseTimecodes?: number[];
+  audio_url?: string;
+};
+
+export type Mandala = {
+  mandala_number: number;
+  hymns: Hymn[];
+};
+
+export type RigvedaData = {
+  metadata: {
+    title: string;
+    total_mandalas: number;
+    total_hymns: number;
+    total_verses: number;
+  };
+  mandalas: Mandala[];
 };
 
 

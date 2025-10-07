@@ -5,14 +5,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRobot, faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import AskAIModal from './AskAIModal';
 
+
+
 type RandomVerse = {
   mandala: number;
   sukta: number;
-  verse: number;
+  verse: string;
   title: string;
   translation: string;
-  sanskrit: Array<{ word?: string; translit?: string; sep?: string }>;
-  sanskrit_lines?: Array<Array<{ word?: string; translit?: string; sep?: string }>> | null;
+  devanagari_text: string;
+  padapatha_text: string;
 };
 
 export default function RandomVerseCard() {
@@ -62,14 +64,7 @@ export default function RandomVerseCard() {
   const contextPrefix = useMemo(() => {
     if (!data) return '';
     const ref = `${data.verse}`;
-    const sanskritText = (data.sanskrit || [])
-      .map((t) => ('sep' in t && t.sep) ? t.sep : (t.word || ''))
-      .join(' ');
-    const translit = (data.sanskrit || [])
-      .filter((t) => !!t.translit)
-      .map((t) => t.translit as string)
-      .join(' ');
-    return `CONTEXT\n(${ref}) ${sanskritText}${translit ? `\n(${translit})` : ''}\n${data.translation}\n\nQUESTION: `;
+    return `CONTEXT\n(${ref}) ${data.devanagari_text}\n(${data.padapatha_text})\n${data.translation}\n\nQUESTION: `;
   }, [data]);
 
   return (
@@ -102,26 +97,34 @@ export default function RandomVerseCard() {
       )}
 
       {data && !error && (
-        <div className="space-y-2">
+        <div className="space-y-3">
+          {/* Devanagari Text with clickable words */}
+          <div className="text-[1.05rem] sm:text-[1.15rem] leading-tight text-accent">
+            {data.devanagari_text.split(' ').map((word, index) => (
+              <span key={index}>
+                <button 
+                  onClick={() => openDictionary(word.trim())} 
+                  className="hover:text-gray-700 hover:underline cursor-pointer"
+                >
+                  {word}
+                </button>
+                {index < data.devanagari_text.split(' ').length - 1 && ' '}
+              </span>
+            ))}
+          </div>
 
-          {/* Sanskrit lines with hover and dictionary */}
-          <div className="space-y-2">
-            {(data.sanskrit_lines && data.sanskrit_lines.length ? data.sanskrit_lines : [data.sanskrit || []]).map((line, li) => (
-              <div key={li} className="flex flex-wrap items-start gap-x-2 gap-y-1 sm:gap-x-3 sm:gap-y-2">
-                {line.map((t, ti) => (
-                  t.sep ? (
-                    <div key={`sep-${li}-${ti}`} className="text-center sanskrit-token">
-                      <div className="text-[1.05rem] sm:text-[1.15rem] leading-tight text-accent">{t.sep}</div>
-                      <div className="text-[12px] text-transparent select-none">.</div>
-                    </div>
-                  ) : (
-                    <button key={`w-${li}-${ti}`} onClick={() => openDictionary(t.word || '')} className="text-center sanskrit-token">
-                      <div className="text-[1.05rem] sm:text-[1.15rem] leading-tight text-accent">{t.word}</div>
-                      {t.translit && <div className="text-[12px] text-muted">{t.translit}</div>}
-                    </button>
-                  )
-                ))}
-              </div>
+          {/* Transliteration (increased font size) with clickable words */}
+          <div className="text-[1.0rem] sm:text-[1rem] text-gray-500 font-normal leading-relaxed">
+            {data.padapatha_text.split(' ').map((word, index) => (
+              <span key={index}>
+                <button 
+                  onClick={() => openDictionary(word.trim())} 
+                  className="hover:text-gray-700 hover:underline cursor-pointer"
+                >
+                  {word}
+                </button>
+                {index < data.padapatha_text.split(' ').length - 1 && ' '}
+              </span>
             ))}
           </div>
 

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStop, faHourglass, faPlay } from '@fortawesome/free-solid-svg-icons';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import type { Hymn, Verse, SanskritToken, SanskritSepToken, SanskritWordToken } from '../../../types/rigveda';
+import type { Hymn, Verse } from '../../../types/rigveda';
 
 type HymnClientProps = {
   hymn: Hymn;
@@ -18,6 +18,7 @@ type HymnClientProps = {
 type AudioState = 'idle' | 'loading' | 'playing' | 'paused';
 
 type ChatMessage = { role: 'user' | 'assistant'; content: string };
+
 
 export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }: HymnClientProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -49,32 +50,15 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   // Dispatch hymn metadata to global header
   useEffect(() => {
     try {
-      const detail = { mandala, sukta, title: hymn.title, group: hymn.group, stanzas: hymn.stanzas ?? hymn.verses.length, prevPath, nextPath };
+      const detail = { mandala, sukta, title: hymn.addressee, group: hymn.group_name, stanzas: hymn.verses.length, prevPath, nextPath };
       window.dispatchEvent(new CustomEvent('hymn:meta', { detail }));
       return () => { window.dispatchEvent(new CustomEvent('hymn:meta', { detail: null })); };
     } catch {}
   }, [hymn, mandala, sukta, prevPath, nextPath]);
 
-  const isSepToken = (t: SanskritToken): t is SanskritSepToken => 'sep' in t && typeof (t as SanskritSepToken).sep === 'string';
-  const isWordToken = (t: SanskritToken): t is SanskritWordToken => 'word' in t;
-
   const startChatForVerse = (verse: Verse) => {
-    const ref = `${verse.number}`;
-    const lines: SanskritToken[][] = verse.sanskrit_lines && verse.sanskrit_lines.length
-      ? verse.sanskrit_lines
-      : verse.sanskrit ? [verse.sanskrit] : [];
-    const sanskrit = lines
-      .map((line: SanskritToken[]) => line
-        .filter(Boolean)
-        .map((w) => (isSepToken(w) ? w.sep : (isWordToken(w) ? w.word : ''))) 
-        .filter(Boolean)
-        .join(' '))
-      .join(' / ');
-    const translit = (verse.sanskrit ?? [])
-      .filter((w): w is SanskritWordToken => isWordToken(w) && !!w.translit)
-      .map((w) => w.translit as string)
-      .join(' ');
-    const ctx = `(${ref}) ${sanskrit}${translit ? `\n(${translit})` : ''}\n${verse.translation || ''}`;
+    const ref = `${verse.verse_number}`;
+    const ctx = `(${ref}) ${verse.devanagari_text}\n(${verse.padapatha_text})\n${verse.griffith_translation}`;
     setChatRef(ref);
     setChatContext(ctx);
     setChatHistory([]);
@@ -322,6 +306,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
           const articleClass = isFirst
             ? 'm-card m-elevation-1 p-2 sm:p-4 sm:pt-8 relative'
             : 'm-card m-elevation-1 p-3 sm:p-4 sm:pt-10 relative';
+          
           return (
           <article key={i} className={articleClass}>
             <div className="flex justify-end">
@@ -333,33 +318,47 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                 Ask AI
               </button>
             </div>
-            <div className="space-y-2 mb-3">
-              {(
-                verse.sanskrit_lines && verse.sanskrit_lines.length
-                  ? verse.sanskrit_lines
-                  : verse.sanskrit ? [verse.sanskrit] : []
-                ).map((line: SanskritToken[], li: number) => (
-                <div key={li} className={isFirst ? 'flex flex-wrap items-start gap-x-2 gap-y-1 sm:gap-x-3 sm:gap-y-2' : 'flex flex-wrap items-start gap-x-3 gap-y-2'}>
-                  {line.map((w: SanskritToken, wi: number) => (
-                    isSepToken(w) ? (
-                      <div key={`sep-${li}-${wi}`} className="text-center sanskrit-token">
-                        <div className={isFirst ? 'text-[1.05rem] sm:text-[1.25rem] leading-tight text-accent' : 'text-[1.25rem] leading-tight text-accent'}>{w.sep}</div>
-                        <div className="text-[13px] text-transparent select-none">.</div>
-                      </div>
-                    ) : (
-                      <button key={wi} onClick={() => openDictionary((w as SanskritWordToken).word)} className="text-center sanskrit-token">
-                        <div className={isFirst ? 'text-[1.05rem] sm:text-[1.25rem] leading-tight text-accent' : 'text-[1.25rem] leading-tight text-accent'}>{(w as SanskritWordToken).word}</div>
-                        {(w as SanskritWordToken).translit && <div className="text-[13px] text-muted">{(w as SanskritWordToken).translit}</div>}
-                      </button>
-                    )
-                  ))}
-                </div>
-              ))}
+            
+            {/* Devanagari Text with clickable words */}
+            <div className="mb-3">
+              <div className={isFirst ? 'text-[1.05rem] sm:text-[1.25rem] leading-tight text-accent' : 'text-[1.25rem] leading-tight text-accent'}>
+                {verse.devanagari_text.split(' ').map((word, index) => (
+                  <span key={index}>
+                    <button 
+                      onClick={() => openDictionary(word.trim())} 
+                      className="hover:text-gray-700 hover:underline cursor-pointer"
+                    >
+                      {word}
+                    </button>
+                    {index < verse.devanagari_text.split(' ').length - 1 && ' '}
+                  </span>
+                ))}
+              </div>
             </div>
-            <div className="max-w-none whitespace-pre-line text-sm sm:text-base">
-              {verse.translation}
+            
+            {/* Transliteration (increased font size) with clickable words */}
+            <div className="mb-3">
+              <div className="text-[0.95rem] sm:text-[1.0rem] text-gray-500 font-light leading-relaxed">
+                {verse.padapatha_text.split(' ').map((word, index) => (
+                  <span key={index}>
+                    <button 
+                      onClick={() => openDictionary(word.trim())} 
+                      className="hover:text-gray-700 hover:underline cursor-pointer"
+                    >
+                      {word}
+                    </button>
+                    {index < verse.padapatha_text.split(' ').length - 1 && ' '}
+                  </span>
+                ))}
+              </div>
             </div>
-            <div className="text-right text-xs text-muted mt-2">{verse.number}</div>
+            
+            {/* Translation */}
+            <div className="max-w-none whitespace-pre-line text-sm sm:text-base mb-3">
+              {verse.griffith_translation}
+            </div>
+            
+            <div className="text-right text-xs text-muted mt-2">{verse.verse_number}</div>
           </article>
           );
         })}
@@ -460,7 +459,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             </button>
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between text-[11px] text-[color:var(--muted)] mb-1">
-                <div className="truncate">Now playing: <span className="font-medium text-[color:var(--olive-green)]">Verse {Number.isInteger(currentVerseIndex) && currentVerseIndex !== null ? hymn.verses[currentVerseIndex]?.number : '-'}</span></div>
+                <div className="truncate">Now playing: <span className="font-medium text-[color:var(--olive-green)]">Verse {Number.isInteger(currentVerseIndex) && currentVerseIndex !== null ? hymn.verses[currentVerseIndex]?.verse_number : '-'}</span></div>
                 <div className="whitespace-nowrap">{formatTime(currentTime)} / {formatTime(duration)}</div>
               </div>
               <input
@@ -475,7 +474,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
               />
             </div>
           </div>
-          <audio ref={audioRef} src={hymn.audio} />
+          <audio ref={audioRef} src={hymn.audio_url} />
         </div>
       </div>
 
