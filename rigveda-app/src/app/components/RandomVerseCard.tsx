@@ -113,7 +113,7 @@ export default function RandomVerseCard() {
             ))}
           </div>
 
-          {/* Transliteration (increased font size) with clickable words */}
+          
           <div className="text-[1.0rem] sm:text-[1rem] text-gray-500 font-normal leading-relaxed">
             {data.padapatha_text.split(' ').map((word, index) => (
               <span key={index}>
