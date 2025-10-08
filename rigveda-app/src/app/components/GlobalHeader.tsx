@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faUpRightFromSquare, faBars, faHome, faArrowRight, faSearch, faRobot, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faUpRightFromSquare, faBars, faHome, faArrowRight, faSearch, faRobot, faChevronDown, faTimes } from '@fortawesome/free-solid-svg-icons';
 import AskAIModal from './AskAIModal';
 import UniversalSearch from './UniversalSearch';
 
@@ -209,13 +209,14 @@ export default function GlobalHeader() {
   useEffect(() => {
     if (!searchOpen && !universalSearchOpen) return;
     try {
-      document.documentElement.classList.add('no-scroll');
+      // Only apply scroll lock to body, not html to avoid header issues
       document.body.classList.add('no-scroll');
+      document.body.style.overflow = 'hidden';
     } catch {}
     return () => {
       try {
-        document.documentElement.classList.remove('no-scroll');
         document.body.classList.remove('no-scroll');
+        document.body.style.overflow = '';
       } catch {}
     };
   }, [searchOpen, universalSearchOpen]);
@@ -425,50 +426,92 @@ export default function GlobalHeader() {
 
       {searchOpen && (
         <div 
-          className="m-dialog-overlay" 
+          className="fixed inset-0 z-50 flex items-start justify-center p-4"
+          style={{ 
+            backgroundColor: 'rgba(0, 0, 0, 0.1) !important',
+            background: 'rgba(0, 0, 0, 0.1) !important',
+            paddingTop: '80px',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            position: 'fixed'
+          }}
           role="dialog" 
-          aria-modal="true" 
-          style={{ overflow: 'visible', alignItems: 'flex-start', paddingTop: '80px' }}
+          aria-modal="true"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               setSearchOpen(false);
             }
           }}
         >
-          <div className="m-dialog m-dialog-plain max-w-2xl mx-auto" style={{ maxHeight: '80vh', overflow: 'visible', width: '100%' }}>
-            <div className="m-dialog-header">
-              <div className="text-sm uppercase tracking-wide text-muted">{detailUrl ? 'Preview' : 'Google Search'}</div>
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300" style={{ width: '100%' }}>
+            <div className="flex items-center justify-between p-6 border-b border-gray-100">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                  <GoogleIcon className="text-red-600 text-lg" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900">{detailUrl ? 'Preview' : 'Google Search'}</h2>
+                  <p className="text-sm text-gray-500">{detailUrl ? 'Viewing search result' : 'Search the web'}</p>
+                </div>
+              </div>
               <div className="flex items-center gap-2">
                 {detailUrl && (
-                  <button onClick={() => setDetailUrl(null)} className="m-btn m-btn-outlined text-sm" aria-label="Back to results">
+                  <button 
+                    onClick={() => setDetailUrl(null)} 
+                    className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors duration-200 flex items-center gap-2" 
+                    aria-label="Back to results"
+                  >
                     <FontAwesomeIcon icon={faArrowLeft} />
                     <span className="hidden sm:inline">Back</span>
                   </button>
                 )}
                 {detailUrl && (
-                  <a href={detailUrl} target="_blank" rel="noreferrer noopener" className="m-btn m-btn-text text-sm" aria-label="Open in new tab">
+                  <a 
+                    href={detailUrl} 
+                    target="_blank" 
+                    rel="noreferrer noopener" 
+                    className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors duration-200 flex items-center gap-2" 
+                    aria-label="Open in new tab"
+                  >
                     <FontAwesomeIcon icon={faUpRightFromSquare} />
                     <span className="hidden sm:inline">Open</span>
                   </a>
                 )}
-                <button onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setDetailUrl(null);
-                  setSearchOpen(false);
-                }} className="icon-btn" aria-label="Close" style={{ zIndex: 10000 }}>×</button>
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.nativeEvent.stopImmediatePropagation();
+                    setDetailUrl(null);
+                    setSearchOpen(false);
+                  }} 
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                  className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors duration-200" 
+                  aria-label="Close"
+                  type="button"
+                >
+                  <FontAwesomeIcon icon={faTimes} className="text-sm" />
+                </button>
               </div>
             </div>
-            <div className="m-dialog-body" style={{ maxHeight: 'calc(80vh - 60px)', overflow: 'auto', position: 'relative' }}>
-              {!cseReady && <div className="text-sm text-muted">Loading search…</div>}
+            <div className="p-6 max-h-[calc(80vh-120px)] overflow-y-auto">
+              {!cseReady && <div className="text-sm text-gray-500 flex items-center gap-2">
+                <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
+                Loading search…
+              </div>}
               <div id={containerId} className={detailUrl ? 'gcse-search hidden' : 'gcse-search'} />
               {detailUrl && (
                 <div>
                   <div className="m-embed-container">
                     <iframe className="embedded-frame" src={detailUrl} title="Result preview" />
                   </div>
-                  <div className="m-note-foot mt-2 text-xs text-muted">
-                    If the page fails to load here, use &quot;Open&quot; to view in a new tab.
+                  <div className="mt-4 p-3 bg-blue-50 rounded-lg text-sm text-blue-700">
+                    If the page fails to load here, use "Open" to view in a new tab.
                   </div>
                 </div>
               )}
@@ -486,28 +529,59 @@ export default function GlobalHeader() {
 
       {universalSearchOpen && (
         <div 
-          className="m-dialog-overlay" 
+          className="fixed inset-0 z-50 flex items-start justify-center p-4"
+          style={{ 
+            backgroundColor: 'rgba(0, 0, 0, 0.1) !important',
+            background: 'rgba(0, 0, 0, 0.1) !important',
+            paddingTop: '80px',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            position: 'fixed'
+          }}
           role="dialog" 
-          aria-modal="true" 
-          style={{ overflow: 'visible', alignItems: 'flex-start', paddingTop: '80px' }}
+          aria-modal="true"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               setUniversalSearchOpen(false);
             }
           }}
         >
-          <div className="m-dialog m-dialog-plain max-w-2xl mx-auto" style={{ maxHeight: '80vh', overflow: 'visible', width: '100%' }}>
-            <div className="m-dialog-header">
-              <div className="text-sm uppercase tracking-wide text-muted">Search Rigveda</div>
-              <button onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('Closing Search Rigveda modal');
-                setUniversalSearchOpen(false);
-              }} className="icon-btn" aria-label="Close" style={{ zIndex: 10000 }}>×</button>
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300" style={{ width: '100%' }}>
+            <div className="flex items-center justify-between p-6 border-b border-gray-100">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <FontAwesomeIcon icon={faSearch} className="text-blue-600 text-lg" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900">Search Rigveda</h2>
+                  <p className="text-sm text-gray-500">Find hymns, verses, and more</p>
+                </div>
+              </div>
+              <button 
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  e.nativeEvent.stopImmediatePropagation();
+                  setUniversalSearchOpen(false);
+                }} 
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
+                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors duration-200" 
+                aria-label="Close"
+                type="button"
+              >
+                <FontAwesomeIcon icon={faTimes} className="text-sm" />
+              </button>
             </div>
-            <div className="m-dialog-body" style={{ maxHeight: 'calc(80vh - 60px)', overflow: 'auto', position: 'relative' }}>
-              <UniversalSearch inModal={true} />
+            <div className="p-6 max-h-[calc(80vh-120px)] overflow-y-auto">
+              <UniversalSearch 
+                inModal={true} 
+                onResultClick={() => setUniversalSearchOpen(false)} 
+              />
             </div>
           </div>
         </div>

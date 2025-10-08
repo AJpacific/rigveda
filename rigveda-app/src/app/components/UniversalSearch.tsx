@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +17,7 @@ type SearchResult = {
   snippet?: string;
 };
 
-export default function UniversalSearch({ inModal = false }: { inModal?: boolean } = {}) {
+export default function UniversalSearch({ inModal = false, onResultClick }: { inModal?: boolean, onResultClick?: () => void } = {}) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [allResults, setAllResults] = useState<SearchResult[]>([]);
@@ -28,6 +28,16 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
   const [scrollPositions, setScrollPositions] = useState<Record<string, number>>({});
   const [displayedCounts, setDisplayedCounts] = useState<Record<string, number>>({});
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (searchTimeout) {
+        clearTimeout(searchTimeout);
+      }
+    };
+  }, [searchTimeout]);
 
   // Function to normalize text for better matching
   const normalizeText = (text: string): string => {
@@ -59,7 +69,14 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
   const textMatches = (text: string, searchQuery: string): boolean => {
     const normalizedText = normalizeText(text);
     const normalizedQuery = normalizeText(searchQuery);
-    return normalizedText.includes(normalizedQuery);
+    const matches = normalizedText.includes(normalizedQuery);
+    
+    // Debug logging for hymn searches
+    if (searchQuery.toLowerCase().includes('hymn') || /^\d+$/.test(searchQuery)) {
+      console.log(`textMatches: "${text}" vs "${searchQuery}" -> "${normalizedText}" vs "${normalizedQuery}" = ${matches}`);
+    }
+    
+    return matches;
   };
 
   // Function to highlight matched text
@@ -166,6 +183,12 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
   };
 
   const searchData = async (searchQuery: string) => {
+    // Ensure searchQuery is a string
+    if (typeof searchQuery !== 'string') {
+      console.error('searchData called with non-string:', searchQuery);
+      return;
+    }
+    
     if (!searchQuery.trim()) {
       setResults([]);
       setAllResults([]);
@@ -183,14 +206,40 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
     setScrollPositions({});
     setDisplayedCounts({});
     try {
-      // Import the complete JSON data
-      const data = (await import('../../data/rigveda_complete.json')).default as RigvedaData;
+      // Load data from API instead of direct import
+      const response = await fetch('/api/search-data');
+      if (!response.ok) {
+        throw new Error(`Failed to load data: ${response.status}`);
+      }
+      const data = await response.json() as RigvedaData;
       const searchResults: SearchResult[] = [];
+      
+      console.log('Data loaded:', {
+        mandalas: data?.mandalas?.length,
+        firstMandala: data?.mandalas?.[0]?.mandala_number,
+        firstHymn: data?.mandalas?.[0]?.hymns?.[0]?.hymn_number
+      });
+      
+      if (!data || !data.mandalas) {
+        console.error('Invalid data structure:', data);
+        setResults([]);
+        setAllResults([]);
+        setShowResults(false);
+        return;
+      }
+      
+      
 
       // Search through all mandalas
-      data.mandalas.forEach((mandala) => {
-        // Search mandala number
-        if (textMatches(mandala.mandala_number.toString(), searchQuery)) {
+      try {
+        data.mandalas.forEach((mandala) => {
+        // Search mandala number - show mandala + all its hymns
+        const mandalaNumberStr = mandala.mandala_number.toString();
+        const mandalaText = `mandala ${mandalaNumberStr}`;
+        const matches = textMatches(mandalaNumberStr, searchQuery) || textMatches(mandalaText, searchQuery);
+        
+        if (matches) {
+          // Add the mandala itself
           searchResults.push({
             mandala: mandala.mandala_number,
             sukta: 0,
@@ -199,12 +248,27 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
             subtitle: `${mandala.hymns.length} hymns`,
             matchField: 'mandala number'
           });
+          
+          // Add all hymns from this mandala
+          mandala.hymns.forEach((hymn) => {
+            searchResults.push({
+              mandala: mandala.mandala_number,
+              sukta: hymn.hymn_number,
+              type: 'hymn',
+              title: `Mandala ${mandala.mandala_number} • Hymn ${hymn.hymn_number}`,
+              subtitle: `${hymn.addressee} • ${hymn.group_name}`,
+              matchField: 'mandala number'
+            });
+          });
         }
 
         // Search through hymns
         mandala.hymns.forEach((hymn) => {
           // Search hymn number
-          if (textMatches(hymn.hymn_number.toString(), searchQuery)) {
+          const hymnNumberStr = hymn.hymn_number.toString();
+          const hymnText = `hymn ${hymnNumberStr}`;
+          const hymnMatches = textMatches(hymnNumberStr, searchQuery) || textMatches(hymnText, searchQuery);
+          if (hymnMatches) {
             searchResults.push({
               mandala: mandala.mandala_number,
               sukta: hymn.hymn_number,
@@ -298,6 +362,10 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
           });
         });
       });
+      } catch (forEachError) {
+        console.error('Error in forEach loop:', forEachError);
+        throw forEachError;
+      }
 
       // Remove duplicates but keep different matchField values
       const uniqueResults = searchResults.filter((result, index, self) => 
@@ -309,12 +377,23 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
         )
       )
 
+      console.log('Search query:', searchQuery);
+      console.log('Final results count:', uniqueResults.length);
+      console.log('Results:', uniqueResults);
+      
       setAllResults(uniqueResults);
       setResults(uniqueResults.slice(0, displayedCount));
       setShowResults(true);
     } catch (error) {
       console.error('Search error:', error);
+      console.error('Error details:', {
+        message: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined,
+        error: error
+      });
       setResults([]);
+      setAllResults([]);
+      setShowResults(false);
     } finally {
       setLoading(false);
     }
@@ -324,12 +403,17 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
     const value = e.target.value;
     setQuery(value);
     
+    // Clear previous timeout
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+    
     // Debounce search
     const timeoutId = setTimeout(() => {
       searchData(value);
     }, 300);
-
-    return () => clearTimeout(timeoutId);
+    
+    setSearchTimeout(timeoutId);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -354,6 +438,21 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
     return '#';
   };
 
+  // Function to scroll to verse and flash highlight
+  const scrollToVerse = (mandala: number, sukta: number, verse: string) => {
+    // Close modal if open
+    if (inModal && onResultClick) {
+      onResultClick();
+    }
+    
+    // Navigate to the hymn page first
+    const url = `/${mandala}/${sukta}#verse-${verse}`;
+    window.location.href = url;
+    
+    // The scroll and flash will be handled by the HymnClient component
+    // when the page loads with the hash fragment
+  };
+
   return (
     <div className="relative">
       <div className="m-field relative">
@@ -364,7 +463,7 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
           onKeyPress={handleKeyPress}
           onFocus={() => setIsInputFocused(true)}
           onBlur={() => setIsInputFocused(false)}
-          className="m-input pr-12"
+          className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm"
           placeholder="Search hymns, verses, deities, addressees, groups..."
           style={{ 
             fontSize: 'clamp(14px, 4vw, 16px)',
@@ -377,10 +476,10 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
           ) : (
             <button
               onClick={handleSearchClick}
-              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              className="w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-600 hover:text-blue-700 transition-all duration-200 flex items-center justify-center"
               type="button"
             >
-              <FontAwesomeIcon icon={faSearch} />
+              <FontAwesomeIcon icon={faSearch} className="text-sm" />
             </button>
           )}
         </div>
@@ -447,6 +546,18 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
                   key={index}
                   href={getResultUrl(result)}
                   className="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 text-left"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (result.type === 'verse' && result.verse) {
+                      scrollToVerse(result.mandala, result.sukta, result.verse);
+                    } else {
+                      // For non-verse results, use normal navigation
+                      window.location.href = getResultUrl(result);
+                    }
+                    if (inModal && onResultClick) {
+                      onResultClick();
+                    }
+                  }}
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1 text-left">

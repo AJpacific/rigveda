@@ -62,10 +62,11 @@ export function parseReference(raw: string): { mandala: number; sukta: number; v
 export async function loadHymnEntries(mandala: number, sukta: number): Promise<SearchIndexEntry[] | null> {
   try {
     // Read from src/data (available to the server at build/dev time)
-    const mod = (await import(`../data/rigveda_complete.json`)) as {
-      default?: import('../types/rigveda').RigvedaData;
-    };
-    const data = mod.default;
+    const fs = await import('fs/promises');
+    const path = await import('path');
+    const filePath = path.join(process.cwd(), 'src', 'data', 'rigveda_complete.json');
+    const fileContent = await fs.readFile(filePath, 'utf-8');
+    const data = JSON.parse(fileContent) as import('../types/rigveda').RigvedaData;
     if (!data) return null;
     
     const mandalaData = data.mandalas.find(m => m.mandala_number === mandala);
