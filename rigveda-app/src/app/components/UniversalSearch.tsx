@@ -71,10 +71,6 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
     const normalizedQuery = normalizeText(searchQuery);
     const matches = normalizedText.includes(normalizedQuery);
     
-    // Debug logging for hymn searches
-    if (searchQuery.toLowerCase().includes('hymn') || /^\d+$/.test(searchQuery)) {
-      console.log(`textMatches: "${text}" vs "${searchQuery}" -> "${normalizedText}" vs "${normalizedQuery}" = ${matches}`);
-    }
     
     return matches;
   };
@@ -214,11 +210,6 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
       const data = await response.json() as RigvedaData;
       const searchResults: SearchResult[] = [];
       
-      console.log('Data loaded:', {
-        mandalas: data?.mandalas?.length,
-        firstMandala: data?.mandalas?.[0]?.mandala_number,
-        firstHymn: data?.mandalas?.[0]?.hymns?.[0]?.hymn_number
-      });
       
       if (!data || !data.mandalas) {
         console.error('Invalid data structure:', data);
@@ -377,9 +368,6 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
         )
       )
 
-      console.log('Search query:', searchQuery);
-      console.log('Final results count:', uniqueResults.length);
-      console.log('Results:', uniqueResults);
       
       setAllResults(uniqueResults);
       setResults(uniqueResults.slice(0, displayedCount));

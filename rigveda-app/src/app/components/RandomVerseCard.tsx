@@ -186,7 +186,7 @@ export default function RandomVerseCard() {
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold text-gray-900">Dictionary</h2>
-                  <p className="text-sm text-gray-500">Definition for "{dictWord}"</p>
+                  <p className="text-sm text-gray-500">Definition for &quot;{dictWord}&quot;</p>
                 </div>
               </div>
               <button 
