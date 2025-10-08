@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing OPENROUTER_API_KEY' }, { status: 500 });
     }
 
-    const model = process.env.OPENROUTER_MODEL || 'deepseek/deepseek-chat:free';
+    const model = process.env.OPENROUTER_MODEL || 'meta-llama/llama-3.3-70b-instruct:free';
     const referer = process.env.OPENROUTER_SITE_URL || undefined;
     const title = process.env.OPENROUTER_SITE_NAME || undefined;
 
