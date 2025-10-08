@@ -555,6 +555,11 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               setDictOpen(false);
+              // Unlock background scroll when modal closes
+              try {
+                document.documentElement.classList.remove('no-scroll');
+                document.body.classList.remove('no-scroll');
+              } catch {}
             }
           }}
         >
@@ -577,6 +582,11 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                   e.stopPropagation();
                   e.nativeEvent.stopImmediatePropagation();
                   setDictOpen(false);
+                  // Unlock background scroll when modal closes
+                  try {
+                    document.documentElement.classList.remove('no-scroll');
+                    document.body.classList.remove('no-scroll');
+                  } catch {}
                 }}
                 onMouseDown={(e) => {
                   e.preventDefault();
