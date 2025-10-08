@@ -48,19 +48,35 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
       .replace(/[āáàâä]/g, 'a')
       .replace(/[īíìîï]/g, 'i')
       .replace(/[ūúùûü]/g, 'u')
-      .replace(/[ṛṝ]/g, 'r')
-      .replace(/[ḷḹ]/g, 'l')
+      .replace(/[ṛṝ]/g, 'r')  // r with dot below
+      .replace(/[ḷḹ]/g, 'l')  // l with dot below
       .replace(/[ēéèêë]/g, 'e')
       .replace(/[ōóòôö]/g, 'o')
-      .replace(/[ṃ]/g, 'm')
-      .replace(/[ḥ]/g, 'h')
-      .replace(/[ṅ]/g, 'n')
-      .replace(/[ñ]/g, 'n')
-      .replace(/[ṭ]/g, 't')
-      .replace(/[ḍ]/g, 'd')
-      .replace(/[ṇ]/g, 'n')
-      .replace(/[ś]/g, 's')
-      .replace(/[ṣ]/g, 's')
+      .replace(/[ṃ]/g, 'm')   // m with dot below
+      .replace(/[ḥ]/g, 'h')   // h with dot below
+      .replace(/[ṅ]/g, 'n')   // n with dot above
+      .replace(/[ñ]/g, 'n')   // n with tilde
+      .replace(/[ṭ]/g, 't')   // t with dot below
+      .replace(/[ḍ]/g, 'd')   // d with dot below
+      .replace(/[ṇ]/g, 'n')   // n with dot below
+      .replace(/[ś]/g, 's')   // s with acute
+      .replace(/[ṣ]/g, 's')   // s with dot below
+      .replace(/[ç]/g, 'c')   // c with cedilla
+      .replace(/[ṁ]/g, 'm')   // m with dot above
+      .replace(/[Ṁ]/g, 'm')   // M with dot above
+      .replace(/[Ṃ]/g, 'm')   // M with dot below
+      .replace(/[Ṛ]/g, 'r')   // R with dot below
+      .replace(/[Ṟ]/g, 'r')   // R with line below
+      .replace(/[Ḷ]/g, 'l')   // L with dot below
+      .replace(/[Ḹ]/g, 'l')   // L with line below
+      .replace(/[Ṭ]/g, 't')   // T with dot below
+      .replace(/[Ḍ]/g, 'd')   // D with dot below
+      .replace(/[Ṇ]/g, 'n')   // N with dot below
+      .replace(/[Ś]/g, 's')   // S with acute
+      .replace(/[Ṣ]/g, 's')   // S with dot below
+      .replace(/[Ḥ]/g, 'h')   // H with dot below
+      .replace(/[ṅ]/g, 'n')   // n with dot above (lowercase)
+      .replace(/[Ṇ]/g, 'n')   // N with dot below
       // Remove extra spaces and normalize
       .replace(/\s+/g, ' ')
       .trim();

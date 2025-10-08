@@ -256,7 +256,7 @@ export default function GlobalHeader() {
   const renderDefault = () => (
     <header className="m-appbar">
       <div className="container mx-auto px-4 m-appbar-inner">
-        <Link href="/" className="m-appbar-title text-lg sm:text-xl">Rig Veda</Link>
+        <Link href="/" className="m-appbar-title text-lg sm:text-xl">RigVeda</Link>
         <nav className="flex items-center gap-1 sm:gap-2">
           {/* Search Dropdown */}
           <div className="relative search-dropdown-container">
@@ -323,7 +323,9 @@ export default function GlobalHeader() {
         <div className="flex items-center justify-between py-3">
           {/* Left side: Hymn title and info */}
           <div className="text-left">
-            <div className="text-[10px] uppercase tracking-[0.3em] text-[color:var(--olive-green)]">Mandala {meta.mandala}</div>
+            <div className="text-[10px] uppercase tracking-[0.3em] text-[color:var(--olive-green)]">
+              <Link href="/" className="hover:text-[color:var(--primary-600)] transition-colors duration-200">RIGVEDA</Link> • Mandala {meta.mandala}
+            </div>
             <h1 className="text-sm sm:text-base font-semibold">Hymn {meta.sukta}: {meta.title}</h1>
             <div className="text-[11px] sm:text-[12px] text-[color:var(--muted)] mt-0.5 flex flex-wrap items-center gap-x-2">
               <span>Group: <span className="font-medium text-[color:var(--olive-green)]">{meta.group || 'Unknown'}</span></span>
@@ -417,7 +419,7 @@ export default function GlobalHeader() {
                       className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900 block"
                     >
                       <FontAwesomeIcon icon={faBars} />
-                      <span>Index</span>
+                      <span>Hymns</span>
                     </Link>
                     {meta.prevPath ? (
                       <Link 
