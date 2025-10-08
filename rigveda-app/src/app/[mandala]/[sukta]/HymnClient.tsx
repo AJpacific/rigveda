@@ -414,7 +414,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
           style={{ 
             backgroundColor: 'rgba(0, 0, 0, 0.1) !important',
             background: 'rgba(0, 0, 0, 0.1) !important',
-            paddingTop: '80px',
+            paddingTop: '40px',
             top: 0,
             left: 0,
             right: 0,
@@ -548,7 +548,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
           style={{
             backgroundColor: 'rgba(0, 0, 0, 0.1) !important',
             background: 'rgba(0, 0, 0, 0.1) !important',
-            paddingTop: '80px',
+            paddingTop: '40px',
             top: 0,
             left: 0,
             right: 0,
@@ -567,9 +567,8 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             <div className="flex items-center justify-between p-6 border-b border-gray-100">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
-                    <path fillRule="evenodd" d="M4 5a2 2 0 012-2v1a1 1 0 001 1h6a1 1 0 001-1V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clipRule="evenodd"/>
+                  <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                   </svg>
                 </div>
                 <div>
@@ -597,14 +596,32 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             </div>
             <div className="p-6 max-h-[calc(80vh-120px)] overflow-y-auto">
               {dictUrl ? (
-                <div className="m-embed-container" ref={dictContainerRef}>
-                  {isMobile ? (
-                    <iframe className="embedded-frame" src={dictUrl} title="Dictionary" />
-                  ) : (
-                    <div style={{ width: '1024px', height: dictWrapperHeight ? `${dictWrapperHeight}px` : '800px', transform: `scale(${dictScale})`, transformOrigin: 'top left' }}>
+                <div>
+                  <div className="m-embed-container" ref={dictContainerRef}>
+                    {isMobile ? (
                       <iframe className="embedded-frame" src={dictUrl} title="Dictionary" />
-                    </div>
-                  )}
+                    ) : (
+                      <div style={{ width: '1024px', height: dictWrapperHeight ? `${dictWrapperHeight}px` : '800px', transform: `scale(${dictScale})`, transformOrigin: 'top left' }}>
+                        <iframe className="embedded-frame" src={dictUrl} title="Dictionary" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="mt-4 p-3 bg-green-50 rounded-lg text-sm text-green-700">
+                    If the page fails to load here, use &quot;Open&quot; to view in a new tab.
+                  </div>
+                  <div className="mt-3 flex justify-end">
+                    <a 
+                      href={dictUrl} 
+                      target="_blank" 
+                      rel="noreferrer noopener" 
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 hover:bg-green-200 text-green-700 hover:text-green-800 rounded-lg text-sm font-medium transition-colors duration-200"
+                    >
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/>
+                      </svg>
+                      Open in New Tab
+                    </a>
+                  </div>
                 </div>
               ) : (
                 <div className="flex items-center gap-2 text-sm text-gray-500">

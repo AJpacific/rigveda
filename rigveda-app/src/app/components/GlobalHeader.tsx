@@ -430,7 +430,7 @@ export default function GlobalHeader() {
           style={{ 
             backgroundColor: 'rgba(0, 0, 0, 0.1) !important',
             background: 'rgba(0, 0, 0, 0.1) !important',
-            paddingTop: '80px',
+            paddingTop: '40px',
             top: 0,
             left: 0,
             right: 0,
@@ -533,7 +533,7 @@ export default function GlobalHeader() {
           style={{ 
             backgroundColor: 'rgba(0, 0, 0, 0.1) !important',
             background: 'rgba(0, 0, 0, 0.1) !important',
-            paddingTop: '80px',
+            paddingTop: '40px',
             top: 0,
             left: 0,
             right: 0,

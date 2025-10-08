@@ -149,7 +149,7 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
         right: 0,
         bottom: 0,
         position: 'fixed',
-        paddingTop: '80px'
+            paddingTop: '40px'
       }}
       role="dialog" 
       aria-modal="true"
