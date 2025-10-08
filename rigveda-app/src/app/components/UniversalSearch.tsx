@@ -15,6 +15,7 @@ type SearchResult = {
   subtitle: string;
   matchField: string;
   snippet?: string;
+  matchedText?: string;
 };
 
 export default function UniversalSearch({ inModal = false, onResultClick }: { inModal?: boolean, onResultClick?: () => void } = {}) {
@@ -85,17 +86,77 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
     
     if (index === -1) return <span>{text}</span>;
     
-    const before = text.substring(0, index);
-    const match = text.substring(index, index + searchQuery.length);
-    const after = text.substring(index + searchQuery.length);
+    // Find the actual match in the original text by searching for the query
+    const originalIndex = text.toLowerCase().indexOf(searchQuery.toLowerCase());
+    if (originalIndex === -1) {
+      // If exact match not found, use the normalized index as fallback
+      const before = text.substring(0, index);
+      const match = text.substring(index, index + searchQuery.length);
+      const after = text.substring(index + searchQuery.length);
+      
+      return (
+        <span>
+          {before}
+          <mark className="bg-yellow-300 text-yellow-900 px-1 rounded font-medium shadow-sm">{match}</mark>
+          {after}
+        </span>
+      );
+    }
+    
+    const before = text.substring(0, originalIndex);
+    const match = text.substring(originalIndex, originalIndex + searchQuery.length);
+    const after = text.substring(originalIndex + searchQuery.length);
     
     return (
       <span>
         {before}
-        <mark className="bg-yellow-200 dark:bg-yellow-800 px-1 rounded">{match}</mark>
+        <mark className="bg-yellow-300 text-yellow-900 px-1 rounded font-medium shadow-sm">{match}</mark>
         {after}
       </span>
     );
+  };
+
+  // Function to highlight specific matched text in subtitle
+  const highlightSubtitle = (result: SearchResult, searchQuery: string) => {
+    if (!searchQuery.trim()) return <span>{result.subtitle}</span>;
+    
+    // For verse results with snippets, show the snippet with highlighting
+    if (result.snippet && (result.matchField === 'devanagari text' || result.matchField === 'transliteration' || result.matchField === 'translation')) {
+      return (
+        <span>
+          {result.subtitle}
+          <div className="text-xs text-gray-600 mt-1 italic">
+            {highlightText(result.snippet, searchQuery)}
+          </div>
+        </span>
+      );
+    }
+    
+    // If we have matchedText, only highlight that specific part
+    if (result.matchedText) {
+      const parts = result.subtitle.split(' • ');
+      const addressee = parts[0];
+      const groupName = parts[1];
+      
+      if (result.matchField === 'addressee') {
+        return (
+          <span>
+            {highlightText(addressee, searchQuery)} • {groupName}
+          </span>
+        );
+      } else if (result.matchField === 'group name') {
+        return (
+          <span>
+            {addressee} • {highlightText(groupName, searchQuery)}
+          </span>
+        );
+      }
+      // Fallback to normal highlighting
+      return highlightText(result.subtitle, searchQuery);
+    }
+    
+    // Fallback to normal highlighting
+    return highlightText(result.subtitle, searchQuery);
   };
 
   // Function to create text snippet with matching word
@@ -278,7 +339,8 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
               type: 'hymn',
               title: `Mandala ${mandala.mandala_number} • Hymn ${hymn.hymn_number}`,
               subtitle: `${hymn.addressee} • ${hymn.group_name}`,
-              matchField: 'addressee'
+              matchField: 'addressee',
+              matchedText: hymn.addressee
             });
           }
 
@@ -290,7 +352,8 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
               type: 'hymn',
               title: `Mandala ${mandala.mandala_number} • Hymn ${hymn.hymn_number}`,
               subtitle: `${hymn.addressee} • ${hymn.group_name}`,
-              matchField: 'group name'
+              matchField: 'group name',
+              matchedText: hymn.group_name
             });
           }
 
@@ -319,6 +382,7 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
                 title: `Mandala ${mandala.mandala_number} • Hymn ${hymn.hymn_number} • Verse ${verse.verse_number}`,
                 subtitle: `${hymn.addressee} • ${hymn.group_name}`,
                 matchField: 'devanagari text',
+                matchedText: verse.devanagari_text,
                 snippet: createSnippet(verse.devanagari_text, searchQuery)
               });
             }
@@ -333,6 +397,7 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
                 title: `Mandala ${mandala.mandala_number} • Hymn ${hymn.hymn_number} • Verse ${verse.verse_number}`,
                 subtitle: `${hymn.addressee} • ${hymn.group_name}`,
                 matchField: 'transliteration',
+                matchedText: verse.padapatha_text,
                 snippet: createSnippet(verse.padapatha_text, searchQuery)
               });
             }
@@ -347,6 +412,7 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
                 title: `Mandala ${mandala.mandala_number} • Hymn ${hymn.hymn_number} • Verse ${verse.verse_number}`,
                 subtitle: `${hymn.addressee} • ${hymn.group_name}`,
                 matchField: 'translation',
+                matchedText: verse.griffith_translation,
                 snippet: createSnippet(verse.griffith_translation, searchQuery)
               });
             }
@@ -474,7 +540,7 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
       </div>
 
       {showResults && (
-        <div className={`search-results-dropdown ${inModal ? 'relative mt-2' : 'absolute top-full left-0 right-0 mt-2'} bg-white border border-gray-200 rounded-lg shadow-lg max-h-96 overflow-y-auto ${inModal ? 'z-[9999]' : 'z-50'}`} style={{ colorScheme: 'light' }}>
+        <div className={`search-results-dropdown ${inModal ? 'relative mt-2' : 'absolute top-full left-0 right-0 mt-2'} bg-white border border-gray-200 rounded-lg shadow-lg max-h-96 overflow-y-auto ${inModal ? 'z-[9999]' : 'z-50'}`} style={{ colorScheme: 'light', WebkitOverflowScrolling: 'touch' }}>
           <div>
             {/* Filter Bar - Always visible when there are search results */}
             <div className="sticky top-0 bg-white px-4 py-3 border-b border-gray-100 z-10">
@@ -553,13 +619,8 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
                         {highlightText(result.title, query)}
                       </div>
                       <div className="text-sm text-gray-500 text-left">
-                        {highlightText(result.subtitle, query)}
+                        {highlightSubtitle(result, query)}
                       </div>
-                      {result.snippet && (
-                        <div className="text-xs text-gray-600 text-left mt-1 italic">
-                          {highlightText(result.snippet, query)}
-                        </div>
-                      )}
                     </div>
                     <div className="text-xs text-gray-400 capitalize ml-2 flex-shrink-0">
                       {result.matchField}
