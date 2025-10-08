@@ -48,7 +48,7 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
       .replace(/[āáàâä]/g, 'a')
       .replace(/[īíìîï]/g, 'i')
       .replace(/[ūúùûü]/g, 'u')
-      .replace(/[ṛṝ]/g, 'r')  // r with dot below
+      .replace(/[r̥ṛṝ]/g, 'r')  // r with dot below
       .replace(/[ḷḹ]/g, 'l')  // l with dot below
       .replace(/[ēéèêë]/g, 'e')
       .replace(/[ōóòôö]/g, 'o')
