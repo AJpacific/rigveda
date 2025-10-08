@@ -47,6 +47,7 @@ export default function GlobalHeader() {
   const [askInitial, setAskInitial] = useState<string | undefined>(undefined);
   const [universalSearchOpen, setUniversalSearchOpen] = useState(false);
   const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
+  const [navDropdownOpen, setNavDropdownOpen] = useState(false);
   const containerId = 'gcse-search-container';
   const lastQueryRef = useRef<string>('');
 
@@ -221,20 +222,23 @@ export default function GlobalHeader() {
     };
   }, [searchOpen, universalSearchOpen]);
 
-  // Close search dropdown when clicking outside
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchDropdownOpen) {
-        const target = event.target as Element;
-        if (!target.closest('.search-dropdown-container')) {
-          setSearchDropdownOpen(false);
-        }
+      const target = event.target as Element;
+      
+      if (searchDropdownOpen && !target.closest('.search-dropdown-container')) {
+        setSearchDropdownOpen(false);
+      }
+      
+      if (navDropdownOpen && !target.closest('.nav-dropdown-container')) {
+        setNavDropdownOpen(false);
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [searchDropdownOpen]);
+  }, [searchDropdownOpen, navDropdownOpen]);
 
   // Measure header height for subappbars
   useEffect(() => {
@@ -314,103 +318,141 @@ export default function GlobalHeader() {
 
   const renderHymnHeader = (meta: NonNullable<HymnHeaderMeta>) => (
     <header className="m-appbar">
-      <div className="container mx-auto px-4 m-appbar-inner" style={{ display: 'grid', gridTemplateColumns: 'auto 1fr auto', alignItems: 'center', gap: '8px' }}>
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-1 sm:gap-2 justify-self-start">
-          <Link href="/" className="m-btn m-btn-outlined text-sm" aria-label="Home">
-            <FontAwesomeIcon icon={faHome} />
-            <span className="hidden sm:inline ml-2">Home</span>
-          </Link>
-          <Link href={`/${meta.mandala}`} className="m-btn m-btn-outlined text-sm" aria-label="Mandala index">
-            <FontAwesomeIcon icon={faBars} />
-            <span className="hidden sm:inline ml-2">Index</span>
-          </Link>
-        </div>
-
-        <div className="text-center justify-self-center overflow-hidden" style={{ minWidth: 0 }}>
-          <div className="text-[10px] uppercase tracking-[0.3em] text-[color:var(--olive-green)]">Mandala {meta.mandala}</div>
-          <h1 className="text-sm sm:text-base font-semibold">Hymn {meta.sukta}: {meta.title}</h1>
-          <div className="text-[11px] sm:text-[12px] text-[color:var(--muted)] mt-0.5 flex flex-wrap justify-center items-center gap-x-2">
-            <span>Group: <span className="font-medium text-[color:var(--olive-green)]">{meta.group || 'Unknown'}</span></span>
-            <span className="hidden sm:inline">·</span>
-            <span>Stanzas: <span className="font-medium text-[color:var(--olive-green)]">{meta.stanzas ?? '-'}</span></span>
+      <div className="container mx-auto px-4">
+        {/* Top row: Heading on left, Dropdowns on right */}
+        <div className="flex items-center justify-between py-3">
+          {/* Left side: Hymn title and info */}
+          <div className="text-left">
+            <div className="text-[10px] uppercase tracking-[0.3em] text-[color:var(--olive-green)]">Mandala {meta.mandala}</div>
+            <h1 className="text-sm sm:text-base font-semibold">Hymn {meta.sukta}: {meta.title}</h1>
+            <div className="text-[11px] sm:text-[12px] text-[color:var(--muted)] mt-0.5 flex flex-wrap items-center gap-x-2">
+              <span>Group: <span className="font-medium text-[color:var(--olive-green)]">{meta.group || 'Unknown'}</span></span>
+              <span className="hidden sm:inline">·</span>
+              <span>Stanzas: <span className="font-medium text-[color:var(--olive-green)]">{meta.stanzas ?? '-'}</span></span>
+            </div>
           </div>
-        </div>
 
-        <div className="flex items-center gap-1 sm:gap-2 text-sm justify-self-end">
-          {/* Search Dropdown */}
-          <div className="relative search-dropdown-container">
-            <button 
-              onClick={() => setSearchDropdownOpen(!searchDropdownOpen)}
-              className="m-btn m-btn-outlined text-sm"
-              aria-label="Search Options"
-            >
-              <FontAwesomeIcon icon={faSearch} />
-              <span className="hidden sm:inline ml-2">Search</span>
-              <FontAwesomeIcon icon={faChevronDown} className="text-xs ml-1" />
-            </button>
-            
-            {searchDropdownOpen && (
-              <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-48" style={{ colorScheme: 'light' }}>
-                <div className="py-1">
-                  <button 
-                    onClick={() => {
-                      setUniversalSearchOpen(true);
-                      setSearchDropdownOpen(false);
-                    }}
-                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900"
-                  >
-                    <FontAwesomeIcon icon={faSearch} />
-                    <span>Search Rigveda</span>
-                  </button>
-                  <button 
-                    onClick={() => {
-                      setSearchOpen(true);
-                      setDetailUrl(null);
-                      setSearchDropdownOpen(false);
-                    }}
-                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900"
-                  >
-                    <GoogleIcon />
-                    <span>Google Search</span>
-                  </button>
-                  <Link 
-                    href="/search" 
-                    onClick={(e) => { 
-                      e.preventDefault(); 
-                      setAskInitial(undefined); 
-                      setAskOpen(true); 
-                      setSearchDropdownOpen(false);
-                    }}
-                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 block"
-                  >
-                    <FontAwesomeIcon icon={faRobot} />
-                    <span>Ask AI</span>
-                  </Link>
+          {/* Right side: Dropdowns */}
+          <div className="flex flex-col sm:flex-row items-end sm:items-center gap-1 sm:gap-2">
+            {/* Search Dropdown */}
+            <div className="relative search-dropdown-container">
+              <button 
+                onClick={() => setSearchDropdownOpen(!searchDropdownOpen)}
+                className="m-btn m-btn-outlined text-sm"
+                aria-label="Search Options"
+              >
+                <FontAwesomeIcon icon={faSearch} />
+                <span className="hidden sm:inline ml-2">Search</span>
+                <FontAwesomeIcon icon={faChevronDown} className="text-xs ml-1" />
+              </button>
+              
+              {searchDropdownOpen && (
+                <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-48" style={{ colorScheme: 'light' }}>
+                  <div className="py-1">
+                    <button 
+                      onClick={() => {
+                        setUniversalSearchOpen(true);
+                        setSearchDropdownOpen(false);
+                      }}
+                      className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900"
+                    >
+                      <FontAwesomeIcon icon={faSearch} />
+                      <span>Search Rigveda</span>
+                    </button>
+                    <button 
+                      onClick={() => {
+                        setSearchOpen(true);
+                        setDetailUrl(null);
+                        setSearchDropdownOpen(false);
+                      }}
+                      className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900"
+                    >
+                      <GoogleIcon />
+                      <span>Google Search</span>
+                    </button>
+                    <Link 
+                      href="/search" 
+                      onClick={(e) => { 
+                        e.preventDefault(); 
+                        setAskInitial(undefined); 
+                        setAskOpen(true); 
+                        setSearchDropdownOpen(false);
+                      }}
+                      className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 block"
+                    >
+                      <FontAwesomeIcon icon={faRobot} />
+                      <span>Ask AI</span>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
-          
-          {/* Navigation arrows - stacked vertically */}
-          <div className="flex flex-col gap-1 ml-2">
-            {meta.prevPath ? (
-              <Link href={meta.prevPath} className="m-btn m-btn-outlined text-sm" aria-label="Previous hymn">
-                <FontAwesomeIcon icon={faArrowLeft} />
-              </Link>
-            ) : (
-              <span className="m-btn m-btn-outlined text-sm" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
-                <FontAwesomeIcon icon={faArrowLeft} />
-              </span>
-            )}
-            {meta.nextPath ? (
-              <Link href={meta.nextPath} className="m-btn m-btn-outlined text-sm" aria-label="Next hymn">
-                <FontAwesomeIcon icon={faArrowRight} />
-              </Link>
-            ) : (
-              <span className="m-btn m-btn-outlined text-sm" aria-hidden="true" style={{opacity:0.35,pointerEvents:'none'}}>
-                <FontAwesomeIcon icon={faArrowRight} />
-              </span>
-            )}
+              )}
+            </div>
+
+            {/* Navigation Dropdown */}
+            <div className="relative nav-dropdown-container">
+              <button 
+                onClick={() => setNavDropdownOpen(!navDropdownOpen)}
+                className="m-btn m-btn-outlined text-sm"
+                aria-label="Navigation Options"
+              >
+                <FontAwesomeIcon icon={faBars} />
+                <span className="hidden sm:inline ml-2">Navigate</span>
+                <FontAwesomeIcon icon={faChevronDown} className="text-xs ml-1" />
+              </button>
+              
+              {navDropdownOpen && (
+                <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-48" style={{ colorScheme: 'light' }}>
+                  <div className="py-1">
+                    <Link 
+                      href="/"
+                      onClick={() => setNavDropdownOpen(false)}
+                      className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900 block"
+                    >
+                      <FontAwesomeIcon icon={faHome} />
+                      <span>Home</span>
+                    </Link>
+                    <Link 
+                      href={`/${meta.mandala}`}
+                      onClick={() => setNavDropdownOpen(false)}
+                      className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900 block"
+                    >
+                      <FontAwesomeIcon icon={faBars} />
+                      <span>Index</span>
+                    </Link>
+                    {meta.prevPath ? (
+                      <Link 
+                        href={meta.prevPath}
+                        onClick={() => setNavDropdownOpen(false)}
+                        className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900 block"
+                      >
+                        <FontAwesomeIcon icon={faArrowLeft} />
+                        <span>Previous</span>
+                      </Link>
+                    ) : (
+                      <span className="w-full px-4 py-2 text-left text-sm text-gray-400 flex items-center gap-2">
+                        <FontAwesomeIcon icon={faArrowLeft} />
+                        <span>Previous</span>
+                      </span>
+                    )}
+                    {meta.nextPath ? (
+                      <Link 
+                        href={meta.nextPath}
+                        onClick={() => setNavDropdownOpen(false)}
+                        className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900 block"
+                      >
+                        <FontAwesomeIcon icon={faArrowRight} />
+                        <span>Next</span>
+                      </Link>
+                    ) : (
+                      <span className="w-full px-4 py-2 text-left text-sm text-gray-400 flex items-center gap-2">
+                        <FontAwesomeIcon icon={faArrowRight} />
+                        <span>Next</span>
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

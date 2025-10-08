@@ -327,11 +327,6 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
 
   return (
     <div className="space-y-6 pb-24 sm:pb-28">
-      {/* Thin scroll progress line */}
-      <div className="fixed top-0 left-0 right-0 h-1 bg-[color:var(--surface-strong)] z-50 pointer-events-none">
-        <div className="h-full bg-[color:var(--primary)]" style={{ width: `${scrollProgress}%` }} />
-      </div>
-
       {/* Content */}
       <section className="space-y-4 pt-2">
         {hymn.verses.map((verse: Verse, i: number) => {
