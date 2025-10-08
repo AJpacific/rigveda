@@ -387,17 +387,17 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
       </div>
 
       {showResults && (
-        <div className={`search-results-dropdown ${inModal ? 'relative mt-2' : 'absolute top-full left-0 right-0 mt-2'} bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-96 overflow-y-auto ${inModal ? 'z-[9999]' : 'z-50'}`}>
+        <div className={`search-results-dropdown ${inModal ? 'relative mt-2' : 'absolute top-full left-0 right-0 mt-2'} bg-white border border-gray-200 rounded-lg shadow-lg max-h-96 overflow-y-auto ${inModal ? 'z-[9999]' : 'z-50'}`} style={{ colorScheme: 'light' }}>
           <div>
             {/* Filter Bar - Always visible when there are search results */}
-            <div className="sticky top-0 bg-white dark:bg-gray-800 px-4 py-3 border-b border-gray-100 dark:border-gray-600 z-10">
+            <div className="sticky top-0 bg-white px-4 py-3 border-b border-gray-100 z-10">
               <div className="flex space-x-2">
                 <button
                   onClick={() => handleFilterChange('all')}
                   className={`px-3 py-1 text-xs rounded-full transition-colors ${
                     activeFilter === 'all'
-                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                      : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 >
                   All
@@ -406,8 +406,8 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
                   onClick={() => handleFilterChange('hymn')}
                   className={`px-3 py-1 text-xs rounded-full transition-colors ${
                     activeFilter === 'hymn'
-                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                      : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 >
                   Hymn
@@ -416,8 +416,8 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
                   onClick={() => handleFilterChange('translation')}
                   className={`px-3 py-1 text-xs rounded-full transition-colors ${
                     activeFilter === 'translation'
-                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                      : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 >
                   Translation
@@ -426,8 +426,8 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
                   onClick={() => handleFilterChange('transliteration')}
                   className={`px-3 py-1 text-xs rounded-full transition-colors ${
                     activeFilter === 'transliteration'
-                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                      : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 >
                   Transliteration
@@ -446,23 +446,23 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
                 <Link
                   key={index}
                   href={getResultUrl(result)}
-                  className="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-600 last:border-b-0 text-left"
+                  className="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 text-left"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1 text-left">
-                      <div className="font-medium text-gray-900 dark:text-gray-100 text-left">
+                      <div className="font-medium text-gray-900 text-left">
                         {highlightText(result.title, query)}
                       </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400 text-left">
+                      <div className="text-sm text-gray-500 text-left">
                         {highlightText(result.subtitle, query)}
                       </div>
                       {result.snippet && (
-                        <div className="text-xs text-gray-600 dark:text-gray-300 text-left mt-1 italic">
+                        <div className="text-xs text-gray-600 text-left mt-1 italic">
                           {highlightText(result.snippet, query)}
                         </div>
                       )}
                     </div>
-                    <div className="text-xs text-gray-400 dark:text-gray-500 capitalize ml-2 flex-shrink-0">
+                    <div className="text-xs text-gray-400 capitalize ml-2 flex-shrink-0">
                       {result.matchField}
                     </div>
                   </div>
@@ -471,10 +471,10 @@ export default function UniversalSearch({ inModal = false }: { inModal?: boolean
               
               {/* Load More Button */}
               {filterResults(allResults, activeFilter).length > results.length && (
-                <div className="px-4 py-3 border-t border-gray-100 dark:border-gray-600">
+                <div className="px-4 py-3 border-t border-gray-100">
                   <button
                     onClick={loadMoreResults}
-                    className="w-full text-center text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium"
+                    className="w-full text-center text-sm text-blue-600 hover:text-blue-800 font-medium"
                   >
                     Load More ({filterResults(allResults, activeFilter).length - results.length} more results)
                   </button>

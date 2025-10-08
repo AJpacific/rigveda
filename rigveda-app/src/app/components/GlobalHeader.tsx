@@ -266,17 +266,17 @@ export default function GlobalHeader() {
             </button>
             
             {searchDropdownOpen && (
-              <div className="absolute right-0 top-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50 min-w-48">
+              <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-48" style={{ colorScheme: 'light' }}>
                 <div className="py-1">
                   <button 
                     onClick={() => {
                       setUniversalSearchOpen(true);
                       setSearchDropdownOpen(false);
                     }}
-                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900"
                   >
                     <FontAwesomeIcon icon={faSearch} />
-                    <span>Universal Search</span>
+                    <span>Search Rigveda</span>
                   </button>
                   <button 
                     onClick={() => {
@@ -284,7 +284,7 @@ export default function GlobalHeader() {
                       setDetailUrl(null);
                       setSearchDropdownOpen(false);
                     }}
-                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900"
                   >
                     <GoogleIcon />
                     <span>Google Search</span>
@@ -297,7 +297,7 @@ export default function GlobalHeader() {
                       setAskOpen(true); 
                       setSearchDropdownOpen(false);
                     }}
-                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2 block"
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 block"
                   >
                     <FontAwesomeIcon icon={faRobot} />
                     <span>Ask AI</span>
@@ -349,17 +349,17 @@ export default function GlobalHeader() {
             </button>
             
             {searchDropdownOpen && (
-              <div className="absolute right-0 top-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50 min-w-48">
+              <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-48" style={{ colorScheme: 'light' }}>
                 <div className="py-1">
                   <button 
                     onClick={() => {
                       setUniversalSearchOpen(true);
                       setSearchDropdownOpen(false);
                     }}
-                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900"
                   >
                     <FontAwesomeIcon icon={faSearch} />
-                    <span>Universal Search</span>
+                    <span>Search Rigveda</span>
                   </button>
                   <button 
                     onClick={() => {
@@ -367,7 +367,7 @@ export default function GlobalHeader() {
                       setDetailUrl(null);
                       setSearchDropdownOpen(false);
                     }}
-                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900"
                   >
                     <GoogleIcon />
                     <span>Google Search</span>
@@ -380,7 +380,7 @@ export default function GlobalHeader() {
                       setAskOpen(true); 
                       setSearchDropdownOpen(false);
                     }}
-                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2 block"
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 block"
                   >
                     <FontAwesomeIcon icon={faRobot} />
                     <span>Ask AI</span>
@@ -498,11 +498,11 @@ export default function GlobalHeader() {
         >
           <div className="m-dialog m-dialog-plain max-w-2xl mx-auto" style={{ maxHeight: '80vh', overflow: 'visible', width: '100%' }}>
             <div className="m-dialog-header">
-              <div className="text-sm uppercase tracking-wide text-muted">Universal Search</div>
+              <div className="text-sm uppercase tracking-wide text-muted">Search Rigveda</div>
               <button onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Closing universal search modal');
+                console.log('Closing Search Rigveda modal');
                 setUniversalSearchOpen(false);
               }} className="icon-btn" aria-label="Close" style={{ zIndex: 10000 }}>×</button>
             </div>

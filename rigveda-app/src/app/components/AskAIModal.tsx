@@ -162,7 +162,7 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
             onClose();
           }} className="icon-btn" aria-label="Close" style={{ zIndex: 10000 }}>×</button>
         </div>
-        <div ref={listRef} className="m-dialog-body space-y-3">
+        <div ref={listRef} className="m-dialog-body space-y-3" style={{ maxHeight: 'calc(80vh - 60px)', overflow: 'auto', position: 'relative' }}>
           {chatHistory.map((m, idx) => (
             <div key={idx} className="space-y-1">
               <div className="text-sm uppercase tracking-wide mb-1 text-primary font-semibold">{m.role === 'user' ? 'You' : 'AI'}</div>
