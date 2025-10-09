@@ -335,16 +335,6 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
                           <span className="font-medium">Etymology:</span> {result.etymology}
                         </p>
                       )}
-                      {result.vedic_context && (
-                        <p className="text-sm text-gray-500">
-                          <span className="font-medium">Vedic Context:</span> {result.vedic_context}
-                        </p>
-                      )}
-                      {result.usage_examples && (
-                        <p className="text-sm text-gray-500">
-                          <span className="font-medium">Usage Examples:</span> {result.usage_examples}
-                        </p>
-                      )}
                       {result.source && (
                         <div className="mt-2 flex items-center gap-2">
                           <span className="text-xs text-gray-400">

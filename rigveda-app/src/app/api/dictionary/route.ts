@@ -20,8 +20,7 @@ Focus on:
 2. Proper transliteration
 3. Comprehensive English meaning
 4. Grammatical classification
-5. Vedic and Rigvedic context
-6. Usage in ancient texts
+5. Etymology and word origins
 
 If the word is not found or unclear, provide the best possible interpretation based on Sanskrit linguistics.`;
 
@@ -58,8 +57,6 @@ If the word is not found or unclear, provide the best possible interpretation ba
           transliteration: parsed.transliteration || word,
           grammar: parsed.grammar || 'Not specified',
           etymology: parsed.etymology || '',
-          vedic_context: parsed.vedic_context || '',
-          usage_examples: parsed.usage_examples || '',
           source: 'AI Sanskrit Scholar',
           dictionary: 'AI'
         }];
