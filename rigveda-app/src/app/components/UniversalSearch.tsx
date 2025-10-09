@@ -25,7 +25,7 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
   const [loading, setLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [displayedCount, setDisplayedCount] = useState(50);
-  const [activeFilter, setActiveFilter] = useState<'all' | 'hymn' | 'translation' | 'transliteration'>('all');
+  const [activeFilter, setActiveFilter] = useState<'all' | 'translation' | 'transliteration' | 'addressee' | 'group'>('all');
   const [scrollPositions, setScrollPositions] = useState<Record<string, number>>({});
   const [displayedCounts, setDisplayedCounts] = useState<Record<string, number>>({});
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -208,16 +208,19 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
 
   const filterResults = (results: SearchResult[], filter: string) => {
     if (filter === 'all') return results;
-    return results.filter(result => {
-      if (filter === 'hymn') {
-        return result.type === 'hymn' || result.type === 'mandala';
-      } else if (filter === 'translation') {
+    const filtered = results.filter(result => {
+      if (filter === 'translation') {
         return result.matchField === 'translation';
       } else if (filter === 'transliteration') {
         return result.matchField === 'transliteration';
+      } else if (filter === 'addressee') {
+        return result.matchField === 'addressee';
+      } else if (filter === 'group') {
+        return result.matchField === 'group name';
       }
       return true;
     });
+    return filtered;
   };
 
   const loadMoreResults = () => {
@@ -228,7 +231,7 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
     setResults(filteredResults.slice(0, newCount));
   };
 
-  const handleFilterChange = (filter: 'all' | 'hymn' | 'translation' | 'transliteration') => {
+  const handleFilterChange = (filter: 'all' | 'translation' | 'transliteration' | 'addressee' | 'group') => {
     // Save current scroll position and displayed count
     const dropdown = document.querySelector('.search-results-dropdown');
     if (dropdown) {
@@ -560,10 +563,10 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
           <div>
             {/* Filter Bar - Always visible when there are search results */}
             <div className="sticky top-0 bg-white px-4 py-3 border-b border-gray-100 z-10">
-              <div className="flex space-x-2">
+              <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => handleFilterChange('all')}
-                  className={`px-3 py-1 text-xs rounded-full transition-colors ${
+                  className={`px-2 sm:px-3 py-1 text-xs rounded-full transition-colors ${
                     activeFilter === 'all'
                       ? 'bg-blue-100 text-blue-700'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -572,18 +575,28 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
                   All
                 </button>
                 <button
-                  onClick={() => handleFilterChange('hymn')}
-                  className={`px-3 py-1 text-xs rounded-full transition-colors ${
-                    activeFilter === 'hymn'
+                  onClick={() => handleFilterChange('addressee')}
+                  className={`px-2 sm:px-3 py-1 text-xs rounded-full transition-colors ${
+                    activeFilter === 'addressee'
                       ? 'bg-blue-100 text-blue-700'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 >
-                  Hymn
+                  Addressee
+                </button>
+                <button
+                  onClick={() => handleFilterChange('group')}
+                  className={`px-2 sm:px-3 py-1 text-xs rounded-full transition-colors ${
+                    activeFilter === 'group'
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  Group
                 </button>
                 <button
                   onClick={() => handleFilterChange('translation')}
-                  className={`px-3 py-1 text-xs rounded-full transition-colors ${
+                  className={`px-2 sm:px-3 py-1 text-xs rounded-full transition-colors ${
                     activeFilter === 'translation'
                       ? 'bg-blue-100 text-blue-700'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -593,7 +606,7 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
                 </button>
                 <button
                   onClick={() => handleFilterChange('transliteration')}
-                  className={`px-3 py-1 text-xs rounded-full transition-colors ${
+                  className={`px-2 sm:px-3 py-1 text-xs rounded-full transition-colors ${
                     activeFilter === 'transliteration'
                       ? 'bg-blue-100 text-blue-700'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
