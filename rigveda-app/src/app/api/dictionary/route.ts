@@ -10,9 +10,14 @@ type DictionaryResult = {
   dictionary?: string;
 };
 
-// AI-powered Sanskrit dictionary using the existing chat API
+// AI-powered Sanskrit dictionary using direct OpenRouter API call
 async function getAIDictionaryMeaning(word: string): Promise<DictionaryResult[]> {
   try {
+    const apiKey = process.env.OPENROUTER_API_KEY || process.env.NEXT_PUBLIC_OPENROUTER_API_KEY;
+    if (!apiKey) {
+      throw new Error('Missing OPENROUTER_API_KEY');
+    }
+
     const contextPrompt = `You are a Sanskrit scholar and expert in Vedic literature. Provide a comprehensive dictionary entry for the word "${word}". 
 
 The word could be:
@@ -38,12 +43,18 @@ Instructions:
 
 Focus on accuracy and scholarly precision for both Sanskrit-to-English and English-to-Sanskrit translations.`;
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/chat`, {
+    const model = process.env.OPENROUTER_MODEL || 'meta-llama/llama-3.3-70b-instruct:free';
+    
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
+        'HTTP-Referer': process.env.OPENROUTER_SITE_URL || 'https://rigveda.vercel.app',
+        'X-Title': process.env.OPENROUTER_SITE_NAME || 'Rigveda',
       },
       body: JSON.stringify({
+        model: model,
         messages: [
           {
             role: 'user',
@@ -54,11 +65,11 @@ Focus on accuracy and scholarly precision for both Sanskrit-to-English and Engli
     });
 
     if (!response.ok) {
-      throw new Error(`AI API error: ${response.status}`);
+      throw new Error(`OpenRouter API error: ${response.status}`);
     }
 
     const data = await response.json();
-    const aiResponse = data.answer || '';
+    const aiResponse = data.choices?.[0]?.message?.content || '';
 
     // Try to parse JSON from AI response
     try {
