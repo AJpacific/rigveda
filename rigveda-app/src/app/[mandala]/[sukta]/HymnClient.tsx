@@ -623,7 +623,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                     onKeyDown={handleChatKey}
                     rows={1}
                     className="w-full px-4 py-3 pr-14 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none overflow-y-auto"
-                    placeholder="Add your question after the context above..."
+                    placeholder="Type your question..."
                     style={{ minHeight: '48px', maxHeight: '120px' }}
                   />
                   <button 

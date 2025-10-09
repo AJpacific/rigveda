@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faUpRightFromSquare, faBars, faHome, faArrowRight, faSearch, faRobot, faChevronDown, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faUpRightFromSquare, faBars, faHome, faArrowRight, faSearch, faRobot, faChevronDown, faTimes, faBook } from '@fortawesome/free-solid-svg-icons';
 import AskAIModal from './AskAIModal';
 import UniversalSearch from './UniversalSearch';
+import DictionaryModal from './DictionaryModal';
 
 const CSE_SRC = 'https://cse.google.com/cse.js?cx=658dcffd2ee984f58';
 
@@ -48,6 +49,7 @@ export default function GlobalHeader() {
   const [universalSearchOpen, setUniversalSearchOpen] = useState(false);
   const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
   const [navDropdownOpen, setNavDropdownOpen] = useState(false);
+  const [dictionaryOpen, setDictionaryOpen] = useState(false);
   const containerId = 'gcse-search-container';
   const lastQueryRef = useRef<string>('');
 
@@ -208,7 +210,7 @@ export default function GlobalHeader() {
 
   // Lock/unlock page scroll when dialog is open
   useEffect(() => {
-    if (!searchOpen && !universalSearchOpen) return;
+    if (!searchOpen && !universalSearchOpen && !dictionaryOpen) return;
     try {
       // Only apply scroll lock to body, not html to avoid header issues
       document.body.classList.add('no-scroll');
@@ -220,7 +222,7 @@ export default function GlobalHeader() {
         document.body.style.overflow = '';
       } catch {}
     };
-  }, [searchOpen, universalSearchOpen]);
+  }, [searchOpen, universalSearchOpen, dictionaryOpen]);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -282,6 +284,16 @@ export default function GlobalHeader() {
                   >
                     <FontAwesomeIcon icon={faSearch} />
                     <span>Search Rigveda</span>
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setDictionaryOpen(true);
+                      setSearchDropdownOpen(false);
+                    }}
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900"
+                  >
+                    <FontAwesomeIcon icon={faBook} />
+                    <span>Dictionary</span>
                   </button>
                   <button 
                     onClick={() => {
@@ -360,6 +372,16 @@ export default function GlobalHeader() {
                     >
                       <FontAwesomeIcon icon={faSearch} />
                       <span>Search Rigveda</span>
+                    </button>
+                    <button 
+                      onClick={() => {
+                        setDictionaryOpen(true);
+                        setSearchDropdownOpen(false);
+                      }}
+                      className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-900"
+                    >
+                      <FontAwesomeIcon icon={faBook} />
+                      <span>Dictionary</span>
                     </button>
                     <button 
                       onClick={() => {
@@ -569,6 +591,11 @@ export default function GlobalHeader() {
         onClose={() => setAskOpen(false)}
         initialQuestion={askInitial}
         title={hymnMeta ? `Ask AI` : 'Ask AI'}
+      />
+
+      <DictionaryModal
+        open={dictionaryOpen}
+        onClose={() => setDictionaryOpen(false)}
       />
 
       {universalSearchOpen && (
