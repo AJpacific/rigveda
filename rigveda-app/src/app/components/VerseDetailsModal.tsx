@@ -241,7 +241,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
       }
 
       // Get form data (pada texts) - using padas data instead
-      const formPadas = data.padas || [];
+      // const formPadas = data.padas || [];
 
       return (
         <div className="space-y-4">
@@ -254,14 +254,12 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-200">Pada</th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-200">Text</th>
                     <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-200">Transliteration & Pattern</th>
                   </tr>
                 </thead>
                 <tbody>
                   {metricalPadas.map((pattern, pIdx) => {
                     const padaLetter = String.fromCharCode(97 + pIdx); // a, b, c, d
-                    const formText = formPadas[pIdx]?.grammarData?.map(token => token.form).join(' ') || '';
                     
                     // Get Lubotsky transliteration for this pada
                     const lubotskyTransliteration = data.transliteration || '';
@@ -302,9 +300,6 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
                       <tr key={pIdx} className="border-b border-blue-200 hover:bg-blue-50">
                         <td className="px-4 py-3 text-sm font-medium text-gray-900">
                           {padaLetter}
-                        </td>
-                        <td className="px-4 py-3 text-sm text-gray-700">
-                          {formText || '-'}
                         </td>
                         <td className="px-4 py-3">
                           <div className="space-y-2">
@@ -528,7 +523,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
             }
           }}
         >
-          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[60vh] flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden">
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
               <div className="flex items-center gap-3">
