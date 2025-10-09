@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faBook, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
@@ -54,41 +54,7 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
     }
   };
 
-  // Focus input when modal opens
-  useEffect(() => {
-    if (open && inputRef.current) {
-      setTimeout(() => {
-        inputRef.current?.focus();
-        if (initialQuery) {
-          setQuery(initialQuery);
-          searchDictionary(initialQuery);
-        }
-      }, 100);
-    }
-  }, [open, initialQuery]);
-
-  // Lock/unlock page scroll when modal is open
-  useEffect(() => {
-    if (open) {
-      try {
-        document.body.classList.add('no-scroll');
-        document.body.style.overflow = 'hidden';
-      } catch {}
-    } else {
-      try {
-        document.body.classList.remove('no-scroll');
-        document.body.style.overflow = '';
-      } catch {}
-    }
-    return () => {
-      try {
-        document.body.classList.remove('no-scroll');
-        document.body.style.overflow = '';
-      } catch {}
-    };
-  }, [open]);
-
-  const searchDictionary = async (searchQuery: string) => {
+  const searchDictionary = useCallback(async (searchQuery: string) => {
     if (!searchQuery.trim()) {
       setResults([]);
       return;
@@ -120,7 +86,41 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
     } finally {
       setLoading(false);
     }
-  };
+  }, [saveSearchHistory]);
+
+  // Focus input when modal opens
+  useEffect(() => {
+    if (open && inputRef.current) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+        if (initialQuery) {
+          setQuery(initialQuery);
+          searchDictionary(initialQuery);
+        }
+      }, 100);
+    }
+  }, [open, initialQuery, searchDictionary]);
+
+  // Lock/unlock page scroll when modal is open
+  useEffect(() => {
+    if (open) {
+      try {
+        document.body.classList.add('no-scroll');
+        document.body.style.overflow = 'hidden';
+      } catch {}
+    } else {
+      try {
+        document.body.classList.remove('no-scroll');
+        document.body.style.overflow = '';
+      } catch {}
+    }
+    return () => {
+      try {
+        document.body.classList.remove('no-scroll');
+        document.body.style.overflow = '';
+      } catch {}
+    };
+  }, [open]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -204,7 +204,7 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyPress={handleKeyPress}
                 className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
-                placeholder="Enter Sanskrit word, transliteration, or English meaning..."
+                placeholder="Enter Sanskrit word, transliteration, or English word..."
                 autoComplete="off"
               />
               {query && (
@@ -284,7 +284,7 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <FontAwesomeIcon icon={faBook} className="text-gray-400 text-xl" />
               </div>
-              <p className="text-gray-500">No results found for "{query}"</p>
+              <p className="text-gray-500">No results found for &quot;{query}&quot;</p>
               <p className="text-sm text-gray-400 mt-1">Try a different spelling or search term</p>
             </div>
           )}
@@ -361,12 +361,13 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Sanskrit Dictionary</h3>
               <p className="text-gray-500 mb-4">
-                AI-powered Sanskrit dictionary with Vedic context and scholarly analysis
+                AI-powered bidirectional Sanskrit ↔ English dictionary with scholarly analysis
               </p>
               <div className="text-sm text-gray-400 space-y-1">
                 <p>• Enter Sanskrit words in Devanagari script</p>
-                <p>• Use transliteration (e.g., "namaste")</p>
-                <p>• Search for English meanings</p>
+                <p>• Use transliteration (e.g., &quot;namaste&quot;)</p>
+                <p>• Search English words for Sanskrit translations</p>
+                <p>• Bidirectional Sanskrit ↔ English dictionary</p>
               </div>
             </div>
           )}

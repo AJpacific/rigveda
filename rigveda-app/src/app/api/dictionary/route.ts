@@ -1,9 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+type DictionaryResult = {
+  sanskrit: string;
+  english: string;
+  transliteration?: string;
+  grammar?: string;
+  etymology?: string;
+  source?: string;
+  dictionary?: string;
+};
+
 // AI-powered Sanskrit dictionary using the existing chat API
-async function getAIDictionaryMeaning(word: string): Promise<any[]> {
+async function getAIDictionaryMeaning(word: string): Promise<DictionaryResult[]> {
   try {
-    const contextPrompt = `You are a Sanskrit scholar and expert in Vedic literature. Provide a comprehensive dictionary entry for the Sanskrit word "${word}". 
+    const contextPrompt = `You are a Sanskrit scholar and expert in Vedic literature. Provide a comprehensive dictionary entry for the word "${word}". 
+
+The word could be:
+- A Sanskrit word in Devanagari script
+- A Sanskrit word in Roman transliteration  
+- An English word that needs Sanskrit translation
 
 Please provide the response in the following JSON format:
 {
@@ -11,18 +26,17 @@ Please provide the response in the following JSON format:
   "transliteration": "Roman transliteration",
   "english": "English meaning and definition",
   "grammar": "Grammatical information (noun, verb, etc.)",
-  "etymology": "Brief etymology if known",
-  
+  "etymology": "Brief etymology if known"
 }
 
-Focus on:
-1. Accurate Sanskrit script in Devanagari
-2. Proper transliteration
-3. Comprehensive English meaning
-4. Grammatical classification
-5. Etymology and word origins
+Instructions:
+1. If the input is a Sanskrit word (Devanagari or transliteration), provide its English meaning and Sanskrit details
+2. If the input is an English word, provide the Sanskrit equivalent(s) with their meanings
+3. For English words, show the most common Sanskrit translations with their Devanagari script
+4. Always include proper transliteration and grammatical information
+5. Provide comprehensive meanings and etymology when available
 
-If the word is not found or unclear, provide the best possible interpretation based on Sanskrit linguistics.`;
+Focus on accuracy and scholarly precision for both Sanskrit-to-English and English-to-Sanskrit translations.`;
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/chat`, {
       method: 'POST',
@@ -61,7 +75,7 @@ If the word is not found or unclear, provide the best possible interpretation ba
           dictionary: 'AI'
         }];
       }
-    } catch (parseError) {
+    } catch {
       console.log('Failed to parse AI JSON response, using text response');
     }
 

@@ -266,8 +266,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
                     const lubotskyLines = lubotskyTransliteration.split('<br />').filter(line => line.trim());
                     const padaTransliteration = lubotskyLines[pIdx] || '';
                     
-                    // Split transliteration into words and pattern into characters
-                    const transliterationWords = padaTransliteration ? padaTransliteration.split(' ') : [];
+                    // Split pattern into characters
                     const patternChars = pattern.split('');
                     
                     // Create word-to-pattern mapping

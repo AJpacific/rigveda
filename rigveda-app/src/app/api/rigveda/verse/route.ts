@@ -28,12 +28,6 @@ function formatDocId(mandala: number, hymn: number, verse: number): string {
   return `${m}${h}${v}`;
 }
 
-function extractSanskrit(padas: PadaData[]): string {
-  if (!padas || !Array.isArray(padas)) return "";
-  return padas.map(pada => 
-    pada.grammarData.map((token: GrammarToken) => token.form || "").join(" ")
-  ).join(" | ");
-}
 
 function getVersion(versions: VersionData[], type: string, id?: string): VersionData | undefined {
   if (!versions || !Array.isArray(versions)) return undefined;
