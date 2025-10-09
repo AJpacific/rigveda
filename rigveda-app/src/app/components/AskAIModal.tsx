@@ -16,7 +16,7 @@ type AskAIModalProps = {
   contextPrefix?: string; // optional prefix/context to prepend to first question
 };
 
-export default function AskAIModal({ open, onClose, initialQuestion, title = 'Ask AI', contextPrefix = '' }: AskAIModalProps) {
+export default function AskAIModal({ open, onClose, title = 'Ask AI', contextPrefix = '' }: AskAIModalProps) {
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
   const [chatInput, setChatInput] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
@@ -63,7 +63,7 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
       const existingHistory = loadChatHistory();
       setChatHistory(existingHistory);
     }
-  }, [open]);
+  }, [open, loadChatHistory]);
 
   // Auto-scroll
   useEffect(() => {
@@ -90,45 +90,44 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
       }, 100);
     }
     lastOpenRef.current = true;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, contextPrefix]);
 
-  const askChatDirectly = async (fullQuestion: string) => {
-    if (!fullQuestion.trim()) return;
-    const messages: ChatMessage[] = [...chatHistory, { role: 'user', content: fullQuestion }];
-    setChatLoading(true);
-    setChatError(null);
-    setChatInput('');
-    setChatHistory(messages);
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ messages }),
-      });
-      let data: { answer?: string; error?: string; detail?: string } = {};
-      const contentType = res.headers.get('content-type') || '';
-      try {
-        if (contentType.includes('application/json')) data = await res.json();
-        else {
-          const txt = await res.text();
-          try { data = JSON.parse(txt); } catch { data = { error: txt || 'Empty response' }; }
-        }
-      } catch {
-        const txt = await res.text().catch(() => '');
-        data = { error: txt || 'Empty response' };
-      }
-      if (!res.ok) {
-        const combined = [data.error, data.detail].filter(Boolean).join(': ');
-        throw new Error(combined || `Chat failed (${res.status})`);
-      }
-      setChatHistory((h) => [...h, { role: 'assistant', content: data.answer || '' }]);
-    } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : 'Chat failed';
-      setChatError(message);
-    }
-    setChatLoading(false);
-  };
+  // const askChatDirectly = async (fullQuestion: string) => {
+  //   if (!fullQuestion.trim()) return;
+  //   const messages: ChatMessage[] = [...chatHistory, { role: 'user', content: fullQuestion }];
+  //   setChatLoading(true);
+  //   setChatError(null);
+  //   setChatInput('');
+  //   setChatHistory(messages);
+  //   try {
+  //     const res = await fetch('/api/chat', {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+  //       body: JSON.stringify({ messages }),
+  //     });
+  //     let data: { answer?: string; error?: string; detail?: string } = {};
+  //     const contentType = res.headers.get('content-type') || '';
+  //     try {
+  //       if (contentType.includes('application/json')) data = await res.json();
+  //       else {
+  //         const txt = await res.text();
+  //         try { data = JSON.parse(txt); } catch { data = { error: txt || 'Empty response' }; }
+  //       }
+  //     } catch {
+  //       const txt = await res.text().catch(() => '');
+  //       data = { error: txt || 'Empty response' };
+  //     }
+  //     if (!res.ok) {
+  //       const combined = [data.error, data.detail].filter(Boolean).join(': ');
+  //       throw new Error(combined || `Chat failed (${res.status})`);
+  //     }
+  //     setChatHistory((h) => [...h, { role: 'assistant', content: data.answer || '' }]);
+  //   } catch (e: unknown) {
+  //     const message = e instanceof Error ? e.message : 'Chat failed';
+  //     setChatError(message);
+  //   }
+  //   setChatLoading(false);
+  // };
 
   const askChat = async (question?: string) => {
     const q = (question ?? chatInput).trim();

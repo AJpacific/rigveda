@@ -1,8 +1,25 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faSpinner, faBook, faLanguage, faMicroscope, faInfoCircle, faExternalLinkAlt, faQuestionCircle, faMusic, faList } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faSpinner, faBook, faLanguage, faMicroscope, faInfoCircle, faQuestionCircle, faMusic, faList } from '@fortawesome/free-solid-svg-icons';
+
+interface PadaData {
+  grammarData?: Array<{
+    form: string;
+    lemma: string;
+    props?: Record<string, unknown>;
+  }>;
+}
+
+interface VersionData {
+  type: string;
+  id: string;
+  form: string[];
+  source: string;
+  language: string;
+  metricalData?: string[];
+}
 
 interface VerseDetailsData {
   mandala: number;
@@ -24,10 +41,10 @@ interface VerseDetailsData {
   meter: string;
   strata: string;
   metricalData?: string;
-  padas: any[];
-  versions: any[];
-  externalResources: any[];
-  rawData: any;
+  padas: PadaData[];
+  versions: VersionData[];
+  externalResources: unknown[];
+  rawData: unknown;
 }
 
 interface VerseDetailsModalProps {
@@ -45,22 +62,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
   const [activeTab, setActiveTab] = useState<'overview' | 'grammar' | 'metrical' | 'versions'>('overview');
   const [strataHelpOpen, setStrataHelpOpen] = useState(false);
 
-
-  useEffect(() => {
-    if (isOpen && mandala && hymn && verse) {
-      setData(null);
-      setError(null);
-      setActiveTab('overview');
-      fetchVerseDetails();
-    } else if (!isOpen) {
-      // Reset state when modal closes
-      setData(null);
-      setError(null);
-      setActiveTab('overview');
-    }
-  }, [isOpen, mandala, hymn, verse]);
-
-  const fetchVerseDetails = async () => {
+  const fetchVerseDetails = useCallback(async () => {
     setLoading(true);
     setError(null);
 
@@ -77,7 +79,21 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
     } finally {
       setLoading(false);
     }
-  };
+  }, [mandala, hymn, verse]);
+
+  useEffect(() => {
+    if (isOpen && mandala && hymn && verse) {
+      setData(null);
+      setError(null);
+      setActiveTab('overview');
+      fetchVerseDetails();
+    } else if (!isOpen) {
+      // Reset state when modal closes
+      setData(null);
+      setError(null);
+      setActiveTab('overview');
+    }
+  }, [isOpen, mandala, hymn, verse, fetchVerseDetails]);
 
   const renderOverview = () => {
     if (!data) return null;
@@ -184,7 +200,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
           <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <h4 className="font-semibold text-gray-800 mb-3">Pada {index + 1}</h4>
             <div className="space-y-2">
-              {pada.grammarData?.map((token: any, tokenIndex: number) => (
+              {pada.grammarData?.map((token, tokenIndex: number) => (
                 <div key={tokenIndex} className="flex flex-wrap items-center gap-2 p-2 bg-white rounded border">
                   <span className="font-semibold text-gray-800">{token.form}</span>
                   <span className="text-sm text-gray-600">({token.lemma})</span>
@@ -224,8 +240,8 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
         metricalPadas = [data.metricalData.trim()];
       }
 
-      // Get form data (pada texts)
-      const formPadas = data.form || [];
+      // Get form data (pada texts) - using padas data instead
+      const formPadas = data.padas || [];
 
       return (
         <div className="space-y-4">
@@ -245,7 +261,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
                 <tbody>
                   {metricalPadas.map((pattern, pIdx) => {
                     const padaLetter = String.fromCharCode(97 + pIdx); // a, b, c, d
-                    const formText = formPadas[pIdx] || '';
+                    const formText = formPadas[pIdx]?.grammarData?.map(token => token.form).join(' ') || '';
                     
                     // Get Lubotsky transliteration for this pada
                     const lubotskyTransliteration = data.transliteration || '';
@@ -280,7 +296,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
                       return result;
                     };
                     
-                    const wordPatternMapping = createWordPatternMapping();
+                    // const wordPatternMapping = createWordPatternMapping();
                     
                     return (
                       <tr key={pIdx} className="border-b border-blue-200 hover:bg-blue-50">
@@ -450,7 +466,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
           ].map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
+              onClick={() => setActiveTab(tab.id as 'overview' | 'grammar' | 'metrical' | 'versions')}
               className={`flex items-center gap-2 px-3 sm:px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                 activeTab === tab.id
                   ? 'border-indigo-500 text-indigo-600'
