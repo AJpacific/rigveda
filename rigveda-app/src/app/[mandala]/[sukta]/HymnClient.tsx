@@ -37,6 +37,33 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   const [chatRef, setChatRef] = useState<string>('');
   const [chatContext, setChatContext] = useState<string>('');
   const chatListRef = useRef<HTMLDivElement | null>(null);
+  const chatInputRef = useRef<HTMLTextAreaElement | null>(null);
+
+  // Chat history persistence - unified for all verse-level chats
+  const getChatStorageKey = () => `verse_chat_history_${mandala}_${sukta}`;
+  
+  const saveChatHistory = (history: ChatMessage[]) => {
+    try {
+      const key = getChatStorageKey();
+      localStorage.setItem(key, JSON.stringify(history));
+      console.log('Saved chat history for', key, ':', history);
+    } catch (error) {
+      console.warn('Failed to save chat history:', error);
+    }
+  };
+
+  const loadChatHistory = (): ChatMessage[] => {
+    try {
+      const key = getChatStorageKey();
+      const stored = localStorage.getItem(key);
+      const history = stored ? JSON.parse(stored) : [];
+      console.log('Loading chat history for', key, ':', history);
+      return history;
+    } catch (error) {
+      console.warn('Failed to load chat history:', error);
+      return [];
+    }
+  };
 
   // Dictionary modal state
   const [dictOpen, setDictOpen] = useState(false);
@@ -103,33 +130,55 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
     const ctx = `(${ref}) ${verse.devanagari_text}\n(${verse.padapatha_text})\n${verse.griffith_translation}`;
     setChatRef(ref);
     setChatContext(ctx);
-    setChatHistory([]);
+    
+    // Load existing chat history (unified for all verses)
+    const existingHistory = loadChatHistory();
+    console.log('Setting chat history to:', existingHistory);
+    setChatHistory(existingHistory);
     setChatError(null);
+    setChatInput(`Context: ${ctx}\n\nQuestion: `);
     setChatOpen(true);
     // Lock background scroll when modal opens
     try {
       document.documentElement.classList.add('no-scroll');
       document.body.classList.add('no-scroll');
     } catch {}
-    void askChat(`Explain this verse in detail:\n${ctx}`);
+  };
+
+  const resetTextareaHeight = () => {
+    if (chatInputRef.current) {
+      chatInputRef.current.style.height = 'auto';
+      chatInputRef.current.style.height = '48px';
+    }
   };
 
   const askChat = async (question?: string) => {
     const q = (question ?? chatInput).trim();
     if (!q) return;
     const firstTurn = chatHistory.length === 0;
-    const messages: ChatMessage[] = firstTurn
-      ? [{ role: 'user', content: `${chatContext}${q}` }]
-      : [...chatHistory, { role: 'user', content: q }];
+    
+    // Create user message for display (just the question)
+    const userMessage: ChatMessage = { role: 'user' as const, content: q };
+    
+    // Create messages for API (first turn includes context)
+    const apiMessages: ChatMessage[] = firstTurn
+      ? [{ role: 'user' as const, content: `${chatContext}${q}` }]
+      : [...chatHistory, userMessage];
+    
     setChatLoading(true);
     setChatError(null);
     setChatInput('');
-    setChatHistory(messages);
+    resetTextareaHeight();
+    
+    // Update chat history for display (always just the question)
+    const displayHistory = [...chatHistory, userMessage];
+    setChatHistory(displayHistory);
+    saveChatHistory(displayHistory);
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ messages }),
+        body: JSON.stringify({ messages: apiMessages }),
       });
       let data: { answer?: string; refs?: { mandala: number; sukta: number; verse: string }[]; error?: string; detail?: string } = {};
       const contentType = res.headers.get('content-type') || '';
@@ -148,7 +197,9 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
         const combined = [data.error, data.detail].filter(Boolean).join(': ');
         throw new Error(combined || `Chat failed (${res.status})`);
       }
-      setChatHistory((h) => [...h, { role: 'assistant', content: data.answer || '' }]);
+      const newHistory: ChatMessage[] = [...displayHistory, { role: 'assistant' as const, content: data.answer || '' }];
+      setChatHistory(newHistory);
+      saveChatHistory(newHistory);
     } catch (e: unknown) {
       const message = e instanceof Error ? e.message : 'Chat failed';
       setChatError(message);
@@ -156,8 +207,9 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
     setChatLoading(false);
   };
 
-  const handleChatKey = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+  const handleChatKey = (e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       void askChat();
     }
   };
@@ -199,6 +251,24 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   useEffect(() => {
     chatListRef.current?.scrollTo({ top: chatListRef.current.scrollHeight, behavior: 'smooth' });
   }, [chatHistory, chatLoading]);
+
+  // Auto-resize textarea when modal opens with pre-populated content
+  useEffect(() => {
+    if (chatOpen && chatInput && chatInputRef.current) {
+      const textarea = chatInputRef.current;
+      textarea.style.height = 'auto';
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 200)}px`;
+      
+      // Scroll to input field and position cursor at end
+      setTimeout(() => {
+        textarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Scroll textarea content to bottom and position cursor at end
+        textarea.scrollTop = textarea.scrollHeight;
+        textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+        textarea.focus();
+      }, 100);
+    }
+  }, [chatOpen, chatInput]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -326,7 +396,8 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   const audioButtonLabel = audioState === 'playing' ? 'Pause' : audioState === 'loading' ? 'Loading' : 'Play';
 
   return (
-    <div className="space-y-6 pb-24 sm:pb-28">
+    <div className="space-y-6 pb-24 sm:pb-28 relative">
+
       {/* Content */}
       <section className="space-y-4 pt-2">
         {hymn.verses.map((verse: Verse, i: number) => {
@@ -425,8 +496,8 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             }
           }}
         >
-          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300" style={{ width: '100%' }}>
-            <div className="flex items-center justify-between p-6 border-b border-gray-100">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full h-[80vh] flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden" style={{ width: '100%' }}>
+            <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
                   <FontAwesomeIcon icon={faRobot} className="text-blue-600 text-lg" />
@@ -455,13 +526,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                 <FontAwesomeIcon icon={faTimes} className="text-sm" />
               </button>
             </div>
-            <div ref={chatListRef} className="p-6 max-h-[calc(80vh-200px)] overflow-y-auto space-y-4">
-              {chatHistory.length === 0 && (
-                <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
-                  Context loaded. Ask a question about this verse.
-                </div>
-              )}
+            <div ref={chatListRef} className="flex-1 p-6 overflow-y-auto space-y-4 min-h-0">
               {chatHistory.map((m, idx) => (
                 <div key={idx} className={`flex gap-3 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   {m.role === 'assistant' && (
@@ -506,21 +571,29 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                 </div>
               )}
             </div>
-            <div className="p-6 border-t border-gray-100 bg-gray-50">
+            <div className="p-6 border-t border-gray-100 bg-gray-50 flex-shrink-0">
               <div className="flex gap-3">
                 <div className="flex-1 relative">
-                  <input
-                    type="text"
+                  <textarea
+                    ref={chatInputRef}
                     value={chatInput}
-                    onChange={(e) => setChatInput(e.target.value)}
+                    onChange={(e) => {
+                      setChatInput(e.target.value);
+                      // Auto-resize textarea
+                      const textarea = e.target;
+                      textarea.style.height = 'auto';
+                      textarea.style.height = `${Math.min(textarea.scrollHeight, 120)}px`;
+                    }}
                     onKeyDown={handleChatKey}
-                    className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Ask a follow-up question about this verse..."
+                    rows={1}
+                    className="w-full px-4 py-3 pr-14 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none overflow-y-auto"
+                    placeholder="Add your question after the context above..."
+                    style={{ minHeight: '48px', maxHeight: '120px' }}
                   />
                   <button 
                     onClick={() => void askChat()} 
                     disabled={!chatInput.trim() || chatLoading}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-blue-600 hover:text-blue-700 transition-colors duration-200 flex items-center justify-center"
+                    className="absolute right-6 bottom-2 w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-blue-600 hover:text-blue-700 transition-colors duration-200 flex items-center justify-center"
                   >
                     {chatLoading ? (
                       <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>

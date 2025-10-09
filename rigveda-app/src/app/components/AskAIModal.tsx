@@ -22,7 +22,34 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
   const [chatLoading, setChatLoading] = useState(false);
   const [chatError, setChatError] = useState<string | null>(null);
   const listRef = useRef<HTMLDivElement | null>(null);
+  const chatInputRef = useRef<HTMLTextAreaElement | null>(null);
   const lastOpenRef = useRef(false);
+
+  // Chat history persistence
+  const getChatStorageKey = () => 'random_verse_chat_history';
+  
+  const saveChatHistory = (history: ChatMessage[]) => {
+    try {
+      const key = getChatStorageKey();
+      localStorage.setItem(key, JSON.stringify(history));
+      console.log('Saved chat history for', key, ':', history);
+    } catch (error) {
+      console.warn('Failed to save chat history:', error);
+    }
+  };
+
+  const loadChatHistory = (): ChatMessage[] => {
+    try {
+      const key = getChatStorageKey();
+      const stored = localStorage.getItem(key);
+      const history = stored ? JSON.parse(stored) : [];
+      console.log('Loading chat history for', key, ':', history);
+      return history;
+    } catch (error) {
+      console.warn('Failed to load chat history:', error);
+      return [];
+    }
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -30,29 +57,41 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
     return () => { try { document.documentElement.classList.remove('no-scroll'); document.body.classList.remove('no-scroll'); } catch {} };
   }, [open]);
 
+  // Load chat history when modal opens
+  useEffect(() => {
+    if (open) {
+      const existingHistory = loadChatHistory();
+      setChatHistory(existingHistory);
+    }
+  }, [open]);
+
   // Auto-scroll
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: 'smooth' });
   }, [chatHistory, chatLoading]);
 
-  // Ask on open if initialQuestion provided
+  // Pre-fill input with context when modal opens
   useEffect(() => {
     if (!open) {
       lastOpenRef.current = false;
       return;
     }
-    // If modal was just opened (wasn't open before) and has initial question, ask it
-    if (!lastOpenRef.current && initialQuestion) {
-      // Use timeout to ensure state is updated before asking
+    // If modal was just opened (wasn't open before), pre-fill input with context
+    if (!lastOpenRef.current && contextPrefix) {
+      setChatInput(contextPrefix);
+      // Trigger resize after setting the context
       setTimeout(() => {
-        // Force the context to be included by calling askChat with the full context
-        const fullQuestion = contextPrefix ? `${contextPrefix}${initialQuestion}` : initialQuestion;
-        void askChatDirectly(fullQuestion);
-      }, 0);
+        resizeTextarea();
+        // Focus the textarea and position cursor at the end
+        if (chatInputRef.current) {
+          chatInputRef.current.focus();
+          chatInputRef.current.setSelectionRange(chatInputRef.current.value.length, chatInputRef.current.value.length);
+        }
+      }, 100);
     }
     lastOpenRef.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, initialQuestion, contextPrefix]);
+  }, [open, contextPrefix]);
 
   const askChatDirectly = async (fullQuestion: string) => {
     if (!fullQuestion.trim()) return;
@@ -95,20 +134,29 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
     const q = (question ?? chatInput).trim();
     if (!q) return;
     const firstTurn = chatHistory.length === 0;
-    // Always include context prefix for initial questions
-    const content = firstTurn && contextPrefix ? `${contextPrefix}${q}` : q;
-    const messages: ChatMessage[] = firstTurn
-      ? [{ role: 'user', content }]
-      : [...chatHistory, { role: 'user', content: q }];
+    
+    // Create user message for display (just the question)
+    const userMessage: ChatMessage = { role: 'user' as const, content: q };
+    
+    // Create messages for API (first turn includes context)
+    const apiMessages: ChatMessage[] = firstTurn
+      ? [{ role: 'user' as const, content: contextPrefix ? `${contextPrefix}${q}` : q }]
+      : [...chatHistory, userMessage];
+    
     setChatLoading(true);
     setChatError(null);
     setChatInput('');
-    setChatHistory(messages);
+    resetTextareaHeight();
+    
+    // Update chat history for display (always just the question)
+    const displayHistory = [...chatHistory, userMessage];
+    setChatHistory(displayHistory);
+    saveChatHistory(displayHistory);
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ messages }),
+        body: JSON.stringify({ messages: apiMessages }),
       });
       let data: { answer?: string; error?: string; detail?: string } = {};
       const contentType = res.headers.get('content-type') || '';
@@ -126,7 +174,9 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
         const combined = [data.error, data.detail].filter(Boolean).join(': ');
         throw new Error(combined || `Chat failed (${res.status})`);
       }
-      setChatHistory((h) => [...h, { role: 'assistant', content: data.answer || '' }]);
+      const newHistory: ChatMessage[] = [...displayHistory, { role: 'assistant' as const, content: data.answer || '' }];
+      setChatHistory(newHistory);
+      saveChatHistory(newHistory);
     } catch (e: unknown) {
       const message = e instanceof Error ? e.message : 'Chat failed';
       setChatError(message);
@@ -134,8 +184,27 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
     setChatLoading(false);
   };
 
-  const handleKey = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') void askChat();
+  const resetTextareaHeight = () => {
+    if (chatInputRef.current) {
+      chatInputRef.current.style.height = 'auto';
+      chatInputRef.current.style.height = '48px';
+    }
+  };
+
+  const resizeTextarea = () => {
+    if (chatInputRef.current) {
+      chatInputRef.current.style.height = 'auto';
+      chatInputRef.current.style.height = `${Math.min(chatInputRef.current.scrollHeight, 120)}px`;
+      // Scroll to bottom to show the end of the content
+      chatInputRef.current.scrollTop = chatInputRef.current.scrollHeight;
+    }
+  };
+
+  const handleKey = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      void askChat();
+    }
   };
 
   return (
@@ -159,8 +228,8 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
         }
       }}
     >
-      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300" style={{ width: '100%' }}>
-        <div className="flex items-center justify-between p-6 border-b border-gray-100">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full h-[80vh] flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden" style={{ width: '100%' }}>
+        <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0 relative z-10 bg-white">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
               <FontAwesomeIcon icon={faRobot} className="text-blue-600 text-lg" />
@@ -188,7 +257,7 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
             <FontAwesomeIcon icon={faTimes} className="text-sm" />
           </button>
         </div>
-        <div ref={listRef} className="p-6 max-h-[calc(80vh-200px)] overflow-y-auto space-y-4">
+        <div ref={listRef} className="flex-1 p-6 overflow-y-auto space-y-4 min-h-0">
           {chatHistory.map((m, idx) => (
             <div key={idx} className={`flex gap-3 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               {m.role === 'assistant' && (
@@ -233,21 +302,33 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
             </div>
           )}
         </div>
-        <div className="p-6 border-t border-gray-100 bg-gray-50">
+        <div className="p-6 border-t border-gray-100 bg-gray-50 flex-shrink-0">
           <div className="flex gap-3">
             <div className="flex-1 relative">
-              <input
-                type="text"
+              <textarea
+                ref={chatInputRef}
                 value={chatInput}
-                onChange={(e) => setChatInput(e.target.value)}
+                onChange={(e) => {
+                  setChatInput(e.target.value);
+                  // Auto-resize textarea
+                  const textarea = e.target;
+                  textarea.style.height = 'auto';
+                  textarea.style.height = `${Math.min(textarea.scrollHeight, 120)}px`;
+                }}
                 onKeyDown={handleKey}
-                className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none overflow-y-auto"
                 placeholder="Type your question about Rigveda..."
+                rows={1}
+                style={{
+                  height: 'auto',
+                  minHeight: '48px',
+                  maxHeight: '120px'
+                }}
               />
               <button 
                 onClick={() => void askChat()} 
                 disabled={!chatInput.trim() || chatLoading}
-                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-blue-600 hover:text-blue-700 transition-colors duration-200 flex items-center justify-center"
+                className="absolute right-2 top-2 w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-blue-600 hover:text-blue-700 transition-colors duration-200 flex items-center justify-center"
               >
                 {chatLoading ? (
                   <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>

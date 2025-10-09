@@ -149,7 +149,6 @@ export default function RandomVerseCard() {
       <AskAIModal
         open={askOpen}
         onClose={() => setAskOpen(false)}
-        initialQuestion={askOpen ? "Explain this verse in detail." : undefined}
         title={`Ask AI · ${data ? `${data.verse}` : ''}`}
         contextPrefix={contextPrefix}
       />
