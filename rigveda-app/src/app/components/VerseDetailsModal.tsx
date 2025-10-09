@@ -273,28 +273,28 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
                     const patternChars = pattern.split('');
                     
                     // Create word-to-pattern mapping
-                    const createWordPatternMapping = () => {
-                      if (!padaTransliteration) return null;
-                      
-                      const words = transliterationWords;
-                      const chars = patternChars;
-                      
-                      // Simple mapping: distribute characters evenly among words
-                      const charsPerWord = Math.ceil(chars.length / words.length);
-                      const result = [];
-                      
-                      let charIndex = 0;
-                      for (let i = 0; i < words.length; i++) {
-                        const wordChars = chars.slice(charIndex, charIndex + charsPerWord);
-                        result.push({
-                          word: words[i],
-                          pattern: wordChars
-                        });
-                        charIndex += charsPerWord;
-                      }
-                      
-                      return result;
-                    };
+                    // const createWordPatternMapping = () => {
+                    //   if (!padaTransliteration) return null;
+                    //   
+                    //   const words = transliterationWords;
+                    //   const chars = patternChars;
+                    //   
+                    //   // Simple mapping: distribute characters evenly among words
+                    //   const charsPerWord = Math.ceil(chars.length / words.length);
+                    //   const result = [];
+                    //   
+                    //   let charIndex = 0;
+                    //   for (let i = 0; i < words.length; i++) {
+                    //     const wordChars = chars.slice(charIndex, charIndex + charsPerWord);
+                    //     result.push({
+                    //       word: words[i],
+                    //       pattern: wordChars
+                    //     });
+                    //     charIndex += charsPerWord;
+                    //   }
+                    //   
+                    //   return result;
+                    // };
                     
                     // const wordPatternMapping = createWordPatternMapping();
                     

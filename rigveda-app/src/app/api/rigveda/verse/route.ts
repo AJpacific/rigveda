@@ -2,6 +2,25 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const VEDAWEB_API = 'http://vedaweb.uni-koeln.de/rigveda/api/document/id';
 
+interface GrammarToken {
+  form: string;
+  [key: string]: unknown;
+}
+
+interface PadaData {
+  grammarData: GrammarToken[];
+}
+
+interface VersionData {
+  type: string;
+  id: string;
+  form: string[];
+  source: string;
+  language: string;
+  metricalData?: string[];
+  [key: string]: unknown;
+}
+
 function formatDocId(mandala: number, hymn: number, verse: number): string {
   const m = String(mandala).padStart(2, '0');
   const h = String(hymn).padStart(3, '0');
@@ -9,23 +28,23 @@ function formatDocId(mandala: number, hymn: number, verse: number): string {
   return `${m}${h}${v}`;
 }
 
-function extractSanskrit(padas: any[]): string {
+function extractSanskrit(padas: PadaData[]): string {
   if (!padas || !Array.isArray(padas)) return "";
   return padas.map(pada => 
-    pada.grammarData.map((token: any) => token.form || "").join(" ")
+    pada.grammarData.map((token: GrammarToken) => token.form || "").join(" ")
   ).join(" | ");
 }
 
-function getVersion(versions: any[], type: string, id?: string): any | undefined {
+function getVersion(versions: VersionData[], type: string, id?: string): VersionData | undefined {
   if (!versions || !Array.isArray(versions)) return undefined;
   return versions.find(v => v.type === type && (id ? v.id === id : true));
 }
 
-function getMetricalData(versions: any[]): string | undefined {
+function getMetricalData(versions: VersionData[]): string | undefined {
   if (!versions || !Array.isArray(versions)) return undefined;
   const lubotskyVersion = versions.find(v => v.id === "version_lubotskyzurich" && v.metricalData);
   // Join with <br /> to preserve pada structure instead of spaces
-  return lubotskyVersion ? lubotskyVersion.metricalData.join("<br />") : undefined;
+  return lubotskyVersion ? lubotskyVersion.metricalData?.join("<br />") : undefined;
 }
 
 export async function GET(request: NextRequest) {
@@ -79,13 +98,13 @@ export async function GET(request: NextRequest) {
     const data = await response.json();
 
     // Extract and structure the data
-    const sanskritText = extractSanskrit(data.padas);
+    // const sanskritText = extractSanskrit(data.padas);
     const transliterationVersion = getVersion(data.versions, "version", "version_lubotskyzurich");
     
     // Fallback: if specific transliteration not found, try to find any version with transliteration-like language
     let finalTransliterationVersion = transliterationVersion;
     if (!finalTransliterationVersion) {
-      const fallbackTransliteration = data.versions?.find(v => 
+      const fallbackTransliteration = data.versions?.find((v: VersionData) => 
         v.type === "version" && 
         (v.language?.includes('Latn') || v.language?.includes('transliteration') || v.id?.includes('lubotsky'))
       );

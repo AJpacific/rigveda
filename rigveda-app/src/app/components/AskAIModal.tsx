@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { useEffect, useRef, useState, useCallback, type KeyboardEvent } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -38,7 +38,7 @@ export default function AskAIModal({ open, onClose, title = 'Ask AI', contextPre
     }
   };
 
-  const loadChatHistory = (): ChatMessage[] => {
+  const loadChatHistory = useCallback((): ChatMessage[] => {
     try {
       const key = getChatStorageKey();
       const stored = localStorage.getItem(key);
@@ -49,7 +49,7 @@ export default function AskAIModal({ open, onClose, title = 'Ask AI', contextPre
       console.warn('Failed to load chat history:', error);
       return [];
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (!open) return;

@@ -24,7 +24,7 @@ type ChatMessage = { role: 'user' | 'assistant'; content: string };
 export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }: HymnClientProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [audioState, setAudioState] = useState<AudioState>('idle');
-  const [scrollProgress, setScrollProgress] = useState(0);
+  // const [scrollProgress, setScrollProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentVerseIndex, setCurrentVerseIndex] = useState<number | null>(null);
@@ -305,7 +305,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
       const winScroll = body.scrollTop || doc.scrollTop;
       const height = doc.scrollHeight - doc.clientHeight;
       const p = height > 0 ? (winScroll / height) * 100 : 0;
-      setScrollProgress(p);
+      // setScrollProgress(p);
     };
     onScroll();
     window.addEventListener('scroll', onScroll);
