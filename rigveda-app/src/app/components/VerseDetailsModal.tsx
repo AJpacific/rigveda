@@ -1,0 +1,593 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes, faSpinner, faBook, faLanguage, faMicroscope, faInfoCircle, faExternalLinkAlt, faQuestionCircle, faMusic, faList } from '@fortawesome/free-solid-svg-icons';
+
+interface VerseDetailsData {
+  mandala: number;
+  hymn: number;
+  verse: number;
+  docId: string;
+  sanskrit: string;
+  sanskritSource: string;
+  sanskritLanguage: string;
+  transliteration: string;
+  transliterationSource: string;
+  translations: {
+    english: string;
+    author: string;
+  };
+  deity: string;
+  poetFamily: string;
+  seer: string;
+  meter: string;
+  strata: string;
+  metricalData?: string;
+  padas: any[];
+  versions: any[];
+  externalResources: any[];
+  rawData: any;
+}
+
+interface VerseDetailsModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  mandala: number;
+  hymn: number;
+  verse: number;
+}
+
+export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, verse }: VerseDetailsModalProps) {
+  const [data, setData] = useState<VerseDetailsData | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'overview' | 'grammar' | 'metrical' | 'versions'>('overview');
+  const [strataHelpOpen, setStrataHelpOpen] = useState(false);
+
+
+  useEffect(() => {
+    if (isOpen && mandala && hymn && verse) {
+      setData(null);
+      setError(null);
+      setActiveTab('overview');
+      fetchVerseDetails();
+    } else if (!isOpen) {
+      // Reset state when modal closes
+      setData(null);
+      setError(null);
+      setActiveTab('overview');
+    }
+  }, [isOpen, mandala, hymn, verse]);
+
+  const fetchVerseDetails = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`/api/rigveda/verse?mandala=${mandala}&hymn=${hymn}&verse=${verse}`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch verse details: ${response.status}`);
+      }
+      const result = await response.json();
+      setData(result.data);
+    } catch (err) {
+      console.error('Error fetching verse details:', err);
+      setError(err instanceof Error ? err.message : 'Failed to fetch verse details');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const renderOverview = () => {
+    if (!data) return null;
+
+    return (
+      <div className="space-y-6">
+        <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-4 shadow-sm">
+          <div className="flex items-center gap-2 mb-3">
+            <FontAwesomeIcon icon={faBook} className="text-amber-600" />
+            <h3 className="font-semibold text-amber-800">Sanskrit Text</h3>
+            <span className="text-xs text-amber-600 bg-amber-100 px-2 py-1 rounded-full">
+              {data.sanskritLanguage}
+            </span>
+          </div>
+          <div
+            className="text-lg leading-relaxed text-amber-900 font-serif"
+            dangerouslySetInnerHTML={{ __html: data.sanskrit }}
+          />
+          <div className="text-xs text-amber-600 mt-2 flex items-center gap-1">
+            <FontAwesomeIcon icon={faInfoCircle} className="text-xs" />
+            Source: {data.sanskritSource}
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200 rounded-xl p-4 shadow-sm">
+          <div className="flex items-center gap-2 mb-3">
+            <FontAwesomeIcon icon={faLanguage} className="text-blue-600" />
+            <h3 className="font-semibold text-blue-800">Transliteration</h3>
+          </div>
+          <div
+            className="text-base leading-relaxed text-blue-900 font-mono"
+            dangerouslySetInnerHTML={{ __html: data.transliteration }}
+          />
+          <div className="text-xs text-blue-600 mt-2 flex items-center gap-1">
+            <FontAwesomeIcon icon={faInfoCircle} className="text-xs" />
+            Source: {data.transliterationSource}
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4 shadow-sm">
+          <div className="flex items-center gap-2 mb-3">
+            <FontAwesomeIcon icon={faBook} className="text-green-600" />
+            <h3 className="font-semibold text-green-800">English Translation</h3>
+          </div>
+          <div className="text-base leading-relaxed text-green-900">
+            {data.translations.english}
+          </div>
+          <div className="text-xs text-green-600 mt-2 flex items-center gap-1">
+            <FontAwesomeIcon icon={faInfoCircle} className="text-xs" />
+            Translator: {data.translations.author}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-200 rounded-xl p-4 shadow-sm">
+            <h4 className="font-semibold text-gray-800 mb-2">
+              Deity
+            </h4>
+            <p className="text-gray-700 font-medium">{data.deity}</p>
+          </div>
+          <div className="bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-200 rounded-xl p-4 shadow-sm">
+            <h4 className="font-semibold text-gray-800 mb-2">
+              Poet Family
+            </h4>
+            <p className="text-gray-700 font-medium">{data.poetFamily}</p>
+          </div>
+          <div className="bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-200 rounded-xl p-4 shadow-sm">
+            <h4 className="font-semibold text-gray-800 mb-2">
+              Meter
+            </h4>
+            <p className="text-gray-700 font-medium">{data.meter}</p>
+          </div>
+          <div className="bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-200 rounded-xl p-4 shadow-sm">
+            <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+              Strata
+              <button
+                onClick={() => setStrataHelpOpen(true)}
+                className="w-5 h-5 rounded-full bg-white border border-gray-300 hover:bg-gray-50 flex items-center justify-center text-gray-600 hover:text-gray-800 transition-colors duration-200 shadow-sm"
+                aria-label="Show strata help"
+              >
+                <FontAwesomeIcon icon={faQuestionCircle} className="text-sm" />
+              </button>
+            </h4>
+            <p className="text-gray-700 font-medium">{data.strata}</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderGrammar = () => {
+    if (!data || !data.padas || data.padas.length === 0) {
+      return (
+        <div className="text-center py-8 text-gray-500">
+          <FontAwesomeIcon icon={faMicroscope} className="text-4xl mb-4" />
+          <p>No grammatical analysis available</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-4">
+        {data.padas.map((pada, index) => (
+          <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+            <h4 className="font-semibold text-gray-800 mb-3">Pada {index + 1}</h4>
+            <div className="space-y-2">
+              {pada.grammarData?.map((token: any, tokenIndex: number) => (
+                <div key={tokenIndex} className="flex flex-wrap items-center gap-2 p-2 bg-white rounded border">
+                  <span className="font-semibold text-gray-800">{token.form}</span>
+                  <span className="text-sm text-gray-600">({token.lemma})</span>
+                  {token.props && (
+                    <div className="flex flex-wrap gap-1">
+                      {Object.entries(token.props).map(([key, value]) => (
+                        <span key={key} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                          {key}: {String(value)}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  const renderMetrical = () => {
+    if (!data) return null;
+
+    // Process metrical data per pada
+    const renderMetricalStructure = () => {
+      if (!data.metricalData) return null;
+
+      // Split metrical data by pada (using <br /> or \n as separators)
+      let metricalPadas;
+      if (data.metricalData.includes('<br />')) {
+        metricalPadas = data.metricalData.split('<br />').map(line => line.trim());
+      } else if (data.metricalData.includes('\n')) {
+        metricalPadas = data.metricalData.split('\n').map(line => line.trim());
+      } else {
+        // Single line - try to split by spaces or assume single pattern
+        metricalPadas = [data.metricalData.trim()];
+      }
+
+      // Get form data (pada texts)
+      const formPadas = data.form || [];
+
+      return (
+        <div className="space-y-4">
+          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+              <h4 className="font-semibold text-gray-800">Metrical Pattern</h4>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-200">Pada</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-200">Text</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-200">Transliteration & Pattern</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {metricalPadas.map((pattern, pIdx) => {
+                    const padaLetter = String.fromCharCode(97 + pIdx); // a, b, c, d
+                    const formText = formPadas[pIdx] || '';
+                    
+                    // Get Lubotsky transliteration for this pada
+                    const lubotskyTransliteration = data.transliteration || '';
+                    const lubotskyLines = lubotskyTransliteration.split('<br />').filter(line => line.trim());
+                    const padaTransliteration = lubotskyLines[pIdx] || '';
+                    
+                    // Split transliteration into words and pattern into characters
+                    const transliterationWords = padaTransliteration ? padaTransliteration.split(' ') : [];
+                    const patternChars = pattern.split('');
+                    
+                    // Create word-to-pattern mapping
+                    const createWordPatternMapping = () => {
+                      if (!padaTransliteration) return null;
+                      
+                      const words = transliterationWords;
+                      const chars = patternChars;
+                      
+                      // Simple mapping: distribute characters evenly among words
+                      const charsPerWord = Math.ceil(chars.length / words.length);
+                      const result = [];
+                      
+                      let charIndex = 0;
+                      for (let i = 0; i < words.length; i++) {
+                        const wordChars = chars.slice(charIndex, charIndex + charsPerWord);
+                        result.push({
+                          word: words[i],
+                          pattern: wordChars
+                        });
+                        charIndex += charsPerWord;
+                      }
+                      
+                      return result;
+                    };
+                    
+                    const wordPatternMapping = createWordPatternMapping();
+                    
+                    return (
+                      <tr key={pIdx} className="border-b border-blue-200 hover:bg-blue-50">
+                        <td className="px-4 py-3 text-sm font-medium text-gray-900">
+                          {padaLetter}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-700">
+                          {formText || '-'}
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="space-y-2">
+                            {/* Transliteration line */}
+                            <div className="text-sm text-gray-600 font-mono">
+                              {padaTransliteration || '-'}
+                            </div>
+                            {/* Pattern line */}
+                            <div className="flex items-center gap-1 flex-wrap">
+                              {patternChars.map((char, cIdx) => (
+                                <span
+                                  key={cIdx}
+                                  className="px-2 py-1 text-sm font-bold rounded bg-blue-100 text-blue-800 border border-blue-200"
+                                >
+                                  {char}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    return (
+      <div className="space-y-6">
+        {data.metricalData && (
+          <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+            <h3 className="font-semibold text-purple-800 mb-3">Metrical Pattern</h3>
+            <div className="text-xs text-purple-600 mb-4">
+              L = Long syllable (Guru), S = Short syllable (Laghu)
+            </div>
+            {renderMetricalStructure()}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderVersions = () => {
+    if (!data || !data.versions || data.versions.length === 0) {
+      return (
+        <div className="text-center py-8 text-gray-500">
+          <FontAwesomeIcon icon={faBook} className="text-4xl mb-4" />
+          <p>No additional versions available</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-4">
+        {data.versions
+          .filter(version => 
+            !version.source?.includes('Eichler') && 
+            !version.language?.includes('san-Deva')
+          )
+          .map((version, index) => (
+          <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+            <div className="flex items-center justify-between mb-2">
+              <h4 className="font-semibold text-gray-800">{version.type}</h4>
+              <span className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded">
+                {version.language}
+              </span>
+            </div>
+            {version.source && (
+              <div className="text-sm text-gray-600 mb-2">Source: {version.source}</div>
+            )}
+            <div className="text-sm text-gray-700">
+              {Array.isArray(version.form) ? version.form.join(' ') : version.form}
+            </div>
+            {version.metricalData && (
+              <div className="mt-2 text-xs text-purple-600 font-mono">
+                Metrical: {version.metricalData.join(' ')}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-start justify-center p-4 pb-20"
+      style={{
+        backgroundColor: 'rgba(0, 0, 0, 0.1) !important',
+        background: 'rgba(0, 0, 0, 0.1) !important',
+        paddingTop: '40px',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        position: 'fixed',
+      }}
+      role="dialog"
+      aria-modal="true"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+          try {
+            document.body.classList.remove('no-scroll');
+          } catch {}
+        }
+      }}
+    >
+      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[75vh] sm:max-h-[80vh] flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden mx-4 sm:mx-0 mb-4">
+        <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
+              <FontAwesomeIcon icon={faInfoCircle} className="text-indigo-600 text-lg" />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold text-gray-900">
+                Verse Details
+              </h2>
+              <p className="text-sm text-gray-500">
+                Mandala {mandala}, Hymn {hymn}, Verse {verse}
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              e.nativeEvent.stopImmediatePropagation();
+              onClose();
+              try {
+                document.documentElement.classList.remove('no-scroll');
+                document.body.classList.remove('no-scroll');
+              } catch {}
+            }}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors duration-200"
+            aria-label="Close"
+            type="button"
+          >
+            <FontAwesomeIcon icon={faTimes} className="text-sm" />
+          </button>
+        </div>
+
+        <div className="flex border-b border-gray-200 flex-shrink-0 overflow-x-auto">
+          {[
+            { id: 'overview', label: 'Overview', icon: faBook },
+            { id: 'grammar', label: 'Grammar', icon: faMicroscope },
+            { id: 'metrical', label: 'Metrical', icon: faMusic },
+            { id: 'versions', label: 'Versions', icon: faList },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id as any)}
+              className={`flex items-center gap-2 px-3 sm:px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+                activeTab === tab.id
+                  ? 'border-indigo-500 text-indigo-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <FontAwesomeIcon icon={tab.icon} className="text-xs" />
+              <span className="hidden sm:inline">{tab.label}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="flex-1 p-4 sm:p-6 overflow-y-auto min-h-0">
+          {loading && (
+            <div className="flex items-center justify-center py-12">
+              <FontAwesomeIcon icon={faSpinner} className="text-2xl text-indigo-600 animate-spin mr-3" />
+              <span className="text-gray-600">Loading verse details...</span>
+            </div>
+          )}
+
+          {error && (
+            <div className="flex items-center gap-2 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+              {error}
+            </div>
+          )}
+
+          {!loading && !error && data && (
+            <>
+              {activeTab === 'overview' && renderOverview()}
+              {activeTab === 'grammar' && renderGrammar()}
+              {activeTab === 'metrical' && renderMetrical()}
+              {activeTab === 'versions' && renderVersions()}
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Strata Help Modal */}
+      {strataHelpOpen && (
+        <div 
+          className="fixed inset-0 z-60 flex items-center justify-center p-4"
+          style={{ 
+            backgroundColor: 'rgba(0, 0, 0, 0.1) !important',
+            background: 'rgba(0, 0, 0, 0.1) !important',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            position: 'fixed'
+          }}
+          role="dialog" 
+          aria-modal="true"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setStrataHelpOpen(false);
+            }
+          }}
+        >
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden">
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <FontAwesomeIcon icon={faQuestionCircle} className="text-blue-600 text-lg" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    Stanza Strata
+                  </h2>
+                  <p className="text-sm text-gray-500">
+                    Classification system for Vedic verses
+                  </p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setStrataHelpOpen(false)}
+                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors duration-200" 
+                aria-label="Close"
+                type="button"
+              >
+                <FontAwesomeIcon icon={faTimes} className="text-sm" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 p-6 overflow-y-auto min-h-0">
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 gap-3">
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <span className="font-mono text-lg font-bold text-gray-800 w-8">A</span>
+                    <span className="text-gray-700">Archaic</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <span className="font-mono text-lg font-bold text-gray-800 w-8">a</span>
+                    <span className="text-gray-700">Archaic on metrical evidence alone</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <span className="font-mono text-lg font-bold text-gray-800 w-8">S</span>
+                    <span className="text-gray-700">Strophic</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <span className="font-mono text-lg font-bold text-gray-800 w-8">s</span>
+                    <span className="text-gray-700">Strophic on metrical evidence alone</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <span className="font-mono text-lg font-bold text-gray-800 w-8">N</span>
+                    <span className="text-gray-700">Normal</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <span className="font-mono text-lg font-bold text-gray-800 w-8">n</span>
+                    <span className="text-gray-700">Normal on metrical evidence alone</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <span className="font-mono text-lg font-bold text-gray-800 w-8">C</span>
+                    <span className="text-gray-700">Cretic</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <span className="font-mono text-lg font-bold text-gray-800 w-8">c</span>
+                    <span className="text-gray-700">Cretic on metrical evidence alone</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <span className="font-mono text-lg font-bold text-gray-800 w-8">P</span>
+                    <span className="text-gray-700">Popular for linguistic reasons, and possibly also for non-linguistic reasons</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <span className="font-mono text-lg font-bold text-gray-800 w-8">p</span>
+                    <span className="text-gray-700">Popular for non-linguistic reasons</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

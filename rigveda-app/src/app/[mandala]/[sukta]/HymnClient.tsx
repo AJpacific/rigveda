@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStop, faHourglass, faPlay, faTimes, faRobot } from '@fortawesome/free-solid-svg-icons';
+import { faStop, faHourglass, faPlay, faTimes, faRobot, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import type { Hymn, Verse } from '../../../types/rigveda';
+import VerseDetailsModal from '../../components/VerseDetailsModal';
 
 type HymnClientProps = {
   hymn: Hymn;
@@ -77,6 +78,10 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   // Verse highlighting state
   const [highlightedVerse, setHighlightedVerse] = useState<string | null>(null);
 
+  // Verse details modal state
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const [selectedVerse, setSelectedVerse] = useState<number | null>(null);
+
   // Dispatch hymn metadata to global header
   useEffect(() => {
     try {
@@ -140,9 +145,33 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
     setChatOpen(true);
     // Lock background scroll when modal opens
     try {
-      document.documentElement.classList.add('no-scroll');
       document.body.classList.add('no-scroll');
     } catch {}
+  };
+
+  const openVerseDetails = (verse: Verse) => {
+    // Extract verse number from format like "1.1.1" -> 1, "1.1.2" -> 2, etc.
+    const verseNumber = parseInt(verse.verse_number.split('.').pop() || '1');
+    
+    // Close modal first if it's open, then open with new verse
+    if (detailsOpen) {
+      setDetailsOpen(false);
+      setSelectedVerse(null);
+      // Small delay to ensure modal closes before reopening
+      setTimeout(() => {
+        setSelectedVerse(verseNumber);
+        setDetailsOpen(true);
+        try {
+          document.body.classList.add('no-scroll');
+        } catch {}
+      }, 100);
+    } else {
+      setSelectedVerse(verseNumber);
+      setDetailsOpen(true);
+      try {
+        document.body.classList.add('no-scroll');
+      } catch {}
+    }
   };
 
   const resetTextareaHeight = () => {
@@ -221,7 +250,6 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
     setDictUrl(url);
     setDictOpen(true);
     try {
-      document.documentElement.classList.add('no-scroll');
       document.body.classList.add('no-scroll');
     } catch {}
   };
@@ -396,7 +424,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   const audioButtonLabel = audioState === 'playing' ? 'Pause' : audioState === 'loading' ? 'Loading' : 'Play';
 
   return (
-    <div className="space-y-6 pb-24 sm:pb-28 relative">
+    <div className="space-y-6 pb-32 sm:pb-36 relative">
 
       {/* Content */}
       <section className="space-y-4 pt-2">
@@ -404,8 +432,8 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
           const isFirst = i === 0;
           const isHighlighted = highlightedVerse === verse.verse_number;
           const articleClass = isFirst
-            ? 'm-card m-elevation-1 p-2 sm:p-4 sm:pt-8 relative'
-            : 'm-card m-elevation-1 p-3 sm:p-4 sm:pt-10 relative';
+            ? 'm-card m-elevation-1 p-2 sm:p-4 sm:pt-4 relative'
+            : 'm-card m-elevation-1 p-3 sm:p-4 sm:pt-4 relative';
           
           return (
           <article 
@@ -413,10 +441,18 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             id={`verse-${verse.verse_number}`}
             className={`${articleClass} ${isHighlighted ? 'verse-highlight' : ''}`}
           >
-            <div className="flex justify-end">
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => openVerseDetails(verse)}
+                className="m-btn m-btn-outlined text-sm"
+                aria-label="View detailed information about this verse"
+              >
+                <FontAwesomeIcon icon={faInfoCircle} className="mr-1" />
+                Details
+              </button>
               <button
                 onClick={() => startChatForVerse(verse)}
-                className="m-btn m-btn-outlined text-sm sm:absolute sm:top-2 sm:right-2"
+                className="m-btn m-btn-outlined text-sm"
                 aria-label="Ask AI about this verse"
               >
                 Ask AI
@@ -492,7 +528,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               setChatOpen(false);
-              try { document.documentElement.classList.remove('no-scroll'); document.body.classList.remove('no-scroll'); } catch {}
+              try { document.body.classList.remove('no-scroll'); } catch {}
             }
           }}
         >
@@ -513,7 +549,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                   e.stopPropagation();
                   e.nativeEvent.stopImmediatePropagation();
                   setChatOpen(false);
-                  try { document.documentElement.classList.remove('no-scroll'); document.body.classList.remove('no-scroll'); } catch {}
+                  try { document.body.classList.remove('no-scroll'); } catch {}
                 }} 
                 onMouseDown={(e) => {
                   e.preventDefault();
@@ -593,7 +629,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                   <button 
                     onClick={() => void askChat()} 
                     disabled={!chatInput.trim() || chatLoading}
-                    className="absolute right-6 bottom-2 w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-blue-600 hover:text-blue-700 transition-colors duration-200 flex items-center justify-center"
+                    className="absolute right-6 bottom-3 w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-blue-600 hover:text-blue-700 transition-colors duration-200 flex items-center justify-center"
                   >
                     {chatLoading ? (
                       <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
@@ -745,6 +781,23 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
           <audio ref={audioRef} src={hymn.audio_url} />
         </div>
       </div>
+
+      {/* Verse Details Modal */}
+      <VerseDetailsModal
+        key={`${mandala}-${sukta}-${selectedVerse}`}
+        isOpen={detailsOpen}
+        onClose={() => {
+          setDetailsOpen(false);
+          setSelectedVerse(null);
+          try { 
+            document.documentElement.classList.remove('no-scroll'); 
+            document.body.classList.remove('no-scroll'); 
+          } catch {}
+        }}
+        mandala={mandala}
+        hymn={sukta}
+        verse={selectedVerse || 1}
+      />
 
     </div>
   );

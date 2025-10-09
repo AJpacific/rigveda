@@ -53,8 +53,8 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
 
   useEffect(() => {
     if (!open) return;
-    try { document.documentElement.classList.add('no-scroll'); document.body.classList.add('no-scroll'); } catch {}
-    return () => { try { document.documentElement.classList.remove('no-scroll'); document.body.classList.remove('no-scroll'); } catch {} };
+    try { document.body.classList.add('no-scroll'); } catch {}
+    return () => { try { document.body.classList.remove('no-scroll'); } catch {} };
   }, [open]);
 
   // Load chat history when modal opens
@@ -209,7 +209,7 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
 
   return (
     <div 
-      className={`fixed inset-0 z-50 flex items-start justify-center p-4 ${open ? 'block' : 'hidden'}`}
+      className={`fixed inset-0 z-50 flex items-start justify-center p-4 pb-20 ${open ? 'block' : 'hidden'}`}
       style={{ 
         backgroundColor: 'rgba(0, 0, 0, 0.1) !important',
         background: 'rgba(0, 0, 0, 0.1) !important',
@@ -228,7 +228,7 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
         }
       }}
     >
-      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full h-[80vh] flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden" style={{ width: '100%' }}>
+      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full h-[75vh] sm:h-[80vh] flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden mb-4" style={{ width: '100%' }}>
         <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0 relative z-10 bg-white">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
@@ -328,7 +328,7 @@ export default function AskAIModal({ open, onClose, initialQuestion, title = 'As
               <button 
                 onClick={() => void askChat()} 
                 disabled={!chatInput.trim() || chatLoading}
-                className="absolute right-2 top-2 w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-blue-600 hover:text-blue-700 transition-colors duration-200 flex items-center justify-center"
+                className="absolute right-6 bottom-3 w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-blue-600 hover:text-blue-700 transition-colors duration-200 flex items-center justify-center"
               >
                 {chatLoading ? (
                   <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>

@@ -2,9 +2,10 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRobot, faRotateRight, faExternalLinkAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faRobot, faRotateRight, faExternalLinkAlt, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import AskAIModal from './AskAIModal';
+import VerseDetailsModal from './VerseDetailsModal';
 
 
 
@@ -26,6 +27,9 @@ export default function RandomVerseCard() {
   const [dictOpen, setDictOpen] = useState(false);
   const [dictUrl, setDictUrl] = useState<string | null>(null);
   const [dictWord, setDictWord] = useState<string>('');
+  
+  // Verse details modal state
+  const [detailsOpen, setDetailsOpen] = useState(false);
 
   const fetchVerse = async () => {
     setLoading(true);
@@ -50,8 +54,8 @@ export default function RandomVerseCard() {
   // Lock body scroll when dictionary is open
   useEffect(() => {
     if (!dictOpen) return;
-    try { document.documentElement.classList.add('no-scroll'); document.body.classList.add('no-scroll'); } catch {}
-    return () => { try { document.documentElement.classList.remove('no-scroll'); document.body.classList.remove('no-scroll'); } catch {} };
+    try { document.body.classList.add('no-scroll'); } catch {}
+    return () => { try { document.body.classList.remove('no-scroll'); } catch {} };
   }, [dictOpen]);
 
   const openDictionary = (word: string) => {
@@ -67,6 +71,14 @@ export default function RandomVerseCard() {
     const ref = `${data.verse}`;
     return `CONTEXT\n(${ref}) ${data.devanagari_text}\n(${data.padapatha_text})\n${data.translation}\n\nQUESTION: `;
   }, [data]);
+
+  const openVerseDetails = () => {
+    if (!data) return;
+    setDetailsOpen(true);
+    try {
+      document.body.classList.add('no-scroll');
+    } catch {}
+  };
 
   return (
     <div className="m-card m-elevation-1 p-3 sm:p-4">
@@ -84,7 +96,17 @@ export default function RandomVerseCard() {
               <span className="hidden sm:inline ml-2">Go to Hymn</span>
             </Link>
           )}
-          <button className="m-btn m-btn-filled text-sm" onClick={() => setAskOpen(true)} disabled={!data} aria-label="Ask AI">
+          {data && (
+            <button
+              onClick={openVerseDetails}
+              className="m-btn m-btn-outlined text-sm"
+              aria-label="View detailed information about this verse"
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              <span className="hidden sm:inline ml-2">Details</span>
+            </button>
+          )}
+          <button className="m-btn m-btn-outlined text-sm" onClick={() => setAskOpen(true)} disabled={!data} aria-label="Ask AI">
             <FontAwesomeIcon icon={faRobot} />
             <span className="hidden sm:inline ml-2">Ask AI</span>
           </button>
@@ -153,9 +175,26 @@ export default function RandomVerseCard() {
         contextPrefix={contextPrefix}
       />
 
+      {/* Verse Details Modal */}
+      {data && (
+        <VerseDetailsModal
+          key={`${data.mandala}-${data.sukta}-${data.verse}`}
+          isOpen={detailsOpen}
+          onClose={() => {
+            setDetailsOpen(false);
+            try { 
+              document.body.classList.remove('no-scroll'); 
+            } catch {}
+          }}
+          mandala={data.mandala}
+          hymn={data.sukta}
+          verse={parseInt(data.verse.split('.').pop() || '1')}
+        />
+      )}
+
       {dictOpen && (
         <div 
-          className="fixed inset-0 z-50 flex items-start justify-center p-4"
+          className="fixed inset-0 z-50 flex items-start justify-center p-4 pb-20"
           style={{ 
             backgroundColor: 'rgba(0, 0, 0, 0.1) !important',
             background: 'rgba(0, 0, 0, 0.1) !important',
@@ -174,7 +213,7 @@ export default function RandomVerseCard() {
             }
           }}
         >
-          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[75vh] sm:max-h-[80vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 mb-4">
             <div className="flex items-center justify-between p-6 border-b border-gray-100">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
