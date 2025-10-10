@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faInfo, faBook, faUsers, faLanguage, faMusic, faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import { useMobileModalHeight } from '../hooks/useMobileModalHeight';

@@ -8,11 +8,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfo } from '@fortawesome/free-solid-svg-icons';
 import MandalaInfoModal, { mandalaData } from './components/MandalaInfoModal';
 
+type MandalaData = {
+  "Mandala Number": number;
+  "Total Hymns (Sūktas)": number;
+  "Total Verses (Ṛc)": number;
+  "Main Deities": string[];
+  "Principal Rishis (Seers)": string[];
+  "Associated Family (Gotra)": string;
+  "Meter Distribution (Chandas)": string;
+  "Language/Style Notes": string;
+  "Theme Summary": string;
+};
+
 const RandomVerseCard = dynamic(() => import('./components/RandomVerseCard'), { ssr: false });
 
 export default function Home() {
   const [infoModalOpen, setInfoModalOpen] = useState(false);
-  const [selectedMandalaData, setSelectedMandalaData] = useState(null);
+  const [selectedMandalaData, setSelectedMandalaData] = useState<MandalaData | null>(null);
 
   const openInfoModal = (mandalaNumber: number) => {
     const data = mandalaData.find(m => m["Mandala Number"] === mandalaNumber);
