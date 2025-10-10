@@ -178,7 +178,7 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
         }
       }}
     >
-      <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[85vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 flex flex-col" style={{ width: '100%', minHeight: '70vh' }}>
+      <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[80vh] sm:max-h-[85vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 flex flex-col" style={{ width: '100%', minHeight: '60vh' }}>
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
           <div className="flex items-center gap-3">
@@ -211,15 +211,16 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
           <div className="flex-1 relative">
             <button
               onClick={() => setActiveTab('learnsanskrit')}
-              className={`w-full px-6 py-3 text-sm font-medium transition-colors duration-200 ${
+              className={`w-full px-4 sm:px-6 py-3 text-sm font-medium transition-colors duration-200 ${
                 activeTab === 'learnsanskrit'
                   ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50'
                   : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
               }`}
             >
-              <div className="flex items-center justify-center gap-2">
+              <div className="flex items-center justify-center gap-1 sm:gap-2">
                 <FontAwesomeIcon icon={faBook} className="text-sm" />
-                <span>LearnSanskrit</span>
+                <span className="hidden sm:inline">LearnSanskrit</span>
+                <span className="sm:hidden">Learn</span>
               </div>
             </button>
             <button
@@ -227,7 +228,7 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
                 e.stopPropagation();
                 openLearnSanskrit();
               }}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-blue-100 rounded transition-colors duration-200"
+              className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-blue-100 rounded transition-colors duration-200"
               title="Open in New Tab"
             >
               <FontAwesomeIcon icon={faExternalLinkAlt} className="text-xs" />
@@ -235,15 +236,16 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
           </div>
           <button
             onClick={() => setActiveTab('ai')}
-            className={`flex-1 px-6 py-3 text-sm font-medium transition-colors duration-200 ${
+            className={`flex-1 px-4 sm:px-6 py-3 text-sm font-medium transition-colors duration-200 ${
               activeTab === 'ai'
                 ? 'text-green-600 border-b-2 border-green-600 bg-green-50'
                 : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
             }`}
           >
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-1 sm:gap-2">
               <FontAwesomeIcon icon={faBook} className="text-sm" />
-              <span>AI Dictionary</span>
+              <span className="hidden sm:inline">AI Dictionary</span>
+              <span className="sm:hidden">AI</span>
             </div>
           </button>
         </div>
