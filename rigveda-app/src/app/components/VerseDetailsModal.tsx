@@ -109,73 +109,75 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
 
     return (
       <div className="space-y-6">
-        <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-4 shadow-sm">
+        <div className="rounded-xl p-4 shadow-sm" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)', borderColor: 'rgba(138, 75, 45, 0.2)' }}>
           <div className="flex items-center gap-2 mb-3">
-            <FontAwesomeIcon icon={faBook} className="text-amber-600" />
-            <h3 className="font-semibold text-amber-800">Sanskrit Text</h3>
-            <span className="text-xs text-amber-600 bg-amber-100 px-2 py-1 rounded-full">
+            <FontAwesomeIcon icon={faBook} style={{ color: 'var(--primary)' }} />
+            <h3 className="font-semibold" style={{ color: 'var(--accent)' }}>Sanskrit Text</h3>
+            <span className="text-xs px-2 py-1 rounded-full" style={{ color: 'var(--primary)', backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
               {data.sanskritLanguage}
             </span>
           </div>
           <div
-            className="text-lg leading-relaxed text-amber-900 font-serif"
+            className="text-lg leading-relaxed font-serif"
+            style={{ color: 'var(--foreground)' }}
             dangerouslySetInnerHTML={{ __html: data.sanskrit }}
           />
-          <div className="text-xs text-amber-600 mt-2 flex items-center gap-1">
+          <div className="text-xs mt-2 flex items-center gap-1" style={{ color: 'var(--primary)' }}>
             <FontAwesomeIcon icon={faInfoCircle} className="text-xs" />
             Source: {data.sanskritSource}
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200 rounded-xl p-4 shadow-sm">
+        <div className="rounded-xl p-4 shadow-sm" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)', borderColor: 'rgba(138, 75, 45, 0.2)' }}>
           <div className="flex items-center gap-2 mb-3">
-            <FontAwesomeIcon icon={faLanguage} className="text-blue-600" />
-            <h3 className="font-semibold text-blue-800">Transliteration</h3>
+            <FontAwesomeIcon icon={faLanguage} style={{ color: 'var(--primary)' }} />
+            <h3 className="font-semibold" style={{ color: 'var(--accent)' }}>Transliteration</h3>
           </div>
           <div
-            className="text-base leading-relaxed text-blue-900 font-mono"
+            className="text-base leading-relaxed font-mono"
+            style={{ color: 'var(--foreground)' }}
             dangerouslySetInnerHTML={{ __html: data.transliteration }}
           />
-          <div className="text-xs text-blue-600 mt-2 flex items-center gap-1">
+          <div className="text-xs mt-2 flex items-center gap-1" style={{ color: 'var(--primary)' }}>
             <FontAwesomeIcon icon={faInfoCircle} className="text-xs" />
             Source: {data.transliterationSource}
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4 shadow-sm">
+        <div className="rounded-xl p-4 shadow-sm" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)', borderColor: 'rgba(138, 75, 45, 0.2)' }}>
           <div className="flex items-center gap-2 mb-3">
-            <FontAwesomeIcon icon={faBook} className="text-green-600" />
-            <h3 className="font-semibold text-green-800">English Translation</h3>
+            <FontAwesomeIcon icon={faBook} style={{ color: 'var(--primary)' }} />
+            <h3 className="font-semibold" style={{ color: 'var(--accent)' }}>English Translation</h3>
           </div>
-          <div className="text-base leading-relaxed text-green-900">
+          <div className="text-base leading-relaxed" style={{ color: 'var(--foreground)' }}>
             {data.translations.english}
           </div>
-          <div className="text-xs text-green-600 mt-2 flex items-center gap-1">
+          <div className="text-xs mt-2 flex items-center gap-1" style={{ color: 'var(--primary)' }}>
             <FontAwesomeIcon icon={faInfoCircle} className="text-xs" />
             Translator: {data.translations.author}
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-200 rounded-xl p-4 shadow-sm">
+          <div className="border border-gray-200 rounded-xl p-4 shadow-sm" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
             <h4 className="font-semibold text-gray-800 mb-2">
               Deity
             </h4>
             <p className="text-gray-700 font-medium">{data.deity}</p>
           </div>
-          <div className="bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-200 rounded-xl p-4 shadow-sm">
+          <div className="border border-gray-200 rounded-xl p-4 shadow-sm" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
             <h4 className="font-semibold text-gray-800 mb-2">
               Poet Family
             </h4>
             <p className="text-gray-700 font-medium">{data.poetFamily}</p>
           </div>
-          <div className="bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-200 rounded-xl p-4 shadow-sm">
+          <div className="border border-gray-200 rounded-xl p-4 shadow-sm" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
             <h4 className="font-semibold text-gray-800 mb-2">
               Meter
             </h4>
             <p className="text-gray-700 font-medium">{data.meter}</p>
           </div>
-          <div className="bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-200 rounded-xl p-4 shadow-sm">
+          <div className="border border-gray-200 rounded-xl p-4 shadow-sm" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
             <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
               Strata
               <button
@@ -216,7 +218,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
                   {token.props && (
                     <div className="flex flex-wrap gap-1">
                       {Object.entries(token.props).map(([key, value]) => (
-                        <span key={key} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                        <span key={key} className="text-xs px-2 py-1 rounded" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)' }}>
                           {key}: {String(value)}
                         </span>
                       ))}
@@ -305,7 +307,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
                     // const wordPatternMapping = createWordPatternMapping();
                     
                     return (
-                      <tr key={pIdx} className="border-b border-blue-200 hover:bg-blue-50">
+                      <tr key={pIdx} className="border-b" style={{ borderColor: 'rgba(138, 75, 45, 0.2)', backgroundColor: 'rgba(138, 75, 45, 0.05)' }}>
                         <td className="px-4 py-3 text-sm font-medium text-gray-900">
                           {padaLetter}
                         </td>
@@ -320,7 +322,8 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
                               {patternChars.map((char, cIdx) => (
                                 <span
                                   key={cIdx}
-                                  className="px-2 py-1 text-sm font-bold rounded bg-blue-100 text-blue-800 border border-blue-200"
+                                  className="px-2 py-1 text-sm font-bold rounded"
+                                  style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)', borderColor: 'rgba(138, 75, 45, 0.2)' }}
                                 >
                                   {char}
                                 </span>
@@ -342,9 +345,9 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
     return (
       <div className="space-y-6">
         {data.metricalData && (
-          <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
-            <h3 className="font-semibold text-purple-800 mb-3">Metrical Pattern</h3>
-            <div className="text-xs text-purple-600 mb-4">
+          <div className="rounded-lg p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)', borderColor: 'rgba(138, 75, 45, 0.2)' }}>
+            <h3 className="font-semibold mb-3" style={{ color: 'var(--accent)' }}>Metrical Pattern</h3>
+            <div className="text-xs mb-4" style={{ color: 'var(--primary)' }}>
               L = Long syllable (Guru), S = Short syllable (Laghu)
             </div>
             {renderMetricalStructure()}
@@ -386,7 +389,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
               {Array.isArray(version.form) ? version.form.join(' ') : version.form}
             </div>
             {version.metricalData && (
-              <div className="mt-2 text-xs text-purple-600 font-mono">
+              <div className="mt-2 text-xs font-mono" style={{ color: 'var(--primary)' }}>
                 Metrical: {version.metricalData.join(' ')}
               </div>
             )}
@@ -425,8 +428,8 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
       <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden mb-4" style={modalStyle}>
         <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
-              <FontAwesomeIcon icon={faInfoCircle} className="text-indigo-600 text-lg" />
+            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+              <FontAwesomeIcon icon={faInfoCircle} className="text-lg" style={{ color: 'var(--primary)' }} />
             </div>
             <div>
               <h2 className="text-xl font-semibold text-gray-900">
@@ -472,9 +475,10 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
               onClick={() => setActiveTab(tab.id as 'overview' | 'grammar' | 'metrical' | 'versions')}
               className={`flex items-center gap-2 px-3 sm:px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'border-indigo-500 text-indigo-600'
+                  ? 'border-2'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
+              style={activeTab === tab.id ? { borderColor: 'var(--primary)', color: 'var(--primary)' } : {}}
             >
               <FontAwesomeIcon icon={tab.icon} className="text-xs" />
               <span className="hidden sm:inline">{tab.label}</span>
@@ -485,13 +489,13 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
         <div className="flex-1 p-4 sm:p-6 overflow-y-auto min-h-0">
           {loading && (
             <div className="flex items-center justify-center py-12">
-              <FontAwesomeIcon icon={faSpinner} className="text-2xl text-indigo-600 animate-spin mr-3" />
+              <FontAwesomeIcon icon={faSpinner} className="text-2xl animate-spin mr-3" style={{ color: 'var(--primary)' }} />
               <span className="text-gray-600">Loading verse details...</span>
             </div>
           )}
 
           {error && (
-            <div className="flex items-center gap-2 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+            <div className="flex items-center gap-2 p-4 rounded-lg" style={{ backgroundColor: 'rgba(107, 30, 20, 0.1)', borderColor: 'rgba(107, 30, 20, 0.2)', color: 'var(--accent)' }}>
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
               </svg>
@@ -535,8 +539,8 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <FontAwesomeIcon icon={faQuestionCircle} className="text-blue-600 text-lg" />
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+                  <FontAwesomeIcon icon={faQuestionCircle} className="text-lg" style={{ color: 'var(--primary)' }} />
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold text-gray-900">

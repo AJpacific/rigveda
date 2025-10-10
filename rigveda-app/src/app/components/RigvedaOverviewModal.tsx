@@ -177,12 +177,12 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
         }
       }}
     >
-      <div className="bg-white rounded-2xl shadow-2xl max-w-6xl w-full overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 flex flex-col" style={modalStyle}>
+      <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 flex flex-col" style={modalStyle}>
         {/* Header */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-100 flex-shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full flex items-center justify-center">
-              <FontAwesomeIcon icon={faBook} className="text-purple-600 text-xl" />
+            <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+              <FontAwesomeIcon icon={faBook} className="text-xl" style={{ color: 'var(--primary)' }} />
             </div>
             <div>
               <h2 className="text-2xl font-bold text-gray-900">ऋग्वेद (Rigveda)</h2>
@@ -204,66 +204,66 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
             {/* Left Column */}
             <div className="space-y-3 sm:space-y-4">
               {/* Basic Information */}
-              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-3 sm:p-4">
+              <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faBook} className="text-blue-600" />
+                  <FontAwesomeIcon icon={faBook} style={{ color: 'var(--primary)' }} />
                   Basic Information
                 </h3>
                 <div className="space-y-3">
                   <div>
                     <span className="text-gray-600 font-medium">Alternative Names:</span>
-                    <p className="text-blue-700 mt-1">{rigvedaData["Alternative Names"].join(", ")}</p>
+                    <p className="mt-1" style={{ color: 'var(--primary)' }}>{rigvedaData["Alternative Names"].join(", ")}</p>
                   </div>
                   <div>
                     <span className="text-gray-600 font-medium">Part Of:</span>
-                    <p className="text-blue-700 mt-1">{rigvedaData["Part Of"]}</p>
+                    <p className="mt-1" style={{ color: 'var(--primary)' }}>{rigvedaData["Part Of"]}</p>
                   </div>
                   <div>
                     <span className="text-gray-600 font-medium">Language:</span>
-                    <p className="text-blue-700 mt-1">{rigvedaData["Language"]}</p>
+                    <p className="mt-1" style={{ color: 'var(--primary)' }}>{rigvedaData["Language"]}</p>
                   </div>
                   <div>
                     <span className="text-gray-600 font-medium">Script:</span>
-                    <p className="text-blue-700 mt-1">{rigvedaData["Script"]}</p>
+                    <p className="mt-1" style={{ color: 'var(--primary)' }}>{rigvedaData["Script"]}</p>
                   </div>
                 </div>
               </div>
 
               {/* Statistics */}
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-3 sm:p-4">
+              <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faScroll} className="text-green-600" />
+                  <FontAwesomeIcon icon={faScroll} style={{ color: 'var(--primary)' }} />
                   Statistics
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">{rigvedaData["Total Mandalas"]}</div>
+                    <div className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>{rigvedaData["Total Mandalas"]}</div>
                     <div className="text-sm text-gray-600">Mandalas</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">{rigvedaData["Total Hymns"]}</div>
+                    <div className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>{rigvedaData["Total Hymns"]}</div>
                     <div className="text-sm text-gray-600">Hymns</div>
                   </div>
                   <div className="text-center col-span-2">
-                    <div className="text-2xl font-bold text-green-600">{rigvedaData["Total Verses"]}</div>
+                    <div className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>{rigvedaData["Total Verses"]}</div>
                     <div className="text-sm text-gray-600">Total Verses</div>
                   </div>
                 </div>
               </div>
 
               {/* Composition Period */}
-              <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-3 sm:p-4">
+              <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faCalendar} className="text-orange-600" />
+                  <FontAwesomeIcon icon={faCalendar} style={{ color: 'var(--primary)' }} />
                   Composition Period
                 </h3>
                 <p className="text-gray-700">{rigvedaData["Composition Period"]}</p>
               </div>
 
               {/* Structure */}
-              <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-3 sm:p-4">
+              <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faUsers} className="text-purple-600" />
+                  <FontAwesomeIcon icon={faUsers} style={{ color: 'var(--primary)' }} />
                   Structure
                 </h3>
                 <p className="text-gray-700 text-sm">{rigvedaData["Structure"]}</p>
@@ -273,9 +273,9 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
             {/* Right Column */}
             <div className="space-y-3 sm:space-y-4">
               {/* Organization */}
-              <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-3 sm:p-4">
+              <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faLightbulb} className="text-indigo-600" />
+                  <FontAwesomeIcon icon={faLightbulb} style={{ color: 'var(--primary)' }} />
                   Organization
                 </h3>
                 <div className="space-y-2">
@@ -291,15 +291,15 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
               </div>
 
               {/* Main Themes */}
-              <div className="bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl p-3 sm:p-4">
+              <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faLightbulb} className="text-rose-600" />
+                  <FontAwesomeIcon icon={faLightbulb} style={{ color: 'var(--accent)' }} />
                   Main Themes
                 </h3>
                 <ul className="text-gray-700 text-sm space-y-1">
                   {rigvedaData["Main Themes"].map((theme, index) => (
                     <li key={index} className="flex items-start gap-2">
-                      <span className="text-rose-500 mt-1">•</span>
+                      <span className="mt-1" style={{ color: 'var(--accent)' }}>•</span>
                       <span>{theme}</span>
                     </li>
                   ))}
@@ -307,18 +307,18 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
               </div>
 
               {/* Significance */}
-              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-3 sm:p-4">
+              <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faGlobe} className="text-yellow-600" />
+                  <FontAwesomeIcon icon={faGlobe} style={{ color: 'var(--primary)' }} />
                   Significance
                 </h3>
                 <p className="text-gray-700 text-sm">{rigvedaData["Significance"]}</p>
               </div>
 
               {/* Transmission */}
-              <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-xl p-3 sm:p-4">
+              <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faHistory} className="text-teal-600" />
+                  <FontAwesomeIcon icon={faHistory} style={{ color: 'var(--primary)' }} />
                   Transmission
                 </h3>
                 <p className="text-gray-700 text-sm">{rigvedaData["Transmission"]}</p>
@@ -329,9 +329,9 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
           {/* Full Width Sections */}
           <div className="mt-4 sm:mt-6 space-y-3 sm:space-y-4">
             {/* Commentaries */}
-            <div className="bg-gradient-to-r from-violet-50 to-purple-50 rounded-xl p-3 sm:p-4">
+            <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
               <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faComments} className="text-violet-600" />
+                <FontAwesomeIcon icon={faComments} style={{ color: 'var(--primary)' }} />
                 Commentaries
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -339,7 +339,7 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
                   <h4 className="font-medium text-gray-700 mb-2">Traditional</h4>
                   <div className="flex flex-wrap gap-2">
                     {rigvedaData["Commentaries"]["Traditional"].map((commentator, index) => (
-                      <span key={index} className="px-3 py-1 bg-violet-100 text-violet-700 rounded-full text-sm">
+                      <span key={index} className="px-3 py-1 rounded-full text-sm" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)' }}>
                         {commentator}
                       </span>
                     ))}
@@ -349,7 +349,7 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
                   <h4 className="font-medium text-gray-700 mb-2">Modern</h4>
                   <div className="flex flex-wrap gap-2">
                     {rigvedaData["Commentaries"]["Modern"].map((commentator, index) => (
-                      <span key={index} className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">
+                      <span key={index} className="px-3 py-1 rounded-full text-sm" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)' }}>
                         {commentator}
                       </span>
                     ))}
@@ -361,25 +361,25 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
 
             {/* Academic Importance */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
-              <div className="bg-gradient-to-r from-slate-50 to-gray-50 rounded-xl p-3 sm:p-4">
+              <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faBrain} className="text-slate-600" />
+                  <FontAwesomeIcon icon={faBrain} style={{ color: 'var(--primary)' }} />
                   Philosophical Development
                 </h3>
                 <p className="text-gray-700 text-sm">{rigvedaData["Philosophical Development"]}</p>
               </div>
 
-              <div className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-xl p-3 sm:p-4">
+              <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faLanguage} className="text-amber-600" />
+                  <FontAwesomeIcon icon={faLanguage} style={{ color: 'var(--primary)' }} />
                   Linguistic Importance
                 </h3>
                 <p className="text-gray-700 text-sm">{rigvedaData["Linguistic Importance"]}</p>
               </div>
 
-              <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl p-3 sm:p-4">
+              <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faGlobe} className="text-cyan-600" />
+                  <FontAwesomeIcon icon={faGlobe} style={{ color: 'var(--primary)' }} />
                   Cultural Influence
                 </h3>
                 <p className="text-gray-700 text-sm">{rigvedaData["Cultural Influence"]}</p>
@@ -387,18 +387,18 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
             </div>
 
             {/* Modern Scholarship */}
-            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-3 sm:p-4">
+            <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
               <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faGraduationCap} className="text-indigo-600" />
+                <FontAwesomeIcon icon={faGraduationCap} style={{ color: 'var(--primary)' }} />
                 Modern Scholarship
               </h3>
               <p className="text-gray-700 text-sm">{rigvedaData["Modern Scholarship"]}</p>
             </div>
 
             {/* Chandas (Meter) */}
-            <div className="bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl p-3 sm:p-4">
+            <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
               <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faMusic} className="text-purple-600" />
+                <FontAwesomeIcon icon={faMusic} style={{ color: 'var(--primary)' }} />
                 Chandas (Meter)
               </h3>
               <div className="space-y-3">
@@ -408,10 +408,10 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
                   <h4 className="font-medium text-gray-700 mb-2">Seven Most Popular Meters:</h4>
                   <div className="space-y-2">
                     {rigvedaData["Chandas (Meter)"]["Seven Most Popular Meters"].map((meter, index) => (
-                      <div key={index} className="bg-white rounded-lg p-3 border border-purple-200">
+                      <div key={index} className="bg-white rounded-lg p-3" style={{ borderColor: 'rgba(138, 75, 45, 0.2)' }}>
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="font-semibold text-purple-700">{meter["Name"]}</span>
-                          <span className="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded">{meter["Tone"]}</span>
+                          <span className="font-semibold" style={{ color: 'var(--primary)' }}>{meter["Name"]}</span>
+                          <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)' }}>{meter["Tone"]}</span>
                         </div>
                         <p className="text-sm text-gray-600 mb-1"><strong>Pattern:</strong> {meter["Pattern"]}</p>
                         <p className="text-sm text-gray-600">{meter["Usage"]}</p>
@@ -423,18 +423,18 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
             </div>
 
             {/* Seers (Rishis) */}
-            <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-3 sm:p-4">
+            <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
               <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faUsers} className="text-emerald-600" />
+                <FontAwesomeIcon icon={faUsers} style={{ color: 'var(--primary)' }} />
                 Seers (Rishis)
               </h3>
               <p className="text-gray-700 text-sm">{rigvedaData["Seers (Rishis)"]}</p>
             </div>
 
             {/* Recitation and Preservation */}
-            <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl p-3 sm:p-4">
+            <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
               <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faHistory} className="text-cyan-600" />
+                <FontAwesomeIcon icon={faHistory} style={{ color: 'var(--primary)' }} />
                 Recitation and Preservation
               </h3>
               <div className="space-y-3">
@@ -443,7 +443,7 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
                   <h4 className="font-medium text-gray-700 mb-2">Recitation Methods:</h4>
                   <div className="flex flex-wrap gap-2">
                     {rigvedaData["Recitation and Preservation"]["Recitation Methods"].map((method, index) => (
-                      <span key={index} className="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">
+                      <span key={index} className="px-3 py-1 rounded-full text-sm" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)' }}>
                         {method}
                       </span>
                     ))}
@@ -458,7 +458,7 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
                     <h4 className="font-medium text-gray-700 mb-1">Lost Recensions:</h4>
                     <div className="flex flex-wrap gap-1">
                       {rigvedaData["Recitation and Preservation"]["Lost Recensions"].map((recension, index) => (
-                        <span key={index} className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">
+                        <span key={index} className="px-2 py-1 rounded text-xs" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)' }}>
                           {recension}
                         </span>
                       ))}
@@ -469,9 +469,9 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
             </div>
 
             {/* Ritual Importance */}
-            <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-xl p-3 sm:p-4">
+            <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
               <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faFire} className="text-red-600" />
+                <FontAwesomeIcon icon={faFire} style={{ color: 'var(--accent)' }} />
                 Ritual Importance
               </h3>
               <div className="space-y-2">
@@ -482,15 +482,15 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
             </div>
 
             {/* Textual Forms */}
-            <div className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-xl p-3 sm:p-4">
+            <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
               <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faBook} className="text-amber-600" />
+                <FontAwesomeIcon icon={faBook} style={{ color: 'var(--primary)' }} />
                 Textual Forms
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {Object.entries(rigvedaData["Textual Forms"]).map(([key, value]) => (
-                  <div key={key} className="bg-white rounded-lg p-3 border border-amber-200">
-                    <h4 className="font-medium text-amber-700 mb-1">{key}:</h4>
+                  <div key={key} className="bg-white rounded-lg p-3" style={{ borderColor: 'rgba(138, 75, 45, 0.2)' }}>
+                    <h4 className="font-medium mb-1" style={{ color: 'var(--primary)' }}>{key}:</h4>
                     <p className="text-sm text-gray-600">{value}</p>
                   </div>
                 ))}

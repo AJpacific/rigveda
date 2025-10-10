@@ -216,8 +216,8 @@ export default function RandomVerseCard() {
           <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[75vh] sm:max-h-[80vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 mb-4">
             <div className="flex items-center justify-between p-6 border-b border-gray-100">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+                  <svg className="w-5 h-5" style={{ color: 'var(--primary)' }} fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                   </svg>
                 </div>
@@ -226,45 +226,45 @@ export default function RandomVerseCard() {
                   <p className="text-sm text-gray-500">Definition for &quot;{dictWord}&quot;</p>
                 </div>
               </div>
-              <button 
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  e.nativeEvent.stopImmediatePropagation();
-                  setDictOpen(false);
-                }}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }}
-                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors duration-200" 
-                aria-label="Close"
-                type="button"
-              >
-                <FontAwesomeIcon icon={faTimes} className="text-sm" />
-              </button>
+              <div className="flex items-center gap-3">
+                {dictUrl && (
+                  <a 
+                    href={dictUrl} 
+                    target="_blank" 
+                    rel="noreferrer noopener" 
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 hover:opacity-80"
+                    style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)' }}
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/>
+                    </svg>
+                    Open
+                  </a>
+                )}
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.nativeEvent.stopImmediatePropagation();
+                    setDictOpen(false);
+                  }}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                  className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors duration-200" 
+                  aria-label="Close"
+                  type="button"
+                >
+                  <FontAwesomeIcon icon={faTimes} className="text-sm" />
+                </button>
+              </div>
             </div>
-            <div className="p-6 max-h-[calc(80vh-120px)] overflow-y-auto">
+            <div className="p-6 max-h-[calc(80vh-120px)] overflow-hidden">
               {dictUrl ? (
                 <div>
                   <div className="m-embed-container">
                     <iframe className="embedded-frame" src={dictUrl} title="Dictionary" />
-                  </div>
-                  <div className="mt-4 p-3 bg-green-50 rounded-lg text-sm text-green-700">
-                    If the page fails to load here, use &quot;Open&quot; to view in a new tab.
-                  </div>
-                  <div className="mt-3 flex justify-end">
-                    <a 
-                      href={dictUrl} 
-                      target="_blank" 
-                      rel="noreferrer noopener" 
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 hover:bg-green-200 text-green-700 hover:text-green-800 rounded-lg text-sm font-medium transition-colors duration-200"
-                    >
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/>
-                      </svg>
-                      Open in New Tab
-                    </a>
                   </div>
                 </div>
               ) : (

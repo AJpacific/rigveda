@@ -191,8 +191,8 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-              <FontAwesomeIcon icon={faBook} className="text-green-600 text-lg" />
+            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+              <FontAwesomeIcon icon={faBook} className="text-lg" style={{ color: 'var(--primary)' }} />
             </div>
             <div>
               <h2 className="text-xl font-semibold text-gray-900">Sanskrit Dictionary</h2>
@@ -222,9 +222,10 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
               onClick={() => setActiveTab('learnsanskrit')}
               className={`w-full px-4 sm:px-6 py-3 text-sm font-medium transition-colors duration-200 ${
                 activeTab === 'learnsanskrit'
-                  ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50'
+                  ? 'border-b-2'
                   : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
               }`}
+              style={activeTab === 'learnsanskrit' ? { color: 'var(--primary)', borderColor: 'var(--primary)', backgroundColor: 'rgba(138, 75, 45, 0.1)' } : {}}
             >
               <div className="flex items-center justify-center gap-1 sm:gap-2">
                 <FontAwesomeIcon icon={faBook} className="text-sm" />
@@ -237,7 +238,8 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
                 e.stopPropagation();
                 openLearnSanskrit();
               }}
-              className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-blue-100 rounded transition-colors duration-200"
+              className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 p-1 rounded transition-colors duration-200"
+              style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}
               title="Open in New Tab"
             >
               <FontAwesomeIcon icon={faExternalLinkAlt} className="text-xs" />
@@ -247,9 +249,10 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
             onClick={() => setActiveTab('ai')}
             className={`flex-1 px-4 sm:px-6 py-3 text-sm font-medium transition-colors duration-200 ${
               activeTab === 'ai'
-                ? 'text-green-600 border-b-2 border-green-600 bg-green-50'
+                ? 'border-b-2'
                 : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
             }`}
+            style={activeTab === 'ai' ? { color: 'var(--primary)', borderColor: 'var(--primary)', backgroundColor: 'rgba(138, 75, 45, 0.1)' } : {}}
           >
             <div className="flex items-center justify-center gap-1 sm:gap-2">
               <FontAwesomeIcon icon={faBook} className="text-sm" />
@@ -270,7 +273,8 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200"
+                  style={{ '--tw-ring-color': 'var(--primary)' } as React.CSSProperties}
                   placeholder="Enter Sanskrit word, transliteration, or English word..."
                   autoComplete="off"
                 />
@@ -288,7 +292,8 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
               <button
                 type="submit"
                 disabled={!query.trim() || loading}
-                className="px-6 py-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-xl transition-colors duration-200 flex items-center gap-2"
+                className="px-6 py-3 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-xl transition-colors duration-200 flex items-center gap-2"
+                style={{ backgroundColor: 'var(--primary)' }}
               >
                 {loading ? (
                   <FontAwesomeIcon icon={faSpinner} className="animate-spin" />
@@ -336,7 +341,7 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
               )}
 
               {error && (
-                <div className="flex items-center gap-2 p-4 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                <div className="flex items-center gap-2 p-4 rounded-lg text-sm" style={{ backgroundColor: 'rgba(107, 30, 20, 0.1)', borderColor: 'rgba(107, 30, 20, 0.2)', color: 'var(--accent)' }}>
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd"/>
                   </svg>
@@ -369,9 +374,9 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
                   
 
                   {results.some(result => result.source === 'AI Sanskrit Scholar') && (
-                    <div className="bg-purple-50 border border-purple-200 rounded-lg p-3 text-sm text-purple-700">
+                    <div className="rounded-lg p-3 text-sm" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)', borderColor: 'rgba(138, 75, 45, 0.2)', color: 'var(--primary)' }}>
                       <div className="flex items-center gap-2">
-                        <FontAwesomeIcon icon={faBook} className="text-purple-600" />
+                        <FontAwesomeIcon icon={faBook} style={{ color: 'var(--primary)' }} />
                         <span className="font-medium">AI Sanskrit Scholar</span>
                       </div>
                       <p className="mt-1 text-xs">
@@ -394,7 +399,7 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
                               </span>
                             )}
                             {result.origin && (
-                              <span className="text-xs px-2 py-1 bg-blue-100 text-blue-600 rounded-full">
+                              <span className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)' }}>
                                 {result.origin}
                               </span>
                             )}
@@ -436,7 +441,7 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
                                 Source: {result.source}
                               </span>
                               {result.dictionary && (
-                                <span className="text-xs px-2 py-1 bg-purple-100 text-purple-600 rounded-full">
+                                <span className="text-xs px-2 py-1 rounded-full" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)' }}>
                                   {result.dictionary.toUpperCase()}
                                 </span>
                               )}
@@ -451,8 +456,8 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
 
               {!loading && !error && !query && (
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <FontAwesomeIcon icon={faBook} className="text-green-600 text-xl" />
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+                    <FontAwesomeIcon icon={faBook} className="text-xl" style={{ color: 'var(--primary)' }} />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">AI Sanskrit Dictionary</h3>
 

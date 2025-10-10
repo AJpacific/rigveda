@@ -172,8 +172,8 @@ export default function MandalaInfoModal({ open, onClose, mandalaData }: Mandala
         {/* Header */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-100 flex-shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-              <FontAwesomeIcon icon={faBook} className="text-blue-600 text-xl" />
+            <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+              <FontAwesomeIcon icon={faBook} className="text-xl" style={{ color: 'var(--primary)' }} />
             </div>
             <div>
               <h2 className="text-2xl font-bold text-gray-900">Mandala {mandalaData["Mandala Number"]}</h2>
@@ -194,32 +194,32 @@ export default function MandalaInfoModal({ open, onClose, mandalaData }: Mandala
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {/* Statistics */}
             <div className="space-y-3 sm:space-y-4">
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4">
+              <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faBook} className="text-blue-600" />
+                  <FontAwesomeIcon icon={faBook} style={{ color: 'var(--primary)' }} />
                   Statistics
                 </h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Total Hymns:</span>
-                    <span className="font-semibold text-blue-600">{mandalaData["Total Hymns (Sūktas)"]}</span>
+                    <span className="font-semibold" style={{ color: 'var(--primary)' }}>{mandalaData["Total Hymns (Sūktas)"]}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Total Verses:</span>
-                    <span className="font-semibold text-blue-600">{mandalaData["Total Verses (Ṛc)"]}</span>
+                    <span className="font-semibold" style={{ color: 'var(--primary)' }}>{mandalaData["Total Verses (Ṛc)"]}</span>
                   </div>
                 </div>
               </div>
 
               {/* Main Deities */}
-              <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-4">
+              <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faLightbulb} className="text-purple-600" />
+                  <FontAwesomeIcon icon={faLightbulb} style={{ color: 'var(--accent)' }} />
                   Main Deities
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {mandalaData["Main Deities"].map((deity, index) => (
-                    <span key={index} className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
+                    <span key={index} className="px-3 py-1 rounded-full text-sm font-medium" style={{ backgroundColor: 'rgba(107, 30, 20, 0.15)', color: 'var(--accent)' }}>
                       {deity}
                     </span>
                   ))}
@@ -227,14 +227,14 @@ export default function MandalaInfoModal({ open, onClose, mandalaData }: Mandala
               </div>
 
               {/* Principal Rishis */}
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4">
+              <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faUsers} className="text-green-600" />
+                  <FontAwesomeIcon icon={faUsers} style={{ color: 'var(--primary)' }} />
                   Principal Rishis
                 </h3>
                 <div className="space-y-1">
                   {mandalaData["Principal Rishis (Seers)"].map((rishi, index) => (
-                    <div key={index} className="text-sm text-gray-700 bg-white rounded-lg p-2 border border-green-200">
+                    <div key={index} className="text-sm text-gray-700 bg-white rounded-lg p-2" style={{ borderColor: 'rgba(138, 75, 45, 0.2)' }}>
                       {rishi}
                     </div>
                   ))}
@@ -245,33 +245,33 @@ export default function MandalaInfoModal({ open, onClose, mandalaData }: Mandala
             {/* Details */}
             <div className="space-y-3 sm:space-y-4">
               {/* Associated Family */}
-              <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-4">
+              <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Associated Family (Gotra)</h3>
                 <p className="text-gray-700">{mandalaData["Associated Family (Gotra)"]}</p>
               </div>
 
               {/* Meter Distribution */}
-              <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl p-4">
+              <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faMusic} className="text-cyan-600" />
+                  <FontAwesomeIcon icon={faMusic} style={{ color: 'var(--primary)' }} />
                   Meter Distribution (Chandas)
                 </h3>
                 <p className="text-gray-700 text-sm">{mandalaData["Meter Distribution (Chandas)"]}</p>
               </div>
 
               {/* Language/Style Notes */}
-              <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-4">
+              <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faLanguage} className="text-indigo-600" />
+                  <FontAwesomeIcon icon={faLanguage} style={{ color: 'var(--primary)' }} />
                   Language/Style Notes
                 </h3>
                 <p className="text-gray-700 text-sm">{mandalaData["Language/Style Notes"]}</p>
               </div>
 
               {/* Theme Summary */}
-              <div className="bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl p-4">
+              <div className="rounded-xl p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <FontAwesomeIcon icon={faInfo} className="text-rose-600" />
+                  <FontAwesomeIcon icon={faInfo} style={{ color: 'var(--accent)' }} />
                   Theme Summary
                 </h3>
                 <p className="text-gray-700 text-sm">{mandalaData["Theme Summary"]}</p>

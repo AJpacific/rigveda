@@ -113,7 +113,7 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
       return (
         <span>
           {before}
-          <mark className="bg-yellow-300 text-yellow-900 px-1 rounded font-medium shadow-sm">{match}</mark>
+          <mark className="px-1 rounded font-medium shadow-sm" style={{ backgroundColor: 'rgba(138, 75, 45, 0.2)', color: 'var(--primary)' }}>{match}</mark>
           {after}
         </span>
       );
@@ -126,7 +126,7 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
     return (
       <span>
         {before}
-        <mark className="bg-yellow-300 text-yellow-900 px-1 rounded font-medium shadow-sm">{match}</mark>
+        <mark className="px-1 rounded font-medium shadow-sm" style={{ backgroundColor: 'rgba(138, 75, 45, 0.2)', color: 'var(--primary)' }}>{match}</mark>
         {after}
       </span>
     );
@@ -536,12 +536,13 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
           onKeyPress={handleKeyPress}
           onFocus={() => setIsInputFocused(true)}
           onBlur={() => setIsInputFocused(false)}
-          className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm"
+          className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 bg-white shadow-sm"
           placeholder="Search hymns, verses, deities, addressees, groups..."
           style={{ 
+            '--tw-ring-color': 'var(--primary)',
             fontSize: 'clamp(14px, 4vw, 16px)',
             paddingRight: '3.5rem'
-          }}
+          } as React.CSSProperties}
         />
         <div className="absolute right-2 top-1/2 -translate-y-1/2">
           {loading ? (
@@ -549,7 +550,8 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
           ) : (
             <button
               onClick={handleSearchClick}
-              className="w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-600 hover:text-blue-700 transition-all duration-200 flex items-center justify-center"
+              className="w-8 h-8 rounded-full transition-all duration-200 flex items-center justify-center"
+              style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)' }}
               type="button"
             >
               <FontAwesomeIcon icon={faSearch} className="text-sm" />
@@ -568,9 +570,10 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
                   onClick={() => handleFilterChange('all')}
                   className={`px-2 sm:px-3 py-1 text-xs rounded-full transition-colors ${
                     activeFilter === 'all'
-                      ? 'bg-blue-100 text-blue-700'
+                      ? 'text-white'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
+                  style={activeFilter === 'all' ? { backgroundColor: 'var(--primary)' } : {}}
                 >
                   All
                 </button>
@@ -578,9 +581,10 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
                   onClick={() => handleFilterChange('addressee')}
                   className={`px-2 sm:px-3 py-1 text-xs rounded-full transition-colors ${
                     activeFilter === 'addressee'
-                      ? 'bg-blue-100 text-blue-700'
+                      ? 'text-white'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
+                  style={activeFilter === 'addressee' ? { backgroundColor: 'var(--primary)' } : {}}
                 >
                   Addressee
                 </button>
@@ -588,9 +592,10 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
                   onClick={() => handleFilterChange('group')}
                   className={`px-2 sm:px-3 py-1 text-xs rounded-full transition-colors ${
                     activeFilter === 'group'
-                      ? 'bg-blue-100 text-blue-700'
+                      ? 'text-white'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
+                  style={activeFilter === 'group' ? { backgroundColor: 'var(--primary)' } : {}}
                 >
                   Group
                 </button>
@@ -598,9 +603,10 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
                   onClick={() => handleFilterChange('translation')}
                   className={`px-2 sm:px-3 py-1 text-xs rounded-full transition-colors ${
                     activeFilter === 'translation'
-                      ? 'bg-blue-100 text-blue-700'
+                      ? 'text-white'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
+                  style={activeFilter === 'translation' ? { backgroundColor: 'var(--primary)' } : {}}
                 >
                   Translation
                 </button>
@@ -608,9 +614,10 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
                   onClick={() => handleFilterChange('transliteration')}
                   className={`px-2 sm:px-3 py-1 text-xs rounded-full transition-colors ${
                     activeFilter === 'transliteration'
-                      ? 'bg-blue-100 text-blue-700'
+                      ? 'text-white'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
+                  style={activeFilter === 'transliteration' ? { backgroundColor: 'var(--primary)' } : {}}
                 >
                   Transliteration
                 </button>
@@ -663,7 +670,8 @@ export default function UniversalSearch({ inModal = false, onResultClick }: { in
                 <div className="px-4 py-3 border-t border-gray-100">
                   <button
                     onClick={loadMoreResults}
-                    className="w-full text-center text-sm text-blue-600 hover:text-blue-800 font-medium"
+                    className="w-full text-center text-sm font-medium"
+                    style={{ color: 'var(--primary)' }}
                   >
                     Load More ({filterResults(allResults, activeFilter).length - results.length} more results)
                   </button>

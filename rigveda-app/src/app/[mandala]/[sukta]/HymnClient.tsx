@@ -25,7 +25,6 @@ type ChatMessage = { role: 'user' | 'assistant'; content: string };
 export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }: HymnClientProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [audioState, setAudioState] = useState<AudioState>('idle');
-  // const [scrollProgress, setScrollProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentVerseIndex, setCurrentVerseIndex] = useState<number | null>(null);
@@ -544,8 +543,8 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
           <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden" style={{ width: '100%', ...modalStyle }}>
             <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <FontAwesomeIcon icon={faRobot} className="text-blue-600 text-lg" />
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+                  <FontAwesomeIcon icon={faRobot} className="text-lg" style={{ color: 'var(--primary)' }} />
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold text-gray-900">Ask AI · Verse {chatRef}</h2>
@@ -575,15 +574,16 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
               {chatHistory.map((m, idx) => (
                 <div key={idx} className={`flex gap-3 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   {m.role === 'assistant' && (
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <FontAwesomeIcon icon={faRobot} className="w-4 h-4 text-blue-600" />
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+                      <FontAwesomeIcon icon={faRobot} className="w-4 h-4" style={{ color: 'var(--primary)' }} />
                     </div>
                   )}
                   <div className={`max-w-[80%] rounded-2xl px-4 py-3 ${
                     m.role === 'user' 
-                      ? 'bg-blue-500 text-white' 
+                      ? 'text-white' 
                       : 'bg-gray-100 text-gray-900'
-                  }`}>
+                  }`}
+                  style={m.role === 'user' ? { backgroundColor: 'var(--primary)' } : {}}>
                     {m.role === 'assistant' ? (
                       <div className="text-sm leading-relaxed">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown>
@@ -593,8 +593,8 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                     )}
                   </div>
                   {m.role === 'user' && (
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+                      <svg className="w-4 h-4" style={{ color: 'var(--primary)' }} fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                       </svg>
                     </div>
@@ -602,7 +602,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                 </div>
               ))}
               {chatError && (
-                <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                <div className="flex items-center gap-2 p-3 rounded-lg text-sm" style={{ backgroundColor: 'rgba(107, 30, 20, 0.1)', borderColor: 'rgba(107, 30, 20, 0.2)', color: 'var(--accent)' }}>
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd"/>
                   </svg>
@@ -611,7 +611,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
               )}
               {chatLoading && (
                 <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
+                  <div className="w-4 h-4 border-2 border-gray-300 rounded-full animate-spin" style={{ borderTopColor: 'var(--primary)' }}></div>
                   Thinking…
                 </div>
               )}
@@ -631,17 +631,22 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                     }}
                     onKeyDown={handleChatKey}
                     rows={1}
-                    className="w-full px-4 py-3 pr-14 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none overflow-y-auto"
+                    className="w-full px-4 py-3 pr-14 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 resize-none overflow-y-auto"
                     placeholder="Type your question..."
-                    style={{ minHeight: '48px', maxHeight: '120px' }}
+                    style={{ 
+                      '--tw-ring-color': 'var(--primary)',
+                      minHeight: '48px', 
+                      maxHeight: '120px' 
+                    } as React.CSSProperties}
                   />
                   <button 
                     onClick={() => void askChat()} 
                     disabled={!chatInput.trim() || chatLoading}
-                    className="absolute right-6 bottom-3 w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-blue-600 hover:text-blue-700 transition-colors duration-200 flex items-center justify-center"
+                    className="absolute right-6 bottom-3 w-8 h-8 rounded-full disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center"
+                    style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)' }}
                   >
                     {chatLoading ? (
-                      <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                      <div className="w-4 h-4 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'var(--primary)' }}></div>
                     ) : (
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/>
@@ -684,8 +689,8 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
           <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300" style={modalStyle}>
             <div className="flex items-center justify-between p-6 border-b border-gray-100">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+                  <svg className="w-5 h-5" style={{ color: 'var(--primary)' }} fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                   </svg>
                 </div>
@@ -694,30 +699,46 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                   <p className="text-sm text-gray-500">Definition for &quot;{dictWord}&quot;</p>
                 </div>
               </div>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  e.nativeEvent.stopImmediatePropagation();
-                  setDictOpen(false);
-                  // Unlock background scroll when modal closes
-                  try {
-                    document.documentElement.classList.remove('no-scroll');
-                    document.body.classList.remove('no-scroll');
-                  } catch {}
-                }}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }}
-                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors duration-200"
-                aria-label="Close"
-                type="button"
-              >
-                <FontAwesomeIcon icon={faTimes} className="text-sm" />
-              </button>
+              <div className="flex items-center gap-3">
+                {dictUrl && (
+                  <a 
+                    href={dictUrl} 
+                    target="_blank" 
+                    rel="noreferrer noopener" 
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 hover:opacity-80"
+                    style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)' }}
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/>
+                    </svg>
+                    Open
+                  </a>
+                )}
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.nativeEvent.stopImmediatePropagation();
+                    setDictOpen(false);
+                    // Unlock background scroll when modal closes
+                    try {
+                      document.documentElement.classList.remove('no-scroll');
+                      document.body.classList.remove('no-scroll');
+                    } catch {}
+                  }}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                  className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors duration-200"
+                  aria-label="Close"
+                  type="button"
+                >
+                  <FontAwesomeIcon icon={faTimes} className="text-sm" />
+                </button>
+              </div>
             </div>
-            <div className="p-6 overflow-y-auto" style={{ maxHeight: 'calc(100% - 120px)' }}>
+            <div className="flex-1 overflow-y-auto p-6" style={{ maxHeight: 'calc(100% - 180px)' }}>
               {dictUrl ? (
                 <div>
                   <div className="m-embed-container" ref={dictContainerRef}>
@@ -728,22 +749,6 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                         <iframe className="embedded-frame" src={dictUrl} title="Dictionary" />
                       </div>
                     )}
-                  </div>
-                  <div className="mt-4 p-3 bg-green-50 rounded-lg text-sm text-green-700">
-                    If the page fails to load here, use &quot;Open&quot; to view in a new tab.
-                  </div>
-                  <div className="mt-3 flex justify-end">
-                    <a 
-                      href={dictUrl} 
-                      target="_blank" 
-                      rel="noreferrer noopener" 
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 hover:bg-green-200 text-green-700 hover:text-green-800 rounded-lg text-sm font-medium transition-colors duration-200"
-                    >
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"/>
-                      </svg>
-                      Open in New Tab
-                    </a>
                   </div>
                 </div>
               ) : (

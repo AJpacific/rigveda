@@ -239,8 +239,8 @@ export default function AskAIModal({ open, onClose, title = 'Ask AI', contextPre
       <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden mb-4" style={{ width: '100%', ...modalStyle }}>
         <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0 relative z-10 bg-white">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-              <FontAwesomeIcon icon={faRobot} className="text-blue-600 text-lg" />
+            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+              <FontAwesomeIcon icon={faRobot} className="text-lg" style={{ color: 'var(--primary)' }} />
             </div>
             <div>
               <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
@@ -269,15 +269,16 @@ export default function AskAIModal({ open, onClose, title = 'Ask AI', contextPre
           {chatHistory.map((m, idx) => (
             <div key={idx} className={`flex gap-3 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               {m.role === 'assistant' && (
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <FontAwesomeIcon icon={faRobot} className="w-4 h-4 text-blue-600" />
+                <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+                  <FontAwesomeIcon icon={faRobot} className="w-4 h-4" style={{ color: 'var(--primary)' }} />
                 </div>
               )}
-              <div className={`max-w-[80%] rounded-2xl px-4 py-3 ${
+              <div               className={`max-w-[80%] rounded-2xl px-4 py-3 ${
                 m.role === 'user' 
-                  ? 'bg-blue-500 text-white' 
+                  ? 'text-white' 
                   : 'bg-gray-100 text-gray-900'
-              }`}>
+              }`}
+              style={m.role === 'user' ? { backgroundColor: 'var(--primary)' } : {}}>
                 {m.role === 'assistant' ? (
                   <div className="text-sm leading-relaxed">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown>
@@ -287,8 +288,8 @@ export default function AskAIModal({ open, onClose, title = 'Ask AI', contextPre
                 )}
               </div>
               {m.role === 'user' && (
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)' }}>
+                  <svg className="w-4 h-4" style={{ color: 'var(--primary)' }} fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                   </svg>
                 </div>
@@ -296,7 +297,7 @@ export default function AskAIModal({ open, onClose, title = 'Ask AI', contextPre
             </div>
           ))}
           {chatError && (
-            <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+            <div className="flex items-center gap-2 p-3 rounded-lg text-sm" style={{ backgroundColor: 'rgba(107, 30, 20, 0.1)', borderColor: 'rgba(107, 30, 20, 0.2)', color: 'var(--accent)' }}>
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd"/>
               </svg>
@@ -305,7 +306,7 @@ export default function AskAIModal({ open, onClose, title = 'Ask AI', contextPre
           )}
           {chatLoading && (
             <div className="flex items-center gap-2 text-sm text-gray-500">
-              <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
+              <div className="w-4 h-4 border-2 border-gray-300 rounded-full animate-spin" style={{ borderTopColor: 'var(--primary)' }}></div>
               Thinking…
             </div>
           )}
@@ -324,22 +325,24 @@ export default function AskAIModal({ open, onClose, title = 'Ask AI', contextPre
                   textarea.style.height = `${Math.min(textarea.scrollHeight, 120)}px`;
                 }}
                 onKeyDown={handleKey}
-                className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none overflow-y-auto"
+                className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200 resize-none overflow-y-auto"
                 placeholder="Type your question..."
                 rows={1}
                 style={{
+                  '--tw-ring-color': 'var(--primary)',
                   height: 'auto',
                   minHeight: '48px',
                   maxHeight: '120px'
-                }}
+                } as React.CSSProperties}
               />
               <button 
                 onClick={() => void askChat()} 
                 disabled={!chatInput.trim() || chatLoading}
-                className="absolute right-6 bottom-3 w-8 h-8 rounded-full bg-blue-100 hover:bg-blue-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-blue-600 hover:text-blue-700 transition-colors duration-200 flex items-center justify-center"
+                className="absolute right-6 bottom-3 w-8 h-8 rounded-full disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center"
+                style={{ backgroundColor: 'rgba(138, 75, 45, 0.15)', color: 'var(--primary)' }}
               >
                 {chatLoading ? (
-                  <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-4 h-4 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'var(--primary)' }}></div>
                 ) : (
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/>
