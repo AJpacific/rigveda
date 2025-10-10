@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faRobot } from '@fortawesome/free-solid-svg-icons';
+import { useMobileModalHeight } from '../hooks/useMobileModalHeight';
 
 export type ChatMessage = { role: 'user' | 'assistant'; content: string };
 
@@ -24,6 +25,14 @@ export default function AskAIModal({ open, onClose, title = 'Ask AI', contextPre
   const listRef = useRef<HTMLDivElement | null>(null);
   const chatInputRef = useRef<HTMLTextAreaElement | null>(null);
   const lastOpenRef = useRef(false);
+  
+  // Dynamic height for mobile devices with audio bar consideration
+  const { style: modalStyle } = useMobileModalHeight({
+    defaultHeight: '80vh',
+    mobileHeight: '70vh',
+    audioBarHeight: 100, // Account for audio bar
+    minHeight: '50vh'
+  });
 
   // Chat history persistence
   const getChatStorageKey = () => 'random_verse_chat_history';
@@ -227,7 +236,7 @@ export default function AskAIModal({ open, onClose, title = 'Ask AI', contextPre
         }
       }}
     >
-      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full h-[75vh] sm:h-[80vh] flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden mb-4" style={{ width: '100%' }}>
+      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden mb-4" style={{ width: '100%', ...modalStyle }}>
         <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0 relative z-10 bg-white">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">

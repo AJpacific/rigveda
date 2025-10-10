@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import type { Hymn, Verse } from '../../../types/rigveda';
 import VerseDetailsModal from '../../components/VerseDetailsModal';
+import { useMobileModalHeight } from '../../hooks/useMobileModalHeight';
 
 type HymnClientProps = {
   hymn: Hymn;
@@ -28,6 +29,14 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentVerseIndex, setCurrentVerseIndex] = useState<number | null>(null);
+  
+  // Dynamic height for mobile devices with audio bar consideration
+  const { style: modalStyle } = useMobileModalHeight({
+    defaultHeight: '80vh',
+    mobileHeight: '70vh',
+    audioBarHeight: 100, // Account for audio bar
+    minHeight: '50vh'
+  });
 
   // Verse-level Ask AI modal state
   const [chatOpen, setChatOpen] = useState(false);
@@ -532,7 +541,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             }
           }}
         >
-          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full h-[80vh] flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden" style={{ width: '100%' }}>
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden" style={{ width: '100%', ...modalStyle }}>
             <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
@@ -672,7 +681,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
             }
           }}
         >
-          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300" style={modalStyle}>
             <div className="flex items-center justify-between p-6 border-b border-gray-100">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
@@ -708,7 +717,7 @@ export default function HymnClient({ hymn, mandala, sukta, prevPath, nextPath }:
                 <FontAwesomeIcon icon={faTimes} className="text-sm" />
               </button>
             </div>
-            <div className="p-6 max-h-[calc(80vh-120px)] overflow-y-auto">
+            <div className="p-6 overflow-y-auto" style={{ maxHeight: 'calc(100% - 120px)' }}>
               {dictUrl ? (
                 <div>
                   <div className="m-embed-container" ref={dictContainerRef}>
