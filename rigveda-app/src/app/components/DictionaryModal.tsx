@@ -40,9 +40,9 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
   // Dynamic height for mobile devices with audio bar consideration
   const { style: modalStyle } = useMobileModalHeight({
     defaultHeight: '85vh',
-    mobileHeight: '80vh',
+    mobileHeight: '70vh',
     audioBarHeight: 100, // Account for audio bar
-    minHeight: '60vh'
+    minHeight: '50vh'
   });
 
   // Load search history from localStorage

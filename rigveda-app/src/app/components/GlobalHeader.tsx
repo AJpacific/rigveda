@@ -511,7 +511,7 @@ export default function GlobalHeader() {
             }
           }}
         >
-          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300" style={{ width: '100%' }}>
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[70vh] sm:max-h-[80vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300" style={{ width: '100%' }}>
             <div className="flex items-center justify-between p-6 border-b border-gray-100">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
@@ -565,7 +565,7 @@ export default function GlobalHeader() {
                 </button>
               </div>
             </div>
-            <div className="p-6 max-h-[calc(80vh-120px)] overflow-y-auto">
+            <div className="p-6 max-h-[calc(70vh-120px)] sm:max-h-[calc(80vh-120px)] overflow-y-auto">
               {!cseReady && <div className="text-sm text-gray-500 flex items-center gap-2">
                 <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
                 Loading search…
@@ -619,7 +619,7 @@ export default function GlobalHeader() {
             }
           }}
         >
-          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300" style={{ width: '100%' }}>
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[70vh] sm:max-h-[80vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300" style={{ width: '100%' }}>
             <div className="flex items-center justify-between p-6 border-b border-gray-100">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
