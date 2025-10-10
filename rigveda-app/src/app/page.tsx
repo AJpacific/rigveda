@@ -41,7 +41,7 @@ export default function Home() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">ऋग्वेद</h1>
           <button
             onClick={() => setRigvedaOverviewOpen(true)}
-            className="absolute -top-2 -right-8 sm:-right-10 w-7 h-7 sm:w-8 sm:h-8 bg-[#e7d8c6]/90 backdrop-blur-sm border border-gray-300 hover:bg-[#e7d8c6] hover:border-gray-400 text-gray-600 hover:text-gray-800 rounded-full flex items-center justify-center transition-all duration-200 shadow-sm hover:shadow-md"
+            className="absolute -top-2 -right-8 sm:-right-10 w-7 h-7 sm:w-8 sm:h-8 bg-[#ececec] hover:bg-[#ececec]/80 text-gray-600 hover:text-gray-800 rounded-full flex items-center justify-center transition-all duration-200"
             title="Learn about the Rigveda"
           >
             <FontAwesomeIcon icon={faInfo} className="text-xs sm:text-sm" />
@@ -75,7 +75,7 @@ export default function Home() {
                   e.stopPropagation();
                   openInfoModal(mandala);
                 }}
-                className="absolute top-1 right-1 sm:top-2 sm:right-2 w-5 h-5 sm:w-6 sm:h-6 bg-[#eee4e0]/90 backdrop-blur-sm border border-gray-300 hover:bg-[#eee4e0] hover:border-gray-400 text-gray-600 hover:text-gray-800 rounded-full flex items-center justify-center transition-all duration-200 shadow-sm hover:shadow-md opacity-100 z-10"
+                className="absolute top-1 right-1 sm:top-2 sm:right-2 w-5 h-5 sm:w-6 sm:h-6 bg-[#ececec] hover:bg-[#ececec]/80 text-gray-600 hover:text-gray-800 rounded-full flex items-center justify-center transition-all duration-200 opacity-100 z-10"
                 title="View Mandala Information"
               >
                 <FontAwesomeIcon icon={faInfo} className="text-xs" />
