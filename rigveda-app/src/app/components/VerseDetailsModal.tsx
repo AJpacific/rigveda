@@ -422,7 +422,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
         }
       }}
     >
-      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden mx-4 sm:mx-0 mb-4" style={modalStyle}>
+      <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden mb-4" style={modalStyle}>
         <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">

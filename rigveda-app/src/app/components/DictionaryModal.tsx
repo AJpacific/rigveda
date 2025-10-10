@@ -323,7 +323,7 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
         )}
 
         {/* Content */}
-        <div className={`flex-1 min-h-0 ${activeTab === 'learnsanskrit' ? 'overflow-hidden' : 'overflow-y-auto p-6'}`}>
+        <div className={`flex-1 min-h-0 ${activeTab === 'learnsanskrit' ? 'overflow-y-auto' : 'overflow-y-auto p-6'}`}>
           {activeTab === 'ai' ? (
             <>
               {loading && (
@@ -463,10 +463,10 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
             <div className="h-full w-full">
               <iframe
                 src="https://www.learnsanskrit.cc/"
-                className="w-full h-full border-0"
+                className="w-full border-0"
                 title="LearnSanskrit Dictionary"
                 sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
-                style={{ minHeight: '600px' }}
+                style={{ minHeight: '800px', height: '100%' }}
               />
             </div>
           )}
