@@ -325,7 +325,7 @@ export default function AskAIModal({ open, onClose, title = 'Ask AI', contextPre
                 }}
                 onKeyDown={handleKey}
                 className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none overflow-y-auto"
-                placeholder="Type your question about Rigveda..."
+                placeholder="Type your question..."
                 rows={1}
                 style={{
                   height: 'auto',
