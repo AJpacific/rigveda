@@ -118,31 +118,31 @@ Follow these instructions:
         // Handle Sanskrit → English response
         if (parsed.languageDetected === 'Sanskrit') {
           return [{
-            sanskrit: parsed.word || word,
-            english: Array.isArray(parsed.meanings) ? parsed.meanings.join('; ') : parsed.meanings || 'Meaning not available',
-            transliteration: parsed.transliteration || word,
-            grammar: `${parsed.partOfSpeech || ''} ${parsed.gender || ''}`.trim() || 'Not specified',
-            etymology: parsed.etymology || '',
+            sanskrit: (parsed.word as string) || word,
+            english: Array.isArray(parsed.meanings) ? (parsed.meanings as string[]).join('; ') : (parsed.meanings as string) || 'Meaning not available',
+            transliteration: (parsed.transliteration as string) || word,
+            grammar: `${(parsed.partOfSpeech as string) || ''} ${(parsed.gender as string) || ''}`.trim() || 'Not specified',
+            etymology: (parsed.etymology as string) || '',
             source: 'AI Sanskrit Scholar',
             dictionary: 'AI',
-            contextualUsage: parsed.contextualUsage || '',
-            grammaticalInfo: parsed.grammaticalInfo || '',
-            derivedWords: Array.isArray(parsed.derivedOrRelatedWords) ? parsed.derivedOrRelatedWords.join(', ') : parsed.derivedOrRelatedWords || ''
+            contextualUsage: (parsed.contextualUsage as string) || '',
+            grammaticalInfo: (parsed.grammaticalInfo as string) || '',
+            derivedWords: Array.isArray(parsed.derivedOrRelatedWords) ? (parsed.derivedOrRelatedWords as string[]).join(', ') : (parsed.derivedOrRelatedWords as string) || ''
           }];
         }
         
         // Handle English → Sanskrit response
         if (parsed.languageDetected === 'English' && Array.isArray(parsed.sanskritEquivalents)) {
-          return parsed.sanskritEquivalents.map((equiv: any) => ({
-            sanskrit: equiv.devanagari || '',
-            english: equiv.meaning || '',
-            transliteration: equiv.transliteration || '',
-            grammar: `${equiv.partOfSpeech || ''} ${equiv.gender || ''}`.trim() || 'Not specified',
-            etymology: equiv.etymology || '',
+          return parsed.sanskritEquivalents.map((equiv: Record<string, unknown>) => ({
+            sanskrit: (equiv.devanagari as string) || '',
+            english: (equiv.meaning as string) || '',
+            transliteration: (equiv.transliteration as string) || '',
+            grammar: `${(equiv.partOfSpeech as string) || ''} ${(equiv.gender as string) || ''}`.trim() || 'Not specified',
+            etymology: (equiv.etymology as string) || '',
             source: 'AI Sanskrit Scholar',
             dictionary: 'AI',
-            usageNote: equiv.usageNote || '',
-            origin: equiv.origin || ''
+            usageNote: (equiv.usageNote as string) || '',
+            origin: (equiv.origin as string) || ''
           }));
         }
       }
