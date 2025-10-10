@@ -8,6 +8,11 @@ type DictionaryResult = {
   etymology?: string;
   source?: string;
   dictionary?: string;
+  contextualUsage?: string;
+  grammaticalInfo?: string;
+  derivedWords?: string;
+  usageNote?: string;
+  origin?: string;
 };
 
 // AI-powered Sanskrit dictionary using direct OpenRouter API call
@@ -18,30 +23,63 @@ async function getAIDictionaryMeaning(word: string): Promise<DictionaryResult[]>
       throw new Error('Missing OPENROUTER_API_KEY');
     }
 
-    const contextPrompt = `You are a Sanskrit scholar and expert in Vedic literature. Provide a comprehensive dictionary entry for the word "${word}". 
+    const contextPrompt = `
+You are a highly knowledgeable Sanskrit scholar specializing in Vedic and Classical Sanskrit philology, lexicography, and etymology. 
+Your task is to return a comprehensive Sanskrit dictionary entry for the word: "${word}".
 
-The word could be:
-- A Sanskrit word in Devanagari script
-- A Sanskrit word in Roman transliteration  
-- An English word that needs Sanskrit translation
+The output must be returned as a valid, parsable JSON object — with no explanations, comments, or Markdown formatting. 
+Do not include any text outside the JSON. Return only the JSON.
 
-Please provide the response in the following JSON format:
-{
-  "sanskrit": "Sanskrit word in Devanagari script",
-  "transliteration": "Roman transliteration",
-  "english": "English meaning and definition",
-  "grammar": "Grammatical information (noun, verb, etc.)",
-  "etymology": "Brief etymology if known"
-}
+The input word can be:
+- A Sanskrit term (in Devanagari or Roman transliteration)
+- An English word that needs Sanskrit translation or equivalents
 
-Instructions:
-1. If the input is a Sanskrit word (Devanagari or transliteration), provide its English meaning and Sanskrit details
-2. If the input is an English word, provide the Sanskrit equivalent(s) with their meanings
-3. For English words, show the most common Sanskrit translations with their Devanagari script
-4. Always include proper transliteration and grammatical information
-5. Provide comprehensive meanings and etymology when available
+Follow these instructions:
 
-Focus on accuracy and scholarly precision for both Sanskrit-to-English and English-to-Sanskrit translations.`;
+1. **Language Detection**
+   - Detect whether the input is Sanskrit (Devanagari or IAST) or English.
+   - Include this as the field: "languageDetected".
+
+2. **If Sanskrit → English**
+   Provide fields:
+   {
+     "word": "",
+     "transliteration": "",
+     "languageDetected": "Sanskrit",
+     "partOfSpeech": "",
+     "gender": "",
+     "meanings": ["", "", ""],
+     "contextualUsage": "",
+     "etymology": "",
+     "grammaticalInfo": "",
+     "derivedOrRelatedWords": ["", ""]
+   }
+
+3. **If English → Sanskrit**
+   Provide fields:
+   {
+     "word": "",
+     "languageDetected": "English",
+     "sanskritEquivalents": [
+       {
+         "devanagari": "",
+         "transliteration": "",
+         "partOfSpeech": "",
+         "gender": "",
+         "meaning": "",
+         "etymology": "",
+         "usageNote": "",
+         "origin": "Vedic / Classical / Philosophical"
+       }
+     ]
+   }
+
+4. **Formatting**
+   - Output must be valid JSON with double quotes around keys and string values.
+   - No Markdown, no asterisks, no additional commentary.
+   - Ensure it can be parsed directly using JSON.parse().
+`;
+    
 
     const model = process.env.OPENROUTER_MODEL || 'meta-llama/llama-3.3-70b-instruct:free';
     
@@ -76,17 +114,39 @@ Focus on accuracy and scholarly precision for both Sanskrit-to-English and Engli
       const jsonMatch = aiResponse.match(/\{[\s\S]*\}/);
       if (jsonMatch) {
         const parsed = JSON.parse(jsonMatch[0]);
-        return [{
-          sanskrit: parsed.sanskrit || word,
-          english: parsed.english || 'Meaning not available',
-          transliteration: parsed.transliteration || word,
-          grammar: parsed.grammar || 'Not specified',
-          etymology: parsed.etymology || '',
-          source: 'AI Sanskrit Scholar',
-          dictionary: 'AI'
-        }];
+        
+        // Handle Sanskrit → English response
+        if (parsed.languageDetected === 'Sanskrit') {
+          return [{
+            sanskrit: parsed.word || word,
+            english: Array.isArray(parsed.meanings) ? parsed.meanings.join('; ') : parsed.meanings || 'Meaning not available',
+            transliteration: parsed.transliteration || word,
+            grammar: `${parsed.partOfSpeech || ''} ${parsed.gender || ''}`.trim() || 'Not specified',
+            etymology: parsed.etymology || '',
+            source: 'AI Sanskrit Scholar',
+            dictionary: 'AI',
+            contextualUsage: parsed.contextualUsage || '',
+            grammaticalInfo: parsed.grammaticalInfo || '',
+            derivedWords: Array.isArray(parsed.derivedOrRelatedWords) ? parsed.derivedOrRelatedWords.join(', ') : parsed.derivedOrRelatedWords || ''
+          }];
+        }
+        
+        // Handle English → Sanskrit response
+        if (parsed.languageDetected === 'English' && Array.isArray(parsed.sanskritEquivalents)) {
+          return parsed.sanskritEquivalents.map((equiv: any) => ({
+            sanskrit: equiv.devanagari || '',
+            english: equiv.meaning || '',
+            transliteration: equiv.transliteration || '',
+            grammar: `${equiv.partOfSpeech || ''} ${equiv.gender || ''}`.trim() || 'Not specified',
+            etymology: equiv.etymology || '',
+            source: 'AI Sanskrit Scholar',
+            dictionary: 'AI',
+            usageNote: equiv.usageNote || '',
+            origin: equiv.origin || ''
+          }));
+        }
       }
-    } catch {
+    } catch (error) {
       console.log('Failed to parse AI JSON response, using text response');
     }
 
