@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faSpinner, faBook, faLanguage, faMicroscope, faInfoCircle, faQuestionCircle, faMusic, faList } from '@fortawesome/free-solid-svg-icons';
+import { useMobileModalHeight } from '../hooks/useMobileModalHeight';
 
 interface PadaData {
   grammarData?: Array<{
@@ -61,6 +62,14 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'overview' | 'grammar' | 'metrical' | 'versions'>('overview');
   const [strataHelpOpen, setStrataHelpOpen] = useState(false);
+  
+  // Dynamic height for mobile devices with audio bar consideration
+  const { style: modalStyle } = useMobileModalHeight({
+    defaultHeight: '80vh',
+    mobileHeight: '70vh',
+    audioBarHeight: 100, // Account for audio bar
+    minHeight: '40vh'
+  });
 
   const fetchVerseDetails = useCallback(async () => {
     setLoading(true);
@@ -413,7 +422,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
         }
       }}
     >
-      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[75vh] sm:max-h-[80vh] flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden mx-4 sm:mx-0 mb-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden mx-4 sm:mx-0 mb-4" style={modalStyle}>
         <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
@@ -522,7 +531,7 @@ export default function VerseDetailsModal({ isOpen, onClose, mandala, hymn, vers
             }
           }}
         >
-          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[60vh] flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col animate-in fade-in-0 zoom-in-95 duration-300 overflow-hidden" style={{ maxHeight: '60vh' }}>
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
               <div className="flex items-center gap-3">

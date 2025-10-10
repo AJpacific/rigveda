@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faBook, faSpinner, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { useMobileModalHeight } from '../hooks/useMobileModalHeight';
 
 type DictionaryResult = {
   sanskrit: string;
@@ -35,6 +36,14 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<TabType>('learnsanskrit');
   const inputRef = useRef<HTMLInputElement>(null);
+  
+  // Dynamic height for mobile devices with audio bar consideration
+  const { style: modalStyle } = useMobileModalHeight({
+    defaultHeight: '85vh',
+    mobileHeight: '80vh',
+    audioBarHeight: 100, // Account for audio bar
+    minHeight: '60vh'
+  });
 
   // Load search history from localStorage
   useEffect(() => {
@@ -178,7 +187,7 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
         }
       }}
     >
-      <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[80vh] sm:max-h-[85vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 flex flex-col" style={{ width: '100%', minHeight: '60vh' }}>
+      <div className="bg-white rounded-2xl shadow-2xl max-w-5xl w-full overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 flex flex-col" style={{ width: '100%', ...modalStyle }}>
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-100 flex-shrink-0">
           <div className="flex items-center gap-3">

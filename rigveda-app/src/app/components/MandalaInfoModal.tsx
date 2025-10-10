@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faInfo, faBook, faUsers, faLanguage, faMusic, faLightbulb } from '@fortawesome/free-solid-svg-icons';
+import { useMobileModalHeight } from '../hooks/useMobileModalHeight';
 
 type MandalaData = {
   "Mandala Number": number;
@@ -136,6 +137,14 @@ const mandalaData: MandalaData[] = [
 ];
 
 export default function MandalaInfoModal({ open, onClose, mandalaData }: MandalaInfoModalProps) {
+  // Dynamic height for mobile devices with audio bar consideration
+  const { style: modalStyle } = useMobileModalHeight({
+    defaultHeight: '90vh',
+    mobileHeight: '75vh',
+    audioBarHeight: 100, // Account for audio bar
+    minHeight: '50vh'
+  });
+
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (open) {
@@ -159,7 +168,7 @@ export default function MandalaInfoModal({ open, onClose, mandalaData }: Mandala
         }
       }}
     >
-      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[75vh] sm:max-h-[90vh] overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 flex flex-col">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 flex flex-col" style={modalStyle}>
         {/* Header */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-100 flex-shrink-0">
           <div className="flex items-center gap-3">
