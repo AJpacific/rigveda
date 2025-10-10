@@ -75,7 +75,7 @@ export default function Home() {
                   e.stopPropagation();
                   openInfoModal(mandala);
                 }}
-                className="absolute top-2 right-2 w-6 h-6 bg-blue-100 hover:bg-blue-200 text-blue-600 rounded-full flex items-center justify-center transition-colors duration-200 opacity-0 group-hover:opacity-100"
+                className="absolute top-2 right-2 w-6 h-6 bg-blue-100 hover:bg-blue-200 text-blue-600 rounded-full flex items-center justify-center transition-colors duration-200 opacity-100"
                 title="View Mandala Information"
               >
                 <FontAwesomeIcon icon={faInfo} className="text-xs" />
