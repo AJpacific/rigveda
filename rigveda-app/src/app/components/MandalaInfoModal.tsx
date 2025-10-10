@@ -139,8 +139,8 @@ const mandalaData: MandalaData[] = [
 export default function MandalaInfoModal({ open, onClose, mandalaData }: MandalaInfoModalProps) {
   // Dynamic height for mobile devices with audio bar consideration
   const { style: modalStyle } = useMobileModalHeight({
-    defaultHeight: '90vh',
-    mobileHeight: '75vh',
+    defaultHeight: '75vh',
+    mobileHeight: '70vh',
     audioBarHeight: 100, // Account for audio bar
     minHeight: '50vh'
   });
@@ -161,7 +161,7 @@ export default function MandalaInfoModal({ open, onClose, mandalaData }: Mandala
 
   return (
     <div 
-      className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${open ? 'block' : 'hidden'}`}
+      className={`fixed inset-0 z-50 flex items-start justify-center p-4 pt-8 sm:pt-12 md:pt-16 lg:pt-20 ${open ? 'block' : 'hidden'}`}
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();

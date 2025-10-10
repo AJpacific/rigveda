@@ -3,10 +3,11 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faUpRightFromSquare, faBars, faHome, faArrowRight, faSearch, faRobot, faChevronDown, faTimes, faBook } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faUpRightFromSquare, faBars, faHome, faArrowRight, faSearch, faRobot, faChevronDown, faTimes, faBook, faInfo } from '@fortawesome/free-solid-svg-icons';
 import AskAIModal from './AskAIModal';
 import UniversalSearch from './UniversalSearch';
 import DictionaryModal from './DictionaryModal';
+import RigvedaOverviewModal from './RigvedaOverviewModal';
 
 const CSE_SRC = 'https://cse.google.com/cse.js?cx=658dcffd2ee984f58';
 
@@ -50,6 +51,7 @@ export default function GlobalHeader() {
   const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
   const [navDropdownOpen, setNavDropdownOpen] = useState(false);
   const [dictionaryOpen, setDictionaryOpen] = useState(false);
+  const [rigvedaOverviewOpen, setRigvedaOverviewOpen] = useState(false);
   const containerId = 'gcse-search-container';
   const lastQueryRef = useRef<string>('');
 
@@ -260,6 +262,16 @@ export default function GlobalHeader() {
       <div className="container mx-auto px-4 m-appbar-inner">
         <Link href="/" className="m-appbar-title text-lg sm:text-xl">RigVeda</Link>
         <nav className="flex items-center gap-1 sm:gap-2">
+          {/* About Rigveda Button */}
+          <button
+            onClick={() => setRigvedaOverviewOpen(true)}
+            className="m-btn m-btn-outlined text-sm"
+            aria-label="About Rigveda"
+          >
+            <FontAwesomeIcon icon={faInfo} />
+            <span className="hidden sm:inline ml-2">About Rigveda</span>
+          </button>
+          
           {/* Search Dropdown */}
           <div className="relative search-dropdown-container">
             <button 
@@ -596,6 +608,11 @@ export default function GlobalHeader() {
       <DictionaryModal
         open={dictionaryOpen}
         onClose={() => setDictionaryOpen(false)}
+      />
+
+      <RigvedaOverviewModal
+        open={rigvedaOverviewOpen}
+        onClose={() => setRigvedaOverviewOpen(false)}
       />
 
       {universalSearchOpen && (

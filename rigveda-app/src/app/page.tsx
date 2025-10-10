@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfo } from '@fortawesome/free-solid-svg-icons';
 import MandalaInfoModal, { mandalaData } from './components/MandalaInfoModal';
-import RigvedaOverviewModal from './components/RigvedaOverviewModal';
 
 type MandalaData = {
   "Mandala Number": number;
@@ -26,7 +25,6 @@ const RandomVerseCard = dynamic(() => import('./components/RandomVerseCard'), { 
 export default function Home() {
   const [infoModalOpen, setInfoModalOpen] = useState(false);
   const [selectedMandalaData, setSelectedMandalaData] = useState<MandalaData | null>(null);
-  const [rigvedaOverviewOpen, setRigvedaOverviewOpen] = useState(false);
 
   const openInfoModal = (mandalaNumber: number) => {
     const data = mandalaData.find(m => m["Mandala Number"] === mandalaNumber);
@@ -37,15 +35,8 @@ export default function Home() {
   return (
     <div className="space-y-10">
       <section className="text-center space-y-4">
-        <div className="relative inline-block">
+        <div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">ऋग्वेद</h1>
-          <button
-            onClick={() => setRigvedaOverviewOpen(true)}
-            className="absolute -top-2 -right-8 sm:-right-10 w-7 h-7 sm:w-8 sm:h-8 bg-[#ececec] hover:bg-[#ececec]/80 text-gray-600 hover:text-gray-800 rounded-full flex items-center justify-center transition-all duration-200"
-            title="Learn about the Rigveda"
-          >
-            <FontAwesomeIcon icon={faInfo} className="text-xs sm:text-sm" />
-          </button>
         </div>
         <p className="text-xl sm:text-2xl text-muted">THE RIGVEDA</p>
         <div className="max-w-2xl mx-auto">
@@ -96,11 +87,6 @@ export default function Home() {
         mandalaData={selectedMandalaData}
       />
 
-      {/* Rigveda Overview Modal */}
-      <RigvedaOverviewModal
-        open={rigvedaOverviewOpen}
-        onClose={() => setRigvedaOverviewOpen(false)}
-      />
     </div>
   );
 }
