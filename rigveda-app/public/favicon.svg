@@ -1,0 +1,34 @@
+<!-- Rigveda logo (single-character Devanagari ऋ) with modern Material UI color palette -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Rigveda single-character logo: ऋ">
+  <defs>
+    <!-- Modern Material UI-inspired gradient -->
+    <radialGradient id="mainGradient" cx="30%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#90CAF9"/>
+      <stop offset="60%" stop-color="#42A5F5"/>
+      <stop offset="100%" stop-color="#1E88E5"/>
+    </radialGradient>
+    <linearGradient id="bgGradient" x1="0" x2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- circular badge background -->
+  <g filter="url(#softShadow)">
+    <circle cx="256" cy="256" r="212" fill="url(#bgGradient)" />
+    <circle cx="256" cy="256" r="176" fill="url(#mainGradient)" />
+  </g>
+
+  <!-- decorative ring -->
+  <circle cx="256" cy="256" r="200" fill="none" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="6"/>
+
+  <!-- Devanagari character 'ऋ' centered -->
+  <text x="256" y="280" text-anchor="middle" font-family="'Noto Sans Devanagari', 'Mangal', 'Devanagari MT', serif" font-size="200" font-weight="700" fill="#0D47A1" stroke="#FFFFFF" stroke-width="6" paint-order="stroke fill" style="dominant-baseline:middle;">
+    ऋ
+  </text>
+
+  <title>Rigveda logo — Devanagari ऋ</title>
+</svg>
