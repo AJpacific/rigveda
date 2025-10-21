@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faUpRightFromSquare, faBars, faHome, faArrowRight, faSearch, faRobot, faChevronDown, faTimes, faBook, faInfo } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faUpRightFromSquare, faBars, faHome, faArrowRight, faSearch, faRobot, faChevronDown, faTimes, faBook, faInfo, faQuestionCircle, faLightbulb, faScroll, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 import AskAIModal from './AskAIModal';
 import UniversalSearch from './UniversalSearch';
 import DictionaryModal from './DictionaryModal';
 import RigvedaOverviewModal from './RigvedaOverviewModal';
+import MandalaInfoModal, { mandalaData } from './MandalaInfoModal';
 
 const CSE_SRC = 'https://cse.google.com/cse.js?cx=658dcffd2ee984f58';
 
@@ -51,8 +52,11 @@ export default function GlobalHeader() {
   const [universalSearchOpen, setUniversalSearchOpen] = useState(false);
   const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
   const [navDropdownOpen, setNavDropdownOpen] = useState(false);
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const [dictionaryOpen, setDictionaryOpen] = useState(false);
   const [rigvedaOverviewOpen, setRigvedaOverviewOpen] = useState(false);
+  const [mandalaInfoOpen, setMandalaInfoOpen] = useState(false);
+  const [selectedMandalaData, setSelectedMandalaData] = useState<any>(null);
   const containerId = 'gcse-search-container';
   const lastQueryRef = useRef<string>('');
 
@@ -239,11 +243,15 @@ export default function GlobalHeader() {
       if (navDropdownOpen && !target.closest('.nav-dropdown-container')) {
         setNavDropdownOpen(false);
       }
+      
+      if (aboutDropdownOpen && !target.closest('.about-dropdown-container')) {
+        setAboutDropdownOpen(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [searchDropdownOpen, navDropdownOpen]);
+  }, [searchDropdownOpen, navDropdownOpen, aboutDropdownOpen]);
 
   // Measure header height for subappbars
   useEffect(() => {
@@ -263,15 +271,50 @@ export default function GlobalHeader() {
       <div className="container mx-auto px-4 m-appbar-inner">
         <Link href="/" className="m-appbar-title text-lg sm:text-xl">RigVeda</Link>
         <nav className="flex items-center gap-1 sm:gap-2">
-          {/* About Rigveda Button */}
-          <button
-            onClick={() => setRigvedaOverviewOpen(true)}
-            className="m-btn m-btn-outlined text-sm"
-            aria-label="About Rigveda"
-          >
-            <FontAwesomeIcon icon={faInfo} />
-            <span className="hidden sm:inline ml-2">About Rigveda</span>
-          </button>
+          {/* About Dropdown */}
+          <div className="relative about-dropdown-container">
+            <button 
+              onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
+              className="m-btn m-btn-outlined text-sm"
+              aria-label="About"
+            >
+              <FontAwesomeIcon icon={faLightbulb} className="text-sm" />
+              <span className="hidden sm:inline ml-2">About</span>
+              <FontAwesomeIcon icon={faChevronDown} className="text-xs ml-1" />
+            </button>
+            
+            {aboutDropdownOpen && (
+              <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-48" style={{ colorScheme: 'light' }}>
+                <div className="py-1">
+                  <button 
+                    onClick={() => {
+                      setRigvedaOverviewOpen(true);
+                      setAboutDropdownOpen(false);
+                    }}
+                    className="w-full px-4 py-2.5 text-left text-sm hover:bg-gray-50 flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-colors duration-150"
+                  >
+                    <FontAwesomeIcon icon={faScroll} className="text-sm text-gray-500" />
+                    <span className="font-medium">About Rigveda</span>
+                  </button>
+                  {Array.from({ length: 10 }, (_, i) => i + 1).map((mandalaNum) => (
+                    <button 
+                      key={mandalaNum}
+                      onClick={() => {
+                        const data = mandalaData.find(m => m["Mandala Number"] === mandalaNum);
+                        setSelectedMandalaData(data || null);
+                        setMandalaInfoOpen(true);
+                        setAboutDropdownOpen(false);
+                      }}
+                      className="w-full px-4 py-2.5 text-left text-sm hover:bg-gray-50 flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-colors duration-150"
+                    >
+                      <FontAwesomeIcon icon={faScroll} className="text-sm text-gray-500" />
+                      <span className="font-medium">About Mandala {mandalaNum}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
           
           {/* Search Dropdown */}
           <div className="relative search-dropdown-container">
@@ -615,6 +658,12 @@ export default function GlobalHeader() {
       <RigvedaOverviewModal
         open={rigvedaOverviewOpen}
         onClose={() => setRigvedaOverviewOpen(false)}
+      />
+
+      <MandalaInfoModal
+        open={mandalaInfoOpen}
+        onClose={() => setMandalaInfoOpen(false)}
+        mandalaData={selectedMandalaData}
       />
 
       {universalSearchOpen && (
