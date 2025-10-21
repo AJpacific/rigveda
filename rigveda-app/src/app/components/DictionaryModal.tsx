@@ -58,7 +58,7 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
   }, []);
 
   // Save search history to localStorage
-  const saveSearchHistory = (newQuery: string) => {
+  const saveSearchHistory = useCallback((newQuery: string) => {
     if (!newQuery.trim()) return;
     const updatedHistory = [newQuery, ...searchHistory.filter(q => q !== newQuery)].slice(0, 10);
     setSearchHistory(updatedHistory);
@@ -67,7 +67,7 @@ export default function DictionaryModal({ open, onClose, initialQuery = '' }: Di
     } catch (error) {
       console.warn('Failed to save search history:', error);
     }
-  };
+  }, [searchHistory]);
 
   const searchDictionary = useCallback(async (searchQuery: string) => {
     if (!searchQuery.trim()) {

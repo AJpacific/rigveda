@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faUpRightFromSquare, faBars, faHome, faArrowRight, faSearch, faRobot, faChevronDown, faTimes, faBook, faInfo, faQuestionCircle, faLightbulb, faScroll, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faUpRightFromSquare, faBars, faHome, faArrowRight, faSearch, faRobot, faChevronDown, faTimes, faBook, faLightbulb, faScroll } from '@fortawesome/free-solid-svg-icons';
 import AskAIModal from './AskAIModal';
 import UniversalSearch from './UniversalSearch';
 import DictionaryModal from './DictionaryModal';
@@ -56,7 +56,7 @@ export default function GlobalHeader() {
   const [dictionaryOpen, setDictionaryOpen] = useState(false);
   const [rigvedaOverviewOpen, setRigvedaOverviewOpen] = useState(false);
   const [mandalaInfoOpen, setMandalaInfoOpen] = useState(false);
-  const [selectedMandalaData, setSelectedMandalaData] = useState<any>(null);
+  const [selectedMandalaData, setSelectedMandalaData] = useState<typeof mandalaData[0] | null>(null);
   const containerId = 'gcse-search-container';
   const lastQueryRef = useRef<string>('');
 

@@ -7,9 +7,6 @@ interface GrammarToken {
   [key: string]: unknown;
 }
 
-interface PadaData {
-  grammarData: GrammarToken[];
-}
 
 interface VersionData {
   type: string;

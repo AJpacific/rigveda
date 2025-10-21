@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faBook, faCalendar, faLanguage, faScroll, faUsers, faLightbulb, faGlobe, faHistory, faComments, faFire, faShield, faBrain, faBookOpen, faGraduationCap, faMusic } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faBook, faCalendar, faLanguage, faScroll, faUsers, faLightbulb, faGlobe, faHistory, faComments, faFire, faBrain, faMusic } from '@fortawesome/free-solid-svg-icons';
 import { useMobileModalHeight } from '../hooks/useMobileModalHeight';
 
 type RigvedaOverviewModalProps = {
@@ -389,7 +389,7 @@ export default function RigvedaOverviewModal({ open, onClose }: RigvedaOverviewM
             {/* Modern Scholarship */}
             <div className="rounded-xl p-3 sm:p-4" style={{ backgroundColor: 'rgba(138, 75, 45, 0.1)' }}>
               <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <FontAwesomeIcon icon={faGraduationCap} style={{ color: 'var(--primary)' }} />
+                <FontAwesomeIcon icon={faBook} style={{ color: 'var(--primary)' }} />
                 Modern Scholarship
               </h3>
               <p className="text-gray-700 text-sm">{rigvedaData["Modern Scholarship"]}</p>

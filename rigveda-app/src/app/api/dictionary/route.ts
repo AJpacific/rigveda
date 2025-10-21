@@ -146,7 +146,7 @@ Follow these instructions:
           }));
         }
       }
-    } catch (error) {
+    } catch {
       console.log('Failed to parse AI JSON response, using text response');
     }
 
